@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   get '/pricing/paymentok', to: 'page#paymentok'
   # 訂單資訊
   get '/pricing/oder', to: 'page#oder'
+  resources :hotels
+  resources :sites
 end
