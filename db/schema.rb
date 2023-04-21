@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 2023_04_26_131719) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.string "hotel_type"
+    t.string "hotel_types", default: [], array: true
     t.string "tel"
-    t.string "equipment_types", default: [], array: true
+    t.string "euipment_types", default: [], array: true
   end
 
   create_table "orders", force: :cascade do |t|
