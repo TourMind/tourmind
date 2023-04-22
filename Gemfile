@@ -41,8 +41,6 @@ gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 gem 'geocoder', '~> 1.8', '>= 1.8.1'
 
-gem 'geocoder', '~> 1.8', '>= 1.8.1'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -57,7 +55,6 @@ group :development do
   # gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
-  gem 'letter_opener'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
 end
