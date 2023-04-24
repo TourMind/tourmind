@@ -27,10 +27,9 @@
     <div class="px-6 pt-4 pb-2 flex justify-between">
       <div>
         <% restaurant.cuisine_types.each do |cuisine_type| %>
-          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "><%=cuisine_type%></span>
+          <span class="type-list"><%=cuisine_type%></span>
         <% end %>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">平均價位: <%=restaurant.price.to_i%></span>
-        <td><%= link_to '加到喜愛清單', favorites_path(favorites: {favorable_type: restaurant.class, favorable_id: restaurant.id}), method: :post %></td>
+        <span class="type-list">平均價位: <%=restaurant.price.to_i%></span>
       </div>
     </div>
   </div>
