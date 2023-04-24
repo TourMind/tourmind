@@ -8,4 +8,3 @@ application.register("moving", MovingController)
 import PictureController from "./picture_controller"
 application.register("picture", PictureController)
 
-
