@@ -16,7 +16,7 @@ class FavoritesController < ApplicationController
   def destroy
     @favorite = Favorite.find(params[:id])
     @favorite.destroy
-    redirect_to favorites_path
+    redirect_back fallback_location: root_path, notice: '以從喜愛清單中移除'
   end
 
   private

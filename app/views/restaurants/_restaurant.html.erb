@@ -1,5 +1,16 @@
 
   <div class=" rounded overflow-hidden shadow-lg relative">
+      <div class="absolute top-0 right-0 m-2">
+        <% if current_user && current_user.favorites.restaurants.find_by(favorable_id: restaurant.id)%>
+          <%= link_to favorite_path(current_user.favorites.restaurants.find_by(favorable_id: restaurant.id)), method: :delete do%>
+          <span class="text-red-500 text-4xl">&#x2665;</span>
+          <% end %>
+        <% else%>
+          <%= link_to favorites_path(favorites: {favorable_type: restaurant.class, favorable_id: restaurant.id}), method: :post do%>
+            <span class="text-white text-4xl">&#x2665;</span>
+          <% end %>
+        <% end %>
+      </div>
     <div>
       <%= link_to 'X', restaurant_path(restaurant), method: :delete, class: "rounded-lg py-1 px-3 bg-gray-200 inline-block font-medium ms-auto absolute top-1 start-1", data: {confirm: "Are you sure?"}%>
     </div>
