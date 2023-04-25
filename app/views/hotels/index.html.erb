@@ -59,6 +59,7 @@
 
       <!--飯店清單區-->
       <section class="flex-grow">
+        <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
         <div class="flex justify-between items-center">
           <div class="py-2">
             <% if @hotels.present? %>
@@ -78,7 +79,7 @@
         </h2>
         <% @hotels.each_with_index do |hotel, index| %>
           <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3">
-            <div class="md:w-72 md:min-h-64">
+            <div class="w-full md:w-72 md:min-h-64">
               <img class="object-cover w-full h-full" src="<%=hotel.image%>">
             </div>
             <div class="flex-grow">
@@ -118,5 +119,8 @@
       </section>
       <!--飯店清單區-->
     </section>
+    <div>
+      <%= paginate @hotels%>
+    </div>
   </div>
 </div>

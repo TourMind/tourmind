@@ -95,5 +95,7 @@
 
   <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
     font-medium'%>
+  <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
+    class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
   <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
 </div>

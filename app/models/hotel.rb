@@ -4,4 +4,5 @@ class Hotel < ApplicationRecord
   def self.search(keyword)
     where('name LIKE ? OR address LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
+  paginates_per 4
 end
