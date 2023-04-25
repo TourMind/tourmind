@@ -12,7 +12,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_230_416_142_249) do
+ActiveRecord::Schema.define(version: 2023_04_19_081705) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -55,4 +56,35 @@ ActiveRecord::Schema.define(version: 20_230_416_142_249) do
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
+  create_table "plans", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "days"
+    t.json "locations"
+    t.string "images", array: true
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.text "intro"
+    t.string "address"
+    t.string "lat"
+    t.string "long"
+    t.string "image"
+    t.string "section"
+    t.string "email"
+    t.string "tel"
+    t.string "website"
+    t.integer "types"
+    t.text "cuisine_types"
+    t.float "price"
+    t.text "atmostphere"
+    t.string "michelin_star"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
 end

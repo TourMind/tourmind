@@ -62,5 +62,13 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+
 gem 'hotwire-rails', '~> 0.1.3'
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "tailwindcss-rails", "~> 2.0"
+gem 'stimulus-rails'
+gem 'requestjs-rails'
+gem 'turbo-rails'
+
