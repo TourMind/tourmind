@@ -69,6 +69,4 @@ ActiveRecord::Schema.define(version: 20_230_418_182_125) do
     t.json "images"
   end
 
-  
-
 end
