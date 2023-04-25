@@ -53,9 +53,9 @@ export default class extends Controller {
   addDay() {
     const dayElement = `
     <div class="relative px-4 day">
-      <h4 class="text-xl text-gray-900 font-bold">第${
+      <h4 class="text-xl text-gray-900 font-bold">第 ${
         +this.containerTarget.dataset.days + 1
-      }天</h4>
+      } 天</h4>
       <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
       <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
         +this.containerTarget.dataset.days + 1

@@ -22,7 +22,7 @@
           <div class="flex bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap mt-10" id="plan" data-edit-target="container" data-days="<%= @plan.days %>">
             <% @plan.locations.each_key.with_index do |key, i| %>
               <div class="relative px-4 day">
-                <h4 class="text-xl text-gray-900 font-bold">第<%= i + 1 %>天</h4>
+                <h4 class="text-xl text-gray-900 font-bold">第 <%= i + 1 %> 天</h4>
                 <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
                 <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
                   <%# this div is here to prevent weird animation problem %>

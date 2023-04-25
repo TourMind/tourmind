@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "plan_nav" do %>
-  <section class="my-3 mx-3">
+  <section class="my-3 mx-3" data-controller="map">
     <h1 class="mt-8 text-3xl font-medium mb-5">行程</h1>
     <nav class="flex flex-col sm:flex-row">
       <button class="py-4 px-6 block focus:outline-none text-gray-600  cursor-default">
@@ -14,14 +14,14 @@
     <div>
       <% if @plan.locations != nil %>
         <div class="flex bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap w-full justify-between">
-          <div class="relative px-4">
-            <h4 class="text-xl text-gray-900 font-bold">第<%= @day %>天</h4>
+          <div class="relative px-4" data-map-target="day">
+            <h4 class="text-xl text-gray-900 font-bold">第 <%= @day %> 天</h4>
             <div
           class="absolute h-full border border-dashed border-opacity-20 border-secondary"
         ></div>
             <% @plan.locations["day#{@day}"].each do |site| %>
               <!-- start::Timeline item -->
-              <div class="flex items-center w-full my-6 -ml-1.5">
+              <div class="flex items-center w-full my-6 -ml-1.5 site" data-lat="<%= site["lat"] %>" data-lng="<%= site["lng"] %>" data-name="<%= site["name"] %>" >
                 <div class="w-1/12 z-10">
                   <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
                 </div>
@@ -36,7 +36,7 @@
               <!-- end::Timeline item -->
             <% end %>
           </div>
-          <div class="h-96 w-2/3" data-controller="map" data-map-target="googleMap"></div>
+          <div class="h-96 w-2/3" data-map-target="map"></div>
         </div>
       <% end %>
     </div>
