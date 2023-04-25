@@ -1,13 +1,19 @@
 class FavoritesController < ApplicationController
+  include ApplicationHelper
   def index
     @favorites = current_user.favorites
   end
 
   def create
     @favorite = current_user.favorites.new(favorite_params)
-
+    
     if @favorite.save
-      redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
+      # @favorite.favorable_id
+      p "---------------------------------------------------------------------------------"
+      p "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
+      p "---------------------------------------------------------------------------------"
+      redirect_to "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
+      # redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
     else
       redirect_back fallback_location: root_path, alert: '收藏失敗'
     end

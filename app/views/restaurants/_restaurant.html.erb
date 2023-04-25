@@ -1,5 +1,5 @@
 
-  <div class=" rounded overflow-hidden shadow-lg relative">
+  <div class=" rounded overflow-hidden shadow-lg relative" id="<%=restaurant.id%>">
       <div class="absolute top-0 right-0 m-2">
         <% if current_user && current_user.favorites.restaurants.find_by(favorable_id: restaurant.id)%>
           <%= link_to favorite_path(current_user.favorites.restaurants.find_by(favorable_id: restaurant.id)), method: :delete do%>
