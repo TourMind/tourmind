@@ -1,5 +1,6 @@
 <%= render 'shared/navbar' %>
   <%= render 'shared/items' %>
+   
 
     <div class="mr-4">
       <div class='flex items-center justify-between'>
@@ -21,37 +22,34 @@
           </div>
         </form>
       </div>
-      <h2>
-        <%= flash[:notice]%>
-      </h2>
-
       <!--景點清單區-->
       <section class="flex flex-wrap">
         <% @sites.each_with_index do |site, index| %>
-          <div class="relative w-1/2 md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
-            <div class="w-full h-full items-center">
-              <img class="w-full object-contain z-0" src="https://fakeimg.pl/350x200/?text=Hello">
+          <div class="relative md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
+            <div class="w-full relative">
+              <img class="w-full" src="https://fakeimg.pl/350x200/?text=Hello" alt="Site Pic">
               <div class="absolute top-0 right-0 m-3">
                 <span class="text-red-500 text-3xl">&#x2665;</span>
               </div>
             </div>
-            <div class="flex-grow px-2 py-2">
+            <div class="flex-grow p-2 m-2">
               <h2 class="text-xl font-medium p-4">
                 <%= link_to site.name , site_path(site.id) %>
               </h2>
               <div class="flex flex-wrap md:flex-nowrap">
-                <ul class="flex flex-col md:w-1/2 justify-evenly border-r px-4">
-                  <li>景點網站:<%= link_to site.name , site.website,target: "_blank" %>
+                <ul class="overflow-hidden flex flex-col max-h-100 md:w-1/2 justify-evenly border-r px-4">
+                  <li>景點網站:<%= link_to site.name , site.website,target: "_blank" %></li>
                   <li>地址:<%= site.address %>
                   </li>
-                  <li>電話:<%= site.tel %>
+                  <li>電話:<br>
+                    <%= site.tel %>
                   </li>
                   <li>簡介:<%= site.intro&.truncate(10)%>
                   </li>
                   <li>Google地圖<i class="fa-solid fa-globe"></i>
                   </li>
                 </ul>
-                <div class="md:w-1/2 px-4">
+                <div class="w-1/2 md:w-1/2 px-4">
                   <h2 class="font-medium">景點類型</h2>
                   <% if @site_type[index].present? %>
                     <ul class="flex flex-wrap mt-2">

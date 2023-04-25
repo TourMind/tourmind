@@ -29,19 +29,21 @@ gem 'jbuilder', '~> 2.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'tailwindcss-rails', '~> 2.0'
+gem 'carrierwave', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
+gem 'mini_magick'
 gem 'stimulus-rails'
+gem 'tailwindcss-rails', '~> 2.0'
 
 # user套件
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
+gem 'geocoder', '~> 1.8', '>= 1.8.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'geocoder', '~> 1.8', '>= 1.8.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

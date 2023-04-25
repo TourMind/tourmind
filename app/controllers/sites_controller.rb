@@ -4,19 +4,16 @@ class SitesController < ApplicationController
   before_action :set_site, only: %i[show edit update destroy]
 
   def index
-     if params[:keyword].present?
-        @sites = Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
-     else
-        @sites = Site.order(updated_at: :desc).page(params[:page])
-     end
-    if  @sites.empty?
-        flash.now[:alert] = '沒有找到符合條件的景點' and return
+    @sites = if params[:keyword].present?
+               Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+             else
+               Site.order(updated_at: :desc).page(params[:page])
+             end
+    flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
+
+    @site_type = @sites.map do |site|
+      site.site_types.presence
     end
-     @site_type = @sites.map { |site|
-      if site.site_types.present?
-      site.site_types
-      end
-    }
   end
 
   def new
@@ -28,15 +25,13 @@ class SitesController < ApplicationController
     if @site.save
       redirect_to sites_path, notice: '新增成功'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show;
-  end
+  def show; end
 
-  def edit;
-  end
+  def edit; end
 
   def update
     if @site.update(site_parames)

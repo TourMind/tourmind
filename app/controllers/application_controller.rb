@@ -21,14 +21,14 @@ class ApplicationController < ActionController::Base
       redirect_to user_line_omniauth_authorize_path
     end
   end
-     #404:沒有找到紀錄
-     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-   
+  # 404:沒有找到紀錄
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-    private
-    def record_not_found
-    render file: Rails.root.join('public', '404.html'),
+  private
+
+  def record_not_found
+    render file: Rails.public_path.join('404.html'),
            layout: false,
-           status: 404 and return
-    end
+           status: :not_found and return
+  end
 end
