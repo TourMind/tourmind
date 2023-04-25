@@ -9,7 +9,8 @@ class RestaurantsController < ApplicationController
   end
 
   # GET /restaurants/1 or /restaurants/1.json
-  def show; end
+  def show
+  end
 
   # GET /restaurants/new
   def new
@@ -17,7 +18,8 @@ class RestaurantsController < ApplicationController
   end
 
   # GET /restaurants/1/edit
-  def edit; end
+  def edit
+  end
 
   # POST /restaurants or /restaurants.json
   def create
@@ -25,11 +27,16 @@ class RestaurantsController < ApplicationController
 
     respond_to do |format|
       if @restaurant.save
-        format.html { redirect_to restaurant_url(@restaurant), notice: 'Restaurant was successfully created.' }
+        format.html do
+          redirect_to restaurant_url(@restaurant),
+                      notice: "Restaurant was successfully created."
+        end
         format.json { render :show, status: :created, location: @restaurant }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @restaurant.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -38,11 +45,16 @@ class RestaurantsController < ApplicationController
   def update
     respond_to do |format|
       if @restaurant.update(restaurant_params)
-        format.html { redirect_to restaurant_url(@restaurant), notice: 'Restaurant was successfully updated.' }
+        format.html do
+          redirect_to restaurant_url(@restaurant),
+                      notice: "Restaurant was successfully updated."
+        end
         format.json { render :show, status: :ok, location: @restaurant }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @restaurant.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -52,7 +64,10 @@ class RestaurantsController < ApplicationController
     @restaurant.destroy
 
     respond_to do |format|
-      format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
+      format.html do
+        redirect_to restaurants_url,
+                    notice: "Restaurant was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
@@ -66,6 +81,22 @@ class RestaurantsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def restaurant_params
-    params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :section, :email, :tel, :website, :types, :cuisine_types, :price, :atmostphere, :michelin_star)
+    params.require(:restaurant).permit(
+      :name,
+      :intro,
+      :address,
+      :lat,
+      :long,
+      :image,
+      :section,
+      :email,
+      :tel,
+      :website,
+      :types,
+      :cuisine_types,
+      :price,
+      :atmostphere,
+      :michelin_star,
+    )
   end
 end
