@@ -4,7 +4,8 @@
     <div class="mr-4">
       <div class='flex items-center justify-between'>
         <h1 class='text-4xl font-bold'>景點</h1>
-        <%= link_to '新增景點' , new_site_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
+        <%= link_to '新增景點' , new_site_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block
+          font-medium'%>
       </div>
       <div class="flex justify-between items-center">
         <div class="py-2">
@@ -27,10 +28,9 @@
       <!--景點清單區-->
       <section class="flex flex-wrap">
         <% @sites.each_with_index do |site, index| %>
-          <div
-            class="relative w-full md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
-            <div class="items-center relative">
-              <img class="w-full object-contain aspect-video z-0" src="<%=site.image%>">
+          <div class="relative w-1/2 md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
+            <div class="w-full h-full items-center">
+              <img class="w-full object-contain z-0" src="https://fakeimg.pl/350x200/?text=Hello">
               <div class="absolute top-0 right-0 m-3">
                 <span class="text-red-500 text-3xl">&#x2665;</span>
               </div>
@@ -76,3 +76,5 @@
     <div>
       <%= paginate @sites%>
     </div>
+
+   

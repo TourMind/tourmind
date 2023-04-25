@@ -12,12 +12,6 @@ class SitesController < ApplicationController
     if  @sites.empty?
         flash.now[:alert] = '沒有找到符合條件的景點' and return
     end
-  
-     @sites.map{ |site|
-     if site.image.nil? || site.image.empty?
-      site.image = "https://fakeimg.pl/400x200/?text=Hello"
-      end
-    }
      @site_type = @sites.map { |site|
       if site.site_types.present?
       site.site_types
@@ -38,13 +32,10 @@ class SitesController < ApplicationController
     end
   end
 
-  def show
-    if @site.image.nil? || @site.image.empty?
-      @site.image = "https://fakeimg.pl/400x200/?text=Hello"
-    end
+  def show;
   end
 
-  def edit
+  def edit;
   end
 
   def update
