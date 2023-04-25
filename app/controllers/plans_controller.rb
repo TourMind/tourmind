@@ -5,8 +5,7 @@ class PlansController < ApplicationController
     @plans = Plan.order(id: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @plan = Plan.new
@@ -26,13 +25,13 @@ class PlansController < ApplicationController
     plan_data[:locations] = update_order(plan_data, @plan)
 
     if @plan.update(plan_data)
-      render json: { status: "success", redirect_url: "/plans/#{@plan.id}" }
+      render json: { status: 'success', redirect_url: "/plans/#{@plan.id}" }
       return
     end
 
     render json: {
-             status: "server error",
-             redirect_url: "/plans/#{@plan.id}",
+             status: 'server error',
+             redirect_url: "/plans/#{@plan.id}"
            },
            status: :internal_server_error
   end
