@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'tailwindcss-rails', '~> 2.0'
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
+gem 'stimulus-rails'
 
 # user套件
 gem 'devise'
@@ -68,10 +70,8 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-
 gem 'hotwire-rails', '~> 0.1.3'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'stimulus-rails'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 
