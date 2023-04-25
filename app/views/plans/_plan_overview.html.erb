@@ -2,12 +2,12 @@
   <section class="my-3 mx-3">
     <h1 class="mt-8 text-3xl font-medium mb-5">行程</h1>
     <nav class="flex flex-col sm:flex-row">
-      <button class="py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-blue-500 border-b-2 font-medium ">
-        <%= button_to "概覽","/plan_overview", data: {turbo_method: :post}, params: { id: @plan.id }%>
+      <button class="py-4 px-6 block focus:outline-none text-blue-500 border-blue-500 border-b-2 font-medium cursor-default">
+        <%= link_to "概覽","/plan_overview?id=#{@plan.id}", class: "hover:text-blue-500" %>
       </button>
       <% @plan.days.times do |i| %>
-        <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-          <%= button_to "第 #{i + 1} 天","/day_info", data: {turbo_method: :post}, params: { id: @plan.id ,day: i + 1 }%>
+        <button class="text-gray-600 py-4 px-6 block focus:outline-none cursor-default">
+          <%= link_to "第 #{i + 1} 天","/day_info?id=#{@plan.id}&day=#{i + 1}", class: "hover:text-blue-500" %>
         </button>
       <% end %>
     </nav>

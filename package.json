@@ -2,6 +2,7 @@
   "name": "tourmind",
   "private": true,
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.15.1",
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^7.3.0",
