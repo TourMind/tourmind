@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hotel < ApplicationRecord
   validates :name, :tel, :address, presence: true
 

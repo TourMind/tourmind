@@ -49,7 +49,7 @@
 <section class='flex justify-center px-5'>
   <div class='w-2/3 px-3 hotel-container'>
     <p>Hotel Pic</p>
-    <img class="w-full" src="<%=@hotel.image%>" alt="hotel_image">
+    <img class="w-full" src="https://fakeimg.pl/350x200/?text=Hello" alt="hotel Pic">
   </div>
   <div class='w-1/3 px-3 map-container'>
     <p>Google Map</p>
@@ -86,16 +86,16 @@
   </div>
   <div class='p-4 bg-white border'>
     <h2 class='py-3 text-2xl font-bold'>飯店設備</h2>
-    <% @hotel.equipment_types.each do |equipment| %>
+    <% @hotel.equipment.each do |equipment| %>
       <span class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full '>
         <%=equipment%>
       </span>
-    <% end %>
+      <% end %>
   </div>
 
   <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
     font-medium'%>
-  <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
-    class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
-  <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
+    <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
+      <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
+        class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
 </div>

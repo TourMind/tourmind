@@ -4,25 +4,16 @@ class HotelsController < ApplicationController
   before_action :set_hotel, only: %i[show edit update destroy]
 
   def index
-     if params[:keyword].present?
-        @hotels = Hotel.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
-     else
-        @hotels = Hotel.order(updated_at: :desc).page(params[:page])
-     end
-    if  @hotels.empty?
-        flash.now[:alert] = '沒有找到符合條件的飯店' and return
+    @hotels = if params[:keyword].present?
+                Hotel.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+              else
+                Hotel.order(updated_at: :desc).page(params[:page])
+              end
+    flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
+
+    @hotel_equipment = @hotels.map do |hotel|
+      hotel.equipment.presence
     end
-  
-    @hotels.map { |hotel|
-      if hotel.image.nil? || hotel.image.empty?
-        hotel.image = "https://fakeimg.pl/400x200/?text=Hello"
-      end
-    }
-    @hotel_equipment = @hotels.map { |hotel|
-      if hotel.equipment_types.present?
-      hotel.equipment_types
-      end
-    }
   end
 
   def new
@@ -34,15 +25,11 @@ class HotelsController < ApplicationController
     if @hotel.save
       redirect_to hotels_path, notice: '新增成功!'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def show
-     if @hotel.image.nil? || @hotel.image.empty?
-      @hotel.image = "https://fakeimg.pl/400x200/?text=Hello"
-    end
-  end
+  def show; end
 
   def edit; end
 
@@ -67,6 +54,6 @@ class HotelsController < ApplicationController
 
   def hotel_parames
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_type, equipment_types: [])
+                                  :hotel_type, equipment: [])
   end
 end
