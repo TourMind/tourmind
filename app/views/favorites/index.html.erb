@@ -19,7 +19,14 @@
 
     <section data-favorite-target="section" data-section="restaurant" class="justify-between items-center">
       <h2 class="font-bold text-3xl my-4">餐廳</h2>
-      <%= render "favorite_list", favorite_objects:@favorites.restaurants%>
+      <div data-favorite-target="subSection" data-section="showAll">
+        <%= render "favorite_list", favorite_objects:@favorites.restaurants%>
+      </div>
+      <div data-favorite-target="subSection" data-section="showFew" class='hidden'>
+        <%= render "favorite_list", favorite_objects:@favorites.restaurants.limit(4)%>
+      </div>
+      <button data-action="click->favorite#toggleShow">+-</button>
+
     </section>
 
     <section data-favorite-target="section" data-section="hotel" class="justify-between items-center">
