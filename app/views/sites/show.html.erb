@@ -68,8 +68,10 @@
       <% end %>
     </div>
 
-    <%= link_to '編輯景點資訊' , sites_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
+    <%= link_to '編輯景點資訊' , edit_site_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
       font-medium'%>
+    <%= link_to '刪除景點資訊' , site_path(@site), method: :delete,
+        class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這個景點嗎？' } %>
     <%= link_to '返回景點列表' , sites_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
   </div>
 </div>

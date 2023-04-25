@@ -5,9 +5,9 @@ class SitesController < ApplicationController
 
   def index
      if params[:keyword].present?
-        @sites = Site.where("name LIKE :search OR address LIKE :search", search: "%#{params[:keyword]}%").order(updated_at: :desc)
+        @sites = Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
      else
-        @sites = Site.order(updated_at: :desc)
+        @sites = Site.order(updated_at: :desc).page(params[:page])
      end
     if  @sites.empty?
         flash.now[:alert] = '沒有找到符合條件的景點' and return
@@ -16,6 +16,11 @@ class SitesController < ApplicationController
      @sites.map{ |site|
      if site.image.nil? || site.image.empty?
       site.image = "https://fakeimg.pl/400x200/?text=Hello"
+      end
+    }
+     @site_type = @sites.map { |site|
+      if site.site_types.present?
+      site.site_types
       end
     }
   end
@@ -34,7 +39,7 @@ class SitesController < ApplicationController
   end
 
   def show
-    if @site.image.nil? || site.image.empty?
+    if @site.image.nil? || @site.image.empty?
       @site.image = "https://fakeimg.pl/400x200/?text=Hello"
     end
   end
