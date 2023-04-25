@@ -14,11 +14,9 @@ export default class extends Controller {
     await loader.load();
 
     const locArr = [];
-    const nameArr = [];
 
     this.dayTarget.querySelectorAll(".site").forEach((el) => {
       locArr.push({ lat: +el.dataset.lat, lng: +el.dataset.lng });
-      nameArr.push(el.dataset.name);
     });
 
     const locLat = locArr.map((el) => el.lat).sort((a, b) => a - b);
