@@ -4,6 +4,8 @@
 </div>
 
 <div data-controller="favorite">
+  <button data-action="click->favorite#toggle" data-section="all">全部</button>
+  <button data-action="click->favorite#toggle" data-section="plan">行程</button>
   <button data-action="click->favorite#toggle" data-section="restaurant">餐廳</button>
   <button data-action="click->favorite#toggle" data-section="hotel">飯店</button>
   <button data-action="click->favorite#toggle" data-section="attraction">景點</button>
@@ -11,7 +13,7 @@
 
 
   <section class = "display-all">
-    <section class="justify-between items-center">
+    <section data-favorite-target="section" data-section="plan" class="justify-between items-center">
       <h2 class="font-bold text-3xl my-4">行程</h2>
     </section>
 
