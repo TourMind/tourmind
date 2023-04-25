@@ -8,12 +8,11 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.new(favorite_params)
     
     if @favorite.save
-      # @favorite.favorable_id
-      p "---------------------------------------------------------------------------------"
-      p "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
-      p "---------------------------------------------------------------------------------"
-      redirect_to "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
-      # redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
+      # p "---------------------------------------------------------------------------------"
+      # p "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
+      # p "---------------------------------------------------------------------------------"
+      # redirect_to "#{request.env['HTTP_REFERER']}##{@favorite.favorable_id}"
+      redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
     else
       redirect_back fallback_location: root_path, alert: '收藏失敗'
     end
