@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2023_04_26_131719) do
     t.string "image"
     t.string "hotel_types", default: [], array: true
     t.string "tel"
-    t.string "euipment_types", default: [], array: true
+    t.string "equipment", default: [], array: true
   end
 
   create_table "orders", force: :cascade do |t|
