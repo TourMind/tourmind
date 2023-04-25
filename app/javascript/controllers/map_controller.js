@@ -16,12 +16,10 @@ export default class extends Controller {
     const locArr = [];
     const nameArr = [];
 
-    const locationCoordinates = this.dayTarget
-      .querySelectorAll(".site")
-      .forEach((el) => {
-        locArr.push({ lat: +el.dataset.lat, lng: +el.dataset.lng });
-        nameArr.push(el.dataset.name);
-      });
+    this.dayTarget.querySelectorAll(".site").forEach((el) => {
+      locArr.push({ lat: +el.dataset.lat, lng: +el.dataset.lng });
+      nameArr.push(el.dataset.name);
+    });
 
     const locLat = locArr.map((el) => el.lat).sort((a, b) => a - b);
     const locLng = locArr.map((el) => el.lng).sort((a, b) => a - b);
