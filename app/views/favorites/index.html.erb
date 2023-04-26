@@ -1,32 +1,37 @@
-<div class="flex">
-  <h1 class="font-bold text-4xl">喜愛清單</h1>
-  <%= link_to '返回清單', restaurants_path, class: "rounded-lg py-3 px-5 block font-medium mx-3 border" %>
-</div>
+<main class="container mx-auto mt-12 px-5">
+  <div class="flex">
+    <h1 class="font-bold text-4xl">喜愛清單</h1>
+    <%= link_to '返回清單', restaurants_path, class: "rounded-lg py-3 px-5 block font-medium mx-3 border" %>
+  </div>
 
-<div data-controller="favorite">
-  <button data-action="click->favorite#toggle" data-section="all">全部</button>
-  <button data-action="click->favorite#toggle" data-section="plan">行程</button>
-  <button data-action="click->favorite#toggle" data-section="restaurant">餐廳</button>
-  <button data-action="click->favorite#toggle" data-section="hotel">飯店</button>
-  <button data-action="click->favorite#toggle" data-section="attraction">景點</button>
+  <div data-controller="favorite">
+    <ul class="flex list-none">
+      <li class="flex-1">
+        <button class="btn-category w-full" data-action="click->favorite#toggle" data-section="all">全部</button>
+      </li>
+      <li class="flex-1">
+        <button class="btn-category w-full" data-action="click->favorite#toggle" data-section="plan">行程</button>
+      </li>
+      <li class="flex-1">
+        <button class="btn-category w-full" data-action="click->favorite#toggle" data-section="restaurant">餐廳</button>
+      </li>
+      <li class="flex-1">
+        <button class="btn-category w-full" data-action="click->favorite#toggle" data-section="hotel">飯店</button>
+      </li>
+      <li class="flex-1">
+        <button class="btn-category w-full" data-action="click->favorite#toggle" data-section="attraction">景點</button>
+      </li>
+    </ul>
 
-
-
-  <section class = "display-all">
     <section data-favorite-target="section" data-section="plan" class="justify-between items-center">
       <h2 class="font-bold text-3xl my-4">行程</h2>
     </section>
 
     <section data-favorite-target="section" data-section="restaurant" class="justify-between items-center">
       <h2 class="font-bold text-3xl my-4">餐廳</h2>
-      <div data-favorite-target="subSection" data-section="showAll">
+      <div class="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 flex px-6">
         <%= render "favorite_list", favorite_objects:@favorites.restaurants%>
       </div>
-      <div data-favorite-target="subSection" data-section="showFew" class='hidden'>
-        <%= render "favorite_list", favorite_objects:@favorites.restaurants.limit(4)%>
-      </div>
-      <button data-action="click->favorite#toggleShow">+-</button>
-
     </section>
 
     <section data-favorite-target="section" data-section="hotel" class="justify-between items-center">
@@ -36,5 +41,5 @@
     <section data-favorite-target="section" data-section="attraction" class="justify-between items-center">
       <h2 class="font-bold text-3xl my-4">景點</h2>
     </section>
-  </section>
-</div>
+  </div>
+</main>

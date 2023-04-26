@@ -1,16 +1,13 @@
 <div class="mx-auto w-full bg-slate-200">
   <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
-
     <Section class = "p-3">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
 
     <section class = "justify-center flex px-4 grid grid-cols-3 gap-4">
-      <div class = "col-span-2 aspect-[5/3]">
+      <div class = "col-span-2 aspect-[5/3] relative">
         <img class="w-full h-full" src=<%=@restaurant.image%> alt="restaurant iamge">
+        <%= render "favorite", object:@restaurant, size:'text-6xl'%>
       </div>
       <%= render "location", restaurant:@restaurant%>
     </section>

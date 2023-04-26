@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "section", "showAll", "showFew"]
+  static targets = ["section"]
   
   toggle(event) {
     event.preventDefault()
@@ -14,9 +14,4 @@ export default class extends Controller {
       }
     })
   }
-  // toggleShow(event) {
-  //   event.preventDefault()
-  //   this.sectionTargets.forEach(section => {
-  //   })
-  // }
 }

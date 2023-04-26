@@ -1,0 +1,11 @@
+<div class="absolute top-0 right-0 m-2">
+  <% if current_user && current_user.favorites.restaurants.find_by(favorable_id: object.id)%>
+    <%= link_to favorite_path(current_user.favorites.restaurants.find_by(favorable_id: object.id)), method: :delete do%>
+    <span class="text-red-500 <%=size%>">&#x2665;</span>
+    <% end %>
+  <% else%>
+    <%= link_to favorites_path(favorites: {favorable_type: object.class, favorable_id: object.id}), method: :post do%>
+      <span class="text-white <%=size%>">&#x2665;</span>
+    <% end %>
+  <% end %> 
+</div>
