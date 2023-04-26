@@ -13,10 +13,6 @@
             <%= form.label :description, "行程簡介", class: "mb-3 block text-base font-medium text-blue-600" %>
             <%= form.text_area :description, data: {edit_target: "description"}, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", rows: 5, cols: 50%>
           </div>
-          <div class="mb-5">
-            <%= form.label :days, "行程天數", class: "mb-3 block text-base font-medium text-blue-600" %>
-            <%= form.number_field :days, class: "days w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", rows: 5, cols: 50, min: 1, placeholder: 1%>
-          </div>
           <div class="text-blue-600 cursor-pointer inline-block" data-action="click->edit#addDay">增加天數</div>
           <div class="text-rose-600 cursor-pointer inline-block" data-action="click->edit#removeDay">移除天數</div>
           <% if @plan.locations != nil %>
