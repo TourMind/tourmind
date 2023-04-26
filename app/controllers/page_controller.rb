@@ -8,7 +8,7 @@ class PageController < ApplicationController
 
   def pricing; end
 
-  #處理訂單的更新資訊
+  # 處理訂單的更新資訊
   def notify
     response = Newebpay::MpgResponse.new(params[:TradeInfo])
   end
@@ -17,14 +17,14 @@ class PageController < ApplicationController
   def return
     response = Newebpay::MpgResponse.new(params[:TradeInfo])
 
-    if response.success?
-      current_user = User.find_by(id: response.mpg_result['MerchantOrderNo'].split('_')[0])
-      payment = current_user.payments.new(amount: response.mpg_result['Amt'],
-                                          pay_time: response.mpg_result['PayTime'],
-                                          status: '付款成功')
-      payment.save                            
-      redirect_to pricing_paymentok_path
-    end
+    return unless response.success?
+
+    current_user = User.find_by(id: response.mpg_result['MerchantOrderNo'].split('_')[0])
+    payment = current_user.payments.new(amount: response.mpg_result['Amt'],
+                                        pay_time: response.mpg_result['PayTime'],
+                                        status: '付款成功')
+    payment.save
+    redirect_to pricing_paymentok_path
   end
 
   def paymentok

@@ -2,7 +2,7 @@
 
 class Payment < ApplicationRecord
   belongs_to :user
-  
+
   def self.diamond_grade
     diamond_grade = if Payment.last.amount === 50
                       '白鑽會員'
