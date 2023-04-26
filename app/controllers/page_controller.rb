@@ -20,18 +20,18 @@ class PageController < ApplicationController
     return unless response.success?
 
     current_user = User.find_by(id: response.mpg_result['MerchantOrderNo'].split('_')[0])
-    payment = current_user.payments.new(amount: response.mpg_result['Amt'],
+    order = current_user.orders.new(amount: response.mpg_result['Amt'],
                                         pay_time: response.mpg_result['PayTime'],
                                         status: '付款成功')
-    payment.save
+    order.save
     redirect_to pricing_paymentok_path
   end
 
   def paymentok
-    user = current_user.update(diamond_grade: Payment.diamond_grade)
-
-    @last_payment = Payment.last
-    @diamond_grade = Payment.diamond_grade
-    @expire_time = Payment.expire_time
+    user = current_user.update(diamond_grade: Order.diamond_grade(current_user))
+    #撈取user的最後一筆訂單
+    @last_order = Order.where(user_id: current_user.id).last
+    @diamond_grade = Order.diamond_grade(current_user)
+    @expire_time = Order.expire_time(current_user)
   end
 end

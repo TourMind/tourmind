@@ -29,9 +29,9 @@
                     <tbody class="border-t border-gray-100 divide-y divide-gray-100">
                         <tr class="hover:bg-gray-50">
                             <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @diamond_grade %></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900">$<%= @last_payment[:amount]%></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @last_payment[:status]%></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@last_payment[:pay_time])%></th>
+                            <th class="gap-3 px-6 py-4 font-normal text-gray-900">$<%= @last_order[:amount]%></th>
+                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @last_order[:status]%></th>
+                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@last_order[:pay_time])%></th>
                             <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@expire_time) %></th>
                         </tr>
                     </tbody>
