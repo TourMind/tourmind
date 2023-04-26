@@ -4,12 +4,12 @@ module Newebpay
   class Mpg
     attr_accessor :info
 
-    def initialize(params)
+    def initialize(params, id)
       @key = Rails.application.credentials[:newebpay_key]
       @iv = Rails.application.credentials[:newebpay_iv]
-      @merchant_id = 'MS348692298'
+      @merchant_id = 'MS348708909'
       @info = {} # 使用 attr_accessor 讓 info 方便存取
-      set_info(params)
+      set_info(params, id)
     end
 
     def form_info
@@ -32,9 +32,9 @@ module Newebpay
     end
 
     # 商品資訊
-    def set_info(params)
+    def set_info(params, id)
       info[:MerchantID] = @merchant_id
-      info[:MerchantOrderNo] = "Test#{Time.now.to_i}"
+      info[:MerchantOrderNo] = "#{id}_#{Time.now.to_i}"
       info[:Amt] = params
       info[:ItemDesc] = 'VIP for one year'
       info[:TimeStamp] = Time.now.to_i
