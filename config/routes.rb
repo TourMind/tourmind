@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   }
 
   resources :restaurants
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :plans
+  get "/day_info", to: "plans#day_info"
+  get "/plan_overview", to: "plans#plan_overview"
 end
