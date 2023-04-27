@@ -7,7 +7,7 @@ export default class extends Controller {
     event.preventDefault()
     const sectionName = event.target.dataset.section
     this.sectionTargets.forEach(section => {
-      if (section.dataset.section === sectionName || sectionName == "all") {
+      if (section.dataset.section === sectionName) {
         section.classList.remove('hidden')
       } else {
         section.classList.add('hidden')
