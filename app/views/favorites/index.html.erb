@@ -33,7 +33,7 @@
 
     <section data-favorite-target="section" data-section="plan" class="justify-between items-center hidden">
       <h2 class="font-bold text-3xl my-4">行程</h2>
-      <%= render "subheader", favorites:@favorites, object:"行程"%>
+      <%= render "subheader", favorites:@favorites.plans, object:"行程"%>
     </section>
 
     <section data-favorite-target="section" data-section="restaurant" class="justify-between items-center hidden">
@@ -46,12 +46,12 @@
 
     <section data-favorite-target="section" data-section="hotel" class="justify-between items-center hidden">
       <h2 class="font-bold text-3xl my-4">飯店</h2>
-      <%= render "subheader", favorites:@favorites, object:"飯店"%>
+      <%= render "subheader", favorites:@favorites.hotels, object:"飯店"%>
     </section>
 
     <section data-favorite-target="section" data-section="attraction" class="justify-between items-center hidden">
       <h2 class="font-bold text-3xl my-4">景點</h2>
-      <%= render "subheader", favorites:@favorites, object:"景點"%>
+      <%= render "subheader", favorites:@favorites.sites, object:"景點"%>
     </section>
   </div>
 </main>
