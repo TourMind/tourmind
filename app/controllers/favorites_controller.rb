@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
 
     if @favorite.save
       # redirect_to restaurants_path(anchor: @favorite.favorable_id)
-      redirect_to "#{request.referrer}##{@favorite.favorable_id}", scroll: {x: 0, y: page_scroll_position}, notice: '新增到喜愛清單'
+      redirect_to "#{request.referrer}##{@favorite.favorable_id}", notice: '新增到喜愛清單'
       # redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
     else
       # redirect_back fallback_location: root_path, alert: '收藏失敗'
