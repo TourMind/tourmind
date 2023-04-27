@@ -9,6 +9,7 @@ import "@hotwired/turbo-rails"
 import "scripts"
 import "controllers"
 
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();

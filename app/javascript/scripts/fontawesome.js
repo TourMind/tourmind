@@ -5,4 +5,5 @@ config.mutateApproach = 'sync'
 import { faHeartPulse, faPencil, faLocationDot, faRightToBracket, faCrown, faBars, faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faGlobe } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faHeartPulse, faPencil, faLocationDot, faRightToBracket, faCrown, faBars, faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faGlobe)
+
 dom.watch()
