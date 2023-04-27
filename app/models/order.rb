@@ -14,6 +14,6 @@ class Order < ApplicationRecord
   end
 
   def self.expire_time(current_user)
-    Order.where(user_id: current_user.id).last.pay_time + 1.month 
+    Order.where(user_id: current_user.id).last.pay_time + 1.month
   end
 end
