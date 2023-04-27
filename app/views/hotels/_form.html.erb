@@ -46,15 +46,15 @@
           w-full' %>
   </div>
   <div class='my-5'>
-    <%= form.label :hotel_type , '住宿類型' %>
-    <%= form.select :hotel_type , options_for_select([ '飯店' , '民宿' , '度假村' , '青年旅館' , '日租套房' ], '請選擇住宿類型' ),
+    <%= form.label :hotel_types , '住宿類型' %>
+    <%= form.select :hotel_types , options_for_select([ '飯店' , '民宿' , '度假村' , '青年旅館' , '日租套房' ], '請選擇住宿類型' ),
           prompt: '請選擇住宿類型' %>
   </div>
   <div class='my-5'>
-    <%= form.label :equipment_types , '飯店設備' , class:'block'%>
-    <% equipment_types=%w[免費WIFI 免費停車 游泳池 餐廳 健身中心 酒吧 可攜帶寵物 行李存放 乾洗服務 自助洗衣服務 腳踏車租賃] %>
+    <%= form.label :equipment , '飯店設備' , class:'block'%>
+    <% equipment =%w[免費WIFI 免費停車 游泳池 餐廳 健身中心 酒吧 可攜帶寵物 行李存放 乾洗服務 自助洗衣服務 腳踏車租賃] %>
     <div>
-      <% equipment_types.each do |equipment| %>
+      <% equipment.each do |equipment| %>
         <label class='inline-flex items-center mr-4'>
           <%= check_box_tag 'hotel[equipment][]' , equipment, @hotel.equipment.include?(equipment),
                   class:'form-checkbox h-5 w-5 text-gray-600' %>

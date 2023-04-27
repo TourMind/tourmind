@@ -25,7 +25,7 @@ class HotelsController < ApplicationController
     if @hotel.save
       redirect_to hotels_path, notice: '新增成功!'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
@@ -54,6 +54,6 @@ class HotelsController < ApplicationController
 
   def hotel_parames
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_type, equipment: [])
+                                  :hotel_types, equipment: [])
   end
 end

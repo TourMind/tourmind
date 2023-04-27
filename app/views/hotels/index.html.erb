@@ -2,16 +2,13 @@
 <%= render 'shared/items' %>
 
 <div data-controller="hotel">
-  <!--小於768px會出現的按鈕區塊--->
   <div class="w-full flex justify-around lg:hidden">
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">排序</div>
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
       data-action="click->hotel#toggleFilterMenu">篩選</div>
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">地圖</div>
   </div>
-  <!--小於768px會出現的按鈕區塊--->
   
-  <!--分類篩選清單區--->
   <div class="bg-gray-100 ">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-hotel-target="filterMenu"
@@ -55,9 +52,7 @@
             </ul>
           </div>
         </section>
-      <!--分類篩選清單區--->
 
-      <!--飯店清單區-->
       <section class="flex-grow">
         <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
         <div class="flex justify-between items-center">
@@ -114,7 +109,6 @@
           </div>
           <% end %>
       </section>
-      <!--飯店清單區-->
     </section>
     <div>
       <%= paginate @hotels%>

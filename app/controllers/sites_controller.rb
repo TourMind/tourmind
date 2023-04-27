@@ -25,7 +25,7 @@ class SitesController < ApplicationController
     if @site.save
       redirect_to sites_path, notice: '新增成功'
     else
-      render :new, status: :unprocessable_entity
+      render :new
     end
   end
 
