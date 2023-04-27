@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   # 付款成功
   get '/pricing/paymentok', to: 'page#paymentok'
   # 訂單資訊
-  get '/pricing/oder', to: 'page#oder'
+  get '/order', to: 'order#index'
 end
