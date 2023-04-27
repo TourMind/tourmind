@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class OrderController < ApplicationController
   def index
-    if current_user != nil
-      @order = Order.where(user_id: current_user.id).order(created_at: :desc)
+    if current_user.nil?
+      redirect_to root_path, alert: '操作錯誤！請先登入會員！'
     else
-      redirect_to root_path
+      @order = Order.where(user_id: current_user.id).order(created_at: :desc)
     end
   end
 end
