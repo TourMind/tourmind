@@ -11,9 +11,6 @@ class SitesController < ApplicationController
              end
     flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
 
-    @site_type = @sites.map do |site|
-      site.site_types.presence
-    end
   end
 
   def new

@@ -11,9 +11,7 @@ class HotelsController < ApplicationController
               end
     flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
 
-    @hotel_equipment = @hotels.map do |hotel|
-      hotel.equipment.presence
-    end
+  
   end
 
   def new
