@@ -1,5 +1,5 @@
 <main class="relative">
-  <%= turbo_frame_tag "popup" do %>
+  <%= turbo_frame_tag "popup", target: "_top" do %>
   <% end %>
   <section class="nav">
     <% if current_user %>
