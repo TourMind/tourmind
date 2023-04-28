@@ -22,7 +22,7 @@
     </div>
 
     <section class="flex flex-wrap">
-      <% @sites.each do |site, index| %>
+      <% @sites.each do |site| %>
         <div
           class="relative md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
           <%= link_to site_path(site.id) do %>
