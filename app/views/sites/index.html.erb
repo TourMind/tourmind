@@ -9,7 +9,7 @@
       <div class="flex justify-between items-center">
         <div class="py-2">
           <% if @sites.present? %>
-            <%= @sites.count %> 個景點
+            <%= @sites.total_count %> 個景點
               <% end %>
         </div>
         <form class="flex justify-center py-1">
@@ -24,15 +24,17 @@
       <section class="flex flex-wrap">
         <% @sites.each_with_index do |site, index| %>
           <div class="relative md:w-1/4 grid grid-cols-1 md:grid-col-4 bg-white rounded-md overflow-hidden shadow-lg mb-3">
+            <%= link_to site_path(site.id) do %>
             <div class="w-full relative">
-              <img class="w-full" src="https://fakeimg.pl/350x200/?text=Hello" alt="Site Pic">
+                <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "Site Pic" , class: "w-full" %>
+                  <% end %>
               <div class="absolute top-0 right-0 m-3">
                 <span class="text-red-500 text-3xl">&#x2665;</span>
               </div>
             </div>
             <div class="flex-grow p-2 m-2">
               <h2 class="text-xl font-medium p-4">
-                <%= link_to site.name , site_path(site.id) %>
+                <%= site.name %>
               </h2>
               <div class="flex flex-wrap md:flex-nowrap">
                 <ul class="overflow-hidden flex flex-col max-h-100 md:w-1/2 justify-evenly border-r px-4">

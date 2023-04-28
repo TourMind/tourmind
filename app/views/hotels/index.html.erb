@@ -57,7 +57,7 @@
         <div class="flex justify-between items-center">
           <div class="py-2">
             <% if @hotels.present? %>
-              <%= @hotels.count %> 家物業
+              <%= @hotels.total_count %> 家物業
                 <% end %>
           </div>
           <form class="flex justify-center py-1">
@@ -70,12 +70,14 @@
         </div>
         <% @hotels.each_with_index do |hotel, index| %>
           <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3">
+            <%= link_to hotel_path(hotel.id) do %>
             <div class="w-full md:w-64 md:min-h-64">
-              <img class="w-full h-full" src="https://fakeimg.pl/350x200/?text=Hello" alt="hotel Pic">
+                <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "hotel Pic" , class: "w-full h-full" %>
+                      <% end %>
             </div>
             <div class="flex-grow">
               <h2 class="text-xl font-medium p-4">
-                <%= link_to hotel.name , hotel_path(hotel.id) %>
+                <%= hotel.name %>
               </h2>
               <div class="flex">
                 <ul class="flex flex-col justify-evenly w-1/2 border-r px-4">
