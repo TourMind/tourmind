@@ -62,7 +62,7 @@
           </div>
           <form class="flex justify-center py-1">
             <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
-              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入關鍵字...."
+              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址..."
                 class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
               <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
             </div>
@@ -82,6 +82,7 @@
               <div class="flex">
                 <ul class="flex flex-col justify-evenly w-1/2 border-r px-4">
                   <li>飯店網站:<%= link_to hotel.name , hotel.website,target: "_blank" %>
+                  </li>
                   <li>地址:<%= hotel.address %>
                   </li>
                   <li>電話:<%= hotel.tel %>

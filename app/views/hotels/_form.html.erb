@@ -42,7 +42,7 @@
   </div>
   <div class='my-5'>
     <%= form.label :image , '照片' %>
-    <%= form.text_field :image, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
+    <%= form.file_field :image, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
           w-full' %>
   </div>
   <div class='my-5'>
@@ -57,7 +57,7 @@
       <% equipment.each do |equipment| %>
         <label class='inline-flex items-center mr-4'>
           <%= check_box_tag 'hotel[equipment][]' , equipment, @hotel.equipment.include?(equipment),
-                  class:'form-checkbox h-5 w-5 text-gray-600' %>
+                  class:'h-5 w-5 text-gray-600' %>
           <%= equipment %>
         </label>
       <% end %>
