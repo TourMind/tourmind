@@ -13,8 +13,6 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
-    // 加入 darkMode 屬性
-    darkMode: false,
   },
   plugins: [
     require('@tailwindcss/forms'),
@@ -22,5 +20,14 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/container-queries'),
     require("daisyui"),
-  ]
+  ],
+  daisyui: {
+    styled: true,
+    themes: false,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+  },
 }
