@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2023_04_26_131719) do
+ActiveRecord::Schema.define(version: 2023_04_27_112150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,9 +38,9 @@ ActiveRecord::Schema.define(version: 2023_04_26_131719) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
-    t.string "hotel_types", default: [], array: true
+    t.string "hotel_types"
     t.string "tel"
-    t.string "euipment_types", default: [], array: true
+    t.string "equipment", default: [], array: true
   end
 
   create_table "orders", force: :cascade do |t|
