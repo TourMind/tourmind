@@ -29,7 +29,6 @@ gem 'jbuilder', '~> 2.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-gem 'carrierwave', '~> 1.0'
 gem 'hotwire-rails', '~> 0.1.3'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 gem 'mini_magick'
@@ -80,4 +79,3 @@ gem 'turbo-rails'
 
 gem 'foreman', '~> 0.87.2'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
-gem "mini_magick"
