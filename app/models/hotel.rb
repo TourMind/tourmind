@@ -7,4 +7,5 @@ class Hotel < ApplicationRecord
     where('name LIKE ? OR address LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
   paginates_per 4
+  mount_uploader :image, ImageUploader
 end
