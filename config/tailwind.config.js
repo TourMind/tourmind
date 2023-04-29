@@ -13,6 +13,8 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
+    // 加入 darkMode 屬性
+    darkMode: false,
   },
   plugins: [
     require('@tailwindcss/forms'),
