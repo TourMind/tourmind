@@ -31,7 +31,7 @@ class SitesController < ApplicationController
 
   def update
     if @site.update(site_parames)
-      redirect_to sites_path, notice: '更新成功'
+      redirect_to site_path(@site), notice: '更新成功'
     else
       render :edit
     end

@@ -31,7 +31,7 @@ class HotelsController < ApplicationController
 
   def update
     if @hotel.update(hotel_parames)
-      redirect_to hotel_path(@hotel.id), notice: '更新成功!'
+      redirect_to hotel_path(@hotel), notice: '更新成功!'
     else
       render :edit
     end
@@ -50,6 +50,6 @@ class HotelsController < ApplicationController
 
   def hotel_parames
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, equipment: [])
+                                  :hotel_types, equipment: [],)
   end
 end
