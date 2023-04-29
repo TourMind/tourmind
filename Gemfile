@@ -72,3 +72,7 @@ gem 'stimulus-rails'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 
+
+gem 'foreman', '~> 0.87.2'
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem "mini_magick"
