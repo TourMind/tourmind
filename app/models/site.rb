@@ -44,4 +44,5 @@ class Site < ApplicationRecord
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
   end
+  mount_uploader :image, ImageUploader
 end

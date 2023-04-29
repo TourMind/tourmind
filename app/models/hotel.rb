@@ -41,7 +41,7 @@ class Hotel < ApplicationRecord
     where(sql_query_condition.join(' AND '))
   end
 
-  paginates_per 6
+  # 上傳圖片
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
 end
