@@ -36,7 +36,6 @@
     </div>
   </div>
 </section>
-
 <Section class='p-3'>
   <div class='flex'>
     <span class='mr-2'>OOOOO(評分)</span>
@@ -92,22 +91,20 @@
       <span class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full '>
         <%=equipment%>
       </span>
-      <% end %>
+    <% end %>
   </div>
-
   <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
     font-medium'%>
-    <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
-    <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
+  <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
+  <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
         class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
-
-    <div data-controller="butt">
-      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
-        發表評論
-      </a>
-      <div class="hidden" data-butt-target="form">
-        <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
-      </div>
-    </div>  
+  <div data-controller="butt">
+    <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+      發表評論
+    </a>
+    <div class="hidden" data-butt-target="form">
+      <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
+    </div>
   </div>
+</div>
 </div>
