@@ -53,3 +53,7 @@
 .btn-black {
   @apply  text-white bg-black hover:bg-green-600;
 }
+
+.btn-VIP{
+  @apply  text-white bg-black;
+}
