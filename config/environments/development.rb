@@ -17,9 +17,9 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true,
     open_timeout: 5,
-    read_timeout: 5
+    read_timeout: 5,
   }
-
+ 
   ################################################################
 
   # Settings specified here will take precedence over those in config/application.rb.
@@ -43,7 +43,7 @@ Rails.application.configure do
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
+      'Cache-Control' => "public, max-age=#{2.days.to_i}",
     }
   else
     config.action_controller.perform_caching = false
