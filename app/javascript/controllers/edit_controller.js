@@ -3,7 +3,7 @@ import { patch } from "@rails/request.js";
 
 // Connects to data-controller="send"
 export default class extends Controller {
-  static targets = ["name", "description", "container"];
+  static targets = ["name", "description", "container", "drawer", "form"];
 
   async update() {
     try {
@@ -89,5 +89,11 @@ export default class extends Controller {
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
     return this.trimDays();
+  }
+
+  showFav() {
+    this.drawerTarget.classList.toggle("-translate-x-56");
+    this.formTarget.classList.toggle("w-full");
+    this.formTarget.classList.toggle("w-10/12");
   }
 }
