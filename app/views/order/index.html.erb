@@ -5,13 +5,13 @@
       <h2 class="p-2 text-2xl font-bold">會員資格</h2>
     <div class="relative p-4 duration-200 shadow-xl bg-gary-400 rounded-xl">
       <% if Order.diamond_grade(current_user) === '白鑽會員' %>
-        <span><%= image_tag("diamond-white", size: "20x20", class: "inline") %> 白鑽會員</span>
+        <span><%= image_tag("diamond-white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
         <span>$<%= @order.first.amount %>/月</span>
       <% elsif Order.diamond_grade(current_user) === '藍鑽會員'%>
-        <span><%= image_tag("diamond-blue", size: "20x20", class: "inline") %> 藍鑽會員</span>
+        <span><%= image_tag("diamond-blue.png", size: "20x20", class: "inline") %> 藍鑽會員</span>
         <span>$<%= @order.first.amount %>/月</span>
       <% elsif Order.diamond_grade(current_user) === '紅鑽會員'%>
-        <span><%= image_tag("diamond-red", size: "20x20", class: "inline") %> 紅鑽會員</span>
+        <span><%= image_tag("diamond-red.png", size: "20x20", class: "inline") %> 紅鑽會員</span>
         <span>$<%= @order.first.amount %>/月</span>
       <% else %>
         <span>一般會員</span>
@@ -38,11 +38,11 @@
                   <div class="p-5">
                     <span class="font-bold">
                       <% if order.amount === 50 %>
-                          <%= image_tag("diamond-white", size: "20x20", class: "inline") %> 白鑽會員
+                          <%= image_tag("diamond-white.png", size: "20x20", class: "inline") %> 白鑽會員
                       <% elsif order.amount === 100 %>
-                          <%= image_tag("diamond-blue", size: "20x20", class: "inline") %> 藍鑽會員
+                          <%= image_tag("diamond-blue.png", size: "20x20", class: "inline") %> 藍鑽會員
                       <% elsif order.amount === 200 %>
-                          <%= image_tag("diamond-red", size: "20x20", class: "inline") %> 紅鑽會員
+                          <%= image_tag("diamond-red.png", size: "20x20", class: "inline") %> 紅鑽會員
                       <% end %>
                     </span>
                     <span class="font-bold">$<%= order.amount %></span>
