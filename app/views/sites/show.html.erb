@@ -42,6 +42,10 @@
       <h1 class='py-3 text-2xl font-bold'>
         <%= @site.name %>
       </h1>
+      <li>
+        <%= link_to '景點網站連結' , @site.website ,target: "_blank" , class:'inline-block bg-blue-300 text-sm px-2 py-1
+          rounded-full cursor: pointer' %>
+      </li>
       <h2 class='py-3 text-2xl font-bold'>詳細資料</h2>
       <h3 class='text-lg'>停留時間</h3>
       <p>
@@ -72,9 +76,10 @@
         </span>
         <% end %>
     </div>
-    <%= link_to '編輯景點資訊' , edit_site_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-blue-300 inline-block
+    <%= link_to '編輯景點資訊' , edit_site_path(@site), class:'mt-2 rounded-lg py-3 px-5 bg-blue-500 inline-block text-white
       font-medium'%>
-      <%= link_to '返回景點列表' , sites_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
+      <%= link_to '返回景點列表' , sites_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-500 inline-block text-white
+        font-medium' %>
         <%= link_to '刪除景點資訊' , site_path(@site), method: :delete,
           class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這個景點嗎？' } %>
   </div>
