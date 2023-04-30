@@ -58,7 +58,8 @@ group :development do
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   # gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
+
+  # gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
@@ -73,9 +74,11 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'foreman', '~> 0.87.2'
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem 'hotwire-rails', '~> 0.1.3'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'stimulus-rails'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 
-gem 'foreman', '~> 0.87.2'
-gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'

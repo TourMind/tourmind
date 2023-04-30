@@ -20,4 +20,3 @@ application.register("picture", PictureController);
 
 import HotelController from "./hotel_controller";
 application.register("hotel", HotelController);
-

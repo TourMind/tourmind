@@ -1,52 +1,96 @@
-<main class="container mx-auto mt-16 px-5 flex">
-  <div class="w-full" id="top" data-id="<%= @plan.id %>">
-    <%= link_to "所有行程", plans_path, class: "text-blue-600"%>
-    <!-- component -->
-    <div class="flex flex-col items-center justify-center p-12 mx-auto" data-controller="request">
-      <div class="w-full">
-        <%= form_with model: @plan, data: {controller: "edit", turbo: "false"} do |form| %>
-          <div class="mb-5">
-            <%= form.label :name, "行程名稱", class: "mb-3 block text-base font-medium text-blue-600" %>
-            <%= form.text_field :name, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "name"}%>
-          </div>
-          <div class="mb-5">
-            <%= form.label :description, "行程簡介", class: "mb-3 block text-base font-medium text-blue-600" %>
-            <%= form.text_area :description, data: {edit_target: "description"}, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", rows: 5, cols: 50%>
-          </div>
-          <div class="text-blue-600 cursor-pointer inline-block" data-action="click->edit#addDay">增加天數</div>
-          <div class="text-rose-600 cursor-pointer inline-block" data-action="click->edit#removeDay">移除天數</div>
-          <% if @plan.locations != nil %>
-            <div class="flex bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap mt-10" id="plan" data-edit-target="container" data-days="<%= @plan.days %>">
-              <% @plan.locations.each_key.with_index do |key, i| %>
-                <div class="relative px-4 day">
-                  <h4 class="text-xl text-gray-900 font-bold">第 <%= i + 1 %> 天</h4>
-                  <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
-                  <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
-                    <%# this div is here to prevent weird animation problem %>
-                    <div></div>
-                    <% @plan.locations[key].each.with_index do | site, j | %>
-                      <!-- start::Timeline item -->
-                      <div class="site flex items-center w-full my-6 -ml-1.5 bg-white" id="day<%= i + 1 %>-<%= j + 1 %>">
-                        <div class="w-1/12 z-10">
-                          <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                        </div>
-                        <div class="w-11/12 ml-2">
-                          <p class="text-sm">
-                            <span><%= site["type"] %></span>
-                            <a href="#" class="text-blue-600 font-bold"><%= site["name"] %></a>
-                          </p>
-                          <p class="text-xs text-gray-500">停留時間：<%= site["stay_time"] %> mins</p>
-                        </div>
-                      </div>
-                      <!-- end::Timeline item -->
-                    <% end %>
-                  </div>
-                </div>
-              <% end %>
+<main class="relative bg-slate-100" data-controller="edit">
+  <div class="container w-full px-10 flex mx-auto">
+    <div class="fixed h-screen -translate-x-56 w-56 top-0 left-0 bg-white transition-all ease-in-out overflow-auto shadow-lg" data-edit-target="drawer">
+      <button data-action="click->edit#toggleFav" type="button" class="bg-white rounded-md p-2 inline-flex ml-auto text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+        <!-- Heroicon name: outline/x -->
+        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <h1 class="text-blue-600 font-bold text-center text-lg my-5">喜愛清單</h1>
+      <div class="relative px-4 day w-48" data-controller="sorting" id="fav-list">
+        <% @plan.locations.each_key.with_index do |key, i| %>
+          <%# this div is here to prevent weird animation problem %>
+          <div></div>
+          <% @plan.locations[key].each.with_index do | site, j | %>
+            <!-- start::Timeline item -->
+            <div class="site flex items-center w-full my-6 -ml-1.5 bg-white" id="day<%= i + 1 %>-<%= j + 1 %>">
+              <div class="w-1/12 z-10">
+                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+              </div>
+              <div class="w-11/12 ml-2">
+                <p class="text-sm">
+                  <span><%= site["type"] %></span>
+                  <a href="#" class="text-blue-600 font-bold"><%= site["name"] %></a>
+                </p>
+                <p class="text-xs text-gray-500">停留時間：<%= site["stay_time"] %> mins</p>
+              </div>
             </div>
+            <!-- end::Timeline item -->
           <% end %>
-          <button data-action="click->edit#update" class="inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">更新行程</button>
         <% end %>
+      </div>
+    </div>
+    <div class="w-full mt-16" id="top" data-id="<%= @plan.id %>">
+      <%= link_to "所有行程", plans_path, class: "text-blue-600"%>
+      <!-- component -->
+      <div class="flex justify-end p-12 mx-auto">
+        <div class="w-full transition-all ease-in-out" data-edit-target="form">
+          <%= form_with model: @plan, data: { turbo: "false"} do |form| %>
+            <div class="flex justify-between">
+              <div>
+                <div class="bg-blue-600 inline-block cursor-pointer hover:bg-blue-700 text-white font-normal text-sm p-2 border-blue-700 rounded" data-action="click->edit#addDay">增加天數</div>
+                <div class="bg-red-600 inline-block cursor-pointer hover:bg-red-700 text-white font-normal text-sm p-2 border-red-700 rounded"  data-action="click->edit#removeDay">移除天數</div>
+                <div class="bg-blue-600 inline-block cursor-pointer hover:bg-blue-700 text-white font-normal text-sm p-2 border-blue-700 rounded"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
+              </div>
+              <div class="inline-flex items-center cursor-pointer p-2 bg-red-600 hover:bg-red-700 text-white text-sm font-normal rounded-md" id="delete-btn" data-controller="sorting">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                移除景點
+              </div>
+            </div>
+            <% if @plan.locations != nil %>
+              <div class="bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap mt-3 grid grid-cols-4 mb-5" id="plan" data-edit-target="container" data-days="<%= @plan.days %>">
+                <% @plan.locations.each_key.with_index do |key, i| %>
+                  <div class="relative px-4 day w-48">
+                    <h4 class="text-xl text-gray-900 font-bold">第 <%= i + 1 %> 天</h4>
+                    <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+                    <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
+                      <%# this div is here to prevent weird animation problem %>
+                      <div></div>
+                      <% @plan.locations[key].each.with_index do | site, j | %>
+                        <!-- start::Timeline item -->
+                        <div class="site flex items-center w-full my-6 -ml-1.5 bg-white" id="day<%= i + 1 %>-<%= j + 1 %>">
+                          <div class="w-1/12 z-10">
+                            <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                          </div>
+                          <div class="w-11/12 ml-2">
+                            <p class="text-sm">
+                              <span><%= site["type"] %></span>
+                              <a href="#" class="text-blue-600 font-bold"><%= site["name"] %></a>
+                            </p>
+                            <p class="text-xs text-gray-500">停留時間：<%= site["stay_time"] %> mins</p>
+                          </div>
+                        </div>
+                        <!-- end::Timeline item -->
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+            <div class="mb-5">
+              <%= form.label :name, "行程名稱", class: "mb-3 block text-base font-medium text-blue-600" %>
+              <%= form.text_field :name, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "name"}%>
+            </div>
+            <div class="mb-5">
+              <%= form.label :description, "行程簡介", class: "mb-3 block text-base font-medium text-blue-600" %>
+              <%= form.text_area :description, data: {edit_target: "description"}, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", rows: 5, cols: 50%>
+            </div>
+            <button data-action="click->edit#update" class="inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">更新行程</button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
