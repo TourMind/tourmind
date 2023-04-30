@@ -11,5 +11,4 @@ class Site < ApplicationRecord
     where('name LIKE ? OR address LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
   paginates_per 8
-  has_many :comments, as: :commentable
 end

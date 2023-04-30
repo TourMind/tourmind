@@ -13,15 +13,16 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     end
-  def create 
-    @comment = Comment.new(comment_params)
-    @comment.commentable_id = params[:comment][:commentable_id]
-    @comment.commentable_type = params[:comment][:commentable_type]
-
-    if @comment.save 
-      redirect_to comments_path, notice: '新增成功'
-    else 
-      render :new 
+    def create
+      @commentable = Restaurant.find(params[:restaurant_id])
+      @comment = @commentable.comments.build(comment_params)
+      @comment.user = current_user
+      
+      if @comment.save
+        redirect_to @commentable, notice: 'Comment was successfully created.'
+      else
+        render :new
+      end
     end
   end
     def create
@@ -73,4 +74,15 @@ class CommentsController < ApplicationController
       (5 - rating.to_i).times { stars += '<i class="fa-solid fa-star" style="color: #effc36;"></i>' }
       stars.html_safe
     end
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 end

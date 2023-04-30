@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :restaurants
   resources :favorites, only: %i[index create destroy]
   resources :restaurants do
     resources :comments, only: [:create,:new]
@@ -31,8 +30,6 @@ Rails.application.routes.draw do
   # 訂單資訊
   get '/order', to: 'order#index'
   
-  resources :hotels
-  resources :sites
   get '/pricing/oder', to: 'page#oder'
   resources :hotels do
     resources :comments, only: [:create,:new]

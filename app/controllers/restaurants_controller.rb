@@ -23,6 +23,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @comment = Comment.new
     @comments = @restaurant.comments
+
   end
 
   # GET /restaurants/new
