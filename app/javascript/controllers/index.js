@@ -21,3 +21,5 @@ application.register("picture", PictureController);
 import HotelController from "./hotel_controller";
 application.register("hotel", HotelController);
 
+import NavbarController from "./navbar_controller"
+application.register("navbar", NavbarController)
