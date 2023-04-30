@@ -5,7 +5,7 @@ class Hotel < ApplicationRecord
 
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-
+  has_many :comments, as: :commentable
   validates :name, :tel, :address, presence: true
   mount_uploader :image, ImageUploader
   def self.search(keyword)
@@ -22,4 +22,5 @@ class Hotel < ApplicationRecord
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
   end
+  
 end

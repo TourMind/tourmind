@@ -5,7 +5,7 @@ class Restaurant < ApplicationRecord
   
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-
+  has_many :comments, as: :commentable
   # 欄位認證
   validates :name, :address, presence: true
   mount_uploader :image, ImageUploader
@@ -73,4 +73,5 @@ class Restaurant < ApplicationRecord
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
   end
+  
 end
