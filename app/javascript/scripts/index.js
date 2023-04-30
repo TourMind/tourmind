@@ -1,2 +1,2 @@
-import "./star"
 import "./fontawesome"
+import "./star"
