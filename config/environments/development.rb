@@ -19,7 +19,7 @@ Rails.application.configure do
     open_timeout: 5,
     read_timeout: 5,
   }
- 
+
   ################################################################
 
   # Settings specified here will take precedence over those in config/application.rb.
