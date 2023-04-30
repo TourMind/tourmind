@@ -57,3 +57,10 @@
 .btn-VIP{
   @apply  text-white bg-black;
 }
+
+.home-text{
+  @apply hover:transform hover:translate-y-3 border-black rounded-md overflow-hidden hover:shadow-lg hover:bg-gray-100;
+}
+.home-title{
+  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform hover:bg-teal-200 hover:shadow-lg hover:scale-110
+}
