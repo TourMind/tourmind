@@ -56,7 +56,7 @@ export default class extends Controller {
       <h4 class="text-xl text-gray-900 font-bold">第 ${
         +this.containerTarget.dataset.days + 1
       } 天</h4>
-      <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+      <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
       <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
         +this.containerTarget.dataset.days + 1
       }">
@@ -69,6 +69,10 @@ export default class extends Controller {
   }
 
   removeDay() {
+    if (+this.containerTarget.dataset.days <= 1) {
+      return alert("行程不得少於一天");
+    }
+
     const sitesInLastDay = this.containerTarget.lastElementChild
       .querySelector(".sites-list")
       .querySelectorAll(".site").length;
