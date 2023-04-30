@@ -2,11 +2,13 @@
   <% favorite_objects.each do |fav| %>
     <!-- component -->
     <div class="flex h-full items-center justify-center">
-      <div class="w-full overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl relative">
+      <div class="w-full rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl relative">
         <div>
           <%= link_to 'ｘ', favorite_path(fav), method: :delete, class: "rounded-lg px-1 bg-gray-200 inline-block font-medium ms-auto absolute top-1 end-1", data: {confirm: "確定要移出喜愛清單?"}%>
-        <p class="text-sm font-medium uppercase bg-gray-100 rounded-lg py-1 px-3 tracking-widest absolute top-2 start-2">
-          <%=fav.favorable.class%>
+        <p class="relative max-w-sm bg-white shadow-md rounded-xl">
+          <span class= "absolute text-white bg-indigo-600 rounded-tl-lg px-3 py-1 text-sm -top-1 -left-1 shadow-xl ">
+            <%=fav.favorable.class%>
+          </span>
         </p>
         </div>
         <div class= "aspect-[5/3]">
