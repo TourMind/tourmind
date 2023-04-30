@@ -22,15 +22,23 @@
           <%= render "reviews"%>
       </div>
     </section>
+ 
+    <div data-controller="comment" data-turbo-frame="comment-comment">
+      <button data-action="click->comment#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium">
+      發表評論
+      </button>
+      <div class="hidden" data-comment-target="form">
+      <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
+      </div>
+    </div>
     <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to '返回餐廳列表', restaurants_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+   
   </div>
 </div>
 
-<h1><%= @restaurant.name %></h1>
 
 
-  <%= render "comments/comment", restaurant: @restaurant %>
 
 
 

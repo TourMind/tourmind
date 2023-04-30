@@ -1,24 +1,26 @@
-<%= turbo_frame_tag "comment-comment" do %>
-  <%= form_for([@restaurant, Comment.new]) do |f| %>
-    <h2 class="text-lg font-bold">餐廳評價</h2>
-    <div class="rating rating-md">
+<turbo-frame id="comment-frame" data-controller="comment" data-comment-target="frame">
+    <%= form_for([@restaurant, Comment.new]) do |f| %>
+      <h2 class="text-lg font-bold">餐廳評價</h2>
+      <div class="rating rating-md">
 
-      <%= f.radio_button :rating, 1, class: "comment-star" %>
-      <%= f.radio_button :rating, 2, class: "comment-star" %>
-      <%= f.radio_button :rating, 3, class: "comment-star" %>
-      <%= f.radio_button :rating, 4, class: "comment-star" %>
-      <%= f.radio_button :rating, 5, class: "comment-star", checked: true %>
-    </div>
-    <div class="form-control">
-      <%= f.label :images, "上傳圖片", class: 'label' %>
-      <%= f.file_field :images, multiple: true %>
-    </div>
-    <div class="form-control">
-      <%= f.label :content, "評論：", class: 'label'%>
-      <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100"%>
-    </div>
+        <%= f.radio_button :rating, 1, class: "comment-star" %>
+        <%= f.radio_button :rating, 2, class: "comment-star" %>
+        <%= f.radio_button :rating, 3, class: "comment-star" %>
+        <%= f.radio_button :rating, 4, class: "comment-star" %>
+        <%= f.radio_button :rating, 5, class: "comment-star", checked: true %>
+      </div>
+      <div class="form-control">
+        <%= f.label :images, "上傳圖片", class: 'label' %>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+      <div class="form-control">
+        <%= f.label :content, "評論：", class: 'label'%>
+        <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100"%>
+      </div>
 
-    <%= f.submit "提交", class: "btn m-1  px-3"%>
-  <% end %>
-<% end %>
+      <%= f.submit "提交", class: "btn m-1  px-3"%>
+    <% end %>
+
+</turbo-frame>
+
 
