@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   resources :restaurants
   resources :favorites, only: %i[index create destroy]
+  resources :restaurants do
+    resources :comments, only: [:create,:new]
+  end
+
   resources :plans
   get "/day_info", to: "plans#day_info"
   get "/plan_overview", to: "plans#plan_overview"

@@ -13,24 +13,24 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     end
-  def create 
-    @comment = Comment.new(comment_params)
-    @comment.commentable_id = params[:comment][:commentable_id]
-    @comment.commentable_type = params[:comment][:commentable_type]
-
-    if @comment.save 
-      redirect_to comments_path, notice: '新增成功'
-    else
-      render :new
+    def create
+      @commentable = Restaurant.find(params[:restaurant_id])
+      @comment = @commentable.comments.build(comment_params)
+      @comment.user = current_user
+      
+      if @comment.save
+        redirect_to @commentable, notice: 'Comment was successfully created.'
+      else
+        render :new
+      end
     end
-  end
 
   def show; end
 
   def edit; end
 
   def update
-    if @comment.update(commemt_params)
+    if @comment.update(comment_params)
       redirect_to comments_path, notice: '編輯成功'
     else
       render :edit
@@ -41,21 +41,29 @@ class CommentsController < ApplicationController
     @comment.destroy
     redirect_to comments_path
   end
-
-  private
-
-  def set_comment
-    @comment = Comment.find(params[:id])
-  end
-
-  def commemt_params
-    params.require(:comment).permit(:content, :title, :author, :rating, :image, images: [])
-  end
-
-  def star_rating(rating)
-    stars = ''
-    rating.to_i.times { stars += '<i class="fas fa-star"></i>' }
-    (5 - rating.to_i).times { stars += '<i class="far fa-star"></i>' }
-    stars.html_safe
-  end
+ 
+  private 
+    def set_comment
+      @comment = Comment.find(params[:id])
+    end
+    def comment_params 
+      params.require(:comment).permit(:content,:title,:author,:rating, :image,images: [])
+    end
+    def star_rating(rating)
+      stars = ''
+      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #ff857;"></i>' }
+      (5 - rating.to_i).times { stars += '<i class="fa-solid fa-star" style="color: #effc36;"></i>' }
+      stars.html_safe
+    end
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 end

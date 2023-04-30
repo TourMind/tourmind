@@ -8,6 +8,7 @@ class Hotel < ApplicationRecord
   has_many :comments, as: :commentable
   validates :name, :tel, :address, presence: true
   mount_uploader :image, ImageUploader
+  has_many :comments, as: :commentable, dependent: :destroy
   def self.search(keyword)
     where('name LIKE ? OR address LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end
