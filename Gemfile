@@ -61,7 +61,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
-  gem 'web-console', '>= 4.1.0'
 end
 
 group :test do
