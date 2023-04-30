@@ -74,15 +74,4 @@ class CommentsController < ApplicationController
       (5 - rating.to_i).times { stars += '<i class="fa-solid fa-star" style="color: #effc36;"></i>' }
       stars.html_safe
     end
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 end
