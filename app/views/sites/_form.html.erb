@@ -1,5 +1,5 @@
 <%= form_with model: site, class:'contents', local: true, data: { turbo: false } do |form| %>
-   <%= render 'shared/error_message' , record: site %>
+  <%= render 'shared/error_message' , record: site %>
 
     <div class='my-5'>
       <%= form.label :name ,'景點名稱' %>
@@ -56,14 +56,14 @@
     </div>
 
     <div class='my-5'>
-      <%= form.label :pet_freindly, '攜帶寵物' %>
-        <%= form.text_field :pet_freindly, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2
-          mt-2 w-full' %>
+      <%= form.label :pet_freindly , '是否可攜帶寵物' %>
+          <%= form.select :pet_freindly, options_for_select(['可攜寵物', '禁止攜帶寵物' ], selected: @site.pet_freindly), {
+            include_blank: '請選擇' }, prompt: '請選擇' %>
     </div>
 
     <div class='my-5'>
       <%= form.label :site_types, '景點類型' , class: 'block' %>
-        <% site_types = %w[大自然 歷史 藝文 購物 戶外 海邊 森林] %>
+        <% site_types=%w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地] %>
           <div class='inline-block'>
             <% site_types.each do |site_type| %>
               <label class='inline-flex items-center mr-4'>
@@ -77,7 +77,7 @@
 
 
     <div class='inline'>
-      <%= form.submit '提交' , class:'rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer'
+      <%= form.submit '提交' , class:'rounded-lg py-3 px-5 bg-blue-500 text-white inline-block font-medium cursor-pointer'
         %>
     </div>
-<% end %>
+    <% end %>

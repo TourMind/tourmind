@@ -54,7 +54,8 @@ class SitesController < ApplicationController
   end
 
   def site_parames
-    params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude, :stay_duration, :intro, :pet_freindly, site_types: [])
+    params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
+                                 :stay_duration, :intro, :pet_freindly, site_types: [])
   end
   def star_rating(rating)
     stars = ''

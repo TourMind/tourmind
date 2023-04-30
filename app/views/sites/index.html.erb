@@ -8,33 +8,45 @@
   </div>
   <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)]">
     <section data-hotel-target="filterMenu"
-        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md">
+        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md"
+        style="z-index: 1">
       <div class="lg:hidden flex justify-end pt-6">
         <button data-action="click->hotel#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
       </div>
       <div class="border-b py-6">
         <div class="border-b py-6">
           <button class="py-2" data-action="click->hotel#toggleFilterCategory">
-            熱門搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
+            地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </button>
-          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96">
-            <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
+          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <li class="py-1"><input class="mr-2" type="checkbox" name="cities" value="Taipei">台北市</li>
+            <li class="py-1"><input class="mr-2" type="checkbox" name="cities" value="NewTaipei">新北市</li>
           </ul>
         </div>
         <div class="border-b py-6">
           <button class="py-2" data-action="click->hotel#toggleFilterCategory">
             景點類型<i class="px-1 fa-solid fa-chevron-down"></i>
           </button>
-          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96">
-            <li class="py-1"><input class="mr-2" type="checkbox">xx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xxxx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xxxx</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">xxxx</li>
+          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <li class="py-1"><input class="mr-2" type="checkbox">自然景觀</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">歷史文化遺產</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">美術館</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">公園休閒</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">購物中心</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">主題樂園</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">海邊</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">動物園</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">體育館</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">溫泉景點</li>
+            <li class="py-1"><input class="mr-2" type="checkbox">觀光勝地</li>
+          </ul>
+        </div>
+        <div class="py-6">
+          <button class="py-2" data-action="click->hotel#toggleFilterCategory">
+            寵物友善搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
+          </button>
+          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <li class="py-1"><input class="mr-2" type="checkbox">可攜帶寵物</li>
           </ul>
         </div>
       </div>
@@ -42,7 +54,7 @@
     <section class="flex-grow w-3/5">
       <div class='flex justify-between'>
         <h1 class='text-center text-4xl font-bold'>景點</h1>
-        <%= link_to '新增景點' , new_site_path(@site), class:'rounded-lg py-3 px-5 bg-blue-600 inline-block text-white
+        <%= link_to '新增景點' , new_site_path(@site), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
             font-medium'%>
       </div>
       <div class="flex justify-between">
@@ -51,61 +63,116 @@
             <%= @sites.total_count %> 個景點
           <% end %>
         </div>
-        <form class="flex justify-center py-1">
-          <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
-            <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址..."
-                class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
-            <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
-          </div>
-        </form>
-      </div>
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-2">
-        <% @sites.each do |site| %>
-          <div class="bg-white rounded-md overflow-hidden shadow-lg">
-            <%= link_to site_path(site.id) do %>
-              <div class=" text-gray-700 md:h-[10rem] w-full">
-                <img class="object-cover w-full h-full" src="<%= site.image.url %>" alt="Site Pic">
-              </div>
+        <div class="flex justify-between">
+          <div class="py-2">
+            <% if @sites.present? %>
+              <%= @sites.total_count %> 個景點
+            <% else %>
+              <p class="text-2xl">沒有任何景點資料<i class="fa-solid fa-face-dizzy fa-2xl"></i></p>
             <% end %>
-            <div class="flex-grow p-2 m-2">
-              <h2 class="text-xl font-medium py-4">
-                <%= site.name %>
-              </h2>
-              <ul>
-                <li>景點網站:<%= link_to site.name, site.website,target: "_blank" %>
-                </li>
-                <li>地址:<%= site.address %>
-                </li>
-                <li>電話:<br>
-                  <%= site.tel %>
-                </li>
-                <li>簡介:<%= site.intro&.truncate(10)%>
-                </li>
-                <li>Google地圖<i class="fa-solid fa-globe"></i>
-                </li>
-              </ul>
-              <div class="mt-2">
-                <h2 class="font-medium">景點類型</h2>
-                <% if site.site_types.present? %>
-                  <ul class="flex flex-wrap mt-2">
-                    <% site.site_types.each do |site_type| %>
-                      <li
-                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                        <%= site_type %>
-                      </li>
+          </div>
+          <form class="max-h-10 flex justify-center py-1">
+            <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
+              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
+                class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
+              <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
+            </div>
+          </form>
+        </div>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <% @sites.each do |site| %>
+            <div class="bg-white rounded-md overflow-hidden shadow-lg">
+              <%= link_to site_path(site.id) do %>
+                <div class="relative">
+                  <div class=" text-gray-700 md:h-[10rem] w-full">
+                    <% if site.image.url.present? %>
+                      <img class="object-cover w-full h-full" src="<%= site.image.url %>" alt="Site Pic">
+                    <% else %>
+                      <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , class: 'object-cover w-full h-full' %>
                     <% end %>
-                  </ul>
-                <% else %>
-                  <p>沒有類型資料</p>
-                <% end %>
+                    <div class="absolute top-0 right-0 m-3">
+                      <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="flex-grow p-2 m-2">
+                <h2 class="text-xl font-medium py-4">
+                  <%= site.name %>
+                </h2>
+                <ul>
+                  <li>評分:<%= 4.5 %>
+                  </li>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+                  <li>地址:<%= site.address %>
+                  </li>
+                  <li>電話:
+                    <%= site.tel %>
+                  </li>
+                  <li>簡介:<%= site.intro&.truncate(30)%>
+                  </li>
+                </ul>
+                <div class=" mt-2">
+                  <h2 class="font-medium">景點類型</h2>
+                  <% if site.site_types.present? %>
+                    <ul class="flex flex-wrap mt-2">
+                      <% site.site_types.each do |site_type| %>
+                        <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                          <%= site_type %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% else %>
+                    <p>沒有類型資料</p>
+                  <% end %>
+                </div>
               </div>
             </div>
+          <% end %>
+          <div class="flex-grow p-2 m-2">
+            <h2 class="text-xl font-medium py-4">
+              <%= site.name %>
+            </h2>
+            <ul>
+              <li>景點網站:<%= link_to site.name, site.website,target: "_blank" %>
+              </li>
+              <li>地址:<%= site.address %>
+              </li>
+              <li>電話:<br>
+                <%= site.tel %>
+              </li>
+              <li>簡介:<%= site.intro&.truncate(10)%>
+              </li>
+              <li>Google地圖<i class="fa-solid fa-globe"></i>
+              </li>
+            </ul>
+            <div class="mt-2">
+              <h2 class="font-medium">景點類型</h2>
+              <% if site.site_types.present? %>
+                <ul class="flex flex-wrap mt-2">
+                  <% site.site_types.each do |site_type| %>
+                    <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                      <%= site_type %>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <p>沒有類型資料</p>
+              <% end %>
+            </div>
           </div>
-        <% end %>
-      </section>
+        </div>
+      <% end %>
     </section>
   </section>
-  <div>
-    <%= paginate @sites%>
-  </div>
+</section>
+<div>
+  <%= paginate @sites%>
+</div>
 </div>
