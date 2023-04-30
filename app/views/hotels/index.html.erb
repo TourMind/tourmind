@@ -1,68 +1,90 @@
-<%= render 'shared/items' %>
-
+<section>
+  <div class="flex m-2 space-x-2 p-10">
+    <div class="w-1/3 ">
+      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
+        <h2 class="text-xl  font-semibold mb-2"><%= link_to '住宿', '#' %>
+        </h2>
+      </div>
+    </div>
+    <div class="w-1/3">
+      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
+        <h2 class="text-xl font-semibold mb-2"><%= link_to '景點', '#' %>
+        </h2>
+      </div>
+    </div>
+    <div class="w-1/3">
+      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
+        <h2 class="text-xl font-semibold mb-2">餐廳</h2>
+      </div>
+    </div>
+  </div>
+</section>
 <div data-controller="hotel">
   <div class="w-full flex justify-around lg:hidden">
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">排序</div>
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
       data-action="click->hotel#toggleFilterMenu">篩選</div>
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">地圖</div>
   </div>
-  
   <div class="bg-gray-100">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-hotel-target="filterMenu"
-        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md">
+        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md" style="z-index: 1">
         <div class="lg:hidden flex justify-end pt-6">
           <button data-action="click->hotel#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
-        <div class="border-b py-6">
+        <section class="border-b py-6">
           <div class="border-b py-6">
             <button class="py-2" data-action="click->hotel#toggleFilterCategory">
-              熱門搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
+              地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </button>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96">
-              <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <li class="py-1"><input class="mr-2" type="checkbox">台北市</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">新北市</li>
             </ul>
           </div>
           <div class="border-b py-6">
             <button class="py-2" data-action="click->hotel#toggleFilterCategory">
               住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </button>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96">
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
               <li class="py-1"><input class="mr-2" type="checkbox">飯店</li>
               <li class="py-1"><input class="mr-2" type="checkbox">民宿</li>
               <li class="py-1"><input class="mr-2" type="checkbox">青年旅館</li>
               <li class="py-1"><input class="mr-2" type="checkbox">度假村</li>
               <li class="py-1"><input class="mr-2" type="checkbox">日租套房</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">奢華酒店</li>
             </ul>
           </div>
           <div class="py-6">
             <button class="py-2" data-action="click->hotel#toggleFilterCategory">
               設備<i class="px-1 fa-solid fa-chevron-down"></i>
             </button>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96">
-              <li class="py-1"><input class="mr-2" type="checkbox">免費無線網路</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">健身房</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">游泳池</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">免費停車</li>
-              <li class="py-1"><input class="mr-2" type="checkbox">酒吧</li>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <li class="py-1"><input class="mr-2" type="checkbox">無線網路(WIFI)</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">停車場/停車位</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">早餐服務</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">酒吧/餐廳</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">會議室/會議設施 </li>
+              <li class="py-1"><input class="mr-2" type="checkbox">健身中心</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">可攜帶寵物</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">行李存放</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">乾洗服務</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">腳踏車租賃</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">24小時櫃檯接待</li>
             </ul>
           </div>
         </section>
-
+      </section>
       <section class="flex-grow">
-        <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
+        <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'inline-block rounded-lg py-3 px-5 text-white bg-blue-500 font-medium'%>
         <div class="flex justify-between items-center">
           <div class="py-2">
             <% if @hotels.present? %>
-              <%= @hotels.total_count %> 家物業
-                <% end %>
+              <%= @hotels.total_count %> 家住宿
+            <% end %>
           </div>
           <form class="flex justify-center py-1">
             <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
-              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址..."
+              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
                 class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
               <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
             </div>
@@ -70,10 +92,19 @@
         </div>
         <% @hotels.each do |hotel| %>
           <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3">
-            <%= link_to hotel_path(hotel.id) do %>
-            <div class="w-full md:w-64 md:min-h-64">
-                <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "hotel Pic" , class: "w-full h-full" %>
-                      <% end %>
+            <div class="relative">
+              <div class="w-full md:w-60 md:h-60">
+                <%= link_to hotel_path(hotel.id) do %>
+                  <% if hotel.image.url.present? %>
+                    <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
+                  <% else %>
+                    <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
+                  <% end %>
+                  <div class="absolute top-0 right-0 m-3">
+                    <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
+                  </div>
+                <% end %>
+              </div>
             </div>
             <div class="flex-grow">
               <h2 class="text-xl font-medium p-4">
@@ -81,17 +112,26 @@
               </h2>
               <div class="flex">
                 <ul class="flex flex-col justify-evenly w-1/2 border-r px-4">
-                  <li>飯店網站:<%= link_to hotel.name , hotel.website,target: "_blank" %>
+                  <li>評分:<%= 4.5 %>
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
                   </li>
                   <li>地址:<%= hotel.address %>
                   </li>
                   <li>電話:<%= hotel.tel %>
                   </li>
-                  <li>簡介:<%= hotel.intro&.truncate(10)%>
+                  <li>簡介:<%= hotel.intro&.truncate(30)%>
                   </li>
-                  <li>Google地圖<i class="fa-solid fa-globe"></i></li>
                 </ul>
                 <div class="w-1/2 px-4">
+                  <h2 class="font-medium">住宿類型</h2>
+                  <span  class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'><%= hotel.hotel_types %>
+                  </span>
                   <h2 class="font-medium">飯店設備</h2>
                   <% if hotel.equipment.present? %>
                     <ul>
@@ -100,20 +140,20 @@
                           class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full '>
                           <%= equipment %>
                         </li>
-                        <% end %>
-                    </ul>
-                    <% else %>
-                      <p>沒有設備資料</p>
                       <% end %>
+                    </ul>
+                  <% else %>
+                    <p>沒有設備資料</p>
+                  <% end %>
                 </div>
               </div>
             </div>
           </div>
-          <% end %>
+        <% end %>
+        <div>
+          <%= paginate @hotels%>
+        </div>
       </section>
     </section>
-    <div>
-      <%= paginate @hotels%>
-    </div>
   </div>
 </div>
