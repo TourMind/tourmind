@@ -91,7 +91,7 @@ export default class extends Controller {
     return this.trimDays();
   }
 
-  showFav() {
+  toggleFav() {
     this.drawerTarget.classList.toggle("-translate-x-56");
     this.formTarget.classList.toggle("w-full");
     this.formTarget.classList.toggle("w-10/12");
