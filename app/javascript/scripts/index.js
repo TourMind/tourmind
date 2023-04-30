@@ -1,0 +1,2 @@
+import "./star"
+import "./fontawesome"

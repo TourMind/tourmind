@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_many :orders
+
   # 驗證必填欄位
   # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
   validates :email,
             presence: true,
             format: {
               with: /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/,
-            }, if: -> { email.present? }
+            }, if: -> { email.present? == false }
 
   # confirmable -> 確認mail認證
   devise :database_authenticatable, :registerable,

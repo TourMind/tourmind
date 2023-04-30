@@ -4,7 +4,12 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "controllers"
 import "@hotwired/turbo-rails"
+//FONTAWESOME
+import "scripts"
+import "controllers"
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
+import "../controllers";
+import "scripts"

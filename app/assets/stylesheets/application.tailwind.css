@@ -22,6 +22,10 @@
   @apply bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded
 }
 
+.field_with_errors textarea{
+  @apply rounded-lg w-full border-4 border-red-600
+}
+
 .btn-square{
   @apply text-black text-center inline-block px-4 py-2 rounded-lg shadow-sm cursor-pointer w-full
 }
@@ -60,4 +64,8 @@
 
 .btn-black {
   @apply  text-white bg-black hover:bg-green-600;
+}
+
+.btn-VIP{
+  @apply  text-white bg-black;
 }
