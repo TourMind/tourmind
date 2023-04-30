@@ -35,6 +35,14 @@
                   <%=hotel_types%>
                 </li>
               <% end %>
+            </button>
+            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
+              <li class="py-1"><input class="mr-2" type="checkbox">飯店</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">民宿</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">青年旅館</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">度假村</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">日租套房</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">奢華酒店</li>
             </ul>
           </div>
           <div class="py-6">
@@ -59,6 +67,25 @@
           <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
           font-medium'%>
         </div>
+            </button>
+            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
+              <li class="py-1"><input class="mr-2" type="checkbox">無線網路(WIFI)</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">停車場/停車位</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">早餐服務</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">酒吧/餐廳</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">會議室/會議設施 </li>
+              <li class="py-1"><input class="mr-2" type="checkbox">健身中心</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">可攜帶寵物</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">行李存放</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">乾洗服務</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">腳踏車租賃</li>
+              <li class="py-1"><input class="mr-2" type="checkbox">24小時櫃檯接待</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+      <section class="flex-grow">
+        <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
         <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @hotels.present? %>
