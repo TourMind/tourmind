@@ -78,6 +78,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'requestjs-rails'
 gem 'turbo-rails'
 
-
 gem 'foreman', '~> 0.87.2'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
