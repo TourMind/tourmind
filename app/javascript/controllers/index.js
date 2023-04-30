@@ -21,3 +21,6 @@ application.register("picture", PictureController);
 import HotelController from "./hotel_controller";
 application.register("hotel", HotelController);
 
+import SiteController from "./site_controller";
+application.register("site", SiteController);
+
