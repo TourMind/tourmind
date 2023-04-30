@@ -12,6 +12,17 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    end
+  def create 
+    @comment = Comment.new(comment_params)
+    @comment.commentable_id = params[:comment][:commentable_id]
+    @comment.commentable_type = params[:comment][:commentable_type]
+
+    if @comment.save 
+      redirect_to comments_path, notice: '新增成功'
+    else 
+      render :new 
+    end
   end
     def create
       if params[:restaurant_id]
