@@ -10,7 +10,17 @@ class Site < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR site_types::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
+  end
+
+  def self.filter(address, site_types, pet_freindly)
+    sql_query_condition = []
+
+    sql_query_condition.push "address ~ '#{address.join('|')}'" if address.present?
+    sql_query_condition.push "site_types @> '{#{site_types.join(',')}}'" if site_types.present?
+    sql_query_condition.push "pet_freindly ~ '#{pet_freindly.join('|')}'" if pet_freindly.present?
+
+    where(sql_query_condition.join(' AND '))
   end
   paginates_per 9
   mount_uploader :image, ImageUploader
