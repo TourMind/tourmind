@@ -60,7 +60,6 @@
     <div class="my-5 col-span-2">
       <%= form.label "餐廳類型"%>
       <%= form.select :restaurant_type, Restaurant.restaurant_type_list %>
-
     </div>
 
     <div class="my-5 col-span-2">
@@ -68,7 +67,6 @@
       <%= form.collection_check_boxes(:cuisine_types, Restaurant.cuisine_list, :first, :last) do |option| %>
         <%= option.label(class:"input-checkbox") { option.check_box + option.text } %>
       <%end%> 
-    
     </div>
 
 

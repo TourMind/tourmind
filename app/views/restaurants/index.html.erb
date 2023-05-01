@@ -1,16 +1,179 @@
-<div class="w-full">
-  <div class="flex justify-between items-center">
-    <div class="flex">
-      <h1 class="font-bold text-4xl">餐廳</h1>
-      <% if current_user%>
-        <%# 功能測試用按鈕 %>
-        <%= link_to '喜愛清單', favorites_path, class: "rounded-lg py-3 px-5 block font-medium mx-3 border" %>
-      <% end %>
-    </div>
-    <%= link_to '新增餐廳', new_restaurant_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<div data-controller="filter">
+  <div class="w-full flex justify-around lg:hidden">
+    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
+      data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
-
-  <div id="restaurants" class="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex">
-    <%= render @restaurants %>
+  <div class="bg-white">
+    <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
+      <section data-filter-target="filterMenu"
+        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md" style="z-index: 1">
+        <div class="lg:hidden flex justify-end pt-6">
+          <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
+        </div>
+        <%= form_tag(restaurants_path, {method: :get,class:'border-b py-6'}) do |form| %>
+          <div class="border-b py-6">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
+              地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <% Restaurant::SECTION_OPTIONS.each do | city |%>
+                <li class="py-1">
+                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
+                  <%=city%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="border-b py-6">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
+              餐廳類型<i class="px-1 fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <% Restaurant::RESTAURANT_TYPE.each do | type |%>
+                <li class="py-1">
+                  <%= check_box_tag "restaurant_type[]", type, @restaurant_type.include?(type) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
+                  <%=type%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="border-b py-6">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
+              價位<i class="px-1 fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <% Restaurant::PRICE_RANGE.each do | price_range |%>
+                <li class="py-1">
+                  <%= check_box_tag "price_range[]", price_range, @price_range.include?(price_range) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
+                  <%=price_range%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="border-b py-6">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
+              菜系<i class="px-1 fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <% Restaurant::CUISINE_OPTIONS.each do | cuisine_type |%>
+                <li class="py-1">
+                  <%= check_box_tag "cuisine_types[]", cuisine_type, @cuisine_types.include?(cuisine_type) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
+                  <%=cuisine_type%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="py-6">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
+              氣氛<i class="px-1 fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+              <% Restaurant::ATMOSTPHERE.each do | atmostphere |%>
+                <li class="py-1">
+                  <%= check_box_tag "atmostphere[]", atmostphere, @atmostphere.include?(atmostphere) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
+                  <%=atmostphere%>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <%= submit_tag "submit", {class:'hidden', data:{filter_target:"filterSubmitBtn"}} %>
+        <% end %>
+      </section>
+      <section class="flex-grow w-3/5">
+        <div class='flex justify-between'>
+          <h1 class='text-center text-4xl font-bold'>餐廳</h1>
+          <%= link_to '新增餐廳' , new_restaurant_path, class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
+          font-medium'%>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="py-2">
+            <% if @restaurants.present? %>
+              <%= @restaurants.total_count %> 家餐廳
+            <% else %>
+              <span>沒有找到符合條件的餐廳</span>
+            <% end %>
+          </div>
+          <form class="flex justify-center py-1">
+            <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
+              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
+                class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
+              <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
+            </div>
+          </form>
+        </div>
+        <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2"><% @restaurants.each do |restaurant| %>
+            <div class="bg-white rounded-md overflow-hidden shadow-lg">
+              <%= link_to restaurant_path(restaurant) do %>
+                <div class="relative">
+                  <div class=" text-gray-700 md:h-[15rem] w-full">
+                    <% if restaurant.image.present? %>
+                      <img class="object-cover w-full h-full" src="<%= restaurant.image %>" alt="Site Pic">
+                    <% else %>
+                      <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
+                    <% end %>
+                    <div class="absolute top-0 right-0 m-3">
+                      <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="flex-grow p-2 m-2">
+                <div class= "flex justify-between items-center">
+                  <h2 class="text-xl font-medium py-4">
+                    <%= restaurant.name %>
+                  </h2>
+                  <span class="inline-block text-md px-3 py-1 font-semibold text-gray-700 bg-gray-200 rounded-full">
+                    <%= restaurant.restaurant_type%>
+                  </span>
+                </div>
+                <ul>
+                  <li>評分:<%= 4.5 %>
+                  </li>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg mt-2"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+                  <li class= "mt-2"><%= restaurant.intro&.truncate(70)%>
+                  </li>
+                </ul>
+                <div class="mt-2 flex">
+                  <ul class="flex flex-wrap mt-2">
+                    <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                      均消:<%= restaurant.price.to_i %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mt-2">
+                  <% if restaurant.cuisine_types.present? || restaurant.atmostphere.present?%>
+                    <ul class="flex flex-wrap mt-2">
+                      <% if restaurant.cuisine_types.present? %>
+                        <% restaurant.cuisine_types.each do |cuisine_type| %>
+                          <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                            <%= cuisine_type %>
+                          </li>
+                        <% end %>
+                      <% end %>
+                      <% if restaurant.atmostphere.present? %>
+                        <% restaurant.atmostphere.each do |atmostphere| %>
+                          <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                            <%= atmostphere %>
+                          </li>
+                        <% end %>
+                      <% end %>
+                    </ul> 
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </section>
+        <div>
+          <%= paginate @restaurants%>
+        </div>
+      </section>
+    </section>
   </div>
 </div>

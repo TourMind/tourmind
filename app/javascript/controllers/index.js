@@ -15,8 +15,8 @@ application.register("moving", MovingController);
 import PictureController from "./picture_controller";
 application.register("picture", PictureController);
 
-import HotelController from "./hotel_controller";
-application.register("hotel", HotelController);
+import FilterController from "./filter_controller";
+application.register("filter", FilterController);
 
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)

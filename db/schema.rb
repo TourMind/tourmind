@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "email"
     t.string "tel"
     t.string "website"
-    t.integer "restaurant_type"
+    t.string "restaurant_type"
     t.string "cuisine_types", default: [], array: true
     t.float "price"
     t.string "atmostphere", default: [], array: true
