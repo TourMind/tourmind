@@ -31,43 +31,48 @@
       <div class="lg:hidden flex justify-end pt-6">
         <button data-action="click->site#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
       </div>
-      <div class="border-b py-6">
+      <%= form_tag(sites_path, {method: :get,class:'border-b py-6'}) do |form| %>
         <div class="border-b py-6">
-          <button class="py-2" data-action="click->site#toggleFilterCategory">
+          <div class="py-2 cursor-pointer" data-action="click->site#toggleFilterCategory">
             地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
-          </button>
+          </div>
           <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
-            <li class="py-1"><input class="mr-2" type="checkbox" name="cities" value="Taipei">台北市</li>
-            <li class="py-1"><input class="mr-2" type="checkbox" name="cities" value="NewTaipei">新北市</li>
+            <% @city_options.each do | city |%>
+              <li class="py-1">
+                <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{site_target:"filterCheckbox"}} %>
+                <%=city%>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="border-b py-6">
-          <button class="py-2" data-action="click->site#toggleFilterCategory">
+          <div class="py-2 cursor-pointer" data-action="click->site#toggleFilterCategory">
             景點類型<i class="px-1 fa-solid fa-chevron-down"></i>
-          </button>
+          </div>
           <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
-            <li class="py-1"><input class="mr-2" type="checkbox">自然景觀</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">歷史文化遺產</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">美術館</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">公園休閒</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">購物中心</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">主題樂園</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">海邊</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">動物園</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">體育館</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">溫泉景點</li>
-            <li class="py-1"><input class="mr-2" type="checkbox">觀光勝地</li>
+            <% @site_type_options.each do | site_type |%>
+              <li class="py-1">
+                <%= check_box_tag "site_types[]", site_type, @site_types.include?(site_type) , {class: "mr-2", data:{site_target:"filterCheckbox"}} %>
+                <%=site_type%>
+              </li>
+            <% end %>
           </ul>
         </div>
         <div class="py-6">
-          <button class="py-2" data-action="click->site#toggleFilterCategory">
+          <div class="py-2 cursor-pointer" data-action="click->site#toggleFilterCategory">
             寵物友善搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
-          </button>
-          <ul class="flex flex-col max-h-0 max-h-96">
-            <li class="py-1"><input class="mr-2" type="checkbox">可攜帶寵物</li>
+          </div>
+          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <% @pet_freindly_options.each do | pet_freindly |%>
+              <li class="py-1">
+                <%= check_box_tag "pet_freindly[]", pet_freindly, @pet_freindly.include?(pet_freindly) , {class: "mr-2", data:{site_target:"filterCheckbox"}} %>
+                <%=pet_freindly%>
+              </li>
+            <% end %>
           </ul>
         </div>
-      </div>
+        <%= submit_tag "submit", {class:'hidden', data:{site_target:"filterSubmitBtn"}} %>
+      <% end %>
     </section>
     <section class="flex-grow w-3/5">
       <div class='flex justify-between'>

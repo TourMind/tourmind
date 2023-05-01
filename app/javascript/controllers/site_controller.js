@@ -2,7 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="site"
 export default class extends Controller {
-    static targets = ["filterMenu"]
+    static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn"]
+
+    connect() {
+        this.registerCheckboxEvent(this.filterCheckboxTargets);
+    }
 
     //控制小於768px時出現的篩選鍵
     toggleFilterMenu() {
@@ -17,5 +21,13 @@ export default class extends Controller {
 
         icon.classList.toggle('rotate-180');
         filterOptions.classList.toggle('max-h-96');
+    }
+
+    registerCheckboxEvent(targets) {
+        targets.map(target => {
+            target.addEventListener('change', () => {
+                this.filterSubmitBtnTarget.click()
+            })
+        })
     }
 }
