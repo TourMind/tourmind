@@ -2,6 +2,11 @@
 
 Rails.application.routes.draw do
   root 'page#home'
+<<<<<<< HEAD
+=======
+  get 'orders/index'
+  get 'orders/show'
+>>>>>>> 1b22483 (modify path)
 
   devise_for :users,
              controllers: {
