@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_27_112150) do
+ActiveRecord::Schema.define(version: 2023_05_01_045157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2023_04_27_112150) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
+    t.json "images"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 2023_04_27_112150) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -116,7 +116,8 @@ ActiveRecord::Schema.define(version: 2023_04_27_112150) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "diamond_grade", default: "一般會員"
+    t.string "diamond_grade"
+    t.string "amount"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

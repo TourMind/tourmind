@@ -39,14 +39,12 @@ gem 'tailwindcss-rails', '~> 2.0'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
 gem 'geocoder', '~> 1.8', '>= 1.8.1'
+gem 'mailgun_rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-
-gem 'geocoder', '~> 1.8', '>= 1.8.1'
-gem 'mailgun_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -65,7 +63,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
-  gem 'web-console', '>= 4.1.0'
 end
 
 group :test do
@@ -80,7 +77,6 @@ end
 gem 'requestjs-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
 
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem 'foreman', '~> 0.87.2'
