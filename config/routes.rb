@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   resources :hotels do
     resources :comments, only: [:create,:new]
   end
-  
+
   resources :sites do
     resources :comments, only: [:create,:new]
   end 
