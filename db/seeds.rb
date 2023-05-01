@@ -114,20 +114,28 @@ sites2 = {
   ],
 }
 
-Plan.create(
-  name: "臺北城市文化探險之旅",
-  description:
-    "這個兩天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將參觀台灣藝術家的作品，探索熱鬧的藝文場所，品嚐當地美食。第二天，您將欣賞中國古代文物和藝術品，放鬆身心，欣賞城市全景。這個行程適合喜歡城市探險和文化體驗的旅行者。",
-  days: 2,
-  locations: sites,
-  category: "文化",
-)
+categories = %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
 
-Plan.create(
-  name: "臺北城市自然和現代化之旅",
-  description:
-    "這個三天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將欣賞中國古代藝術品、探索著名的夜市、欣賞現代化建築的壯觀。第二天，您將欣賞壯麗的自然風光、探索台灣溫泉的歷史和文化。",
-  days: 3,
-  locations: sites2,
-  category: "自然",
-)
+10.times do
+  Plan.create!(
+    name: "臺北城市文化探險之旅",
+    description:
+      "這個兩天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將參觀台灣藝術家的作品，探索熱鬧的藝文場所，品嚐當地美食。第二天，您將欣賞中國古代文物和藝術品，放鬆身心，欣賞城市全景。這個行程適合喜歡城市探險和文化體驗的旅行者。",
+    days: 2,
+    locations: sites,
+    user_id: 17,
+    public: true,
+    category: categories.sample,
+  )
+
+  Plan.create!(
+    name: "臺北城市自然和現代化之旅",
+    description:
+      "這個三天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將欣賞中國古代藝術品、探索著名的夜市、欣賞現代化建築的壯觀。第二天，您將欣賞壯麗的自然風光、探索台灣溫泉的歷史和文化。",
+    days: 3,
+    locations: sites2,
+    user_id: 17,
+    public: true,
+    category: categories.sample,
+  )
+end

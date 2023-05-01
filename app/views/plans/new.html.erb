@@ -103,11 +103,19 @@
             </div>
             <div class="mb-5">
               <%= form.label :people, "適合人數", class: "mb-3 block text-base font-medium text-blue-600" %>
-              <%= form.number_field :people, class: "rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: ""}, min: 1, placeholder: 1%>
+              <%= form.number_field :people, class: "rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "people"}, min: 1, placeholder: 1%>
             </div>
             <div class="mb-5">
               <%= form.label :category, "行程主題", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.select :category, Plan.category_options, {}, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "category"}%>
+            </div>
+            <div class="mb-5">
+              <div class='flex flex-row'>
+                <%= form.check_box :public, class: "appearance-none h-6 w-6 bg-white rounded-full checked:bg-blue-500 checked:scale-75 transition-all duration-200 peer", checked: true, data: {edit_target: "public"} %>
+                <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-blue-300 peer-checked:border-2'>
+                </div>
+                <%= form.label :public, "與他人分享這行程", class: 'flex flex-col justify-center px-2 peer-checked:text-blue-600 text-rose-600 select-none'%>
+              </div>
             </div>
             <div class="mb-5">
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>

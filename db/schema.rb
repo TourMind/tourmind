@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_27_112150) do
+ActiveRecord::Schema.define(version: 2023_05_01_105221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,10 +56,14 @@ ActiveRecord::Schema.define(version: 2023_04_27_112150) do
     t.text "description"
     t.integer "days"
     t.json "locations"
-    t.string "images", array: true
+    t.string "images", default: [], array: true
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.integer "people", default: 1
+    t.boolean "public", default: false
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -121,4 +125,5 @@ ActiveRecord::Schema.define(version: 2023_04_27_112150) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "plans", "users"
 end

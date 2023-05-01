@@ -7,9 +7,11 @@ export default class extends Controller {
     "name",
     "description",
     "category",
+    "people",
     "container",
     "drawer",
     "form",
+    "public",
   ];
 
   async update() {
@@ -20,6 +22,8 @@ export default class extends Controller {
         name: this.nameTarget.value,
         description: this.descriptionTarget.value,
         days: +this.containerTarget.dataset.days,
+        people: +this.peopleTarget.value,
+        public: this.publicTarget.checked,
         category: this.categoryTarget.value,
         locations: {},
       };
