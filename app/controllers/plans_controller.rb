@@ -1,5 +1,6 @@
 class PlansController < ApplicationController
-  before_action :find_plan, only: %i[show edit update destroy]
+  before_action :find_plan,
+                only: %i[show edit update destroy day_info plan_overview]
 
   def index
     @plans = Plan.order(id: :desc)
@@ -31,10 +32,9 @@ class PlansController < ApplicationController
     end
 
     render json: {
-             status: "server error",
-             redirect_url: "/plans/#{@plan.id}",
+             errors: @plan.errors.full_messages,
            },
-           status: :internal_server_error
+           status: :unprocessable_entity
   end
 
   def destroy
@@ -42,15 +42,12 @@ class PlansController < ApplicationController
   end
 
   def day_info
-    @plan = Plan.find(params[:id])
     @day = params[:day].to_i
 
     render "day_nav"
   end
 
   def plan_overview
-    @plan = Plan.find(params[:id])
-
     render "_plan_overview"
   end
 
@@ -63,8 +60,8 @@ class PlansController < ApplicationController
   def plan_info
     params
       .require(:data)
-      .permit(:name, :description, :days, locations: {})
-      .tap { |field| field[:locations] = params[:data][:locations].permit! }
+      .permit(:name, :description, :days, :category, locations: {})
+      .tap { |plan| plan[:locations] = params[:data][:locations].permit! }
   end
 
   def update_order(locations, reference)

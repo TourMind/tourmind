@@ -3,7 +3,14 @@ import { patch } from "@rails/request.js";
 
 // Connects to data-controller="send"
 export default class extends Controller {
-  static targets = ["name", "description", "container", "drawer", "form"];
+  static targets = [
+    "name",
+    "description",
+    "category",
+    "container",
+    "drawer",
+    "form",
+  ];
 
   async update() {
     try {
@@ -13,6 +20,7 @@ export default class extends Controller {
         name: this.nameTarget.value,
         description: this.descriptionTarget.value,
         days: +this.containerTarget.dataset.days,
+        category: this.categoryTarget.value,
         locations: {},
       };
 
@@ -39,12 +47,13 @@ export default class extends Controller {
         body: JSON.stringify({ data }),
         responseKind: "json",
       });
+      const resData = await res.json;
 
-      const { redirect_url } = await res.json;
+      if (!res.ok) {
+        return alert(resData.errors);
+      }
 
-      if (!res.ok) alert("Something went wrong!");
-
-      window.location.replace(redirect_url);
+      window.location.replace(resData.redirect_url);
     } catch (err) {
       alert(err.message);
     }
