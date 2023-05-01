@@ -12,12 +12,19 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
-    end
+  end
     def create
-      @commentable = Restaurant.find(params[:restaurant_id])
+      if params[:restaurant_id]
+        @commentable = Restaurant.find(params[:restaurant_id])
+      elsif params[:site_id]
+        @commentable = Site.find(params[:site_id])
+      elsif params[:hotel_id]
+        @commentable = Hotel.find(params[:hotel_id])
+      end
+      
       @comment = @commentable.comments.build(comment_params)
       @comment.user = current_user
-      
+          
       if @comment.save
         redirect_to @commentable, notice: 'Comment was successfully created.'
       else
