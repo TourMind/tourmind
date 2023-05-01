@@ -220,6 +220,7 @@ GEM
       actionpack (>= 4.2)
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
+    pagy (6.0.3)
     parallel (1.23.0)
     parser (3.2.2.1)
       ast (~> 2.4.1)
@@ -402,6 +403,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-line!
   omniauth-rails_csrf_protection (~> 1.0)
+  pagy
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

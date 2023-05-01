@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def users
-    @users = User.all.order(:id)
+    @pagy, @users = pagy(User.all.order(:id))
     @users = @users.search(params[:keyword]) if params[:keyword].present?
   end
 

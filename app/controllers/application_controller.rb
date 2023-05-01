@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+  
   include Rails.application.routes.url_helpers
   # 設定語言為中文
   before_action :set_locale
