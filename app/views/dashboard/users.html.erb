@@ -1,5 +1,19 @@
 <div class="m-4">
-  <h1 class="mb-20 text-4xl font-bold">後台系統</h1>
+  <h1 class="mb-10 text-4xl font-bold">後台系統</h1>
+  <div class="chartBox">
+    <div class="chart" >
+      <canvas id="myChart", data-controller="chart" 
+              data-controller="chart" 
+              data-regular="<%= @regular_count %>"
+              data-rd="<%= @rd_count %>"
+              data-bd="<%= @bd_count %>"
+              data-wd="<%= @wd_count %>">
+      </canvas>
+    </div>
+    <div class="text-4xl font-bold">
+      <span class="border-b-2">總營收 $<%= @prices %></span>
+    </div>
+  </div>
   <span class="text-xl font-bold">Post:<%= @users.count %> / <%= User.count %></span>
   <form class="m-4">
     <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢姓名、電話、信箱...">

@@ -1,9 +1,0 @@
-/*
- *= require_tree .
- *= require_self
- */
-
-.flash_style {
-    top: 60px !important;
-    right: 10px !important;
-}
