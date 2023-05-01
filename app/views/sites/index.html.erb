@@ -63,10 +63,10 @@
             寵物友善搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
           <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
-            <% @pet_freindly_options.each do | pet_freindly |%>
+            <% @pet_friendly_options.each do | pet_friendly |%>
               <li class="py-1">
-                <%= check_box_tag "pet_freindly[]", pet_freindly, @pet_freindly.include?(pet_freindly) , {class: "mr-2", data:{site_target:"filterCheckbox"}} %>
-                <%=pet_freindly%>
+                <%= check_box_tag "pet_friendly[]", pet_friendly, @pet_friendly.include?(pet_friendly) , {class: "mr-2", data:{site_target:"filterCheckbox"}} %>
+                <%=pet_friendly%>
               </li>
             <% end %>
           </ul>

@@ -6,16 +6,16 @@ class SitesController < ApplicationController
   def index
     @city_options = %w[台北市 新北市]
     @site_type_options = %w[自然景觀 歷史文化遺產 美術館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
-    @pet_freindly_options = %w[可攜寵物]
+    @pet_friendly_options = %w[可攜寵物]
 
     @address = params[:address] || []
     @site_types = params[:site_types] || []
-    @pet_freindly = params[:pet_freindly] || []
+    @pet_friendly = params[:pet_friendly] || []
 
     @sites = if params[:keyword].present?
                Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
-             elsif @address.present? || @site_types.present? || @pet_freindly.present?
-               Site.filter(@address, @site_types, @pet_freindly).order(updated_at: :desc).page(params[:page])
+             elsif @address.present? || @site_types.present? || @pet_friendly.present?
+               Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc).page(params[:page])
              else
                Site.order(updated_at: :desc).page(params[:page])
              end
@@ -61,6 +61,6 @@ class SitesController < ApplicationController
 
   def site_parames
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
-                                 :stay_duration, :intro, :pet_freindly, site_types: [],)
+                                 :stay_duration, :intro, :pet_friendly, site_types: [], images: [],)
   end
 end

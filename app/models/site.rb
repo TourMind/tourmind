@@ -13,12 +13,12 @@ class Site < ApplicationRecord
           keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
 
-  def self.filter(address, site_types, pet_freindly)
+  def self.filter(address, site_types, pet_friendly)
     sql_query_condition = []
 
     sql_query_condition.push "address ~ '#{address.join('|')}'" if address.present?
     sql_query_condition.push "site_types @> '{#{site_types.join(',')}}'" if site_types.present?
-    sql_query_condition.push "pet_freindly ~ '#{pet_freindly.join('|')}'" if pet_freindly.present?
+    sql_query_condition.push "pet_friendly ~ '#{pet_friendly.join('|')}'" if pet_friendly.present?
 
     where(sql_query_condition.join(' AND '))
   end
