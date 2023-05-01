@@ -20,7 +20,6 @@ class Hotel < ApplicationRecord
     where('name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword OR equipment::text ILIKE ANY (ARRAY[:keywords])',
           keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
-  paginates_per 4
 
   friendly_id :name, use: :slugged
 
@@ -31,7 +30,7 @@ class Hotel < ApplicationRecord
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
   end
-  # 上傳圖片
+  paginates_per 6
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
 end
