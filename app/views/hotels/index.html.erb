@@ -82,7 +82,8 @@
               <li class="py-1"><input class="mr-2" type="checkbox">24小時櫃檯接待</li>
             </ul>
           </div>
-        </section>
+          <%= submit_tag "submit", {class:'hidden', data:{hotel_target:"filterSubmitBtn"}} %>
+        <% end %>
       </section>
       <section class="flex-grow w-3/5">
         <div class='flex justify-between'>
