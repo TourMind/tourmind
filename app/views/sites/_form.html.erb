@@ -41,9 +41,11 @@
           w-full' %>
   </div>
   <div class='my-5'>
-    <%= form.label :image , '照片' %>
-    <%= form.file_field :image, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
-          w-full' %>
+    <%= form.label :images , '照片' %>
+    <% site.images.each do |image| %>
+      <%= hidden_field :hotel, :images, multiple: true, value: image.identifier %>
+    <% end %>
+    <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
   <div class='my-5'>
     <%= form.label :pet_friendly , '是否可攜帶寵物' %>

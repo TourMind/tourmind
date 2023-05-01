@@ -100,7 +100,9 @@
             <%= link_to site_path(site.id) do %>
               <div class="relative">
                 <div class=" text-gray-700 md:h-[10rem] w-full">
-                  <% if site.image.url.present? %>
+                  <% if site.images.present? %>
+                    <img class="object-cover w-full h-full" src="<%= site.images.first.url %>" alt="Site Pic">
+                  <% elsif site.image.url.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.image.url %>" alt="Site Pic">
                   <% else %>
                     <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>

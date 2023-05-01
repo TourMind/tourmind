@@ -22,6 +22,7 @@ class Site < ApplicationRecord
 
     where(sql_query_condition.join(' AND '))
   end
-  paginates_per 9
+  paginates_per 6
   mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 end
