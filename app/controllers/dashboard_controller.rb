@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DashboardController < ApplicationController
   def users
     @pagy, @users = pagy(User.all.order(:id))
@@ -10,12 +12,9 @@ class DashboardController < ApplicationController
     @prices = Order.sum(:amount)
   end
 
-  def sites
-  end
+  def sites; end
 
-  def hotels
-  end
+  def hotels; end
 
-  def restaurants
-  end
+  def restaurants; end
 end
