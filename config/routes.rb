@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'page#home'
   get 'orders/index'
   get 'orders/show'
-  get 'dashboard/users'
-  get 'dashboard/sites'
-  get 'dashboard/hotels'
-  get 'dashboard/restaurants'
-  root 'page#home'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -33,10 +29,11 @@ Rails.application.routes.draw do
   # 訂單資訊
   resources :orders, only: %i[index show]
   # 管理員後台
-  get 'dashboard/users', to: 'dashboard#users'
-  get 'dashboard/sites', to: 'dashboard#sites'
-  get 'dashboard/hotels', to: 'dashboard#hotels'
-  get 'dashboard/restaurants', to: 'dashboard#restaurants'
+  get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
+  get '/dashboard/sites', to: 'dashboard#sites', as: 'dashboard_sites'
+  get '/dashboard/hotels', to: 'dashboard#hotels', as: 'dashboard_hotels'
+  get '/dashboard/restaurants', to: 'dashboard#restaurants', as: 'dashboard_restaurants'
+
   
   resources :hotels
   resources :sites

@@ -15,17 +15,19 @@
     </div>
   </div>
   <span class="text-xl font-bold">Post:<%= @users.count %> / <%= User.count %></span>
-  <form class="m-4">
+  <form class="m-4 my-6">
     <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢姓名、電話、信箱...">
     <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer " value="查詢">
   </form>
   <section>
     <div style='border-bottom: 2px solid #eaeaea'>
       <ul class='flex cursor-pointer'>
-          <li class='px-6 py-2 bg-white rounded-t-lg'>用戶資料</li>
-          <li class='px-6 py-2 text-gray-500 bg-white bg-gray-200 rounded-t-lg'>餐廳</li>
-          <li class='px-6 py-2 text-gray-500 bg-white bg-gray-200 rounded-t-lg'>景點</li>
-          <li class='px-6 py-2 text-gray-500 bg-white bg-gray-200 rounded-t-lg'>住宿</li>
+          <li class='px-6 py-2 text-xl font-bold bg-gray-100 rounded-t-lg'>
+            <%= link_to "用戶資料", dashboard_users_path %>
+          </li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>餐廳</li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>景點</li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>住宿</li>
       </ul>
     </div>
     <div>
