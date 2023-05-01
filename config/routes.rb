@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'orders/index'
-  get 'orders/show'
-  get 'dashboard/users'
-  get 'dashboard/sites'
-  get 'dashboard/hotels'
-  get 'dashboard/restaurants'
   root 'page#home'
 
   devise_for :users,
