@@ -126,13 +126,6 @@ GEM
       stimulus-rails
       turbo-rails
 
-    http-accept (1.7.0)
-    http-cookie (1.0.5)
-      domain_name (~> 0.5)
-    i18n (1.13.0)
-
-    http-accept (1.7.0)
-    http-cookie (1.0.5)
       concurrent-ruby (~> 1.0)
       domain_name (~> 0.5)
     i18n (1.13.0)
