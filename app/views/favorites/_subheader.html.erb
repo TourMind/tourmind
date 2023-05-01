@@ -6,7 +6,7 @@
   </div>
   <%= form_with(url: favorites_path, method: "get") do %>
     <%= label_tag(:sort, "排序:") %>
-    <%= select_tag(:sort, options_for_select([["價位", "price"], ["收藏時間", "name"]])) %>
+    <%= select_tag(:sort, options_for_select([["價位", "price"], ["收藏時間", "created_at"]])) %>
   <% end %>
   </div>
 <hr class="h-px my-4 bg-gray-300 border-0 dark:bg-gray-300">
