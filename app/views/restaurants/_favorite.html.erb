@@ -3,7 +3,7 @@
     <%= button_to favorite_path(current_user.favorites.restaurants.find_by(favorable_id: object.id)), method: :delete, anchor: object.id, data: { turbo: false } do%>
     <span class="text-red-500 <%=size%>">&#x2665;</span>
     <% end %>
-  <% else%>
+  <% elsif current_user %>
     <%= button_to favorites_path(favorites: {favorable_type: object.class, favorable_id: object.id}), method: :post, anchor: object.id, data: { turbo: false } do%>
       <span class="text-slate-300 <%=size%>">&#x2665;</span>
     <% end %>

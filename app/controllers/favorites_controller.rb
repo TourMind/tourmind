@@ -1,7 +1,9 @@
 class FavoritesController < ApplicationController
   include ApplicationHelper
+  before_action :authenticate_user!, only: [:index]
+
   def index
-    @favorites = current_user.favorites
+    @favorites = current_user.favorites.order(updated_at: :desc)
   end
 
   def create
