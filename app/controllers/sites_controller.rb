@@ -2,7 +2,7 @@
 
 class SitesController < ApplicationController
   before_action :set_site, only: %i[show edit update destroy]
-
+  helper_method :star_rating
   def index
     @sites = if params[:keyword].present?
                Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
@@ -25,7 +25,11 @@ class SitesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+
+    @comment = Comment.new
+    @comments = @site.comments
+  end
 
   def edit; end
 
@@ -51,5 +55,15 @@ class SitesController < ApplicationController
 
   def site_parames
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude, :stay_duration, :intro, :pet_freindly, site_types: [])
+  end
+  def star_rating(rating)
+    stars = ''
+    if rating.present?
+      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      (5 - rating.to_i).times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    else
+      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    end
+    stars.html_safe
   end
 end

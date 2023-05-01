@@ -2,13 +2,7 @@
   <% @restaurant.comments.each do |comment| %>
     <div class="p-4 max-w-lg truncate ...">
       <p>By <%= comment.user.email %> </p>
-<%= star_rating(comment.rating) %>
-
-
-
-
-
-
+      <%= star_rating(comment.rating) %>
       <div class="flex flex-row space-x-4 ">
         <% comment.images.each do |image| %>
           <%= image_tag image.url, class: 'w-1/5 mx-1' %>
