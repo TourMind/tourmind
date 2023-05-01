@@ -107,7 +107,7 @@
             </div>
             <div class="mb-5">
               <%= form.label :category, "行程主題", class: "mb-3 block text-base font-medium text-blue-600" %>
-              <%= form.select :category, @plan.category_options, {}, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "category"}%>
+              <%= form.select :category, Plan.category_options, {}, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "category"}%>
             </div>
             <div class="mb-5">
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>
