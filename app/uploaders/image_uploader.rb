@@ -44,6 +44,14 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   process resize_to_fill: [400, 400]
   # end
 
+  # 上傳的圖片會被裁切成小於 600 * 600 像素的大小，原始圖片會另外保留
+  process resize_to_fit: [600, 600]
+
+  # 另存一個叫做 thumb ，大小為 200 * 200 像素的圖片版本
+  version :thumb do
+    process resize_to_fill: [200, 200]
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_allowlist
