@@ -10,8 +10,9 @@ class Hotel < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword OR equipment::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
   paginates_per 4
   mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 end
