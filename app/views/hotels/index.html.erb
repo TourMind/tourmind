@@ -96,7 +96,9 @@
               <%= render "favorite", object:hotel, size:"text-4xl"%>
               <div class="w-full md:w-60 md:h-60">
                 <%= link_to hotel_path(hotel.id) do %>
-                  <% if hotel.image.url.present? %>
+                  <% if hotel.images.present? %>
+                    <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
+                  <% elsif hotel.image.url.present? %>
                     <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
                   <% else %>
                     <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
