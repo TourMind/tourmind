@@ -74,7 +74,7 @@
           </div>
         </section>
       </section>
-      <section class="flex-grow">
+      <section class="flex-grow w-3/5">
         <div class='flex justify-between'>
           <h1 class='text-center text-4xl font-bold'>住宿</h1>
           <%= link_to '新增景點' , new_hotel_path(@hotel), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
@@ -94,68 +94,71 @@
             </div>
           </form>
         </div>
-        <% @hotels.each do |hotel| %>
-          <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3">
-            <div class="relative">
-              <div class="w-full md:w-60 md:h-60">
-                <%= link_to hotel_path(hotel.id) do %>
-                  <% if hotel.images.present? %>
-                    <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
-                  <% elsif hotel.image.url.present? %>
-                    <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
-                  <% else %>
-                    <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
-                  <% end %>
-                  <div class="absolute top-0 right-0 m-3">
-                    <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-2"><% @hotels.each do |hotel| %>
+            <div class="bg-white rounded-md overflow-hidden shadow-lg">
+              <%= link_to hotel_path(hotel.id) do %>
+                <div class="relative">
+                  <div class=" text-gray-700 md:h-[10rem] w-full">
+                    <% if hotel.images.present? %>
+                      <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Site Pic">
+                    <% elsif hotel.image.url.present? %>
+                      <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
+                    <% else %>
+                      <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
+                    <% end %>
+                    <div class="absolute top-0 right-0 m-3">
+                      <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
+                    </div>
                   </div>
-                <% end %>
-              </div>
-            </div>
-            <div class="flex-grow">
-              <h2 class="text-xl font-medium p-4">
-                <%= hotel.name %>
-              </h2>
-              <div class="flex">
-                <ul class="flex flex-col justify-evenly w-1/2 border-r px-4">
+                </div>
+              <% end %>
+              <div class="flex-grow p-2 m-2">
+                <h2 class="text-xl font-medium py-4">
+                  <%= hotel.name %>
+                </h2>
+                <ul>
                   <li>評分:<%= 4.5 %>
                   </li>
-                  <li>
-                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                    <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
-                  </li>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
                   <li>地址:<%= hotel.address %>
                   </li>
-                  <li>電話:<%= hotel.tel %>
+                  <li>電話:
+                    <%= hotel.tel %>
                   </li>
                   <li>簡介:<%= hotel.intro&.truncate(30)%>
                   </li>
                 </ul>
-                <div class="w-1/2 px-4">
+                <div class="mt-2">
                   <h2 class="font-medium">住宿類型</h2>
-                  <span  class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'><%= hotel.hotel_types %>
-                  </span>
+                  <ul class="flex flex-wrap mt-2">
+                    <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                      <%= hotel.hotel_types %>
+                    </li>
+                  </ul>
+                </div>
+                <div class="mt-2">
                   <h2 class="font-medium">飯店設備</h2>
                   <% if hotel.equipment.present? %>
-                    <ul>
+                    <ul class="flex flex-wrap mt-2">
                       <% hotel.equipment.each do |equipment| %>
                         <li
-                          class='inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full '>
+                            class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
                           <%= equipment %>
                         </li>
                       <% end %>
                     </ul>
                   <% else %>
-                    <p>沒有設備資料</p>
+                    <p>沒有類型資料</p>
                   <% end %>
                 </div>
               </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </section>
         <div>
           <%= paginate @hotels%>
         </div>
