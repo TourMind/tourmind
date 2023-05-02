@@ -44,8 +44,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-
-gem 'geocoder', '~> 1.8', '>= 1.8.1'
 gem 'mailgun_rails'
 
 group :development, :test do
@@ -82,3 +80,5 @@ gem 'turbo-rails'
 
 gem 'foreman', '~> 0.87.2'
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+
+gem "dockerfile-rails", ">= 1.2", :group => :development
