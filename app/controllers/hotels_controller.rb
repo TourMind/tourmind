@@ -5,7 +5,7 @@ class HotelsController < ApplicationController
   helper_method :star_rating
   def index
     @city_options = %w[台北市 新北市]
-    @hotel_type_options = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
+    @hotel_types_options = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
     @equipment_options = %w[無線網路(WIFI) 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 腳踏車租賃 24小時櫃檯接待]
 
     @address = params[:address] || []
