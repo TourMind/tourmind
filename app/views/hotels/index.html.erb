@@ -69,7 +69,9 @@
           </form>
         </div>
         <% @hotels.each do |hotel| %>
-          <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3">
+          <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3 relative">
+            <%# 喜愛清單 愛心按鈕%>
+            <%= render "favorite", object:hotel, size:"text-4xl"%>
             <%= link_to hotel_path(hotel.id) do %>
             <div class="w-full md:w-64 md:min-h-64">
                 <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "hotel Pic" , class: "w-full h-full" %>
