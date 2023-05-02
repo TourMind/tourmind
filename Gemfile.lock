@@ -3,6 +3,8 @@ GIT
   revision: 3a770110c6fee0027708d0abcd5b975e7e7b5c86
   specs:
     omniauth-line (0.0.3)
+      concurrent-ruby (~> 1.0)
+      domain_name (~> 0.5)
       json (>= 1.8)
       omniauth-oauth2 (>= 1.6)
 
@@ -125,9 +127,10 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
-
-      concurrent-ruby (~> 1.0)
       domain_name (~> 0.5)
+
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
     i18n (1.13.0)
     image_processing (1.12.2)
       ruby-vips (>= 2.0.17, < 3)
