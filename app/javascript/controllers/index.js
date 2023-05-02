@@ -2,6 +2,7 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
+
 import { application } from "./application"
 
 import ChartController from "./chart_controller"
@@ -33,3 +34,6 @@ application.register("picture", PictureController)
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
+
+import FavoriteController from "./favorite_controller";
+application.register("favorite", FavoriteController);
