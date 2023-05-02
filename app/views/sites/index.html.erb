@@ -99,7 +99,7 @@
           <div class="bg-white rounded-md overflow-hidden shadow-lg">
             <%= link_to site_path(site.id) do %>
               <div class="relative">
-                <div class=" text-gray-700 md:h-[10rem] w-full">
+                <div class=" text-gray-700 md:h-[15rem] w-full">
                   <% if site.images.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.images.first.url %>" alt="Site Pic">
                   <% elsif site.image.url.present? %>
@@ -125,11 +125,6 @@
                 <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
                 <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
                 <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
-                <li>地址:<%= site.address %>
-                </li>
-                <li>電話:
-                  <%= site.tel %>
-                </li>
                 <li>簡介:<%= site.intro&.truncate(30)%>
                 </li>
               </ul>
