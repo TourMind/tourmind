@@ -11,10 +11,4 @@ class DashboardController < ApplicationController
     @rd_count = User.where(diamond_grade: '紅鑽會員').count
     @prices = Order.sum(:amount)
   end
-
-  def sites; end
-
-  def hotels; end
-
-  def restaurants; end
 end

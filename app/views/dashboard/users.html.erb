@@ -25,9 +25,18 @@
           <li class='px-6 py-2 text-xl font-bold bg-gray-100 rounded-t-lg'>
             <%= link_to "用戶資料", dashboard_users_path %>
           </li>
-          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>餐廳</li>
-          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>景點</li>
-          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>住宿</li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+             <%= link_to '餐廳', restaurants_path %> 
+          </li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+             <%= link_to '景點', sites_path %> 
+          </li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+             <%= link_to '住宿', hotels_path %> 
+          </li>
+          <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+             <%= link_to '行程規劃', plans_path %> 
+          </li>
       </ul>
     </div>
     <div>
