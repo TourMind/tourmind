@@ -50,10 +50,10 @@
               住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
-              <% @hotel_type_options.each do | hotel_type |%>
+              <% @hotel_types_options.each do | hotel_types |%>
                 <li class="py-1">
-                  <%= check_box_tag "hotel_type[]", hotel_type, @hotel_types.include?(hotel_type) , {class: "mr-2", data:{hotel_target:"filterCheckbox"}} %>
-                  <%=hotel_type%>
+                  <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2", data:{hotel_target:"filterCheckbox"}} %>
+                  <%=hotel_types%>
                 </li>
               <% end %>
             </ul>
