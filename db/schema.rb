@@ -75,7 +75,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.datetime "pay_time"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false    
+    t.integer "user_id"
   end
 
   create_table "plans", force: :cascade do |t|
