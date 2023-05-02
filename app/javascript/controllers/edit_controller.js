@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 import { patch } from "@rails/request.js";
+// import { patch } from "@rails/request.js";
 
 // Connects to data-controller="send"
 export default class extends Controller {
@@ -10,6 +11,7 @@ export default class extends Controller {
     "people",
     "container",
     "drawer",
+    "images",
     "form",
     "public",
   ];
@@ -18,39 +20,58 @@ export default class extends Controller {
     try {
       this.trimDays();
 
-      const data = {
-        name: this.nameTarget.value,
-        description: this.descriptionTarget.value,
-        days: +this.containerTarget.dataset.days,
-        people: +this.peopleTarget.value,
-        public: this.publicTarget.checked,
-        category: this.categoryTarget.value,
-        locations: {},
-      };
+      // const data = {
+      //   name: this.nameTarget.value,
+      //   description: this.descriptionTarget.value,
+      //   days: +this.containerTarget.dataset.days,
+      //   people: +this.peopleTarget.value,
+      //   public: this.publicTarget.checked,
+      //   category: this.categoryTarget.value,
+      //   locations: {},
+      // };
+
+      let locations = {};
 
       const dayCount = document
         .querySelector("#plan")
         .querySelectorAll(".day").length;
 
       for (let i = 1; i <= dayCount; i++) {
-        data.locations[`day${i}`] = [];
+        locations[`day${i}`] = [];
         const sites = document
           .querySelector(`#plan-day-${i}`)
           .querySelectorAll(".site");
 
         sites.forEach((site) => {
-          data.locations[`day${i}`].push(
-            site.id.split("-").map((el) => +el || el)
-          );
+          locations[`day${i}`].push(site.id.split("-").map((el) => +el || el));
         });
       }
 
       const id = document.querySelector("#top").dataset.id;
 
+      const form = new FormData();
+
+      const files = this.imagesTarget.files;
+
+      form.append("name", this.nameTarget.value);
+      form.append("description", this.descriptionTarget.value);
+      form.append("days", +this.containerTarget.dataset.days);
+      form.append("people", +this.peopleTarget.value);
+      form.append("public", this.publicTarget.checked);
+      form.append("category", this.categoryTarget.value);
+      form.append("locations", JSON.stringify(locations));
+      form.append("images", files[0]);
+      // form.append("images", files[1]);
+
+      // for (let i = 0; i < files.length; i++) {
+      //   form.append("images", files[i]);
+      // }
+
       const res = await patch(`/plans/${id}`, {
-        body: JSON.stringify({ data }),
+        body: form,
         responseKind: "json",
       });
+
       const resData = await res.json;
 
       if (!res.ok) {

@@ -29,7 +29,7 @@ class PlansController < ApplicationController
   end
 
   def update
-    plan_data = plan_info
+    plan_data = plan_params
     plan_data[:locations] = update_order(plan_data, @plan)
 
     if current_user == @plan.user
@@ -82,25 +82,23 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
   end
 
-  def plan_info
-    params
-      .require(:data)
-      .permit(
-        :name,
-        :description,
-        :days,
-        :people,
-        :public,
-        :category,
-        locations: {
-        },
-      )
-      .tap { |plan| plan[:locations] = params[:data][:locations].permit! }
+  def plan_params
+    params.permit(
+      :name,
+      :description,
+      :days,
+      :people,
+      :public,
+      :category,
+      :locations,
+      :images,
+    )
   end
 
-  def update_order(locations, reference)
-    locations[:locations].each_key do |key|
-      locations[:locations][key] = locations[:locations][key].map do |location|
+  def update_order(data, reference)
+    locations = JSON.parse(data[:locations])
+    locations.each_key do |key|
+      locations[key] = locations[key].map do |location|
         reference[:locations][location[0]][location[1] - 1]
       end
     end

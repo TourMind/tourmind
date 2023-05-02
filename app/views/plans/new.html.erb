@@ -119,9 +119,9 @@
             </div>
             <div class="mb-5">
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>
-              <%= form.file_field :images, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "category"}, multiple: true%>
+              <%= form.file_field :images, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "images"}, multiple: true, accept: "image/png,image/gif,image/jpeg" %>
             </div>
-            <button data-action="click->edit#update" class="inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">更新行程</button>
+            <div data-action="click->edit#update" class="inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">更新行程</div>
           <% end %>
         </div>
       </div>

@@ -30,7 +30,7 @@
               <% current_user.plans.order(id: :desc).each do |plan| %>
                 <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                   <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                    <img src=<%= plan.images.sample || %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %>  alt="plant" class="h-auto w-full" />
+                    <img src=<%= %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %>  alt="plant" class="h-auto w-full" />
                     <div class="p-5 flex flex-col gap-5 h-auto">
                       <div class="font-bold"><%= plan.name %></div>
                       <div>
@@ -69,7 +69,7 @@
               <% next if plan == nil %>
               <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                 <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                  <img src=<%= plan.images.sample || %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %> alt="plant" class="h-auto w-full" />
+                  <img src=<%= %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %> alt="plant" class="h-auto w-full" />
                   <div class="p-5 flex flex-col gap-5 h-auto">
                     <div class="font-bold"><%= plan.name %></div>
                     <div>
