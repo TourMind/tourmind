@@ -27,7 +27,7 @@
     </div>
   </section>
   <div class='flex py-4 flex-col lg:flex-row'>
-    <div class="w-full lg:w-2/3 mr-4">
+    <div class="w-full mr-4">
       <div class='pb-4 px-4 border-b-2 border-blue-300'>
         <div class='text-2xl font-bold pb-2'>詳細資料</div>
         <ul>
@@ -72,25 +72,6 @@
         <%= link_to '返回飯店列表' , hotels_path, class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium' %>
         <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
           class: 'rounded-md py-2 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
-      </div>
-    </div>
-    <div class="w-full lg:w-1/3">
-      <div class='p-4 bg-white border'>
-        <div>
-          <h2 class='py-3 text-2xl font-bold'>評等</h2>
-          <hr class='my-8 bg-gray-200'>
-        </div>
-        <div>
-          <h3 class='text-lg '>評等</h3>
-          <div class='flex justify-between'>
-            <h4 class='text-base '></h4>
-            <span>OOOOO</span>
-          </div>
-          <div class='flex justify-between'>
-            <h4 class='text-base '>XX</h4>
-            <span>OOOOO</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
