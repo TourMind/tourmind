@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   helper_method :star_rating
   def index
     @city_options = %w[台北市 新北市]
-    @site_type_options = %w[自然景觀 歷史文化遺產 美術館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
+    @site_type_options = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
     @pet_friendly_options = %w[可攜寵物]
 
     @address = params[:address] || []
