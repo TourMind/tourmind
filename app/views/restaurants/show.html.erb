@@ -1,12 +1,21 @@
-<div class="mx-auto w-full bg-slate-200">
+<div class="container m-auto pb-4">
   <div class="mx-auto">
     <Section class = "p-3">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
 
-    <section class = "justify-center flex px-4 grid grid-cols-3 gap-4">
-      <div class = "col-span-2 aspect-[5/3]">
-        <img class="w-full" src=<%=@restaurant.image%> alt="site iamge">
+    <section class = "justify-center flex px-4 grid grid-cols-3 gap-4 overflow-hidden" >
+      <div class = "col-span-2 relative" data-controller="moving">
+        <button data-action="click->moving#prevSlide" class="ml-2 absolute left-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2"><</button>
+        <% if @restaurant.images.present? %>
+          <% @restaurant.images.each_with_index do |image, index| %>
+            <%= image_tag image.url, {class: "h-[40rem] w-full object-fill", data: {moving_target: "slides"}}%>
+          <% end %>
+        <% else %>
+          <%= image_tag "https://fakeimg.pl/300x200", {class: "h-full w-full object-fill"}%>
+        <% end %>
+        <%= render "favorite", object:@restaurant, size:'text-6xl'%>
+        <button data-action="click->moving#nextSlide" class="mr-2 absolute right-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">></button>
       </div>
       <%= render "location", restaurant:@restaurant%>
     </section>
