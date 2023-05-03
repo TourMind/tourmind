@@ -31,6 +31,8 @@ Restaurant.create!(
       website: "https://timely-noodle.business.site/",
       price: 120,
       restaurant_type: 2,
+      lat: 24.999679401438087,
+      long: 121.52457507851321,
     },
   ],
 )
@@ -51,6 +53,8 @@ Restaurant.create!(
       restaurant_type: 0,
       cuisine_types: %w[美式料理 法式料理],
       atmostphere: %w[浪漫 舒適休閒],
+      lat: 25.042242922714284,
+      long: 121.55562939566491,
     },
   ],
 )
@@ -77,6 +81,8 @@ Restaurant.create!(
       restaurant_type: 0,
       cuisine_types: ["中式料理"],
       atmostphere: %w[安靜 舒適休閒],
+      lat: 25.032374793862548,
+      long: 121.54360533614681,
     },
   ],
 )

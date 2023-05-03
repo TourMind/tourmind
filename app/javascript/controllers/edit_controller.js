@@ -20,16 +20,6 @@ export default class extends Controller {
     try {
       this.trimDays();
 
-      // const data = {
-      //   name: this.nameTarget.value,
-      //   description: this.descriptionTarget.value,
-      //   days: +this.containerTarget.dataset.days,
-      //   people: +this.peopleTarget.value,
-      //   public: this.publicTarget.checked,
-      //   category: this.categoryTarget.value,
-      //   locations: {},
-      // };
-
       let locations = {};
 
       const dayCount = document
@@ -63,11 +53,6 @@ export default class extends Controller {
       form.append("category", this.categoryTarget.value);
       form.append("locations", JSON.stringify(locations));
       form.append("images", files[0]);
-      // form.append("images", files[1]);
-
-      // for (let i = 0; i < files.length; i++) {
-      //   form.append("images", files[i]);
-      // }
 
       const res = await patch(`/plans/${id}`, {
         body: form,

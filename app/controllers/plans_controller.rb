@@ -100,6 +100,42 @@ class PlansController < ApplicationController
     locations = JSON.parse(data[:locations])
     locations.each_key do |key|
       locations[key] = locations[key].map do |location|
+        if location[0] == "餐廳"
+          restaurant = Restaurant.find(location[1])
+          output = {
+            name: restaurant.name,
+            type: "餐廳",
+            lat: restaurant.lat,
+            lng: restaurant.long,
+            stay_time: location[2],
+          }
+          next output
+        end
+
+        if location[0] == "景點"
+          site = Site.find(location[1])
+          output = {
+            name: site.name,
+            type: "餐廳",
+            lat: site.latitude,
+            lng: site.longitude,
+            stay_time: location[2],
+          }
+          next output
+        end
+
+        if location[0] == "住宿"
+          hotel = Hotel.find(location[1])
+          output = {
+            name: hotel.name,
+            type: "餐廳",
+            lat: hotel.latitude,
+            lng: hotel.longitude,
+            stay_time: location[2],
+          }
+          next output
+        end
+
         output = reference[:locations][location[0]][location[1] - 1]
         output[:stay_time] = location[2]
         output
