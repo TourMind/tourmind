@@ -80,6 +80,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem "dockerfile-rails", ">= 1.2", :group => :development
-gem 'foreman', '~> 0.87.2'
 gem 'pagy'
 gem 'foreman', '~> 0.87.2'
