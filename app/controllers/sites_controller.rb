@@ -27,7 +27,7 @@ class SitesController < ApplicationController
   end
 
   def create
-    @site = Site.new(site_parames)
+    @site = Site.new(site_params)
     if @site.save
       redirect_to sites_path, notice: '新增成功'
     else
@@ -44,7 +44,7 @@ class SitesController < ApplicationController
   def edit; end
 
   def update
-    if @site.update(site_parames)
+    if @site.update(site_params)
       redirect_to site_path(@site), notice: '更新成功'
     else
       render :edit
@@ -63,7 +63,7 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
   end
 
-  def site_parames
+  def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
                                  :stay_duration, :intro, :pet_friendly, :remove_images, site_types: [], images: [],)
   end
