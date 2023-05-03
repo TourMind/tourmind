@@ -20,13 +20,13 @@ class Restaurant < ApplicationRecord
   RESTAURANT_TYPE = %w[餐廳 酒吧及夜店 小吃 麵包糕點 咖啡和茶 甜點 特色食品市場]
   PRICE_RANGE = %w[~200 200~400 400~800 800~1500 1500~]
 
-  #搜尋
+  # 搜尋
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR cuisine_types::text ILIKE ANY (ARRAY[:keywords]) OR atmostphere::text ILIKE ANY (ARRAY[:keywords])',
           keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
   end
 
-  #篩選
+  # 篩選
   def self.filter(address, restaurant_type, cuisine_types, atmostphere, min_price, max_price)
     sql_query_condition = []
 

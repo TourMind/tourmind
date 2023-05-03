@@ -9,7 +9,7 @@ class User < ApplicationRecord
             presence: true,
             format: {
               with: /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/,
-            }, if: -> { email.present? == false && provider != 'line'}
+            }, if: -> { email.present? == false && provider != 'line' }
 
   # confirmable -> 確認mail認證
   devise :database_authenticatable, :registerable,

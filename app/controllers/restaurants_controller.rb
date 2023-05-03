@@ -75,6 +75,7 @@ class RestaurantsController < ApplicationController
 
   def get_min_max_price
     return unless params[:price_range].present?
+
     selected_price_ranges = params[:price_range].map { |price_range| price_range.split('~') }
     selected_price_ranges.each do |min_price_str, max_price_str|
       @min_price << min_price_str.to_i
