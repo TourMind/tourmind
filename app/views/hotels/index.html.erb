@@ -101,7 +101,7 @@
                 <%= link_to hotel_path(hotel.id) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if hotel.images.present? %>
-                      <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Site Pic">
+                      <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
                     <% elsif hotel.image.url.present? %>
                       <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
                     <% else %>

@@ -27,7 +27,7 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = Hotel.new(hotel_parames)
+    @hotel = Hotel.new(hotel_params)
     if @hotel.save
       redirect_to hotels_path, notice: '新增成功!'
     else
@@ -44,7 +44,7 @@ class HotelsController < ApplicationController
   def edit; end
 
   def update
-    if @hotel.update(hotel_parames)
+    if @hotel.update(hotel_params)
       redirect_to hotel_path(@hotel), notice: '更新成功!'
     else
       render :edit
@@ -62,9 +62,9 @@ class HotelsController < ApplicationController
     @hotel = Hotel.friendly.find(params[:id])
   end
 
-  def hotel_parames
+  def hotel_params
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, :remove_images, equipment: [], images: [],)
+                                  :hotel_types, :remove_images, equipment: [], images: [])
   end
   def star_rating(rating)
     stars = ''
