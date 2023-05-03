@@ -149,7 +149,6 @@ GEM
       rails (>= 6.0.0)
       stimulus-rails
       turbo-rails
-
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
