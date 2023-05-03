@@ -19,7 +19,7 @@ class Hotel < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword OR equipment::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
 
   friendly_id :name, use: :slugged
@@ -45,4 +45,7 @@ class Hotel < ApplicationRecord
   # 上傳圖片
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
+
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true
 end
