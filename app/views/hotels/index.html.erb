@@ -96,9 +96,9 @@
         </div>
         <section class="grid grid-cols-1 md:grid-cols-3 gap-2"><% @hotels.each do |hotel| %>
             <div class="bg-white rounded-md overflow-hidden shadow-lg">
-              <%= link_to hotel_path(hotel.id) do %>
-                <div class="relative">
-                  <%= render "favorite", object:hotel, size:"text-4xl"%>
+              <div class="relative">
+                <%= render 'favorite', object: hotel, size:'text-4xl'%>
+                <%= link_to hotel_path(hotel.id) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if hotel.images.present? %>
                       <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Site Pic">
@@ -107,9 +107,6 @@
                     <% else %>
                       <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
                     <% end %>
-                    <div class="absolute top-0 right-0 m-3">
-                      <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
-                    </div>
                   </div>
                 </div>
               <% end %>
