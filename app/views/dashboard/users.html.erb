@@ -61,7 +61,7 @@
                   <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= user.email %></th>
                   <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= user.diamond_grade %></th>
                   <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900">
-                    <% if user.diamond_grade != '一般會員' %>
+                    <% if user.diamond_grade != '一般會員' && user.diamond_grade != nil %>
                       <%= format_date(Order.where(user_id: user.id).last.pay_time)%>-<%= format_date(Order.where(user_id: user.id).last.pay_time + 1.month)%>
                     <% end %>
                   </th>
