@@ -46,6 +46,9 @@
       <%= hidden_field :hotel, :images, multiple: true, value: image.identifier %>
     <% end %>
     <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
+    <label>
+      <%= form.check_box :remove_images %> 刪除圖片
+    </label>
   </div>
   <div class='my-5'>
     <%= form.label :pet_friendly , '是否可攜帶寵物' %>

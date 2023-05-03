@@ -14,7 +14,7 @@ class Site < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR site_types::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
 
   def self.filter(address, site_types, pet_friendly)
@@ -29,4 +29,6 @@ class Site < ApplicationRecord
   paginates_per 6
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
+  has_many :images, dependent: :destroy
+  accepts_nested_attributes_for :images, allow_destroy: true
 end
