@@ -19,59 +19,59 @@
     </div>
   </div>
 </section>
-<div data-controller="hotel">
+<div data-controller="filter">
   <div class="w-full flex justify-around lg:hidden">
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
-      data-action="click->hotel#toggleFilterMenu">篩選</div>
+      data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
   <div class="bg-white">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
-      <section data-hotel-target="filterMenu"
+      <section data-filter-target="filterMenu"
         class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md" style="z-index: 1">
         <div class="lg:hidden flex justify-end pt-6">
-          <button data-action="click->hotel#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
+          <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
         <%= form_tag(hotels_path, {method: :get,class:'border-b py-6'}) do |form| %>
           <div class="border-b py-6">
-            <div class="py-2" data-action="click->hotel#toggleFilterCategory">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
               地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
               <% @city_options.each do | city |%>
                 <li class="py-1">
-                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{hotel_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
                   <%=city%>
                 </li>
               <% end %>
             </ul>
           </div>
           <div class="border-b py-6">
-            <div class="py-2" data-action="click->hotel#toggleFilterCategory">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
               住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
               <% @hotel_types_options.each do | hotel_types |%>
                 <li class="py-1">
-                  <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2", data:{hotel_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
                   <%=hotel_types%>
                 </li>
               <% end %>
             </ul>
           </div>
           <div class="py-6">
-            <div class="py-2" data-action="click->hotel#toggleFilterCategory">
+            <div class="py-2" data-action="click->filter#toggleFilterCategory">
               設備<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
               <% @equipment_options.each do | equipment |%>
                 <li class="py-1">
-                  <%= check_box_tag "equipment[]", equipment, @equipment.include?(equipment) , {class: "mr-2", data:{hotel_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "equipment[]", equipment, @equipment.include?(equipment) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
                   <%=equipment%>
                 </li>
               <% end %>
             </ul>
           </div>
-          <%= submit_tag "submit", {class:'hidden', data:{hotel_target:"filterSubmitBtn"}} %>
+          <%= submit_tag "submit", {class:'hidden', data:{filter_target:"filterSubmitBtn"}} %>
         <% end %>
       </section>
       <section class="flex-grow w-3/5">
