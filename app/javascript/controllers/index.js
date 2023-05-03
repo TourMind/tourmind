@@ -34,6 +34,3 @@ application.register("picture", PictureController)
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
-
-import FavoriteController from "./favorite_controller";
-application.register("favorite", FavoriteController);
