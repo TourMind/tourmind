@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_02_165053) do
+ActiveRecord::Schema.define(version: 2023_05_03_034223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2023_05_02_165053) do
     t.string "tel"
     t.string "equipment", default: [], array: true
     t.json "images"
+    t.string "slug"
+    t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
   create_table "orders", force: :cascade do |t|
