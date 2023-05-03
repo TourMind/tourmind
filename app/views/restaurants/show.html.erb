@@ -21,13 +21,12 @@
     </section>
 
     <section class="min-w-full grid grid-cols-3 gap-4 flex my-5 px-4">
-      <div class="space-y-4 overflow-y-auto h-20 ">
-        <div id="comment-list">
-          <%= render partial: "comment", collection: @restaurant.comments %>
-        </div>
-        <hr class='h-px my-8 bg-gray-200'>
+      
+      <div class="border p-4 bg-white col-span-3">
+        <%= render "description", restaurant:@restaurant%>
       </div>
-      <div class="border p-4 bg-white col-span-1">
+
+      <div class="border p-4 bg-white col-span-3">
         <div>
 
       </div>
