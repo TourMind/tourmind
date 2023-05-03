@@ -97,8 +97,9 @@
       <section class="grid grid-cols-1 md:grid-cols-3 gap-2">
         <% @sites.each do |site| %>
           <div class="bg-white rounded-md overflow-hidden shadow-lg">
-            <%= link_to site_path(site.id) do %>
-              <div class="relative">
+            <div class="relative">
+              <%= render 'favorite', object: site, size:'text-4xl'%>
+              <%= link_to site_path(site.id) do %>
                 <div class=" text-gray-700 md:h-[15rem] w-full">
                   <% if site.images.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.images.first.url %>" alt="Site Pic">
@@ -107,9 +108,6 @@
                   <% else %>
                     <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
                   <% end %>
-                  <div class="absolute top-0 right-0 m-3">
-                    <i class="fa-solid fa-heart text-red-600 fa-lg"></i>
-                  </div>
                 </div>
               </div>
             <% end %>

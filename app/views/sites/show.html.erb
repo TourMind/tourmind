@@ -5,7 +5,7 @@
     </h1>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-blue-300 md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-2/3 shadow-md mr-4 rounded-md overflow-hidden'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-2/3 shadow-md mr-4 rounded-md overflow-hidden relative'>
       <% if @site.images.present? %>
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
@@ -20,6 +20,7 @@
         <% end %>
       <% else %>
         <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full' %>
+        <%= render 'favorite', object: @site, size:'text-4xl'%>
       <% end %>
     </div>
     <div class='flex flex-grow w-1/3 text-center'>
