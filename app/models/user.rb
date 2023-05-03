@@ -9,12 +9,15 @@ class User < ApplicationRecord
             presence: true,
             format: {
               with: /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/,
-            }, if: -> { email.present? == false }
+            }, if: -> { email.present? == false && provider != 'line'}
 
   # confirmable -> 確認mail認證
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2 line facebook]
+
+  # 喜愛清單關聯性
+  has_many :favorites, inverse_of: :user
 
   # 第三方認證登入後，創建用戶資料庫
   def self.from_omniauth(auth)

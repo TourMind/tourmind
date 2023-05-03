@@ -3,6 +3,9 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  #部署時，防止 sassc-rails 在壓縮器為我修復它時設置 sass
+  #Preventing sassc-rails from setting sass as the compressor fixed it for me.
+  config.assets.css_compressor = nil
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

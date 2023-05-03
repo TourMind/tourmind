@@ -1,8 +1,5 @@
 import { application } from "./application";
 
-import FlashController from "./flash_controller";
-application.register("flash", FlashController);
-
 import EditController from "./edit_controller";
 application.register("edit", EditController);
 
@@ -21,3 +18,11 @@ application.register("picture", PictureController);
 import HotelController from "./hotel_controller";
 application.register("hotel", HotelController);
 
+import FlashController from "./flash_controller"
+application.register("flash", FlashController)
+
+import FavoriteController from "./favorite_controller";
+application.register("favorite", FavoriteController);
+
+import NavbarController from "./navbar_controller";
+application.register("navbar", NavbarController);
