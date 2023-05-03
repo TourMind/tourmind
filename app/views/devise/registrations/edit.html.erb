@@ -1,9 +1,9 @@
 <section class="flex items-center justify-center w-full h-screen">
   <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
-    <%= link_to image_tag("close", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
+    <%= link_to image_tag("close.png", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
     <div class="form-value">
         <div class="m-8 field ">
-          <%= image_tag("logo", class: "w-10 h-10 mb-2") %>
+          <%= image_tag("logo.png", class: "w-10 h-10 mb-2") %>
           <span class="my-8 text-xl font-bold text-center">
             <span class="text-red-600 tracking-zero">修改</span>
             您在
@@ -17,7 +17,7 @@
           <div class="field">
             <%= f.hidden_field :avatar_url %>
             <% if current_user.avatar_url == nil || current_user.avatar_url == '' %>
-              <%=image_tag("user_default_avatar", class: "rounded-full w-20 h-20 m-auto")%>
+              <%=image_tag("user_default_avatar.png", class: "rounded-full w-20 h-20 m-auto")%>
             <% else %>
               <%=image_tag(current_user.avatar_url, class: "rounded-full w-20 h-20 m-auto")%>
             <% end %>
