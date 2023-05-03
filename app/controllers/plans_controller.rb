@@ -2,6 +2,7 @@ class PlansController < ApplicationController
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :find_favorites, only: %i[new edit]
 
   def index
     @plans = Plan.where(public: true).order(id: :desc)
@@ -99,8 +100,38 @@ class PlansController < ApplicationController
     locations = JSON.parse(data[:locations])
     locations.each_key do |key|
       locations[key] = locations[key].map do |location|
-        reference[:locations][location[0]][location[1] - 1]
+        output = reference[:locations][location[0]][location[1] - 1]
+        output[:stay_time] = location[2]
+        output
       end
     end
+  end
+
+  def find_favorites
+    all_favorites = current_user.favorites.all
+    @favorites =
+      all_favorites.map do |fav|
+        if fav.favorable_type == "Restaurant"
+          restaurant = Restaurant.find(fav.favorable_id)
+          next(
+            {
+              name: restaurant.name,
+              type: "餐廳",
+              id: restaurant.id,
+              stay_time: 0,
+            }
+          )
+        end
+
+        if fav.favorable_type == "Hotel"
+          hotel = Hotel.find(fav.favorable_id)
+          next({ name: hotel.name, type: "住宿", id: hotel.id, stay_time: 0 })
+        end
+
+        if fav.favorable_type == "Site"
+          site = Site.find(fav.favorable_id)
+          next({ name: site.name, type: "景點", id: site.id, stay_time: 0 })
+        end
+      end
   end
 end

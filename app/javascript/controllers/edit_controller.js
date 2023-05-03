@@ -43,7 +43,9 @@ export default class extends Controller {
           .querySelectorAll(".site");
 
         sites.forEach((site) => {
-          locations[`day${i}`].push(site.id.split("-").map((el) => +el || el));
+          const updatedSite = site.id.split("-").map((el) => +el || el);
+          updatedSite.push(site.querySelector(".stay-time").textContent);
+          locations[`day${i}`].push(updatedSite);
         });
       }
 
