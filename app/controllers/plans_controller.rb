@@ -116,7 +116,7 @@ class PlansController < ApplicationController
           site = Site.find(location[1])
           output = {
             name: site.name,
-            type: "餐廳",
+            type: "景點",
             lat: site.latitude,
             lng: site.longitude,
             stay_time: location[2],
@@ -128,7 +128,7 @@ class PlansController < ApplicationController
           hotel = Hotel.find(location[1])
           output = {
             name: hotel.name,
-            type: "餐廳",
+            type: "住宿",
             lat: hotel.latitude,
             lng: hotel.longitude,
             stay_time: location[2],
