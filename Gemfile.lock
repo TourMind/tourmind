@@ -102,6 +102,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dockerfile-rails (1.2.5)
+      rails
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
@@ -384,6 +386,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   carrierwave (>= 3.0.0.beta, < 4.0)
   devise
+  dockerfile-rails (>= 1.2)
   dotenv-rails (~> 2.7)
   foreman (~> 0.87.2)
   geocoder (~> 1.8, >= 1.8.1)
