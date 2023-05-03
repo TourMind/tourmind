@@ -3,4 +3,3 @@ class AddImagesToComment < ActiveRecord::Migration[6.1]
     add_column :comments, :images, :json
   end
 end
- 

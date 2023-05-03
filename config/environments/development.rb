@@ -4,22 +4,29 @@ require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
   # 開發者收信測試套件
-  config.action_mailer.delivery_method = :letter_opener
-  config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.perform_deliveries = true
   # user_寄信
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'example.com',
-    user_name: Rails.application.credentials[:gmail_user_name],
-    password: Rails.application.credentials[:gmail_password],
-    authentication: 'plain',
-    enable_starttls_auto: true,
-    open_timeout: 5,
-    read_timeout: 5,
+
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+      api_key: Rails.application.credentials[:mailgun_api_key],
+      domain: 'sandbox527ab8307cd14976a3bb8f1ca99bc786.mailgun.org'
   }
- 
+  
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   port: 587,
+  #   domain: 'example.com',
+  #   user_name: Rails.application.credentials[:gmail_user_name],
+  #   password: Rails.application.credentials[:gmail_password],
+  #   authentication: 'plain',
+  #   enable_starttls_auto: true,
+  #   open_timeout: 5,
+  #   read_timeout: 5
+  # }
+
   ################################################################
 
   # Settings specified here will take precedence over those in config/application.rb.

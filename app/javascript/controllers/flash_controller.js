@@ -24,7 +24,6 @@ export default class extends Controller {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
       })
-      console.log(type)
       if(type == 'notice'){
         Toast.fire({
           icon: 'success',
