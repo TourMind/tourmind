@@ -28,10 +28,9 @@
           <%= link_to site_path(site.id) do %>
             <div class="w-full relative">
               <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "Site Pic" , class: "w-full" %>
-                  <div class="absolute top-0 right-0 m-3">
-                    <span class="text-red-500 text-3xl">&#x2665;</span>
-                  </div>
                 <% end %>
+              <%# 喜愛清單 愛心按鈕%>
+              <%= render "favorite", object:site, size:"text-4xl"%>
             </div>
             <div class="flex-grow p-2 m-2">
               <h2 class="text-xl font-medium p-4">

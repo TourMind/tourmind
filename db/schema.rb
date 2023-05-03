@@ -15,6 +15,16 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table 'favorites', force: :cascade do |t|
+    t.bigint 'user_id', null: false
+    t.string 'favorable_type', null: false
+    t.bigint 'favorable_id', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index %w[favorable_type favorable_id], name: 'index_favorites_on_favorable'
+    t.index ['user_id'], name: 'index_favorites_on_user_id'
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -65,6 +75,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.json "images"
   end
 
+  add_foreign_key 'favorites', 'users'
   create_table "orders", force: :cascade do |t|
     t.integer "amount"
     t.datetime "pay_time"
