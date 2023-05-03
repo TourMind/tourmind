@@ -1,2 +1,4 @@
-import "./star"
 import "./fontawesome"
+import "./star"
+import "./arrow"
+
