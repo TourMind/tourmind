@@ -83,3 +83,5 @@ gem "babosa"
 
 gem "dockerfile-rails", ">= 1.2", :group => :development
 gem 'foreman', '~> 0.87.2'
+gem 'friendly_id', '~> 5.4'
+gem "babosa"
