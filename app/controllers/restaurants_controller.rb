@@ -91,6 +91,7 @@ class RestaurantsController < ApplicationController
     @min_price = []
     @max_price = []
   end
+
   # Only allow a list of trusted parameters through.
   def restaurant_params
     params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
