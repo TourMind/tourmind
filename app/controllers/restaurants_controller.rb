@@ -8,14 +8,13 @@ class RestaurantsController < ApplicationController
     declare_params
     get_min_max_price
     @restaurants = if params[:keyword].present?
-                Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
-              elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
-                Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price, @max_price).order(updated_at: :desc).page(params[:page])
-              else
-                Restaurant.order(updated_at: :desc).page(params[:page])
-              end
+                     Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+                   elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
+                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price, @max_price).order(updated_at: :desc).page(params[:page])
+                   else
+                     Restaurant.order(updated_at: :desc).page(params[:page])
+                   end
     flash.now[:alert] = '沒有找到符合條件的餐廳' and return if @restaurants.empty?
-
   end
 
   # GET /restaurants/1 or /restaurants/1.json
@@ -75,12 +74,12 @@ class RestaurantsController < ApplicationController
   end
 
   def get_min_max_price
-    if params[:price_range].present?
-      selected_price_ranges = params[:price_range].map { |price_range| price_range.split("~") }
-      selected_price_ranges.each do |min_price_str, max_price_str|
-        @min_price << min_price_str.to_i
-        @max_price << (max_price_str ? max_price_str.to_i : Restaurant::MAX_PRICE)
-      end
+    return unless params[:price_range].present?
+
+    selected_price_ranges = params[:price_range].map { |price_range| price_range.split('~') }
+    selected_price_ranges.each do |min_price_str, max_price_str|
+      @min_price << min_price_str.to_i
+      @max_price << (max_price_str ? max_price_str.to_i : Restaurant::MAX_PRICE)
     end
   end
 
@@ -93,10 +92,11 @@ class RestaurantsController < ApplicationController
     @min_price = []
     @max_price = []
   end
+
   # Only allow a list of trusted parameters through.
   def restaurant_params
-    params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :section, :email, :tel,
-                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, :michelin_star).tap do |whitelisted|
+    params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
+                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }).tap do |whitelisted|
       whitelisted[:cuisine_types].reject!(&:empty?)
       whitelisted[:atmostphere].reject!(&:empty?)
     end

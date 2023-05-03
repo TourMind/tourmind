@@ -39,12 +39,12 @@ gem 'tailwindcss-rails', '~> 2.0'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
 gem 'geocoder', '~> 1.8', '>= 1.8.1'
+gem 'mailgun_rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'mailgun_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

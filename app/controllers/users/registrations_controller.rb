@@ -2,13 +2,12 @@
 
 module Users
   class RegistrationsController < Devise::RegistrationsController
-
     def create
       user = User.new(account_register_params)
       user.save
       sign_in_and_redirect user, event: :authentication
     end
-    
+
     # 更新使用者資訊
     # resource= User, params = 要更新的參數
     def update_resource(resource, _params)

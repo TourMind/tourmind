@@ -27,14 +27,13 @@
       <%= form.text_area :intro, rows: 4, class: "input-field" %>
     </div>
 
-    <div class="my-5">
-      <%= form.label "照片" %>
-      <%= form.text_field :image, class: "input-field" %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label "地區" %>
-      <%= form.text_field :section, class: "input-field" %>
+    <div class='my-5'>
+      <%= form.label :images, '照片 (預設第一張為封面圖)' %>
+      <% restaurant.images.each do |image| %>
+        <%= hidden_field :restaurant, :images, multiple: true, value: image.identifier %>
+      <% end %>
+      <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
+            w-full' %>
     </div>
 
     <div class="my-5">
@@ -50,11 +49,6 @@
     <div class="my-5">
       <%= form.label "價位" %>
       <%= form.text_field :price, class: "input-field" %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label "米其林星數" %>
-      <%= form.text_field :michelin_star, class: "input-field" %>
     </div>
 
     <div class="my-5 col-span-2">

@@ -7,7 +7,7 @@ class Restaurant < ApplicationRecord
   # 欄位認證
   validates :name, :address, presence: true
   mount_uploader :image, ImageUploader
-  MAX_PRICE = 99999999999999
+  MAX_PRICE = 99_999_999_999_999
   SECTION_OPTIONS = %w[台北市 新北市]
   CUISINE_OPTIONS = ['中式料理', '日式料理', '亞洲料理', '健康料理', '印度料理', '台灣小吃/台菜', '壽司', '墨西哥料理', '法式料理', '美式料理', '燒肉', '韓式料理',
                      '越南料理', '海鮮料理']
@@ -17,7 +17,7 @@ class Restaurant < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR cuisine_types::text ILIKE ANY (ARRAY[:keywords]) OR atmostphere::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
   end
 
   def self.filter(address, restaurant_type, cuisine_types, atmostphere, min_price, max_price)
@@ -39,6 +39,7 @@ class Restaurant < ApplicationRecord
   end
 
   paginates_per 9
+  mount_uploaders :images, ImageUploader
 
   class << self
     def cuisine_list
