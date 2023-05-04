@@ -105,7 +105,7 @@
       <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
         發表評論
       </a>
-      <div class="hidden" data-butt-target="form" id="comment-form">
+      <div class="hidden" data-butt-target="form">
         <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
       </div>
     </div>  

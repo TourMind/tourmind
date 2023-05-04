@@ -13,46 +13,44 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
   end
-    def create
-      if params[:restaurant_id]
-        @commentable = Restaurant.find(params[:restaurant_id])
-      elsif params[:site_id]
-        @commentable = Site.find(params[:site_id])
-      elsif params[:hotel_id]
-        @commentable = Hotel.find(params[:hotel_id])
-      end
-      
-      @comment = @commentable.comments.build(comment_params)
-      @comment.user = current_user
-          
-      respond_to do |format|
-        if @comment.save
-          format.js # render create.js.erb
-        else
-          format.html { render :new }
-        end
+  def create
+    if params[:restaurant_id]
+      @commentable = Restaurant.find(params[:restaurant_id])
+    elsif params[:site_id]
+      @commentable = Site.find(params[:site_id])
+    elsif params[:hotel_id]
+      @commentable = Hotel.find(params[:hotel_id])
+    end
+  
+    @comment = @commentable.comments.build(comment_params)
+    @comment.user = current_user
+  
+    respond_to do |format|
+      if @comment.save
+        format.json { render json: @comment, status: :created }
+      else
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
-    def create
-      if params[:restaurant_id]
-        @commentable = Restaurant.find(params[:restaurant_id])
-      elsif params[:site_id]
-        @commentable = Site.find(params[:site_id])
-      elsif params[:hotel_id]
-        @commentable = Hotel.find(params[:hotel_id])
-      end
-      
-      @comment = @commentable.comments.build(comment_params)
-      @comment.user = current_user
-          
+  def create
+    if params[:restaurant_id]
+      @commentable = Restaurant.find(params[:restaurant_id])
+    elsif params[:site_id]
+      @commentable = Site.find(params[:site_id])
+    elsif params[:hotel_id]
+      @commentable = Hotel.find(params[:hotel_id])
+    end
+    @comment = @commentable.comments.build(comment_params)
+    @comment.user = current_user
+    respond_to do |format|
       if @comment.save
-        redirect_to @commentable, notice: 'Comment was successfully created.'
+        format.json { render json: @comment, status: :created }
       else
-        render :new
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
-
+  end
   def show; end
 
   def edit; end

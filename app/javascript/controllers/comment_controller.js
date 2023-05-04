@@ -15,7 +15,7 @@ export default class extends Controller {
       // 成功提交表單後要做的事情
       form.reset()
       this.refreshCommentList()
-      window.location.hash = "comment-form"
+      window.scrollTo(0, window.scrollY)
     })
   }
 
@@ -23,16 +23,10 @@ export default class extends Controller {
     fetch(this.data.get("comment-url"))
       .then(response => response.text())
       .then(html => {
-        const commentListTarget = this.commentListTarget
-        commentListTarget.innerHTML = html
-        const commentForm = document.querySelector("#comment-form")
-        commentForm.scrollIntoView({ behavior: 'smooth' })
+        this.commentListTarget.innerHTML = html
+        this.commentListTarget.scrollIntoView(false);
       })
   }
 }
-
-
-
-
 
 
