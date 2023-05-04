@@ -1,4 +1,4 @@
-<div class="container m-auto pb-4">
+<div class="container mx-auto px-4">
   <div class="mx-auto">
     <Section class = "p-3 relative">
       <%= render "heading", restaurant:@restaurant%>
@@ -6,10 +6,10 @@
 
     <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden py-4 shadow-lg rounded-lg" >
       <% if @restaurant.images.present? %>
-        <div class = "col-span-5 lg:col-span-3 relative">
-          <%= image_tag @restaurant.images[0].url, {class: "h-[32rem] w-full h-full object-fill"}%>
+        <div class = "col-span-5 lg:col-span-3 relative h-96 ">
+          <%= image_tag @restaurant.images[0].url, {class: "w-full h-full object-fill"}%>
         </div>
-        <div class = "col-span-5 lg:col-span-2 h-full flex flex-col gap-2 h-[32rem]">
+        <div class = "col-span-5 lg:col-span-2 flex flex-col gap-2 h-96">
           <div class="h-1/2 w-full overflow-hidden">
             <%= image_tag @restaurant.images[1].url, {class: "object-fit w-full h-full"} if @restaurant.images[1].present?%>
           </div>
@@ -18,7 +18,7 @@
           </div>
         </div>
       <% else %>
-        <div class = "col-span-5 relative h-[32rem]">
+        <div class = "col-span-5 relative h-96">
           <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
         </div>
       <% end %>

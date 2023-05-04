@@ -2,7 +2,7 @@
   <h2 class="font-bold text-2xl py-3">位置和聯絡方式</h2>
   <div class = "w-full h-2/3">
     <iframe class="w-full h-[15rem] my-auto" frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBawjsBn1GmvJAlZVA_lpP5EwYGDPNxI58&q=<%=restaurant.name%> <%=restaurant.address.gsub(',', '')%>"
+            src="https://www.google.com/maps/embed/v1/place?key=<%=@google_api_key%>&q=<%=restaurant.name%> <%=restaurant.address.gsub(',', '')%>"
             allowfullscreen>
     </iframe>
   </div>
