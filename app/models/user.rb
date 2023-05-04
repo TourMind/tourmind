@@ -29,16 +29,16 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       case auth.provider
-      when "google_oauth2"
+      when 'google_oauth2'
         user.email = auth.info.email
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
         user.avatar_url = auth.info.image
-      when "line"
+      when 'line'
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
         user.avatar_url = auth.info.image
-      when "facebook"
+      when 'facebook'
         user.email = auth.info.email
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
@@ -59,19 +59,19 @@ class User < ApplicationRecord
 
   def self.city_list
     [
-      ["請選擇城市"],
-      ["台北市"],
-      ["新北市"],
-      ["宜蘭"],
-      ["花蓮"],
-      ["高雄"],
-      ["台南"],
-      ["台東"],
-      ["新竹"],
-      ["彰化"],
-      ["嘉義"],
-      ["南投"],
-      ["屏東"],
+      ['請選擇城市'],
+      ['台北市'],
+      ['新北市'],
+      ['宜蘭'],
+      ['花蓮'],
+      ['高雄'],
+      ['台南'],
+      ['台東'],
+      ['新竹'],
+      ['彰化'],
+      ['嘉義'],
+      ['南投'],
+      ['屏東']
     ]
   end
 end

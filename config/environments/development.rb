@@ -11,10 +11,10 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
-      api_key: Rails.application.credentials[:mailgun_api_key],
-      domain: 'sandbox527ab8307cd14976a3bb8f1ca99bc786.mailgun.org'
+    api_key: Rails.application.credentials[:mailgun_api_key],
+    domain: 'sandbox527ab8307cd14976a3bb8f1ca99bc786.mailgun.org',
   }
-  
+
   # config.action_mailer.smtp_settings = {
   #   address: 'smtp.gmail.com',
   #   port: 587,
