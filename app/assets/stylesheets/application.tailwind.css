@@ -40,7 +40,7 @@
 }
 
 .btn-sm {
-  @apply px-3 py-1 text-sm;
+  @apply px-3 py-1 text-sm w-28;
 }
 
 .btn-xs {
