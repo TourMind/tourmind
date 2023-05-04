@@ -170,7 +170,11 @@
       <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
         <a href="<%= hotel_path(hotel) %>" class="text-white px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
         <div class="relative transform image-container">
-          <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% if hotel.image.present? %>
+            <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% else %>
+            <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+          <% end %>
           <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
             <span>熱門景點</span>
           </div>
@@ -192,35 +196,55 @@
   <div class="w-64 carousel rounded-box mx-2">
     <% @hotels.sample(4).each do |hotel| %>
     <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% if hotel.image.present? %>
+        <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% else %>
+        <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+      <% end %>
     </div>
     <% end %>
   </div>
   <div class="w-64 carousel rounded-box mx-2">
     <% @hotels.sample(4).each do |hotel| %>
     <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% if hotel.image.present? %>
+        <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% else %>
+        <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+      <% end %>
     </div>
     <% end %>
   </div>
   <div class="w-64 carousel rounded-box mx-2">
     <% @hotels.sample(4).each do |hotel| %>
     <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% if hotel.image.present? %>
+        <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% else %>
+        <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+      <% end %>
     </div>
     <% end %>
   </div>
     <div class="w-64 carousel rounded-box mx-2">
     <% @hotels.sample(4).each do |hotel| %>
     <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% if hotel.image.present? %>
+        <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% else %>
+        <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+      <% end %>
     </div>
     <% end %>
   </div>
     <div class="w-64 carousel rounded-box mx-2">
     <% @hotels.sample(4).each do |hotel| %>
     <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% if hotel.image.present? %>
+        <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+      <% else %>
+        <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+      <% end %>
     </div>
     <% end %>
   </div>
@@ -231,7 +255,11 @@
     <% @hotels.sample(4).each do |hotel| %>
       <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
         <div class="relative">
-          <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% if hotel.image.present? %>
+            <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% else %>
+            <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+          <% end %>
           <div class="absolute top-0 right-0 m-3">
             <span class="text-red-500 text-3xl">&#x2665;</span>
           </div>
@@ -250,7 +278,11 @@
     <% @hotels.sample(4).each do |hotel| %>
       <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
         <div class="relative">
-          <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% if hotel.image.present? %>
+            <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% else %>
+            <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+          <% end %>
           <div class="absolute top-0 right-0 m-3">
             <span class="text-red-500 text-3xl">&#x2665;</span>
           </div>
@@ -275,7 +307,11 @@
         <% @hotels.sample(4).each do |hotel| %>
         <div class=" rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 ">
           <div class="relative image-container">
-          <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% if hotel.image.present? %>
+            <%= image_tag hotel.image.url, class: "object-cover w-full h-48 sm:h-56" %>
+          <% else %>
+            <%= image_tag "placeholder-image.png", class: "object-cover w-full h-48 sm:h-56" %>
+          <% end %>
           <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
             <span>飯店推薦</span>
           </div>
