@@ -22,7 +22,8 @@
   </section>
   <% if user_signed_in? %>
     <section class="px-12">
-      <div class="border-b-2 border-slate-300 mb-12 pb-12">
+      <div class="border-b-2  border-slate-300 mb-12 pb-12">
+        <%= link_to "新增我的專屬行程！", new_plan_path, class: "text-pink-500 inline-block mb-5" %>
         <h1 class="text-xl font-bold">我的行程</h1>
         <div class="overflow-x-scroll">
           <div class="flex gap-5 w-max px-3 py-5">
@@ -30,7 +31,7 @@
               <% current_user.plans.order(id: :desc).each do |plan| %>
                 <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                   <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                    <img src=<%= %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %>  alt="plant" class="h-auto w-full" />
+                    <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="h-auto w-full" />
                     <div class="p-5 flex flex-col gap-5 h-auto">
                       <div class="font-bold"><%= plan.name %></div>
                       <div>
@@ -60,16 +61,20 @@
     </section>
   <% end %>
   <% Plan.category_options.each do |category| %>
+    <% next if @plans.select {|plan| plan.category == category } == [] %>
     <section class="px-12">
       <div class="border-b-2 border-slate-300 mb-12 pb-12">
         <h1 class="text-xl font-bold"><%= category %>之旅</h1>
         <div class="overflow-x-scroll">
           <div class="flex gap-5 w-max px-3 py-5">
             <% @plans.select {|plan| plan.category == category }.each do |plan| %>
-              <% next if plan == nil %>
               <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
                 <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                  <img src=<%= %i[https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0a/69/82/50.jpg https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/a6/5c/66/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/12/9a/cc/caption.jpg?w=600&h=600&s=1 https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/57/c0/34/caption.jpg?w=600&h=600&s=1].sample %> alt="plant" class="h-auto w-full" />
+                  <% if plan.images.present? %>
+                    <img src="<%= plan.images[0].url %>" alt="plant" class="h-auto w-full" />
+                  <% else %>
+                    <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'h-auto w-full' %>
+                  <% end %>
                   <div class="p-5 flex flex-col gap-5 h-auto">
                     <div class="font-bold"><%= plan.name %></div>
                     <div>

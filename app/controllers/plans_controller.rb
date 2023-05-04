@@ -16,8 +16,20 @@ class PlansController < ApplicationController
   end
 
   def create
-    plan = Plan.new(plan_params)
-    return redirect_to plan_path(plan.id) if plan.save
+    plan_data = plan_params
+    plan_data[:locations] = update_locations(plan_data, nil)
+
+    new_plan = current_user.plans.new(plan_data)
+
+    if new_plan.save
+      render json: { status: "success", redirect_url: "/plans/#{new_plan.id}" }
+      return
+    end
+
+    render json: {
+             errors: new_plan.errors.full_messages,
+           },
+           status: :unprocessable_entity
   end
 
   def edit
@@ -31,7 +43,7 @@ class PlansController < ApplicationController
 
   def update
     plan_data = plan_params
-    plan_data[:locations] = update_order(plan_data, @plan)
+    plan_data[:locations] = update_locations(plan_data, @plan)
 
     if current_user == @plan.user
       if @plan.update(plan_data)
@@ -54,7 +66,7 @@ class PlansController < ApplicationController
     end
 
     render json: {
-             errors: @plan.errors.full_messages,
+             errors: new_plan.errors.full_messages,
            },
            status: :unprocessable_entity
   end
@@ -64,7 +76,7 @@ class PlansController < ApplicationController
       return redirect_to plans_path, notice: "刪除成功" if @plan.destroy
     end
 
-    redirect_to root_path, alert: "你不是這個行程的擁有者"
+    redirect_to plans_path, alert: "你不是這個行程的擁有者"
   end
 
   def day_info
@@ -92,12 +104,13 @@ class PlansController < ApplicationController
       :public,
       :category,
       :locations,
-      :images,
+      images: [],
     )
   end
 
-  def update_order(data, reference)
+  def update_locations(data, reference)
     locations = JSON.parse(data[:locations])
+
     locations.each_key do |key|
       locations[key] = locations[key].map do |location|
         if location[0] == "餐廳"
@@ -145,6 +158,7 @@ class PlansController < ApplicationController
 
   def find_favorites
     all_favorites = current_user.favorites.all
+
     @favorites =
       all_favorites.map do |fav|
         if fav.favorable_type == "Restaurant"

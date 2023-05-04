@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
-import { patch } from "@rails/request.js";
-// import { patch } from "@rails/request.js";
+import { patch, post } from "@rails/request.js";
+import Swal from "sweetalert2";
 
 // Connects to data-controller="send"
 export default class extends Controller {
@@ -52,18 +52,31 @@ export default class extends Controller {
       form.append("public", this.publicTarget.checked);
       form.append("category", this.categoryTarget.value);
       form.append("locations", JSON.stringify(locations));
-      form.append("images", files[0]);
 
-      const res = await patch(`/plans/${id}`, {
-        body: form,
-        responseKind: "json",
-      });
-
-      const resData = await res.json;
-
-      if (!res.ok) {
-        return alert(resData.errors);
+      for (let i = 0; i < files.length; i++) {
+        form.append("images[]", files[i]);
       }
+
+      let res;
+      let resData;
+
+      if (!id) {
+        res = await post("/plans", {
+          body: form,
+          responseKind: "json",
+        });
+
+        resData = await res.json;
+      } else {
+        res = await patch(`/plans/${id}`, {
+          body: form,
+          responseKind: "json",
+        });
+
+        resData = await res.json;
+      }
+
+      if (!res.ok) return this.alertErrors(resData.errors);
 
       window.location.replace(resData.redirect_url);
     } catch (err) {
@@ -120,5 +133,27 @@ export default class extends Controller {
     this.drawerTarget.classList.toggle("-translate-x-56");
     this.formTarget.classList.toggle("w-full");
     this.formTarget.classList.toggle("w-10/12");
+  }
+
+  alertErrors(message) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      customClass: {
+        container: "flash_style",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "error",
+      title: message.map((el) => el.split(" ")[1]).join(" "),
+    });
   }
 }
