@@ -8,17 +8,18 @@
     </div>
     <div class="flex items-center px-2">
         <% if current_user %>
-            <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex">
-                <li class="px-5 py-2 md:px-2">
-                    <span><%= current_user.email %></span>
-                </li>
-                <li class="px-5 py-2 md:px-2">
-                    <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray mr-2" %>
+            <span class="px-2 py-2"><%= current_user.email %></span>
+            <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+                <li class="px-2 py-2 md:px-2">
+                    <span class="mr-2 btn-round btn-sm btn-gray">
+                        <i class="fa-solid fa-heart fa-bounce" style="color: #ff0000;"></i>
+                        <%= link_to '喜愛清單', favorites_path %>
+                    </span>
                 </li>
                 <li class="px-5 py-2 md:px-2">
                     <% if current_user.diamond_grade == '一般會員'%>
                         <%= link_to "升級會員", pricing_path,
-                                            class: "btn-round btn-sm btn-gray mr-2"  %>
+                                            class: "btn-round btn-sm btn-gray"  %>
                     <% elsif current_user.diamond_grade == '白鑽會員' %>
                         <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
                     <% elsif current_user.diamond_grade == '藍鑽會員' %>
@@ -27,12 +28,18 @@
                         <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員</span>
                     <% end %>
                 </li>
+                <li class="px-5 py-2 md:px-2">
+                    <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
+                </li>
+                <li class="px-5 py-2 md:px-2">
+                    <%= link_to "設置", edit_user_registration_path, class: "btn-round btn-sm btn-gray align-middle" %>
+                </li>
             </ul>
             <i class="rounded-full ring ring-primary ring-offset-base-100">
                 <% if current_user.avatar_url == nil || current_user.avatar_url == ''%>
-                    <%=link_to image_tag("user_default_avatar.png", class: "w-10 rounded-full truncate"),edit_user_registration_path%>
+                    <%=link_to image_tag("user_default_avatar.png", class: "w-10 rounded-full truncate")%>
                 <% else %>
-                    <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10 mr-2"), edit_user_registration_path%>
+                    <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10 mr-2")%>
                 <% end %>
             </i>
             <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
@@ -42,7 +49,7 @@
             <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex">
                 <li class="px-5 py-2 md:px-2">
                     <%= link_to "升級會員", pricing_path,
-                                        class: "btn-round btn-sm btn-gray"  %>
+                                        class: "btn-round btn-sm btn-gray align-middle"  %>
                 </li>
                 <li class="px-5 py-2 md:px-2">
                     <%= link_to "會員登入" , new_user_session_path, 
