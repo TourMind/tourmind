@@ -45,7 +45,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -82,3 +81,4 @@ gem 'dockerfile-rails', '>= 1.2', group: :development
 gem 'foreman', '~> 0.87.2'
 gem 'friendly_id', '~> 5.4'
 gem "babosa"
+gem 'fog-aws'

@@ -3,10 +3,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick 這裡我先註解掉，這是設定照片像素，需要安裝MiniMagick跟Imagemagick
   # process resize_to_fit: [200,200]
-  storage :file
+  # storage :file
   # Choose what kind of storage to use for this uploader:
 
-  # storage :fog
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
