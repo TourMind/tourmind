@@ -33,10 +33,9 @@ class RestaurantsController < ApplicationController
   # POST /restaurants or /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    set_default_image_if_not_filled
     if @restaurant.save
       get_location
-      redirect_to restaurants_path, notice: 'Restaurant was successfully created.'
+      redirect_to restaurants_path, notice: '餐廳新增成功'
     else
       render :new, status: :unprocessable_entity
     end
@@ -63,10 +62,6 @@ class RestaurantsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_restaurant
     @restaurant = Restaurant.find(params[:id])
-  end
-
-  def set_default_image_if_not_filled
-    @restaurant.image = 'https://fakeimg.pl/300x200' if @restaurant.image.empty?
   end
 
   def get_location
