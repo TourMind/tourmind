@@ -25,10 +25,12 @@ class CommentsController < ApplicationController
       @comment = @commentable.comments.build(comment_params)
       @comment.user = current_user
           
-      if @comment.save
-        redirect_to @commentable, notice: 'Comment was successfully created.'
-      else
-        render :new
+      respond_to do |format|
+        if @comment.save
+          format.js # render create.js.erb
+        else
+          format.html { render :new }
+        end
       end
     end
   end

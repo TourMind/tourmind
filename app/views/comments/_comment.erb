@@ -1,5 +1,5 @@
-<turbo-frame id="comment-frame" data-controller="comment" data-comment-target="frame">
-    <%= form_with(model: [@site, @restaurant, @hotel, @comment], local: true) do |f| %>
+<%= form_with(model: [@site, @restaurant, @hotel, @comment], local: true, id: 'comment-form', data: { target: 'comment-list', commentFormContainer: 'comment-form-container' }) do |f| %>
+
       <h2 class="text-lg font-bold">餐廳評價</h2>
       <div class="rating rating-md">
         <%= f.radio_button :rating, 1, class: "comment-star" %>
@@ -16,10 +16,5 @@
         <%= f.label :content, "評論：", class: 'label'%>
         <%= f.text_area :content, class: "textarea h-24 textarea-bordered bg-zinc-100"%>
       </div>
-
       <%= f.submit "提交", class: "btn m-1  px-3"%>
     <% end %>
-
-</turbo-frame>
-
-

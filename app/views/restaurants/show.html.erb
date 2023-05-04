@@ -12,28 +12,28 @@
     </section>
 
     <section class="min-w-full grid grid-cols-3 gap-4 flex my-5 px-4">
-      
-      <div class="border p-4 bg-white col-span-2">
-        <%= render "description", restaurant:@restaurant%>
+      <div class="space-y-4 overflow-y-auto h-20 ">
+        <div id="comment-list">
+          <%= render partial: "comment", collection: @site.comments %>
+        </div>
+        <hr class='h-px my-8 bg-gray-200'>
       </div>
-
       <div class="border p-4 bg-white col-span-1">
         <div>
           <%= render "reviews"%>
       </div>
     </section>
- 
-    <div data-controller="comment" data-turbo-frame="comment-comment">
-      <button data-action="click->comment#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium">
-      發表評論
-      </button>
-      <div class="hidden" data-comment-target="form">
-      <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
-      </div>
-    </div>
     <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to '返回餐廳列表', restaurants_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-   
+  
+    <div data-controller="butt">
+      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+        發表評論
+      </a>
+      <div class="hidden" data-butt-target="form" id="comment-form">
+        <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
+      </div>
+    </div>
   </div>
 </div>
 

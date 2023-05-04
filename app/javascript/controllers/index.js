@@ -20,6 +20,9 @@ application.register("picture", PictureController);
 
 import FilterController from "./filter_controller";
 application.register("filter", FilterController);
+import ButtController from "./butt_controller"
+application.register("butt", ButtController)
+
 import CommentController from "./comment_controller"
 application.register("comment", CommentController)
 

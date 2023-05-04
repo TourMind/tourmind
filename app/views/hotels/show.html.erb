@@ -17,21 +17,10 @@
     </div>
   </div>
   <div class='p-4 bg-white border'>
-    <div>
-      <div class="space-y-4 overflow-y-auto h-20 ">
-        <% @hotel.comments.each do |comment| %>
-        <div class="p-4 max-w-lg truncate ...">
-          <p>By <%= comment.user.email %> </p>
-          <%= star_rating(comment.rating) %>
-        <div class="flex flex-row space-x-4 ">
-          <% comment.images.each do |image| %>
-          <%= image_tag image.url, class: 'w-1/5 mx-1' %>
-          <% end %>
-        </div>
-        <p><%= comment.content %></p>
-        <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-        </div>
-        <% end %>
+    <div class="space-y-4 overflow-y-auto h-20 ">
+      <div id="comment-list">
+        <%= render partial: "comment", collection: @hotel.comments %>
+      </div>
       <hr class='h-px my-8 bg-gray-200'>
     </div>
     <div>
@@ -111,12 +100,14 @@
     <%= link_to '返回飯店列表' , hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-300 inline-block font-medium' %>
     <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
         class: 'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
-            <div data-controller="comment" data-turbo-frame="comment-comment">
-      <button data-action="click->comment#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium">
-      發表評論
-      </button>
-      <div class="hidden" data-comment-target="form">
-      <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
+
+    <div data-controller="butt">
+      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+        發表評論
+      </a>
+      <div class="hidden" data-butt-target="form" id="comment-form">
+        <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
       </div>
-    </div>
+    </div>  
+  </div>
 </div>
