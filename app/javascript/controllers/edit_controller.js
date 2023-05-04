@@ -58,27 +58,27 @@ export default class extends Controller {
       }
 
       let res;
-      let resData;
 
       if (!id) {
         res = await post("/plans", {
           body: form,
           responseKind: "json",
         });
-
-        resData = await res.json;
       } else {
         res = await patch(`/plans/${id}`, {
           body: form,
           responseKind: "json",
         });
-
-        resData = await res.json;
       }
 
-      if (!res.ok) return this.alertErrors(resData.errors);
+      const resInfo = await res.json;
 
-      window.location.replace(resData.redirect_url);
+      if (!res.ok)
+        return this.alertErrors(
+          resInfo.errors.map((el) => el.split(" ")[1]).join(" ")
+        );
+
+      window.location.replace(resInfo.redirect_url);
     } catch (err) {
       alert(err.message);
     }
@@ -86,7 +86,7 @@ export default class extends Controller {
 
   addDay() {
     const dayElement = `
-    <div class="relative px-4 day">
+    <div class="relative px-4 day w-48 min-h-[200px]">
       <h4 class="text-xl text-gray-900 font-bold">第 ${
         +this.containerTarget.dataset.days + 1
       } 天</h4>
@@ -104,14 +104,16 @@ export default class extends Controller {
 
   removeDay() {
     if (+this.containerTarget.dataset.days <= 1) {
-      return alert("行程不得少於一天");
+      return this.alertErrors("行程不得少於一天");
     }
 
     const sitesInLastDay = this.containerTarget.lastElementChild
       .querySelector(".sites-list")
       .querySelectorAll(".site").length;
 
-    if (sitesInLastDay) return alert("移除天數前，請先移除該天所有行程。");
+    if (sitesInLastDay) {
+      return this.alertErrors("移除天數前，請先移除該天所有行程。");
+    }
 
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
@@ -153,7 +155,7 @@ export default class extends Controller {
 
     Toast.fire({
       icon: "error",
-      title: message.map((el) => el.split(" ")[1]).join(" "),
+      title: message,
     });
   }
 }

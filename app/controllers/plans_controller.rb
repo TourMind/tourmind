@@ -8,7 +8,11 @@ class PlansController < ApplicationController
     @plans = Plan.where(public: true).order(id: :desc)
   end
 
-  def show; end
+  def show
+    return if (user_signed_in? && current_user == @plan.user) || @plan.public
+
+    redirect_to plans_path, alert: '你沒有權限查看此行程！'
+  end
 
   def new
     @plan = Plan.new

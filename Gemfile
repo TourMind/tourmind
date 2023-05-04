@@ -75,7 +75,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
-gem "dockerfile-rails", ">= 1.2", :group => :development
+gem 'dockerfile-rails', '>= 1.2', group: :development
 gem 'foreman', '~> 0.87.2'
 gem 'hotwire-rails', '~> 0.1.3'
 gem 'requestjs-rails'
