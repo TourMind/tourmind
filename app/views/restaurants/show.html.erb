@@ -4,9 +4,7 @@
       <%= render "heading", restaurant:@restaurant%>
     </Section>
 
-    <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden" >
-      
-      <%# <button data-action="click->moving#prevSlide" class="ml-2 absolute left-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2"><</button> %>
+    <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden py-4 shadow-lg" >
       <% if @restaurant.images.present? %>
         <div class = "col-span-3 relative">
           <%= image_tag @restaurant.images[0].url, {class: "h-[30rem] w-full h-full object-fill"}%>
@@ -24,16 +22,15 @@
           <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
         </div>
       <% end %>
-      <%# <button data-action="click->moving#nextSlide" class="mr-2 absolute right-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">></button> %>
     </section>
 
-    <section class="min-w-full grid grid-cols-5 gap-2 flex my-5 px-4">
+    <section class="min-w-full grid grid-cols-5 gap-2 flex my-5">
       
-      <div class="p-4 bg-white col-span-3">
+      <div class="p-8 bg-white col-span-3 shadow-lg">
         <%= render "description", restaurant:@restaurant%>
       </div>
 
-      <div class="py-4 bg-white col-span-2">
+      <div class="p-8 bg-white col-span-2 shadow-lg">
         <%= render "location", restaurant:@restaurant%>
       </div>
 
