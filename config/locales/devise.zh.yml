@@ -82,5 +82,12 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
-
+        restaurant:
+          attributes:
+            name:
+              blank: "名稱不能為空"
+            tel:
+              blank: "電話不能為空"
+            address:
+              blank: "地址不能為空"
       
