@@ -1,0 +1,15 @@
+<% if current_user && current_user.favorites.restaurants.find_by(favorable_id: object.id)%>
+  <%= button_to favorite_path(current_user.favorites.restaurants.find_by(favorable_id: object.id)), method: :delete, anchor: object.id, data: { turbo: false } do%>
+  <div class = "text-white bg-gray-200 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-3 py-1 mx-2 mb-2 dark:bg-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+    <span class="inline-block text-red-300 <%=size%>">從喜愛清單移除</span>
+    <span class="inline-block text-red-500 <%=size%>">&#x2665;</span>
+  </div>
+  <% end %>
+<% elsif current_user %>
+  <%= button_to favorites_path(favorites: {favorable_type: object.class, favorable_id: object.id}), method: :post, anchor: object.id, data: { turbo: false } do%>
+    <div class = "text-white bg-gray-200 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-3 py-1 mx-2 mb-2 dark:bg-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+      <span class="text-white <%=size%>">加入喜愛清單</span>
+      <span class="text-white <%=size%>">&#x2665;</span>
+    </div>
+  <% end %>
+<% end %> 

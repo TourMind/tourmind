@@ -1,8 +1,8 @@
-<div class="map-container flex flex-wrap bg-white px-4">
+<div class="map-container flex flex-wrap bg-white ">
   <h2 class="font-bold text-2xl">位置和聯絡方式</h2>
-  <div class = "w-full h-2/3">
-    <iframe class="w-full h-full my-auto" frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/place?key=<%=@google_api_key%>&q=<%=restaurant.name%> <%=restaurant.address.gsub(',', '')%>"
+  <div class = "w-full h-2/3 py-5">
+    <iframe class="w-full h-[15rem] my-auto my-2" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBawjsBn1GmvJAlZVA_lpP5EwYGDPNxI58&q=<%=restaurant.name%> <%=restaurant.address.gsub(',', '')%>"
             allowfullscreen>
     </iframe>
   </div>

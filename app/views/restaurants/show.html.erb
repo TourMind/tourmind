@@ -1,34 +1,47 @@
 <div class="container m-auto pb-4">
   <div class="mx-auto">
-    <Section class = "p-3">
+    <Section class = "p-3 relative">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
 
-    <section class = "justify-center flex px-4 grid grid-cols-3 gap-4 overflow-hidden" >
-      <div class = "col-span-2 relative" data-controller="moving">
-        <button data-action="click->moving#prevSlide" class="ml-2 absolute left-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2"><</button>
-        <% if @restaurant.images.present? %>
-          <% @restaurant.images.each_with_index do |image, index| %>
-            <%= image_tag image.url, {class: "h-[40rem] w-full object-fill", data: {moving_target: "slides"}}%>
-          <% end %>
-        <% else %>
-          <%= image_tag "https://fakeimg.pl/300x200", {class: "h-full w-full object-fill"}%>
-        <% end %>
-        <%= render "favorite", object:@restaurant, size:'text-6xl'%>
-        <button data-action="click->moving#nextSlide" class="mr-2 absolute right-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">></button>
-      </div>
-      <%= render "location", restaurant:@restaurant%>
+    <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden" >
+      
+      <%# <button data-action="click->moving#prevSlide" class="ml-2 absolute left-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2"><</button> %>
+      <% if @restaurant.images.present? %>
+        <div class = "col-span-3 relative">
+          <%= image_tag @restaurant.images[0].url, {class: "h-[30rem] w-full h-full object-fill"}%>
+        </div>
+        <div class = "col-span-2 h-full flex flex-col gap-2 h-[30rem]">
+          <div class="h-1/2 w-full overflow-hidden">
+            <%= image_tag @restaurant.images[1].url, {class: "object-fit w-full h-full"} if @restaurant.images[1].present?%>
+          </div>
+          <div class="h-1/2 w-full overflow-hidden">
+            <%= image_tag @restaurant.images[2].url, {class: "object-fit w-full h-full"} if @restaurant.images[2].present?%>
+          </div>
+        </div>
+      <% else %>
+        <div class = "col-span-5 relative h-[35rem]">
+          <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
+        </div>
+      <% end %>
+      <%# <button data-action="click->moving#nextSlide" class="mr-2 absolute right-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">></button> %>
     </section>
 
-    <section class="min-w-full grid grid-cols-3 gap-4 flex my-5 px-4">
+    <section class="min-w-full grid grid-cols-5 gap-2 flex my-5 px-4">
       
-      <div class="border p-4 bg-white col-span-3">
+      <div class="p-4 bg-white col-span-3">
         <%= render "description", restaurant:@restaurant%>
       </div>
 
-      <div class="border p-4 bg-white col-span-3">
-        <div>
+      <div class="py-4 bg-white col-span-2">
+        <%= render "location", restaurant:@restaurant%>
+      </div>
 
+      <div class="p-4 bg-white col-span-3">
+        <div>
+          <h2 class="font-bold text-2xl py-3">評等和評論</h2>
+          <hr class="h-px my-2 bg-gray-200">
+        </div>
       </div>
     </section>
     <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
