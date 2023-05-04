@@ -1,8 +1,18 @@
 <h2 class="font-bold text-2xl py-3">詳細資料</h2>
-<span class="text-sm"><%=@restaurant.intro%></span>
-<h3 class="text-lg mt-3">價位</h3>
-<span><%=@restaurant.price%></span>
-<h3 class="text-lg mt-3">菜系</h3>
-<% @restaurant.cuisine_types.each do |cuisine_type| %>
-  <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "><%=cuisine_type%></span>
-<% end %>
+<span class="text-md"><%=@restaurant.intro%></span>
+<div>
+  <h3 class="text-lg mt-3 mb-1">價位</h3>
+  <span>$<%=@restaurant.price.to_i%></span>
+</div>
+<div>
+<h3 class="text-lg mt-3 mb-1">菜系</h3>
+  <% @restaurant.cuisine_types.each do |cuisine_type| %>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "><%=cuisine_type%></span>
+  <% end %>
+</div>
+<div>
+  <h3 class="text-lg mt-3 mb-1">氣氛</h3>
+  <% restaurant.atmostphere.each do |atmostphere| %>
+    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 "><%=atmostphere%></span>
+  <% end %>
+</div>
