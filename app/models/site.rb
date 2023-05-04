@@ -18,7 +18,7 @@ class Site < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR site_types::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
 
   def self.filter(address, site_types, pet_friendly)
