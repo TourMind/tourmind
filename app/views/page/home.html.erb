@@ -1,78 +1,16 @@
-<section class="nav">
-    <% if current_user %>
-        <section class="flex justify-between mt-3 nav">
-            <div class='flex item-center'>
-                <%= link_to root_path, class: 'cursor-default' do %>
-                    <%= image_tag 'logo',size: '30x30', class: 'inline-block' %>
-                    <span class="align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
-                    <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
-                <% end %>
-            </div>
-            <div class="flex items-center">
-                <%= current_user.email %>
-                <% if current_user.avatar_url == nil || current_user.avatar_url == ''%>
-                    <%=link_to image_tag("user_default_avatar", class: "rounded-full w-10 h-10 mr-2"),edit_user_registration_path%>
-                <% else %>
-                    <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10 mr-2"), edit_user_registration_path%>
-                <% end %>
-                 <% if current_user.diamond_grade == '一般會員'%>
-                    <%= link_to "升級會員", pricing_path,
-                                        class: "btn-round btn-sm btn-gray mr-2"  %>
-                <% elsif current_user.diamond_grade == '白鑽會員' %>
-                    <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond-white", size: "20x20", class: "inline") %> 白鑽會員</span>
-                <% elsif current_user.diamond_grade == '藍鑽會員' %>
-                    <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond-blue", size: "20x20", class: "inline") %> 藍鑽會員</span>
-                <% elsif current_user.diamond_grade == '紅鑽會員' %>
-                    <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond-red", size: "20x20", class: "inline") %> 紅鑽會員</span>
-                <% end %>
-                <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray mr-2" %>
-            </div>
-        </section>
-    <% else %>
-        <section class="flex justify-between mt-3 nav">
-            <div class='flex item-center'>
-                <%= link_to root_path, class: 'cursor-default' do %>
-                    <%= image_tag 'logo',size: '30x30', class: 'inline-block' %>
-                    <span class="align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
-                    <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
-                <% end %>
-            </div>
-            <div class="sm:hidden">
-              <label for="menu" class="sr-only">選單</label>
-              <select id="menu" onchange="window.location.href=this.value" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option value="" disabled selected>請選擇</option>
-                <option value="<%= sites_path %>">景點</option>
-                <option value="<%= restaurants_path %>">餐廳</option>
-                <option value="<%= hotels_path %>">飯店</option>
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
-              </div>
-            </div>
-            <div>
-                <%= link_to "升級會員", pricing_path,
-                                        class: "btn-round btn-sm btn-gray"  %>
-                <%= link_to "會員登入" , new_user_session_path, 
-                                        class: "btn-round btn-sm btn-black" %>
-                <%= link_to "註冊", new_user_registration_path, 
-                                        class: "btn-round btn-sm btn-gray" %>
-            </div>
-        </section>
-    <% end %>
-</section>
 <div class="sm:hidden">
-              <label for="menu" class="sr-only">選單</label>
-              <select id="menu" onchange="window.location.href=this.value" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                <option value="" disabled selected>請選擇</option>
-                <option value="<%= sites_path %>">景點</option>
-                <option value="<%= restaurants_path %>">餐廳</option>
-                <option value="<%= hotels_path %>">飯店</option>
-                <option value="<%= plans_path %>">行程規劃</option>
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
-              </div>
-            </div>
+  <label for="menu" class="sr-only">選單</label>
+  <select id="menu" onchange="window.location.href=this.value" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <option value="" disabled selected>請選擇</option>
+    <option value="<%= sites_path %>">景點</option>
+    <option value="<%= restaurants_path %>">餐廳</option>
+    <option value="<%= hotels_path %>">飯店</option>
+    <option value="<%= plans_path %>">行程規劃</option>
+  </select>
+  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
+  </div>
+</div>
 <div class="flex m-2 space-x-2 hidden sm:flex ">
   <%= link_to hotels_path do %>
     <div class="w-1/4 border-2 home-text">
@@ -103,8 +41,6 @@
       <% end %>
     </div>  
 </div>
-
-
 
 <section class="relative py-4  ">
   <img src="https://picsum.photos/200/300/?gravity=east" alt="圖片" class="w-full h-96 opacity-80">
