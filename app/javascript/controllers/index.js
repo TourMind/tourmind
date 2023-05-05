@@ -9,9 +9,6 @@ application.register("edit", EditController);
 import FlashController from "./flash_controller";
 application.register("flash", FlashController);
 
-import HotelController from "./hotel_controller";
-application.register("hotel", HotelController);
-
 import MapController from "./map_controller";
 application.register("map", MapController);
 
@@ -23,29 +20,15 @@ application.register("picture", PictureController);
 
 import FilterController from "./filter_controller";
 application.register("filter", FilterController);
+
 import ButtController from "./butt_controller"
 application.register("butt", ButtController)
 
 import CommentController from "./comment_controller"
 application.register("comment", CommentController)
 
-import FlashController from "./flash_controller"
-application.register("flash", FlashController)
-
-import MapController from "./map_controller"
-application.register("map", MapController)
-
-import MovingController from "./moving_controller"
-application.register("moving", MovingController)
-
 import FavoriteController from "./favorite_controller";
 application.register("favorite", FavoriteController);
 
 import NavbarController from "./navbar_controller";
 application.register("navbar", NavbarController);
-
-import PictureController from "./picture_controller"
-application.register("picture", PictureController)
-
-import SortingController from "./sorting_controller"
-application.register("sorting", SortingController)

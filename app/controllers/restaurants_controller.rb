@@ -20,7 +20,6 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1 or /restaurants/1.json
   def show
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
-    @restaurant = Restaurant.find(params[:id])
     @comment = Comment.new
     @comments = @restaurant.comments
 
@@ -74,7 +73,6 @@ class RestaurantsController < ApplicationController
 
   def get_min_max_price
     return unless params[:price_range].present?
-
     selected_price_ranges = params[:price_range].map { |price_range| price_range.split('~') }
     selected_price_ranges.each do |min_price_str, max_price_str|
       @min_price << min_price_str.to_i
