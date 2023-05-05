@@ -2,15 +2,28 @@
 
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[show edit update destroy]
-
+  helper_method :star_rating
   # GET /restaurants or /restaurants.json
   def index
-    @restaurants = Restaurant.order(updated_at: :desc)
+    declare_params
+    get_min_max_price
+    @restaurants = if params[:keyword].present?
+                     Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+                   elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
+                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price, @max_price).order(updated_at: :desc).page(params[:page])
+                   else
+                     Restaurant.order(updated_at: :desc).page(params[:page])
+                   end
+    flash.now[:alert] = '沒有找到符合條件的餐廳' and return if @restaurants.empty?
   end
 
   # GET /restaurants/1 or /restaurants/1.json
   def show
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
+    @restaurant = Restaurant.find(params[:id])
+    @comment = Comment.new
+    @comments = @restaurant.comments
+
   end
 
   # GET /restaurants/new
@@ -24,10 +37,9 @@ class RestaurantsController < ApplicationController
   # POST /restaurants or /restaurants.json
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    set_default_image_if_not_filled
     if @restaurant.save
       get_location
-      redirect_to restaurants_path, notice: 'Restaurant was successfully created.'
+      redirect_to restaurants_path, notice: '餐廳新增成功'
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +49,7 @@ class RestaurantsController < ApplicationController
   def update
     if @restaurant.update(restaurant_params)
       get_location
-      redirect_to restaurant_url(@restaurant), notice: 'Restaurant was successfully updated.'
+      redirect_to restaurant_url(@restaurant), notice: '餐廳更新成功'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +58,7 @@ class RestaurantsController < ApplicationController
   # DELETE /restaurants/1 or /restaurants/1.json
   def destroy
     @restaurant.destroy
-    redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.'
+    redirect_to restaurants_url, notice: '餐廳刪除成功'
   end
 
   private
@@ -56,20 +68,50 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.friendly.find(params[:id])
   end
 
-  def set_default_image_if_not_filled
-    @restaurant.image = 'https://fakeimg.pl/300x200' if @restaurant.image.empty?
-  end
-
   def get_location
     GeocoderSearchJob.perform_later(@restaurant)
   end
 
+  def get_min_max_price
+    return unless params[:price_range].present?
+
+    selected_price_ranges = params[:price_range].map { |price_range| price_range.split('~') }
+    selected_price_ranges.each do |min_price_str, max_price_str|
+      @min_price << min_price_str.to_i
+      @max_price << (max_price_str ? max_price_str.to_i : Restaurant::MAX_PRICE)
+    end
+  end
+
+  def declare_params
+    @address = params[:address] || []
+    @restaurant_type = params[:restaurant_type] || []
+    @cuisine_types = params[:cuisine_types] || []
+    @atmostphere = params[:atmostphere] || []
+    @price_range = params[:price_range] || []
+    @min_price = []
+    @max_price = []
+  end
+
   # Only allow a list of trusted parameters through.
   def restaurant_params
-    params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :section, :email, :tel,
-                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, :michelin_star).tap do |whitelisted|
+    params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
+                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }).tap do |whitelisted|
       whitelisted[:cuisine_types].reject!(&:empty?)
       whitelisted[:atmostphere].reject!(&:empty?)
     end
   end
+  def star_rating(rating)
+    stars = ''
+    if rating.present?
+      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      (5 - rating.to_i).times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    else
+      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    end
+    stars.html_safe
+  end
+  
+  
+  
+  
 end

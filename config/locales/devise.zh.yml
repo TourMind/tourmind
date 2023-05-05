@@ -88,3 +88,12 @@ zh:
               blank: "行程名稱為必填"
             description:
               blank: "行程簡介為必填"
+        restaurant:
+          attributes:
+            name:
+              blank: "名稱不能為空"
+            tel:
+              blank: "電話不能為空"
+            address:
+              blank: "地址不能為空"
+      

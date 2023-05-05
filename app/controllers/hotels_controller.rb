@@ -2,7 +2,7 @@
 
 class HotelsController < ApplicationController
   before_action :set_hotel, only: %i[show edit update destroy]
-
+  helper_method :star_rating
   def index
     @hotels = if params[:keyword].present?
                 Hotel.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
@@ -25,7 +25,11 @@ class HotelsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+    @comments = @hotel.comments
+  end
+  
 
   def edit; end
 
@@ -51,5 +55,15 @@ class HotelsController < ApplicationController
   def hotel_parames
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
                                   :hotel_types, equipment: [])
+  end
+  def star_rating(rating)
+    stars = ''
+    if rating.present?
+      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      (5 - rating.to_i).times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    else
+      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    end
+    stars.html_safe
   end
 end

@@ -82,3 +82,4 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'friendly_id', '~> 5.4'
 gem "babosa"
+gem 'fog-aws'
