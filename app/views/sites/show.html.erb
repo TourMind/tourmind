@@ -20,7 +20,7 @@
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
             <div class="col-span-2 row-span-2">
-              <%= image_tag image.url, {class: "h-full w-full object-fill"}%>
+              <%= image_tag image.url, {class: "w-full h-full object-fill"}%>
             </div>
           <% elsif index < 3 %>
             <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
