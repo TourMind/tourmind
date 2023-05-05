@@ -5,7 +5,7 @@ class Site < ApplicationRecord
   has_many :favorites, as: :favorable, dependent: :destroy
 
   validates :name, :tel, :address, presence: true
-
+  mount_uploader :image, ImageUploader
   def self.search(keyword)
     where('name LIKE ? OR address LIKE ?', "%#{keyword}%", "%#{keyword}%")
   end

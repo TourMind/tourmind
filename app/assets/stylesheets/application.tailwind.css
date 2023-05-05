@@ -75,6 +75,12 @@
   @apply  text-white bg-black;
 }
 
+.home-text{
+  @apply overflow-hidden border-black rounded-md hover:transform hover:translate-y-3 hover:shadow-lg ;
+}
+.home-title{
+  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform 
+}
 
 /* 以下為分頁樣式 */
 

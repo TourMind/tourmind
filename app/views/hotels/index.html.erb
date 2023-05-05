@@ -1,22 +1,22 @@
 <%= render 'shared/items' %>
 
 <div data-controller="hotel">
-  <div class="w-full flex justify-around lg:hidden">
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">排序</div>
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
+  <div class="flex justify-around w-full lg:hidden">
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer">排序</div>
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
       data-action="click->hotel#toggleFilterMenu">篩選</div>
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer">地圖</div>
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer">地圖</div>
   </div>
   
   <div class="bg-gray-100">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-hotel-target="filterMenu"
-        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md">
-        <div class="lg:hidden flex justify-end pt-6">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg lg:block lg:static lg:w-72 h-max bd">
+        <div class="flex justify-end pt-6 lg:hidden">
           <button data-action="click->hotel#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
-        <div class="border-b py-6">
-          <div class="border-b py-6">
+        <div class="py-6 border-b">
+          <div class="py-6 border-b">
             <button class="py-2" data-action="click->hotel#toggleFilterCategory">
               熱門搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </button>
@@ -26,7 +26,7 @@
               <li class="py-1"><input class="mr-2" type="checkbox">xxx</li>
             </ul>
           </div>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <button class="py-2" data-action="click->hotel#toggleFilterCategory">
               住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </button>
@@ -54,35 +54,35 @@
 
       <section class="flex-grow">
         <%= link_to '新增飯店' , new_hotel_path(@hotel), class:'mt-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-medium'%>
-        <div class="flex justify-between items-center">
+        <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @hotels.present? %>
               <%= @hotels.total_count %> 家物業
                 <% end %>
           </div>
           <form class="flex justify-center py-1">
-            <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
+            <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
               <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址..."
-                class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
-              <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
+                class="h-1 mx-1 bg-transparent border-0 focus:ring-transparent">
+              <button type="submit" class="btn-add"><i class="w-3 mr-2 fas fa-search"></i></button>
             </div>
           </form>
         </div>
         <% @hotels.each do |hotel| %>
-          <div class="flex flex-col md:flex-row bg-white rounded-md overflow-hidden shadow-lg mb-3 relative">
+          <div class="relative flex flex-col mb-3 overflow-hidden bg-white rounded-md shadow-lg md:flex-row">
             <%# 喜愛清單 愛心按鈕%>
             <%= render "favorite", object:hotel, size:"text-4xl"%>
-            <%= link_to hotel_path(hotel.id) do %>
+            <%= link_to hotel_path(hotel) do %>
             <div class="w-full md:w-64 md:min-h-64">
                 <%= image_tag "https://fakeimg.pl/350x200/?text=Hello" , alt: "hotel Pic" , class: "w-full h-full" %>
                       <% end %>
             </div>
             <div class="flex-grow">
-              <h2 class="text-xl font-medium p-4">
+              <h2 class="p-4 text-xl font-medium">
                 <%= hotel.name %>
               </h2>
               <div class="flex">
-                <ul class="flex flex-col justify-evenly w-1/2 border-r px-4">
+                <ul class="flex flex-col w-1/2 px-4 border-r justify-evenly">
                   <li>飯店網站:<%= link_to hotel.name , hotel.website,target: "_blank" %>
                   </li>
                   <li>地址:<%= hotel.address %>

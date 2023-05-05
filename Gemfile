@@ -82,3 +82,5 @@ gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
 gem "dockerfile-rails", ">= 1.2", :group => :development
 gem 'pagy'
 gem 'foreman', '~> 0.87.2'
+gem 'friendly_id', '~> 5.4'
+gem "babosa"
