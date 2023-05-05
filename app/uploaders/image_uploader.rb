@@ -1,7 +1,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  # include CarrierWave::MiniMagick
   # process resize_to_fit: [200,200]
   storage :file
   # Choose what kind of storage to use for this uploader:
@@ -35,18 +35,18 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # 上傳的圖片會被裁切成小於 800 * 800 像素的大小，原始圖片會另外保留
-  process resize_to_fit: [800, 800]
+  # process resize_to_fit: [800, 800]
 
   # 另存一個叫做 thumb ，大小為 400 * 400 像素的圖片版本
-  version :thumb do
-    process resize_to_fill: [400, 400]
-  end
+  # version :thumb do
+  #   process resize_to_fill: [400, 400]
+  # end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  def extension_allowlist
-    %w[jpg jpeg gif png]
-  end
+  # def extension_allowlist
+  #   %w[jpg jpeg gif png]
+  # end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
