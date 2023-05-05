@@ -63,6 +63,20 @@ zh:
    not_saved:
     one: "1個錯誤導致無法保存此%{resource}:"
     other: "%{count} 個錯誤導致無法保存此 %{resource}:"
+   carrierwave_processing_error: "無法處理"
+   carrierwave_integrity_error: "不是允許的文件類型"
+   carrierwave_download_error: "無法下載"
+   extension_allowlist_error: "您不允許上傳 %{extension} 文件，允許的類型: %{allowed_types}"
+   extension_denylist_error: "您不允許上傳 %{extension} 文件，禁止的類型: %{prohibited_types}"
+   content_type_allowlist_error: "您不允許上傳 %{content_type} 文件，允許的類型: %{allowed_types}"
+   content_type_denylist_error: "您不允許上傳 %{content_type} 文件"
+   processing_error: "無法處理，也許它不是一個圖像？"
+   min_size_error: "文件大小應大於 %{min_size}"
+   max_size_error: "文件大小應小於 %{max_size}"
+   min_width_error: "圖像寬度應大於 %{min_width}px"
+   max_width_error: "圖像寬度應小於 %{max_width}px"
+   min_height_error: "圖像高度應大於 %{min_height}px"
+   max_height_error: "圖像高度應小於 %{max_height}px"
  activerecord:
   errors:
     messages:
