@@ -13,33 +13,14 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
   end
+  
   def create
     if params[:restaurant_id]
-      @commentable = Restaurant.find(params[:restaurant_id])
+      @commentable = Restaurant.friendly.find(params[:restaurant_id])
     elsif params[:site_id]
       @commentable = Site.find(params[:site_id])
     elsif params[:hotel_id]
-      @commentable = Hotel.find(params[:hotel_id])
-    end
-  
-    @comment = @commentable.comments.build(comment_params)
-    @comment.user = current_user
-  
-    respond_to do |format|
-      if @comment.save
-        format.json { render json: @comment, status: :created }
-      else
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  def create
-    if params[:restaurant_id]
-      @commentable = Restaurant.find(params[:restaurant_id])
-    elsif params[:site_id]
-      @commentable = Site.find(params[:site_id])
-    elsif params[:hotel_id]
-      @commentable = Hotel.find(params[:hotel_id])
+      @commentable = Hotel.friendly.find(params[:hotel_id])
     end
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
