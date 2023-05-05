@@ -78,9 +78,6 @@ gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
-gem 'friendly_id', '~> 5.4'
-gem "babosa"
-
 gem "dockerfile-rails", ">= 1.2", :group => :development
 gem 'foreman', '~> 0.87.2'
 gem 'friendly_id', '~> 5.4'
