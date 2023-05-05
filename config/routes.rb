@@ -3,11 +3,12 @@
 Rails.application.routes.draw do
   root 'page#home'
 
-  devise_for :users, controllers: {
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    omniauth_callbacks: 'users/omniauth_callbacks'
-  }
+  devise_for :users,
+             controllers: {
+               registrations: 'users/registrations',
+               sessions: 'users/sessions',
+               omniauth_callbacks: 'users/omniauth_callbacks',
+             }
 
   resources :favorites, only: %i[index create destroy]
   resources :restaurants do
@@ -15,8 +16,8 @@ Rails.application.routes.draw do
   end
 
   resources :plans
-  get "/day_info", to: "plans#day_info"
-  get "/plan_overview", to: "plans#plan_overview"
+  get '/day_info', to: 'plans#day_info'
+  get '/plan_overview', to: 'plans#plan_overview'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :comments
 
@@ -29,7 +30,6 @@ Rails.application.routes.draw do
   get '/pricing/paymentok', to: 'page#paymentok'
   # 訂單資訊
   get '/order', to: 'order#index'
-  
   get '/pricing/oder', to: 'page#oder'
   resources :hotels do
     resources :comments, only: [:create,:new]
@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   resources :sites do
     resources :comments, only: [:create,:new]
   end 
+
 end

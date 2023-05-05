@@ -2,6 +2,8 @@
 
 class User < ApplicationRecord
   has_many :orders
+  has_many :plans
+
   has_many :comments, dependent: :destroy
   # 驗證必填欄位
   # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
@@ -12,9 +14,13 @@ class User < ApplicationRecord
             }, if: -> { email.present? == false && provider != 'line' }
 
   # confirmable -> 確認mail認證
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[google_oauth2 line facebook]
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: %i[google_oauth2 line facebook]
 
   # 喜愛清單關聯性
   has_many :favorites, inverse_of: :user
@@ -52,6 +58,7 @@ class User < ApplicationRecord
   end
 
   def self.city_list
-    [['請選擇城市'], ['台北市'], ['新北市'], ['宜蘭'], ['花蓮'], ['高雄'], ['台南'], ['台東'], ['新竹'], ['彰化'], ['嘉義'], ['南投'], ['屏東']]
+    [ ['請選擇城市'], ['台北市'], ['新北市'], ['宜蘭'], ['花蓮'], ['高雄'], ['台南'], 
+  ['台東'], ['新竹'], ['彰化'], ['嘉義'], ['南投'], ['屏東'] ]
   end
 end
