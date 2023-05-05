@@ -104,7 +104,7 @@
             </div>
             <div class="mb-5">
               <div class='flex flex-row'>
-                <%= form.check_box :public, class: "appearance-none h-6 w-6 bg-white rounded-full checked:bg-blue-500 checked:scale-75 transition-all duration-200 peer", checked: true, data: {edit_target: "public"} %>
+                <%= form.check_box :public, class: "appearance-none h-6 w-6 bg-white rounded-full checked:bg-blue-500 checked:scale-75 transition-all duration-200 peer", data: {edit_target: "public"} %>
                 <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-blue-300 peer-checked:border-2'>
                 </div>
                 <%= form.label :public, "與他人分享這行程", class: 'flex flex-col justify-center px-2 peer-checked:text-blue-600 text-rose-600 select-none'%>
