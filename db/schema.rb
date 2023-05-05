@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_024316) do
+ActiveRecord::Schema.define(version: 2023_05_03_031229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,16 +108,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_messages_on_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.integer "amount"
     t.datetime "pay_time"
@@ -148,20 +138,19 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "lat"
     t.string "long"
     t.string "image"
-    t.string "section"
     t.string "email"
     t.string "tel"
     t.string "website"
-    t.integer "restaurant_type"
+    t.string "restaurant_type"
     t.string "cuisine_types", default: [], array: true
     t.float "price"
     t.string "atmostphere", default: [], array: true
-    t.string "michelin_star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status", default: "draft"
     t.integer "category_id"
     t.index ["category_id"], name: "index_restaurants_on_category_id"
+    t.json "images"
   end
 
   create_table "rooms", force: :cascade do |t|
