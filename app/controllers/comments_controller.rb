@@ -2,12 +2,12 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
   helper_method :star_rating
 
-  def index
-    @comments = if params[:content].present?
-                  Comment.by_content(params[:keyword])
-                else
-                  Comment.all
-                end
+  def index 
+    if params[:content].present?
+      @comments = Comment.by_content(params[:keyword])
+    else
+      @comments = Comment.all
+    end
   end
 
   def new
