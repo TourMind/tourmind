@@ -29,20 +29,8 @@ application.register("comment", CommentController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
-import MapController from "./map_controller"
-application.register("map", MapController)
-
-import MovingController from "./moving_controller"
-application.register("moving", MovingController)
-
 import FavoriteController from "./favorite_controller";
 application.register("favorite", FavoriteController);
 
 import NavbarController from "./navbar_controller";
 application.register("navbar", NavbarController);
-
-import PictureController from "./picture_controller"
-application.register("picture", PictureController)
-
-import SortingController from "./sorting_controller"
-application.register("sorting", SortingController)
