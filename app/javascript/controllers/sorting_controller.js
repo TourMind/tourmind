@@ -26,6 +26,9 @@ export default class extends Controller {
       },
       animation: 150,
       sort: false,
+      onClone: function (e) {
+        e.clone.id = e.item.id;
+      },
     });
   }
 
