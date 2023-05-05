@@ -20,7 +20,6 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1 or /restaurants/1.json
   def show
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
-    @restaurant = Restaurant.find(params[:id])
     @comment = Comment.new
     @comments = @restaurant.comments
 
