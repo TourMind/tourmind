@@ -32,7 +32,7 @@ export default class extends Controller {
       zoom: 11,
     });
 
-    locArr.forEach((loc, i) => {
+    locArr.forEach((loc) => {
       new google.maps.Marker({
         position: loc,
         map,

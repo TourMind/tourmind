@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_031229) do
 
+ActiveRecord::Schema.define(version: 2023_05_03_031229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_031229) do
     t.bigint "favorable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable"
+    t.index %w[favorable_type favorable_id],
+            name: "index_favorites_on_favorable"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -53,9 +54,14 @@ ActiveRecord::Schema.define(version: 2023_05_03_031229) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+    t.index %w[slug sluggable_type scope],
+            name:
+              "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
+            unique: true
+    t.index %w[slug sluggable_type],
+            name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index %w[sluggable_type sluggable_id],
+            name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -195,9 +201,10 @@ ActiveRecord::Schema.define(version: 2023_05_03_031229) do
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
     t.integer "role", default: 1
-
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["reset_password_token"],
+            name: "index_users_on_reset_password_token",
+            unique: true
   end
 
   add_foreign_key "comments", "users"
@@ -205,4 +212,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_031229) do
   add_foreign_key "plans", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "plans", "users"
 end
