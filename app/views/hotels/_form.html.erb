@@ -40,10 +40,11 @@
     <%= form.text_area :intro, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
           w-full' %>
   </div>
-  <div class='my-5'>
+  <div class="flex flex-wrap">
     <%= form.label :images, '照片' %>
     <% hotel.images.each do |image| %>
-      <%= hidden_field :hotel, :images, multiple: true, value: image.identifier %>
+      <%= hidden_field_tag "hotel[images][]", image.identifier, id: "hotel_images_#{image.identifier}" %>
+      <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
     <% end %>
     <%= form.file_field :images, multiple: true, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full', accept: 'image/jpeg,image/gif,image/png,image/jpg'%>
   </div>
