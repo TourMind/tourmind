@@ -4,7 +4,15 @@ class PageController < ApplicationController
   before_action :authenticate_user!, only: [:pricing]
   skip_before_action :verify_authenticity_token, only: %i[return notify]
 
-  def home; end
+  def home
+  @hotel = Hotel.first
+  @hotels = Hotel.all
+  @site = Site.first
+  @sites = Site.all
+  @restaurant = Restaurant.first
+  @restaurants = Restaurant.all
+  end
+
 
   def pricing; end
 
