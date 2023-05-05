@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   has_many :orders
-
+  has_many :comments, dependent: :destroy
   # 驗證必填欄位
   # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
   validates :email,

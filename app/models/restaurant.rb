@@ -5,7 +5,7 @@ class Restaurant < ApplicationRecord
   
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-
+  has_many :comments, as: :commentable
   # 欄位認證
   validates :name, :address, presence: true
   mount_uploader :image, ImageUploader
@@ -16,8 +16,7 @@ class Restaurant < ApplicationRecord
   # 選項列表
   MAX_PRICE = 99_999_999_999_999
   SECTION_OPTIONS = %w[台北市 新北市]
-  CUISINE_OPTIONS = ['中式料理', '日式料理', '亞洲料理', '健康料理', '印度料理', '台灣小吃/台菜', '壽司', '墨西哥料理', '法式料理', '美式料理', '燒肉', '韓式料理',
-                     '越南料理', '海鮮料理']
+  CUISINE_OPTIONS = ['中式料理', '日式料理', '亞洲料理', '健康料理', '印度料理', '台灣小吃/台菜', '壽司', '墨西哥料理', '法式料理', '美式料理', '燒肉', '韓式料理','越南料理', '海鮮料理']
   ATMOSTPHERE = %w[浪漫 大自然 舒適休閒 安靜 熱鬧 歷史悠久 藝術氛圍]
   RESTAURANT_TYPE = %w[餐廳 酒吧及夜店 小吃 麵包糕點 咖啡和茶 甜點 特色食品市場]
   PRICE_RANGE = %w[~200 200~400 400~800 800~1500 1500~]
@@ -73,4 +72,5 @@ class Restaurant < ApplicationRecord
   def normalize_friendly_id(input)
     input.to_s.to_slug.normalize.to_s
   end
+  
 end

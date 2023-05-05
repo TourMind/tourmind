@@ -2,7 +2,7 @@
 
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[show edit update destroy]
-
+  helper_method :star_rating
   # GET /restaurants or /restaurants.json
   def index
     declare_params
@@ -20,6 +20,10 @@ class RestaurantsController < ApplicationController
   # GET /restaurants/1 or /restaurants/1.json
   def show
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
+    @restaurant = Restaurant.find(params[:id])
+    @comment = Comment.new
+    @comments = @restaurant.comments
+
   end
 
   # GET /restaurants/new
@@ -96,4 +100,18 @@ class RestaurantsController < ApplicationController
       whitelisted[:atmostphere].reject!(&:empty?)
     end
   end
+  def star_rating(rating)
+    stars = ''
+    if rating.present?
+      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      (5 - rating.to_i).times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    else
+      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    end
+    stars.html_safe
+  end
+  
+  
+  
+  
 end
