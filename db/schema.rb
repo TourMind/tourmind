@@ -37,8 +37,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.bigint "favorable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index %w[favorable_type favorable_id],
-            name: "index_favorites_on_favorable"
+    t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -48,14 +47,9 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index %w[slug sluggable_type scope],
-            name:
-              "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
-            unique: true
-    t.index %w[slug sluggable_type],
-            name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-    t.index %w[sluggable_type sluggable_id],
-            name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "hotels", force: :cascade do |t|
@@ -72,7 +66,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
-    t.json "images"
     t.string "slug"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
@@ -116,8 +109,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "atmostphere", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "images"
     t.string "slug"
+    t.json "images"
     t.index ["slug"], name: "index_restaurants_on_slug", unique: true
   end
 
@@ -129,14 +122,13 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "longitude"
     t.float "stay_duration"
     t.text "intro"
-    t.string "pet_friendly"
+    t.string "pet_freindly"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "site_types", default: [], array: true
     t.string "tel"
     t.string "image"
     t.string "parking"
-    t.json "images"
   end
 
   create_table "users", force: :cascade do |t|
@@ -158,9 +150,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"],
-            name: "index_users_on_reset_password_token",
-            unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "comments", "users"
