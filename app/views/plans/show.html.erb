@@ -1,7 +1,7 @@
-<main class="container mx-auto px-5 flex">
+<main class="container mx-auto flex">
   <div class="flex flex-col mt-20 mx-auto">
     <div>
-      <%= link_to "所有行程", plans_path, class: "text-blue-600 mx -3"%>
+      <%= link_to "所有行程", plans_path, class: "text-blue-600"%>
       <% if user_signed_in? %>
         <% if current_user == @plan.user %>
           <%= link_to "編輯行程", edit_plan_path(@plan), class: "text-blue-600"%>
@@ -11,6 +11,7 @@
         <% end %>
       <% end %>
     </div>
+    <div class="group [transform:translateZ(0)] px-6 py-3 w-1/4 rounded-lg bg-gray-200 overflow-hidden relative before:absolute before:bg-sky-600 before:bottom-0 before:left-0 before:h-full before:w-full before:origin-[100%_100%] before:scale-x-0 hover:before:origin-[0_0] hover:before:scale-x-100 before:transition before:ease-in-out before:duration-500"><span class="relative z-0 text-black group-hover:text-gray-200 transition ease-in-out duration-500">Hover over me</span></div>
     <section class="flex w-full h-96 mt-3 gap-2 relative">
       <!-- component -->
       <button class="flex justify-center opacity-80 group absolute right-3 bottom-3 h-7 w-28 overflow-hidden rounded-full bg-slate-800 text-lg shadow">
@@ -48,9 +49,8 @@
           <p class="my-3 text-slate-700 text-m">所需時間： <%= @plan.days %> 天</p>
           <p class="my-3 text-slate-700 text-m">分類： <%= @plan.category %></p>
           <% if user_signed_in? && current_user == @plan.user %>
-          <p class="my-3 text-blue-600 text-m">行程公開狀態： <%= @plan.public ? "所有人皆可查看" : "私人行程" %></p>
+            <p class="my-3 text-blue-600 text-m">行程公開狀態： <%= @plan.public ? "所有人皆可查看" : "私人行程" %></p>
           <% end %>
-          
         </div>
       </div>
     </section>
