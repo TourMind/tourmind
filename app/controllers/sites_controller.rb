@@ -36,9 +36,9 @@ class SitesController < ApplicationController
   end
 
   def show
-
     @comment = Comment.new
     @comments = @site.comments
+    @comments_score = @comments.average(:rating).round(1)
   end
 
   def edit; end
@@ -67,6 +67,7 @@ class SitesController < ApplicationController
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
                                  :stay_duration, :intro, :pet_friendly, :remove_images, site_types: [], images: [])
   end
+
   def star_rating(rating)
     stars = ''
     if rating.present?

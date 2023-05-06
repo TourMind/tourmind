@@ -95,13 +95,10 @@
                 <%= site.name %>
               </h2>
               <ul>
-                <li>評分:<%= 4.5 %>
-                </li>
-                <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+                <h2 class="font-bold">評分：<%= site.comments.average(:rating).to_f.round(1) %></h2>
+                <% site.comments.average(:rating).to_i.times do %>
+                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                <% end %>
                 <li>簡介:<%= site.intro&.truncate(30)%>
                 </li>
               </ul>

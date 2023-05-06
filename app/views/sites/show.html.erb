@@ -3,36 +3,33 @@
     <%= @site.name %>
   </h1>
   <div class="flex flex-wrap">
-    <ul class="flex-col p-4">
-      <li>評分:<%= 4.5 %>
-      </li>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+    <div class="flex-col p-4">
+      <h2 class="font-bold">評分：<%=  @comments_score %></h2>
+      <% @comments_score.to_i.times do %>
+        <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+      <% end %>
       <button class="px-2 py-1 text-white bg-pink-300 rounded-full">
         加入喜愛清單<i class="fa-solid fa-heart text-red-700 fa-lg"></i>
       </button>
-    </ul>
+    </div>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full shadow-md mr-4 rounded-md overflow-hidden relative'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md mr-4 rounded-md overflow-hidden relative'>
       <% if @site.images.present? %>
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
             <div class="col-span-2 row-span-2">
-              <%= image_tag image.url, {class: "w-full h-full object-fill"}%>
+              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% elsif index < 3 %>
             <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
             <div>
-              <%= image_tag image.url, {class: "w-full h-full object-fill"}%>
+              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% end %>
         <% end %>
       <% else %>
-        <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full' %>
+        <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full h-full' %>
         <%= render 'favorite', object: @site, size:'text-4xl'%>
       <% end %>
     </div>
