@@ -54,6 +54,11 @@
             include_blank: '請選擇' }, prompt: '請選擇' %>
   </div>
   <div class='my-5'>
+    <%= form.label :parking , '是否附設停車場' %>
+    <%= form.select :parking, options_for_select(['是', '否'], selected: @site.parking), {
+            include_blank: '請選擇' }, prompt: '請選擇' %>
+  </div>
+  <div class='my-5'>
     <%= form.label :site_types, '景點類型' , class: 'block' %>
     <% site_types=%w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地] %>
     <div class='inline-block'>
