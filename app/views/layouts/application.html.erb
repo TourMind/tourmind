@@ -11,6 +11,38 @@
   </head>
   <body>
     <%= render 'shared/navbar' %>
+    <div class="flex justify-center my-6">
+      <div class="flex hidden sm:flex container">
+        <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
+          <div class="border-2 home-text">
+            <div class="home-title">
+              <h2 class="text-xl font-semibold">住宿</h2>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
+          <div class="border-2 home-text">
+            <div class="home-title">
+              <h2 class="text-xl font-semibold">景點</h2>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
+          <div class="border-2 home-text">
+            <div class="home-title">
+              <h2 class="text-xl font-semibold">餐廳</h2>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to plans_path , class: "inline-block w-1/4" do %>
+          <div class="border-2 home-text">
+            <div class="home-title">
+              <h2 class="text-xl font-semibold">行程規劃</h2>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <%= yield %>
     <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
   </body>

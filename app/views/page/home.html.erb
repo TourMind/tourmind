@@ -4,45 +4,14 @@
     <option value="" disabled selected>請選擇</option>
     <option value="<%= sites_path %>">景點</option>
     <option value="<%= restaurants_path %>">餐廳</option>
-    <option value="<%= hotels_path %>">飯店</option>
+    <option value="<%= restaurants_path %>">飯店</option>
     <option value="<%= plans_path %>">行程規劃</option>
   </select>
   <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
   </div>
 </div>
-<div class="flex m-2 space-x-2 hidden sm:flex ">
-  <%= link_to hotels_path do %>
-    <div class="w-1/4 border-2 home-text">
-      <div class="home-title">
-        <h2 class="text-xl font-semibold mb-2 ">住宿</h2>
-      </div>
-      <% end %>
-    </div>
-  <%= link_to sites_path do %>
-    <div class="w-1/4 border-2 home-text">
-      <div class="home-title">
-        <h2 class="text-xl font-semibold mb-2 ">景點</h2>
-      </div>
-      <% end %>
-    </div>
-  <%= link_to restaurants_path do %>
-    <div class="w-1/4 border-2 home-text">
-      <div class="home-title">
-        <h2 class="text-xl font-semibold mb-2 ">餐廳</h2>
-      </div>
-      <% end %>
-    </div>
-  <%= link_to plans_path do %>
-    <div class="w-1/4 border-2 home-text">
-      <div class="home-title">
-        <h2 class="text-xl font-semibold mb-2 ">行程規劃</h2>
-      </div>
-      <% end %>
-    </div>  
-</div>
-
-<section class="relative py-4  ">
+<section class="relative container mx-auto px-4">
   <img src="https://picsum.photos/200/300/?gravity=east" alt="圖片" class="w-full h-96 opacity-80">
   <div class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-1/2">
     <div class="container px-4 mx-auto">
@@ -57,8 +26,7 @@
     </div>
   </div>
 </section>
-
-<div class="flex flex-wrap mx-2 px-10 ">
+<div class="flex flex-wrap container mx-auto px-4 ">
   <div class="w-full sm:w-1/2 md:w-1/3 px-2 pt-2">
     <div class="relative">
       <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
@@ -71,7 +39,6 @@
       </div>
     </div>
   </div>
-
   <div class="w-full sm:w-1/2 md:w-1/3 px-2 pt-2">
     <div class="relative">
       <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
@@ -84,7 +51,6 @@
       </div>
     </div>
   </div>
-
   <div class="w-full sm:w-1/2 md:w-1/3 px-2 pt-2">
     <div class="relative">
       <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
@@ -98,158 +64,110 @@
     </div>
   </div>
 </div>
-
-<section class="px-10 py-4 m-2">
+<section class="container mx-auto px-4">
   <h2 class="py-4">熱門飯店</h2>
   <div class="flex flex-wrap">
-    <% @hotels.sample(4).each do |hotel| %>
+    <% @restaurants.sample(4).each do |restaurant| %>
       <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
-        <a href="<%= hotel_path(hotel) %>" class="text-white px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
-        <div class="relative transform image-container">
-          <%= image_tag hotel.image.url if hotel.image.url.present? %>
-          <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
-            <span>熱門景點</span>
+        <a href="<%= restaurants_path(restaurant) %>" class="text-white px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+          <div class="relative transform image-container">
+            <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+            <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+              <span>熱門景點</span>
+            </div>
+            <div class="absolute top-0 right-0 m-3">
+              <span class="text-red-500 text-3xl">&#x2665;</span>
+            </div>
           </div>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
-          </div>
-        </div>
-        <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= hotel.name %></p>
-        <p><%=@hotel.star_rating%></p>
-        <p class="text-gray-600 text-sm mb-4"><%= hotel.intro&.truncate(30) %></p>
-        <p></p>
+          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+          <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+          <p></p>
         </a>
       </div>
     <% end %>
   </div>
 </section>
-
-<div class="p-10 flex ">
+<div class="container mx-auto px-4 flex">
   <div class="w-64 carousel rounded-box mx-2">
-    <% @hotels.sample(4).each do |hotel| %>
-    <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url if hotel.image.url.present? %>
-    </div>
-    <% end %>
-  </div>
-  <div class="w-64 carousel rounded-box mx-2">
-    <% @hotels.sample(4).each do |hotel| %>
-    <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url if hotel.image.url.present? %>
-    </div>
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="carousel-item w-full image-container">
+        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+      </div>
     <% end %>
   </div>
   <div class="w-64 carousel rounded-box mx-2">
-    <% @hotels.sample(4).each do |hotel| %>
-    <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url if hotel.image.url.present? %>
-    </div>
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="carousel-item w-full image-container">
+        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+      </div>
     <% end %>
   </div>
-    <div class="w-64 carousel rounded-box mx-2">
-    <% @hotels.sample(4).each do |hotel| %>
-    <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url if hotel.image.url.present? %>
-    </div>
+  <div class="w-64 carousel rounded-box mx-2">
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="carousel-item w-full image-container">
+        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+      </div>
     <% end %>
   </div>
-    <div class="w-64 carousel rounded-box mx-2">
-    <% @hotels.sample(4).each do |hotel| %>
-    <div class="carousel-item w-full image-container">
-      <%= image_tag hotel.image.url if hotel.image.url.present? %>
-    </div>
+  <div class="w-64 carousel rounded-box mx-2">
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="carousel-item w-full image-container">
+        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+      </div>
+    <% end %>
+  </div>
+  <div class="w-64 carousel rounded-box mx-2">
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="carousel-item w-full image-container">
+        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+      </div>
     <% end %>
   </div>
 </div>
-
-<div class="carousel rounded-box">
-  <div class="carousel-item p-12">
-    <% @hotels.sample(4).each do |hotel| %>
-      <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
-        <div class="relative">
-         <%= image_tag hotel.image.url if hotel.image.url.present? %>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= hotel.name %></p>
-          <p class="text-gray-600 text-sm mb-4"><%= hotel.intro&.truncate(30) %></p>
-          <div class="flex items-center justify-between">
-            <a href="<%= hotel_path(hotel) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div> 
-  <div class="carousel-item p-12">
-    <% @hotels.sample(4).each do |hotel| %>
-      <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
-        <div class="relative">
-         <%= image_tag hotel.image.url if hotel.image.url.present? %>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= hotel.name %></p>
-          <p class="text-gray-600 text-sm mb-4"><%= hotel.intro&.truncate(30) %></p>
-          <div class="flex items-center justify-between">
-            <a href="<%= hotel_path(hotel) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div> 
-</div>
-
-
-<section class=" px-12 py-4">
+<section class="container mx-auto px-4">
   <div class="relative bg-white rounded-lg " style="height:auto" data-controller="moving">
     <div data-moving-target="slides" class="flex flex-warp">
       <div class="flex flex-wrap ">
-        <% @hotels.sample(4).each do |hotel| %>
-        <div class=" rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 ">
-          <div class="relative image-container">
-         <%= image_tag hotel.image.url if hotel.image.url.present? %>
-          <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
-            <span>飯店推薦</span>
-          </div>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
-          </div>
-        </div>
-
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= hotel.name %></p>
-          <p class="text-gray-600 text-sm mb-4"><%= hotel.intro&.truncate(30) %></p>
-            <a href="<%= hotel_path(hotel) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+        <% @restaurants.sample(4).each do |restaurant| %>
+          <div class=" rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4 ">
+            <div class="relative image-container">
+              <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+              <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+                <span>飯店推薦</span>
+              </div>
+              <div class="absolute top-0 right-0 m-3">
+                <span class="text-red-500 text-3xl">&#x2665;</span>
+              </div>
             </div>
-      <% end %>
+            <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+            <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+            <a href="<%= restaurant_path(restaurant) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+          </div>
+        <% end %>
       </div>
     </div>
-
     <div data-moving-target="slides" class="flex flex-warp">
       <div class="flex flex-wrap ">
         <% @sites.sample(4).each do |site| %>
-        <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
-          <div class="relative image-container">
-          <%= image_tag site.image.url if site.image.url.present? %>
-          <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
-            <span>熱門景點</span>
-          </div>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
-          </div>
-        </div>
-        <div class="p-4">
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= site.name %></p>
-          <p class="text-gray-600 text-sm mb-4"><%= site.intro&.truncate(30) %></p>
-            <div class="flex items-center justify-between">
-            <a href="<%= site_path(site) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+          <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
+            <div class="relative image-container">
+              <%= image_tag site.image.url if site.image.url.present? %>
+              <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+                <span>熱門景點</span>
+              </div>
+              <div class="absolute top-0 right-0 m-3">
+                <span class="text-red-500 text-3xl">&#x2665;</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= site.name %></p>
+              <p class="text-gray-600 text-sm mb-4"><%= site.intro&.truncate(30) %></p>
+              <div class="flex items-center justify-between">
+                <a href="<%= site_path(site) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
       </div>
     </div>
     <button data-action="click->moving#prevSlide" class="absolute top-1/2 transform -translate-y-1/2 left-0 rounded-full bg-gray-200 w-6 h-6">
@@ -259,39 +177,76 @@
       <i class="fa-solid fa-circle-chevron-right fa-2xl"></i>
     </button>
   </div>
-  
 </section>
-
-
+<div class="carousel container mx-auto px-4">
+  <div class="carousel-item p-12">
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="bg-white rounded-lg  md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
+        <div class="relative">
+          <div class="container"><%= image_tag restaurant.images.first.url if restaurant.images.present? %></div>
+          <div class="absolute top-0 right-0 m-3">
+            <span class="text-red-500 text-3xl">&#x2665;</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+          <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+          <div class="flex items-center justify-between">
+            <a href="<%= restaurant_path(restaurant) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="carousel-item p-12">
+    <% @restaurants.sample(4).each do |restaurant| %>
+      <div class="bg-white rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
+        <div class="relative">
+          <div class="container"><%= image_tag restaurant.images.first.url if restaurant.images.present? %></div>
+          <div class="absolute top-0 right-0 m-3">
+            <span class="text-red-500 text-3xl">&#x2665;</span>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+          <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+          <div class="flex items-center justify-between">
+            <a href="<%= restaurant_path(restaurant) %>" class="inline-block bg-gray-900 text-white py-2 px-6 rounded-lg hover:bg-gray-700 focus:bg-gray-700 transition duration-300 ease-in-out">查看更多</a>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
 <footer class="footer p-10 bg-base-200 text-base-content">
   <div>
-    <span class="footer-title">Services</span> 
-    <a class="link link-hover">Branding</a> 
-    <a class="link link-hover">Design</a> 
-    <a class="link link-hover">Marketing</a> 
+    <span class="footer-title">Services</span>
+    <a class="link link-hover">Branding</a>
+    <a class="link link-hover">Design</a>
+    <a class="link link-hover">Marketing</a>
     <a class="link link-hover">Advertisement</a>
-  </div> 
+  </div>
   <div>
-    <span class="footer-title">Company</span> 
-    <a class="link link-hover">About us</a> 
-    <a class="link link-hover">Contact</a> 
-    <a class="link link-hover">Jobs</a> 
+    <span class="footer-title">Company</span>
+    <a class="link link-hover">About us</a>
+    <a class="link link-hover">Contact</a>
+    <a class="link link-hover">Jobs</a>
     <a class="link link-hover">Press kit</a>
-  </div> 
+  </div>
   <div>
-    <span class="footer-title">Legal</span> 
-    <a class="link link-hover">Terms of use</a> 
-    <a class="link link-hover">Privacy policy</a> 
+    <span class="footer-title">Legal</span>
+    <a class="link link-hover">Terms of use</a>
+    <a class="link link-hover">Privacy policy</a>
     <a class="link link-hover">Cookie policy</a>
-  </div> 
+  </div>
   <div>
-    <span class="footer-title">Newsletter</span> 
+    <span class="footer-title">Newsletter</span>
     <div class="form-control w-80">
       <label class="label">
         <span class="label-text">Enter your email address</span>
-      </label> 
+      </label>
       <div class="relative">
-        <input type="text" placeholder="username@site.com" class="w-full pr-16 input input-bordered" /> 
+        <input type="text" placeholder="username@site.com" class="w-full pr-16 input input-bordered" />
         <button class="absolute top-0 right-0 rounded-l-none btn btn-primary">Subscribe</button>
       </div>
     </div>
