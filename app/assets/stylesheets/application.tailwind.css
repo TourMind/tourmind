@@ -75,10 +75,10 @@
 }
 
 .home-text {
-  @apply hover:transform hover:translate-y-3 border-black rounded-md overflow-hidden hover:shadow-lg;
+  @apply hover:transform  border-black rounded-md overflow-hidden hover:shadow-lg;
 }
 .home-title {
-  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform;
+  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform relative after:absolute after:bg-indigo-600 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300;
 }
 @layer components {
   /* 評價功能的星星radio */
