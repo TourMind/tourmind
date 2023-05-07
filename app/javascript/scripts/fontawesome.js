@@ -2,8 +2,7 @@
 import { config, library, dom } from '@fortawesome/fontawesome-svg-core'
 config.mutateApproach = 'sync'
 
+import { faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faGlobe, faStar, faStarHalf, faHeart, faBars } from '@fortawesome/free-solid-svg-icons'
 
-import { faBars, faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faStar, faStarHalf, faHeart } from '@fortawesome/free-solid-svg-icons'
-
-library.add(faBars, faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faStar, faStarHalf, faHeart)
+library.add(faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faGlobe, faStar, faStarHalf, faHeart, faBars)
 dom.watch()

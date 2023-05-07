@@ -40,19 +40,21 @@
     <%= form.text_area :intro, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
           w-full' %>
   </div>
-  <div class='my-5'>
-    <%= form.label :image , '照片' %>
-    <%= form.file_field :image, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
-          w-full' %>
+  <div class="flex flex-wrap">
+    <%= form.label :images, '照片' %>
+    <% hotel.images.each do |image| %>
+      <%= hidden_field_tag "hotel[images][]", image.identifier, id: "hotel_images_#{image.identifier}" %>
+      <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
+    <% end %>
+    <%= form.file_field :images, multiple: true, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full', accept: 'image/jpeg,image/gif,image/png,image/jpg'%>
   </div>
   <div class='my-5'>
     <%= form.label :hotel_types , '住宿類型' %>
-    <%= form.select :hotel_types , options_for_select([ '飯店' , '民宿' , '度假村' , '青年旅館' , '日租套房' ], '請選擇住宿類型' ),
-          prompt: '請選擇住宿類型' %>
+    <%= form.select :hotel_types , options_for_select([ '飯店' , '民宿' , '度假村' , '青年旅館' , '日租套房','奢華酒店' ], selected: @hotel.hotel_types) %>
   </div>
   <div class='my-5'>
     <%= form.label :equipment , '飯店設備' , class:'block'%>
-    <% equipment =%w[免費WIFI 免費停車 游泳池 餐廳 健身中心 酒吧 可攜帶寵物 行李存放 乾洗服務 自助洗衣服務 腳踏車租賃] %>
+    <% equipment =%w[無線網路(WIFI) 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 自助洗衣服務 腳踏車租賃 24小時櫃檯接待] %>
     <div>
       <% equipment.each do |equipment| %>
         <label class='inline-flex items-center mr-4'>
@@ -64,7 +66,7 @@
     </div>
   </div>
   <div class='inline'>
-    <%= form.submit '提交' , class:'rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer'
+    <%= form.submit '提交' , class:'rounded-lg py-3 px-5 bg-blue-500 text-white inline-block font-medium cursor-pointer'
         %>
   </div>
 <% end %>
