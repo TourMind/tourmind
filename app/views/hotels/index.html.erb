@@ -98,7 +98,7 @@
             <div class="bg-white rounded-md overflow-hidden shadow-lg">
               <div class="relative">
                 <%= render 'favorite', object: hotel, size:'text-4xl'%>
-                <%= link_to hotel_path(hotel.id) do %>
+                <%= link_to hotel_path(hotel) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if hotel.images.present? %>
                       <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
@@ -122,13 +122,14 @@
                   </ul>
                 </div>
                 <ul>
-                  <li>評分:<%= 4.5 %>
-                  </li>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+                  <% if hotel.comments.any? %>
+                    <h2 class="font-bold">評分：<%= hotel.comments.average(:rating).to_f.round(1) %></h2>
+                    <% hotel.comments.average(:rating).to_i.times do %>
+                      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <% end %>
+                  <% else %>
+                    <p>尚未有評論</p>
+                  <%end%>
                   <li>簡介:<%= hotel.intro&.truncate(30)%>
                   </li>
                 </ul>
