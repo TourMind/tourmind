@@ -31,9 +31,6 @@ class Site < ApplicationRecord
 
     where(sql_query_condition.join(' AND '))
   end
-  paginates_per 6
-  mount_uploader :image, ImageUploader
-  mount_uploaders :images, ImageUploader
 
   friendly_id :name, use: :slugged
 
@@ -45,4 +42,5 @@ class Site < ApplicationRecord
     input.to_s.to_slug.normalize.to_s
   end
   mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
 end
