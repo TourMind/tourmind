@@ -3,6 +3,13 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
+  #寄信
+  config.action_mailer.default_url_options = { :host => "tourmind.fly.dev" }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: Rails.application.credentials[:mailgun_api_key],
+    domain: 'sandbox527ab8307cd14976a3bb8f1ca99bc786.mailgun.org',
+  }
   # 部署時，防止 sassc-rails 在壓縮器為我修復它時設置 sass
   # Preventing sassc-rails from setting sass as the compressor fixed it for me.
   config.assets.css_compressor = nil
