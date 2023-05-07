@@ -8,4 +8,7 @@ class Comment < ApplicationRecord
   end
   belongs_to :user
   belongs_to :commentable, polymorphic: true
+  def self.average_rating
+    where.not(rating: nil).average(:rating) || 0
+  end
 end

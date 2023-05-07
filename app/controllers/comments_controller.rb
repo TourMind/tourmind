@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   helper_method :star_rating
 
   def index 
+    @average_rating = Comment.average_rating
     if params[:content].present?
       @comments = Comment.by_content(params[:keyword])
     else

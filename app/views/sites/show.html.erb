@@ -5,10 +5,8 @@
   <div class="flex flex-wrap">
     <div class="flex p-4 items-center">
       <% if @comments_score.present? %>
-        <h2 class="font-bold">評分：<%= @comments_score.round(1) %></h2>
-        <% @comments_score.to_i.times do %>
-          <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-        <% end %>
+        <h2 class="font-bold">評分：<%= star_rating(@average_rating) %><%= sprintf('%.1f', @average_rating) %>
+                                   <%= @comment_count == 0 ? '0則評論' : "#{@comment_count}則評論" %></span>
       <% else %>
         <p>尚未有評論</p>
       <% end %>

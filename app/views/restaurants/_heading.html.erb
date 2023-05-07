@@ -3,12 +3,7 @@
   <%= render "favoritebtn", object:@restaurant, size:'text-lg'%>
 </div>
   <div class="flex items-center">
-    <span class="mr-2 text-lg"><%=4.5%></span>
-    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-    <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
-    <span class="mr-2"><%=0%>則評論</span>
+    <span class="mr-2"><%= star_rating(@average_rating) %><%= sprintf('%.1f', @average_rating) %></span>
+    <span class="mr-2"><%= @comment_count == 0 ? '0則評論' : "#{@comment_count}則評論" %></span>
     <span class="inline-block rounded-full px-3 py-1 text-md font-semibold text-gray-700 "><%= restaurant.restaurant_type%></span>
   </div>

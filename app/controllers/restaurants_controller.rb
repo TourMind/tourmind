@@ -3,10 +3,13 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[show edit update destroy]
   helper_method :star_rating
+  before_action :total_rating, only: %i[index show]
+  before_action :comment_rating, only: %i[index]
   # GET /restaurants or /restaurants.json
   def index
     declare_params
     get_min_max_price
+
     @restaurants = if params[:keyword].present?
                      Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
                    elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
@@ -22,7 +25,6 @@ class RestaurantsController < ApplicationController
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
     @comment = Comment.new
     @comments = @restaurant.comments
-
   end
 
   # GET /restaurants/new
@@ -101,15 +103,28 @@ class RestaurantsController < ApplicationController
   def star_rating(rating)
     stars = ''
     if rating.present?
-      rating.to_i.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
-      (5 - rating.to_i).times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+      full_stars = rating.to_i
+      half_stars = rating - full_stars >= 0.5 ? 1 : 0
+      empty_stars = 5 - full_stars - half_stars
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
     stars.html_safe
   end
-  
-  
-  
-  
+  def total_rating
+    @average_rating = Comment.average_rating
+    @comment_count = Comment.where.not(content: nil).count
+  end
+  def comment_rating
+    @restaurant_data = {}
+    Restaurant.all.each do |restaurant|
+      @restaurant_data[restaurant.id] = {
+        average_rating: restaurant.comments.average(:rating).to_f,
+        comment_count: restaurant.comments.where.not(content: nil).count
+      }
+    end
+  end
 end

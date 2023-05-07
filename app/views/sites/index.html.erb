@@ -96,10 +96,9 @@
               </h2>
               <ul>
                 <% if site.comments.any? %>
-                  <h2 class="font-bold">評分：<%= site.comments.average(:rating).to_f.round(1) %></h2>
-                  <% site.comments.average(:rating).to_i.times do %>
-                    <i class="text-yellow-300 fa-solid fa-star fa-lg"></i>
-                  <% end %>
+                  <h2 class="font-bold">評分：<%= star_rating(@site_data[site.id][:average_rating]) %>
+                                             <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+                                             (<%= @site_data[site.id][:comment_count] %>則評論)
                 <% else %>
                   <p>尚未有評論</p>
                 <% end %>
