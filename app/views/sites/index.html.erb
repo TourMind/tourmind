@@ -95,9 +95,13 @@
                 <%= site.name %>
               </h2>
               <ul>
-                <h2 class="font-bold">評分：<%= site.comments.average(:rating).to_f.round(1) %></h2>
-                <% site.comments.average(:rating).to_i.times do %>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                <% if site.comments.any? %>
+                  <h2 class="font-bold">評分：<%= site.comments.average(:rating).to_f.round(1) %></h2>
+                  <% site.comments.average(:rating).to_i.times do %>
+                    <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                  <% end %>
+                <% else %>
+                  <p>尚未有評論</p>
                 <% end %>
                 <li>簡介:<%= site.intro&.truncate(30)%>
                 </li>

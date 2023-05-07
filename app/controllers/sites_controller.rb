@@ -38,7 +38,7 @@ class SitesController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @site.comments
-    @comments_score = @comments.average(:rating).round(1)
+    @comments_score = @comments.average(:rating).try(:round, 1)
   end
 
   def edit; end

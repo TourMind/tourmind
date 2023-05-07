@@ -4,9 +4,13 @@
   </h1>
   <div class="flex flex-wrap">
     <div class="flex-col p-4">
-      <h2 class="font-bold">評分：<%=  @comments_score %></h2>
-      <% @comments_score.to_i.times do %>
-        <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+      <% if @comments_score.present? %>
+        <h2 class="font-bold">評分：<%= @comments_score.round(1) %></h2>
+        <% @comments_score.to_i.times do %>
+          <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+        <% end %>
+      <% else %>
+        <p>尚未有評論</p>
       <% end %>
       <button class="px-2 py-1 text-white bg-pink-300 rounded-full">
         加入喜愛清單<i class="fa-solid fa-heart text-red-700 fa-lg"></i>
