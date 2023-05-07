@@ -4,27 +4,26 @@
  */
 
 .flash_style {
-    top: 60px !important;
-    right: 10px !important;
+ top: 60px !important;
+ right: 10px !important;
 }
 .image-container {
-  position: relative;
-  overflow: hidden;
+ position: relative;
+ overflow: hidden;
 }
 
 .image-container img {
-  transition: transform 0.5s ease-in-out;
+ transition: transform 0.5s ease-in-out;
 }
 
 .image-container:hover img {
-  transform: scale(1.2);
+ transform: scale(1.2);
 }
 
 .comment-form-wrapper {
-  display: none;
+ display: none;
 }
 
 /* .hidden {
   display: none;
 } */
-  
