@@ -7,7 +7,7 @@
         <% end %>
     </div>
     <div class="flex items-center px-2">
-        <% if current_user %>
+        <% if current_user &&  current_user.role == 1 %>
             <span class="px-2 py-2"><%= current_user.email %></span>
             <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
                 <li class="px-2 py-2 md:px-2">
@@ -41,6 +41,22 @@
                 <% else %>
                     <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10 mr-2")%>
                 <% end %>
+            </i>
+            <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
+                <i class="fa-solid fa-bars fa-xl"></i>
+            </button>
+        <% elsif current_user && current_user.role == 0 %>
+            <span class="px-2 py-2"><%= current_user.email %></span>
+            <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+                 <li class="px-5 py-2 md:px-2">
+                    <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-sm btn-black" %>
+                </li>
+                <li class="px-5 py-2 md:px-2">
+                    <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
+                </li>
+            </ul>
+            <i class="rounded-full ring ring-primary ring-offset-base-100">
+                <i class="p-2 fa-solid fa-users-gear"></i>
             </i>
             <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
                 <i class="fa-solid fa-bars fa-xl"></i>

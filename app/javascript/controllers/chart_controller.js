@@ -9,9 +9,9 @@ export default class extends Controller {
     const ctx = document.getElementById('myChart');
     const dataValue = [
       this.element.dataset.regular,
-      this.element.dataset.rd,
-      this.element.dataset.bd,
       this.element.dataset.wd,
+      this.element.dataset.bd,
+      this.element.dataset.rd,
     ];
     
     const chart = new Chart(ctx, {
