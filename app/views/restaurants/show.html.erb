@@ -1,45 +1,54 @@
-<div class="mx-auto w-full bg-slate-200">
+<div class="container mx-auto">
   <div class="mx-auto">
-    <Section class = "p-3">
+    <Section class = "p-3 relative">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
-
-    <section class = "justify-center flex px-4 grid grid-cols-3 gap-4">
-      <div class = "col-span-2 aspect-[5/3]">
-        <img class="w-full" src=<%=@restaurant.image%> alt="site iamge">
-      </div>
-      <%= render "location", restaurant:@restaurant%>
-    </section>
-
-    <section class="min-w-full grid grid-cols-3 gap-4 flex my-5 px-4">
-      <div class="space-y-4 overflow-y-auto h-20 ">
-        <div id="comment-list">
-          <%= render partial: "comment", collection: @restaurant.comments %>
+    <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden py-4 shadow-lg rounded-lg" >
+      <% if @restaurant.images.present? %>
+        <div class = "col-span-5 lg:col-span-3 relative h-96">
+          <%= image_tag @restaurant.images[0].url, {class: "w-full h-full object-fill"}%>
         </div>
-        <hr class='h-px my-8 bg-gray-200'>
+        <div class = "col-span-5 lg:col-span-2 flex flex-col gap-2 h-96">
+          <div class="h-1/2 w-full overflow-hidden">
+            <%= image_tag @restaurant.images[1].url, {class: "object-fit w-full h-full"} if @restaurant.images[1].present?%>
+          </div>
+          <div class="h-1/2 w-full overflow-hidden">
+            <%= image_tag @restaurant.images[2].url, {class: "object-fit w-full h-full"} if @restaurant.images[2].present?%>
+          </div>
+        </div>
+      <% else %>
+        <div class = "col-span-5 relative h-96">
+          <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
+        </div>
+      <% end %>
+    </section>
+    <section class="min-w-full grid grid-cols-5 gap-2 flex my-5">
+      <div class="p-8 bg-white col-span-5 lg:col-span-3 shadow-lg rounded-lg">
+        <%= render "description", restaurant:@restaurant%>
       </div>
-      <div class="border p-4 bg-white col-span-1">
+      <div class="p-8 bg-white col-span-5 lg:col-span-2 shadow-lg rounded-lg">
+        <%= render "location", restaurant:@restaurant%>
+      </div>
+      <div class="p-4 bg-white col-span-5">
         <div>
-
+          <h2 class="font-bold text-2xl py-3">評等和評論</h2>
+          <hr class="h-px my-2 bg-gray-200">
+          <div class="space-y-4 overflow-y-auto h-20 ">
+            <div id="comment-list">
+              <%= render partial: "comment", collection: @restaurant.comments %>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to '返回餐廳列表', restaurants_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-  
-<div data-controller="butt">
-  <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
-    發表評論
-  </a>
-  <div class="hidden" data-butt-target="form" >
-    <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
+    <div data-controller="butt">
+      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+        發表評論
+      </a>
+      <div class="hidden" data-butt-target="form" >
+        <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
+      </div>
+    </div>
   </div>
-</div>
-
-</div>
-
-
-
-
-
-
-
