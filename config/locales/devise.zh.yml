@@ -88,6 +88,10 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
+            stay_duration:
+              not_a_number: "停留時間必須是數字"
+              not_in_range: "停留時間必須介於0.5至24小時之間"
+              less_than_or_equal_to: "停留時間不能超過24小時"
         hotel:
           attributes:
             name:
