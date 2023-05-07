@@ -1,5 +1,5 @@
-<div class="p-4 max-w-lg truncate ...">
-  <p>By <%= comment.user.email %> </p>
+    <div class="p-4 max-w-lg truncate ...">
+  <p>By <%= comment.user.email if comment.user %> </p>
   <%= star_rating(comment.rating) %>
   <div class="flex flex-row space-x-4 ">
     <% comment.images.each do |image| %>
@@ -7,5 +7,5 @@
     <% end %>
   </div>
   <p><%= comment.content %></p>
-  <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+  <%= comment.created_at.in_time_zone('Taipei').strftime("%Y-%m-%d %H:%M:%S") if comment.created_at %>
 </div>

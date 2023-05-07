@@ -101,14 +101,13 @@
                   </ul>
                 </div>
                 <ul>
-                  <% if hotel.comments.any? %>
-                    <h2 class="font-bold">評分：<%= hotel.comments.average(:rating).to_f.round(1) %></h2>
-                    <% hotel.comments.average(:rating).to_i.times do %>
-                      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                    <% end %>
-                  <% else %>
-                    <p>尚未有評論</p>
-                  <%end%>
+               <% if hotel.comments.any? %>
+                  <h2 class="font-bold">評分：<%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                                             <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                                             (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+                <% else %>
+                  <p>尚未有評論</p>
+                <% end %>
                   <li>簡介:<%= hotel.intro&.truncate(30)%>
                   </li>
                 </ul>
