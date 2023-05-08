@@ -1,36 +1,37 @@
 <div class="container m-auto pb-4">
-  <h1 class='flex p-4 text-2xl font-bold'>
+  <h1 class='flex text-2xl font-bold'>
     <%= @hotel.name %>
   </h1>
   <div class="flex flex-wrap">
-    <ul class="flex-col p-4">
-      <li>評分:<%= 4.5 %>
-      </li>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-      <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
-      <button class="px-2 py-1 text-white bg-gray-700 rounded-full">加入喜愛清單</button>
+    <ul class="flex items-center py-4">
+      <% if @comments_score.present? %>
+        <h2 class="font-bold">評分：<%= @comments_score.round(1) %></h2>
+        <% @comments_score.to_i.times do %>
+          <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+        <% end %>
+      <% else %>
+        <p>尚未有評論</p>
+      <% end %>
+      <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
     </ul>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full shadow-md mr-4 rounded-md overflow-hidden relative'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md mr-4 rounded-md overflow-hidden relative'>
       <% if @hotel.images.present? %>
         <% @hotel.images.each_with_index do |image, index| %>
           <% if index == 0 %>
             <div class="col-span-2 row-span-2">
-              <%= image_tag image.url, {class: "w-full h-full object-fill"}%>
+              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% elsif index < 3 %>
             <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
             <div>
-              <%= image_tag image.url, {class: "w-full h-full object-fill"}%>
+              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% end %>
         <% end %>
       <% else %>
-        <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full' %>
+        <%= image_tag src="https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?", class:'object-cover col-span-full row-span-full w-full h-full' %>
       <% end %>
     </div>
   </section>
@@ -88,23 +89,25 @@
       </iframe>
     </div>
   </div>
-  <section class='w-full'>
-    <div class='p-4 bg-white border'>
+  <section class="min-w-full grid grid-cols-5 gap-2 flex my-5">
+    <div class="p-4 bg-white col-span-5">
       <div>
-        <h2 class='py-3 text-2xl font-bold'>評論</h2>
-        <hr class='h-px my-8 bg-gray-200'>
-      </div>
-      <div>
-        <h3 class='text-lg '>評論</h3>
-        <div class='flex justify-between'>
-          <h4 class='text-base '>XX</h4>
-          <span>OOOOO</span>
-        </div>
-        <div class='flex justify-between'>
-          <h4 class='text-base '>XX</h4>
-          <span>OOOOO</span>
+        <h2 class="font-bold text-2xl py-3">評等和評論</h2>
+        <hr class="h-px my-2 bg-gray-200">
+        <div class="space-y-4 overflow-y-auto h-20 ">
+          <div id="comment-list">
+            <%= render partial: "comment", collection: @hotel.comments %>
+          </div>
         </div>
       </div>
     </div>
   </section>
+  <div data-controller="butt">
+    <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+      發表評論
+    </a>
+    <div class="hidden" data-butt-target="form" >
+      <%= render "comments/comment", comment: Comment.new, hotel: @hotel %>
+    </div>
+  </div>
 </div>
