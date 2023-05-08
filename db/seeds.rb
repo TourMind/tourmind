@@ -562,7 +562,7 @@ Hotel.create(
   equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待 酒吧/餐廳 健身中心],
 )
 Hotel.create(
-  name: '金普頓大安酒店 Kimpton Da An',
+  name: '金普頓大安酒店',
   website: 'https://www.ihg.com/kimptonhotels/hotels/tw/zh/da-an-hotel-taipei/tpekm/hoteldetail',
   star_rating: '5星級飯店',
   address: '台北市大安區仁愛路四段27巷25號',
