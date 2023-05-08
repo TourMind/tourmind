@@ -85,7 +85,7 @@
                   <% elsif site.image.url.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.image.url %>" alt="Site Pic">
                   <% else %>
-                    <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
+                    <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg" , class:'object-cover w-full h-full' %>
                   <% end %>
                 </div>
               </div>
@@ -125,9 +125,9 @@
           </div>
         <% end %>
       </section>
+      <div>
+        <%= paginate @sites%>
+      </div>
     </section>
   </section>
-  <div>
-    <%= paginate @sites%>
-  </div>
 </div>
