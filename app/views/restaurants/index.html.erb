@@ -109,7 +109,7 @@
                 <%= link_to restaurant_path(restaurant) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if restaurant.images.present? %>
-                      <img class="object-cover w-full h-full" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+                      <img class="object-fit w-full h-full" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
                     <% else %>
                       <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
                     <% end %>

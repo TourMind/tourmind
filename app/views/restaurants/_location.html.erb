@@ -7,8 +7,16 @@
     </iframe>
   </div>
   <div class="w-full mt-4">
-    <h3 class="text-md ">地址: <%=restaurant.address.gsub(',', '')%></h3>
-    <h3 class="text-md mt-3">電話: <%=restaurant.tel%></h3>
-    <h3 class="text-md mt-3">網站: <%=restaurant.website%></h3>       
+    <ul>
+    <li>
+      <span class="text-md font-bold">地址: </span><span><%=restaurant.address.gsub(',', '')%></span>
+    </li>
+    <li>
+      <span class="text-md mt-3 font-bold">電話:</span> <span><%=restaurant.tel%></span>   
+    </li>
+    <li>
+      <%= link_to "網址連結", restaurant.website, class:'text-md mt-3 font-bold'%> 
+    </li>
+    </ul>      
   </div>
 </div>
