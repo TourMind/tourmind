@@ -12,6 +12,7 @@ export default class extends Controller {
     "container",
     "drawer",
     "images",
+    "id",
     "form",
     "public",
   ];
@@ -24,8 +25,7 @@ export default class extends Controller {
 
       let locations = {};
 
-      const dayCount = document
-        .querySelector("#plan")
+      const dayCount = this.containerTarget
         .querySelectorAll(".day").length;
 
       for (let i = 1; i <= dayCount; i++) {
@@ -41,7 +41,7 @@ export default class extends Controller {
         });
       }
 
-      const id = document.querySelector("#top").dataset.id;
+      const id = this.idTarget.dataset.id;
 
       const form = new FormData();
 
