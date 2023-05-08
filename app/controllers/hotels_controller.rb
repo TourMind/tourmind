@@ -38,8 +38,8 @@ class HotelsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @hotel.comments
+    @comments_score = @comments.average(:rating).try(:round, 1)
   end
-  
 
   def edit; end
 
@@ -64,8 +64,9 @@ class HotelsController < ApplicationController
 
   def hotel_params
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, :remove_images, equipment: [], images: [])
+                                  :hotel_types, :remove_images, :images_cache, equipment: [], images: [],)
   end
+
   def star_rating(rating)
     stars = ''
     if rating.present?

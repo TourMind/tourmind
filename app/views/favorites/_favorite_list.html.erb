@@ -12,7 +12,11 @@
           </p>
         </div>
         <div class= "aspect-[5/3]">
-          <img class="h-full w-full" src="https://fakeimg.pl/350x200/?text=TourMind" alt='<%=fav.favorable.class%> image'>
+          <% if fav.favorable.images.present? %>
+            <img class="h-full w-full" src=<%=fav.favorable.images.first.url%> alt='<%=fav.favorable.class%> image'>
+          <% else %>
+            <img class="h-full w-full" src="https://fakeimg.pl/350x200/?text=TourMind" alt='<%=fav.favorable.class%> image'>
+          <% end %>
         </div>
         <div class="p-5">
           <div class="flex justify-between">
