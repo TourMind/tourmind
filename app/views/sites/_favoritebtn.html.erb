@@ -1,0 +1,15 @@
+<% if current_user && current_user.favorites.sites.find_by(favorable_id: object.id)%>
+  <%= button_to favorite_path(current_user.favorites.sites.find_by(favorable_id: object.id)), method: :delete, anchor: object.id, data: { turbo: false } do%>
+    <div class = "bg-rose-300  text-white focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-3 py-1 mx-2 hover:bg-white hover:text-red-500 border-2">
+      <span class="inline-block <%=size%>">已加喜愛清單</span>
+      <span class="inline-block text-red-500 <%=size%>">&#x2665;</span>
+    </div>
+  <% end %>
+<% elsif current_user %>
+  <%= button_to favorites_path(favorites: {favorable_type: object.class, favorable_id: object.id}), method: :post, anchor: object.id, data: { turbo: false } do%>
+    <div class = "bg-white text-red-500 focus:outline-none focus:ring-4 font-medium rounded-full text-sm px-3 py-1 mx-2 bg-white hover:bg-rose-300 hover:text-white border-2">
+      <span class=" <%=size%>">加入喜愛清單</span>
+      <span class="inline-block text-red-500 <%=size%>">&#x2665;</span>
+    </div>
+  <% end %>
+<% end %> 

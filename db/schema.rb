@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_034223) do
-
+ActiveRecord::Schema.define(version: 2023_05_08_090406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,6 +66,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "tel"
     t.string "equipment", default: [], array: true
     t.string "slug"
+    t.json "images"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
@@ -76,7 +76,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -91,6 +92,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.integer "people", default: 1
     t.boolean "public", default: false
     t.json "images"
+    t.string "slug"
+    t.index ["slug"], name: "index_plans_on_slug", unique: true
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -129,13 +132,16 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.string "longitude"
     t.float "stay_duration"
     t.text "intro"
-    t.string "pet_freindly"
+    t.string "pet_friendly"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "site_types", default: [], array: true
     t.string "tel"
     t.string "image"
     t.string "parking"
+    t.json "images"
+    t.string "slug"
+    t.index ["slug"], name: "index_sites_on_slug", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -156,6 +162,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_034223) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
+    t.integer "role", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
