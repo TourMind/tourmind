@@ -1,7 +1,7 @@
 class Plan < ApplicationRecord
   validates :name, :description, presence: true
   belongs_to :user
-
+  has_many :comments, as: :commentable, dependent: :destroy
   mount_uploaders :images, ImageUploader
 
   def self.category_options

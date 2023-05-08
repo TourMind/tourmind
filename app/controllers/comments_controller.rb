@@ -16,19 +16,26 @@ class CommentsController < ApplicationController
   end
   
   def create
+   
     if params[:restaurant_id]
       @commentable = Restaurant.friendly.find(params[:restaurant_id])
     elsif params[:site_id]
       @commentable = Site.find(params[:site_id])
     elsif params[:hotel_id]
       @commentable = Hotel.friendly.find(params[:hotel_id])
+    elsif  
+      @commentable = Plan.find(params.fetch(:plan_id, nil))
     end
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.json { render json: @comment, status: :created }
+        format.turbo_stream { redirect_to @commentable, notice: "Comment was successfully created." }
+        format.html { redirect_to @commentable, notice: "Comment was successfully created." }
+        format.json { render :show, status: :created, location: @comment }
       else
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: "comments/form", locals: { comment: @comment }) }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
