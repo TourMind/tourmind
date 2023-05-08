@@ -12,7 +12,7 @@ class PlansController < ApplicationController
   def show
     return if (user_signed_in? && current_user == @plan.user) || @plan.public
 
-    redirect_to plans_path, alert: "你沒有權限查看此行程！"
+    redirect_to plans_path, alert: '你沒有權限查看此行程！'
   end
 
   def new
@@ -26,7 +26,7 @@ class PlansController < ApplicationController
     new_plan = current_user.plans.new(plan_data)
 
     if new_plan.save
-      render json: { status: "success", redirect_url: "/plans/#{new_plan.id}" }
+      render json: { status: 'success', redirect_url: "/plans/#{new_plan.id}" }
       return
     end
 
@@ -38,8 +38,8 @@ class PlansController < ApplicationController
 
   def edit
     unless current_user == @plan.user
-      @plan.name = ""
-      @plan.description = ""
+      @plan.name = ''
+      @plan.description = ''
     end
 
     render :new
@@ -51,7 +51,7 @@ class PlansController < ApplicationController
 
     if current_user == @plan.user
       if @plan.update(plan_data)
-        render json: { status: "success", redirect_url: "/plans/#{@plan.id}" }
+        render json: { status: 'success', redirect_url: "/plans/#{@plan.id}" }
         return
       end
 
@@ -65,7 +65,7 @@ class PlansController < ApplicationController
     new_plan = current_user.plans.new(plan_data)
 
     if new_plan.save
-      render json: { status: "success", redirect_url: "/plans/#{new_plan.id}" }
+      render json: { status: 'success', redirect_url: "/plans/#{new_plan.id}" }
       return
     end
 
@@ -77,20 +77,20 @@ class PlansController < ApplicationController
 
   def destroy
     if current_user == @plan.user && @plan.destroy
-      return redirect_to plans_path, notice: "刪除成功"
+      return redirect_to plans_path, notice: '刪除成功'
     end
 
-    redirect_to plans_path, alert: "你不是這個行程的擁有者"
+    redirect_to plans_path, alert: '你不是這個行程的擁有者'
   end
 
   def day_info
     @day = params[:day].to_i
 
-    render "day_nav"
+    render 'day_nav'
   end
 
   def plan_overview
-    render "_plan_overview"
+    render '_plan_overview'
   end
 
   private
@@ -117,11 +117,11 @@ class PlansController < ApplicationController
 
     locations.each_key do |key|
       locations[key] = locations[key].map do |location|
-        if location[0] == "餐廳"
+        if location[0] == '餐廳'
           restaurant = Restaurant.find(location[1])
           output = {
             name: restaurant.name,
-            type: "餐廳",
+            type: '餐廳',
             lat: restaurant.lat,
             lng: restaurant.long,
             stay_time: location[2],
@@ -129,11 +129,11 @@ class PlansController < ApplicationController
           next output
         end
 
-        if location[0] == "景點"
+        if location[0] == '景點'
           site = Site.find(location[1])
           output = {
             name: site.name,
-            type: "景點",
+            type: '景點',
             lat: site.latitude,
             lng: site.longitude,
             stay_time: location[2],
@@ -141,11 +141,11 @@ class PlansController < ApplicationController
           next output
         end
 
-        if location[0] == "住宿"
+        if location[0] == '住宿'
           hotel = Hotel.find(location[1])
           output = {
             name: hotel.name,
-            type: "住宿",
+            type: '住宿',
             lat: hotel.latitude,
             lng: hotel.longitude,
             stay_time: location[2],
@@ -165,26 +165,26 @@ class PlansController < ApplicationController
 
     @favorites =
       all_favorites.map do |fav|
-        if fav.favorable_type == "Restaurant"
+        if fav.favorable_type == 'Restaurant'
           restaurant = Restaurant.find(fav.favorable_id)
           next(
             {
               name: restaurant.name,
-              type: "餐廳",
+              type: '餐廳',
               id: restaurant.id,
               stay_time: 0,
             }
           )
         end
 
-        if fav.favorable_type == "Hotel"
+        if fav.favorable_type == 'Hotel'
           hotel = Hotel.find(fav.favorable_id)
-          next({ name: hotel.name, type: "住宿", id: hotel.id, stay_time: 0 })
+          next({ name: hotel.name, type: '住宿', id: hotel.id, stay_time: 0 })
         end
 
-        if fav.favorable_type == "Site"
+        if fav.favorable_type == 'Site'
           site = Site.find(fav.favorable_id)
-          next({ name: site.name, type: "景點", id: site.id, stay_time: 0 })
+          next({ name: site.name, type: '景點', id: site.id, stay_time: 0 })
         end
       end
   end
