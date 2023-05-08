@@ -3,7 +3,7 @@
     <%= @site.name %>
   </h1>
   <div class="flex flex-wrap">
-    <div class="flex-col p-4">
+    <div class="flex p-4 items-center">
       <% if @comments_score.present? %>
         <h2 class="font-bold">評分：<%= @comments_score.round(1) %></h2>
         <% @comments_score.to_i.times do %>
@@ -12,9 +12,7 @@
       <% else %>
         <p>尚未有評論</p>
       <% end %>
-      <button class="px-2 py-1 text-white bg-pink-300 rounded-full">
-        加入喜愛清單<i class="fa-solid fa-heart text-red-700 fa-lg"></i>
-      </button>
+      <%= render "favoritebtn", object:@site, size:'text-lg'%>
     </div>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
@@ -34,7 +32,6 @@
         <% end %>
       <% else %>
         <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full h-full' %>
-        <%= render 'favorite', object: @site, size:'text-4xl'%>
       <% end %>
     </div>
   </section>
@@ -90,7 +87,7 @@
     </div>
   </div>
   <section class="min-w-full my-5 px-4">
-    <div class="overflow-y-auto h-60 ">
+    <div class="overflow-y-auto h-20 ">
       <div id="comment-list">
         <%= render partial: "comment", collection: @site.comments %>
       </div>
