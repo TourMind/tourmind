@@ -1,6 +1,6 @@
 <div data-controller="comment" data-comment-url="<%= url_for([@site, @restaurant, @hotel,@plan, :comments]) %>">
   <%= form_with(model: [@site, @restaurant, @hotel,@plan, @comment], local: true) do |f| %>
-    <h2 class="text-lg font-bold">餐廳評價</h2>
+    <h2 class="text-lg font-bold">評論區</h2>
     <div class="rating rating-md">
       <%= f.radio_button :rating, 1, class: "comment-star" %>
       <%= f.radio_button :rating, 2, class: "comment-star" %>
