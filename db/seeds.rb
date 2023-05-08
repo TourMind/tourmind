@@ -8,211 +8,212 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Restaurant.create!(
+
+# 以下為飯店新增11筆
+Hotel.create!(
   [
     {
-      name: "甘霖涼麵-永和店",
+      name: '和苑三井花園飯店台北忠孝',
+      website: 'https://www.gardenhotels.co.jp/taipei-zhongxiao/tw/',
+      star_rating: '4星級飯店',
+      address: '台北市大安區忠孝東路三段30號1樓',
+      latitude: 25.04339013,
+      longitude: 121.5344147,
       intro:
-        "我們是涼麵店，也有賣熱拌麵
-  今天我想推薦給您 #純粹乾拌麵
-  就是在這樣的天氣才會這樣的想起這碗麵
-  使用純醬拌麵，沒有五光十色的過度調味
-  淡黃色Q彈的麵條，完整吸附醬汁
-  加上些許燙青菜
-  入口後青菜的清脆與麵條的口感千絲萬縷
-  輕鬆補充每日必須養分與熱量
-  給您一碗單純的好味道
-  滿足味覺...",
-      image:
-        "https://lh3.googleusercontent.com/p/AF1QipNUlESGRGoTRr1TSegH69b-HTb68JG0ZVfAguHs=w768-h432-p-no-v0",
-      address: "新北市永和區,得和路373巷,3號",
-      tel: "0908032183",
-      website: "https://timely-noodle.business.site/",
-      price: 120,
-      restaurant_type: 2,
-      lat: 24.999679401438087,
-      long: 121.52457507851321,
+        'MGH Mitsui Garden Hotel Taipei Zhongxiao 位於台北，距離大安森林公园 1.7 公里，有觀光旅遊櫃台、全面禁菸客房、共用休息室、全館WiFi（免費）以及餐廳。這間 4 星級飯店提供 24 小時接待櫃檯和行李寄放服務。住客可以欣賞市景。',
+      hotel_types: '飯店',
+      tel: '(02)27811131',
+      images: '',
+      equipment: %w[無線網路(WIFI) 停車場/停車位 早餐服務 24小時櫃檯接待 行李存放 乾洗服務 健身中心],
     },
   ],
 )
 
-Restaurant.create!(
+Hotel.create!(
   [
     {
-      name: "La MESA 忠孝",
+      name: '台北馥敦飯店復南館',
+      website: 'http://www.taipeifullerton.com.tw/',
+      star_rating: '4星級飯店',
+      address: ' 台北市大安區復興南路二段41號',
+      latitude: 25.03302242,
+      longitude: 121.5438641,
       intro:
-        "Contemporary tapas restaurant in the heart of Taipei with menu designed by Chef Paco.",
-      image:
-        "https://lh5.googleusercontent.com/p/AF1QipPpvX2P9KZYCzsImzvgpVi4dGrJOOJ6_zdSaAWz=w408-h616-k-no",
-      address: "台北市大安區,延吉街137巷,33號",
-      tel: "(02)27787676",
-      website: "https://www.facebook.com/LaMESAtw/",
-      price: 1200,
-      restaurant_type: 0,
-      cuisine_types: %w[美式料理 法式料理],
-      atmostphere: %w[浪漫 舒適休閒],
-      lat: 25.042242922714284,
-      long: 121.55562939566491,
+        '台北馥敦飯店．復南館於 2019 年 6 月全面翻新，位於敦南商務中心，距離捷運大安站步行 5 分鐘。飯店提供設備齊全的健身中心、2 間餐廳和免費網路。',
+      hotel_types: '飯店',
+      tel: '(02)27031234',
+      images: '',
+      equipment: %w[無線網路(WIFI) 停車場/停車位 早餐服務 24小時櫃檯接待 行李存放 乾洗服務],
     },
   ],
 )
 
-Restaurant.create!(
+Hotel.create!(
   [
     {
-      name: "聰哥食堂 大安店",
+      name: '旅樂序精品旅館站前五館',
+      website: 'https://www.taiwantravelmap.com/hotel/508-ch-index.html',
+      star_rating: '3星級飯店',
+      address: '台北市中正區重慶南路一段20號',
+      latitude: 25.04759785,
+      longitude: 121.5133625,
       intro:
-        "五十年前，一個來自於嘉義鄉下的孩子，靠自己的努力考上台大，
-畢業後成為跨國企業會計師，數十年的職場生活並未減少他對美食的熱情。
-身為家中長子的他從小就要幫忙燒飯，
-對料理產生濃厚的興趣，燒的一手好菜。
-他，就是創辦人—文聰哥
-退休後，文聰哥將自己私藏手路菜食譜集合起來，
-創辦「聰哥食堂」，將一道道的佳餚飄香入你我的日常。",
-      image:
-        "https://lh5.googleusercontent.com/p/AF1QipNR42vUI4U_lJwv5t19ruCiodWaN8c8lD8XI1OL=w408-h427-k-no",
-      address: "台北市大安區,復興南路二段,17號",
-      tel: "(02)37076891",
-      website: "https://www.smartkitchen.tw/",
-      price: 200,
-      restaurant_type: 0,
-      cuisine_types: ["中式料理"],
-      atmostphere: %w[安靜 舒適休閒],
-      lat: 25.032374793862548,
-      long: 121.54360533614681,
+        '旅樂序精品旅館站前五館距離西門町購物商圈 8 分鐘步行路程，距離總統府 10 分鐘步行路程，最近的機場是台北松山機場，搭乘捷運 6 站即可抵達。',
+      hotel_types: '飯店',
+      tel: '(02)23756777',
+      images: '',
+      equipment: %w[無線網路(WIFI) 停車場/停車位 早餐服務 24小時櫃檯接待 行李存放 乾洗服務],
     },
   ],
 )
 
-sites = {
-  day1: [
+Hotel.create!(
+  [
     {
-      name: "台北市立美術館",
-      stay_time: 20,
-      type: "景點",
-      lat: 25.07261585329631,
-      lng: 121.52475655161953,
-    },
-    {
-      name: "華山1914文化創意產業園區",
-      stay_time: 65,
-      type: "景點",
-      lat: 25.044244740152156,
-      lng: 121.52932610929034,
-    },
-    {
-      name: "饒河街觀光夜市",
-      stay_time: 100,
-      type: "餐廳",
-      lat: 25.05108758917027,
-      lng: 121.57745638045473,
+      name: '台北時代寓所',
+      website: 'https://tapestry.hilton.com.cn/zh-hk/hotel/taibei/hotel-resonance-taipei-tsaupup/index.html',
+      star_rating: '4星級飯店',
+      address: '台北市中正區林森南路7號',
+      latitude: 25.04413481,
+      longitude: 121.5233377,
+      intro:
+        '臺北時代寓所」為希爾頓全球酒店集團旗下一員，已於2020年底開業，並為亞太地區第一家Tapestry Collection by HiltonTM品牌精選飯店。以富有巧思的設計與細節規劃、摩登現代的藝術空間，結合臺灣獨有濃厚人情味與待客之道的<上心服務，臺北時代寓所致力提供所有旅客難忘的美好時光。',
+      hotel_types: '飯店',
+      tel: '(02)77521888',
+      images: '',
+      equipment: %w[無線網路(WIFI) 停車場/停車位 早餐服務 24小時櫃檯接待 行李存放 乾洗服務 健身中心],
     },
   ],
-  day2: [
-    {
-      name: "國立故宮博物院",
-      stay_time: 10,
-      type: "景點",
-      lat: 25.102512574287264,
-      lng: 121.54849837133887,
-    },
-    {
-      name: "北投溫泉區",
-      stay_time: 38,
-      type: "景點",
-      lat: 25.13671194396663,
-      lng: 121.50716520347267,
-    },
-    {
-      name: "台北101觀景台",
-      stay_time: 73,
-      type: "景點",
-      lat: 25.034287433437417,
-      lng: 121.5640104669617,
-    },
-  ],
-}
+)
 
-sites2 = {
-  day1: [
+Hotel.create!(
+  [
     {
-      name: "國立故宮博物院",
-      stay_time: 20,
-      type: "景點",
-      lat: 25.102512574287264,
-      lng: 121.54849837133887,
-    },
-    {
-      name: "臺北101",
-      stay_time: 30,
-      type: "夜景",
-      lat: 25.034287433437417,
-      lng: 121.5640104669617,
-    },
-  ],
-  day2: [
-    {
-      name: "陽明山國家公園",
-      stay_time: 20,
-      type: "景點",
-      lat: 25.194498590641256,
-      lng: 121.56089338045958,
-    },
-    {
-      name: "北投區溫泉博物館",
-      stay_time: 25,
-      type: "溫泉",
-      lat: 25.13671194396663,
-      lng: 121.50716520347267,
-    },
-    {
-      name: "士林官邸",
-      stay_time: 35,
-      type: "景點",
-      lat: 25.093396983931115,
-      lng: 121.53232659816169,
+      name: 'chez taipei no5',
+      website: 'https://tapestry.hilton.com.cn/zh-hk/hotel/taibei/hotel-resonance-taipei-tsaupup/index.html',
+      star_rating: '4星級飯店',
+      address: '台北市中正區延平南路160-5號',
+      latitude: 25.03817096,
+      longitude: 121.5083426,
+      intro:
+        '這間休閒民宿位在商店林立的熱鬧街道上，步行 5 分鐘可達華西街上的商家和小吃攤，步行 6 分鐘可達捷運西門站，距離中正紀念堂 2 公里。',
+      hotel_types: '飯店',
+      tel: '(02)23883067',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務],
     },
   ],
-  day3: [
+)
+
+Hotel.create!(
+  [
     {
-      name: "象山",
-      stay_time: 15,
-      type: "戶外",
-      lat: 25.02742219851901,
-      lng: 121.57654284502128,
-    },
-    {
-      name: "中正紀念堂",
-      stay_time: 40,
-      type: "景點",
-      lat: 25.035774267485415,
-      lng: 121.5202357215834,
+      name: '誠品行旅',
+      website: 'https://www.eslitehotel.com/',
+      star_rating: '4星級飯店',
+      address: '台北市信義區菸廠路98號',
+      latitude: 25.033059,
+      longitude: 121.567941,
+      intro:
+        '養身在動，養心在靜。從容體驗優雅的藝文空間，內蘊雍容，款待身心。誠品行旅，一處對美好生活飽藏無限想像之所在。',
+      hotel_types: '飯店',
+      tel: '(02)66262888',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 會議室/會議設施 24小時櫃檯接待],
     },
   ],
-}
+)
 
-categories = %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
+Hotel.create!(
+  [
+    {
+      name: '德立莊酒店',
+      website: 'https://www.midtownrichardson.com/zh-tw',
+      star_rating: '4星級飯店',
+      address: '台北市中正區秀山街4號',
+      latitude: 25.04287943,
+      longitude: 121.5094476,
+      intro:
+        '德立莊酒店位於台北，毗鄰捷運西門站，提供舒適的住宿環境。所有客房均提供免費 WiFi。 德立莊酒店緊鄰有各式各樣餐飲和娛樂選項的西門町購物商圈，距離台北車站為 1 站捷運車程，距離台北松山機場為 7 站捷運車程，距離二二八和平紀念公園和總統府步行皆為 7 分鐘。 每間客房均設有空調、50 吋平面電視、小冰箱和電熱水壺，並提供茶包。為了客人旅途的便利，也備有拖鞋。私人衛浴內配有浴缸或淋浴設施。',
+      hotel_types: '飯店',
+      tel: '(02)23757777',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待],
+    },
+  ],
+)
 
-10.times do
-  Plan.create!(
-    name: "臺北城市文化探險之旅",
-    description:
-      "這個兩天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將參觀台灣藝術家的作品，探索熱鬧的藝文場所，品嚐當地美食。第二天，您將欣賞中國古代文物和藝術品，放鬆身心，欣賞城市全景。這個行程適合喜歡城市探險和文化體驗的旅行者。",
-    days: 2,
-    locations: sites,
-    user_id: 1,
-    public: true,
-    category: categories.sample,
-  )
+Hotel.create!(
+  [
+    {
+      name: '福容大飯店台北一館',
+      website: 'https://www.fullon-hotels.com.tw/tp/tw/',
+      star_rating: '5星級飯店',
+      address: '台北市大安區建國南路一段266號',
+      latitude: 25.03680116,
+      longitude: 121.5374049,
+      intro:
+        '福容大飯店台北一館位於建國南路，距離大安森林公園站僅 5 分鐘步行路程。此豪華 5 星級飯店設有室外游泳池、SPA 中心和房內免費網路。 客房空間寬敞，裝潢時尚並配備現代家具。客房設備齊全，均配有迷你吧和室內保險箱。房內衛浴設有浴缸。 台北福容大飯店設有設備齊全的健身中心。住客可以在 Lih Spa 享受各種按摩課程和美容護理。',
+      hotel_types: '飯店',
+      tel: '(02)27019266',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待],
+    },
+  ],
+)
 
-  Plan.create!(
-    name: "臺北城市自然和現代化之旅",
-    description:
-      "這個三天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將欣賞中國古代藝術品、探索著名的夜市、欣賞現代化建築的壯觀。第二天，您將欣賞壯麗的自然風光、探索台灣溫泉的歷史和文化。",
-    days: 3,
-    locations: sites2,
-    user_id: 1,
-    public: true,
-    category: categories.sample,
-  )
-end
+Hotel.create!(
+  [
+    {
+      name: '君品酒店',
+      website: 'https://www.palaisdechinehotel.comm',
+      star_rating: '5星級飯店',
+      address: '台北市大同區承德路一段3號',
+      latitude: 25.04921221,
+      longitude: 121.5166856,
+      intro:
+        '君品酒店是一家奢華的 5 星級穆斯林友善飯店，距離台北轉運站步行 3 分鐘，提供時尚住宿、3 間餐飲場所和健身中心。飯店距離可供住客免費使用的游泳池僅數步之遙。 客房均享有寬敞裝潢，設有現代化家具、空調、茶／咖啡沖泡設備、高保真音響系統和 40 吋平面有線電視。 飯店設有設備齊全的健身中心、商務中心（附傳真和影印設施），並提供洗衣和乾洗服務。',
+      hotel_types: '飯店',
+      tel: '(02)21819999',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待 酒吧/餐廳],
+    },
+  ],
+)
+Hotel.create!(
+  [
+    {
+      name: 'Home Hotel',
+      website: 'https://homehotel.com.tw/xinyi/',
+      star_rating: '5星級飯店',
+      address: '台北市信義區松仁路90號',
+      latitude: 25.03505558,
+      longitude: 121.5678609,
+      intro:
+        'Home Hotel 距離知名的台北 101 僅有 2 分鐘步行路程，距離象山捷運站有 5 分鐘步行路程。住宿提供免費 WiFi 和裝飾簡約的客房。館內設有商務中心和健身房。',
+      hotel_types: '飯店',
+      tel: '(02)87890111',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待 酒吧/餐廳 健身中心],
+    },
+  ],
+)
+
+Hotel.create!(
+  [
+    {
+      name: '金普頓大安酒店 Kimpton Da An',
+      website: 'https://www.ihg.com/kimptonhotels/hotels/tw/zh/da-an-hotel-taipei/tpekm/hoteldetail',
+      star_rating: '5星級飯店',
+      address: '台北市大安區仁愛路四段27巷25號',
+      latitude: 25.039853,
+      longitude: 121.548017,
+      intro:
+        '金普頓大安酒店-台灣唯一獲選Wallpaper* 雜誌2019最佳城市酒店! 隱身於台北東區靜謐街巷內，金普頓大安酒店與購物中心和捷運站僅隔一個街區。獨特地理位置，攘往熙來人潮看似近在咫尺，卻猶如世外桃源般靜謐。各式迷人充滿詩意的人文咖啡館、個性精品店與文藝畫廊，散落酒店周圍。而擁有129間舒適客、套房的金普頓酒店，以精緻細膩的設計詮釋復古與白瓷的層疊美學，相映著透光的天井建築，每一個轉彎都透著設計師巧思，邀請大膽創新的世界旅遊家和在地設計師一同品味徘徊探索。而當步入位於12樓的摩登餐酒館，可瞧見風情萬種的亞熱帶陽光灑落在寬敞戶外露台，除了可放鬆品酩美酒佳餚外，令人醉心的台北城景與聳入天際的台北101盡收眼底，徹底讓賓客體驗與挖掘新舊台北魅力與脈動。',
+      hotel_types: '飯店',
+      tel: '(02)21737999',
+      images: '',
+      equipment: %w[無線網路(WIFI) 早餐服務 行李存放 乾洗服務 24小時櫃檯接待 酒吧/餐廳],
+    },
+  ],
+)

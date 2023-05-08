@@ -1,24 +1,3 @@
-<section>
-  <div class="flex m-2 space-x-2 p-10">
-    <div class="w-1/3 ">
-      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
-        <h2 class="text-xl  font-semibold mb-2"><%= link_to '住宿', '#' %>
-        </h2>
-      </div>
-    </div>
-    <div class="w-1/3">
-      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
-        <h2 class="text-xl font-semibold mb-2"><%= link_to '景點', '#' %>
-        </h2>
-      </div>
-    </div>
-    <div class="w-1/3">
-      <div class="bg-white rounded-md shadow-md bg-blue-100 p-2">
-        <h2 class="text-xl font-semibold mb-2">餐廳</h2>
-      </div>
-    </div>
-  </div>
-</section>
 <div data-controller="filter">
   <div class="w-full flex justify-around lg:hidden">
     <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
@@ -98,14 +77,14 @@
             <div class="bg-white rounded-md overflow-hidden shadow-lg">
               <div class="relative">
                 <%= render 'favorite', object: hotel, size:'text-4xl'%>
-                <%= link_to hotel_path(hotel.id) do %>
+                <%= link_to hotel_path(hotel) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if hotel.images.present? %>
                       <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
                     <% elsif hotel.image.url.present? %>
                       <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
                     <% else %>
-                      <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
+                      <%= image_tag "https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?" , class:'object-cover w-full h-full' %>
                     <% end %>
                   </div>
                 </div>
@@ -122,13 +101,14 @@
                   </ul>
                 </div>
                 <ul>
-                  <li>評分:<%= 4.5 %>
-                  </li>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
-                  <i class="fa-solid fa-star-half text-yellow-300 fa-lg"></i>
+                  <% if hotel.comments.any? %>
+                    <h2 class="font-bold">評分：<%= hotel.comments.average(:rating).to_f.round(1) %></h2>
+                    <% hotel.comments.average(:rating).to_i.times do %>
+                      <i class="fa-solid fa-star text-yellow-300 fa-lg"></i>
+                    <% end %>
+                  <% else %>
+                    <p>尚未有評論</p>
+                  <%end%>
                   <li>簡介:<%= hotel.intro&.truncate(30)%>
                   </li>
                 </ul>
