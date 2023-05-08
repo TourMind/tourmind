@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_03_024316) do
+ActiveRecord::Schema.define(version: 2023_05_03_034223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,19 +66,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
-    t.json "images"
     t.string "slug"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_messages_on_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -87,8 +76,7 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.integer "user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -113,15 +101,13 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "lat"
     t.string "long"
     t.string "image"
-    t.string "section"
     t.string "email"
     t.string "tel"
     t.string "website"
-    t.integer "restaurant_type"
+    t.string "restaurant_type"
     t.string "cuisine_types", default: [], array: true
     t.float "price"
     t.string "atmostphere", default: [], array: true
-    t.string "michelin_star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -130,6 +116,9 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.json "images"
+    t.index ["slug"], name: "index_restaurants_on_slug", unique: true
   end
 
   create_table "sites", force: :cascade do |t|
@@ -167,8 +156,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
-    t.integer "role", default: 1
-
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -177,6 +164,4 @@ ActiveRecord::Schema.define(version: 2023_05_03_024316) do
   add_foreign_key "orders", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "plans", "users"
-  add_foreign_key "messages", "rooms"
-  add_foreign_key "messages", "users"
 end

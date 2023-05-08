@@ -16,7 +16,7 @@ gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+# gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -39,12 +39,12 @@ gem 'tailwindcss-rails', '~> 2.0'
 gem 'devise'
 gem 'dotenv-rails', '~> 2.7'
 gem 'geocoder', '~> 1.8', '>= 1.8.1'
+gem 'mailgun_rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-line', git: 'https://github.com/etrex/omniauth-line.git'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
-gem 'mailgun_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -60,7 +60,8 @@ group :development do
   # gem 'rack-mini-profiler', '~> 2.0'
 
   gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
+
+  # gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
@@ -75,13 +76,13 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'babosa'
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem 'dockerfile-rails', '>= 1.2', group: :development
+gem 'fog-aws'
+gem 'foreman', '~> 0.87.2'
+gem 'friendly_id', '~> 5.4'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
-gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
-gem "dockerfile-rails", ">= 1.2", :group => :development
 gem 'pagy'
-gem 'foreman', '~> 0.87.2'
-gem 'friendly_id', '~> 5.4'
-gem "babosa"

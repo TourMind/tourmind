@@ -6,3 +6,4 @@ import { faHeartPulse, faPencil, faLocationDot, faRightToBracket, faCrown, faBar
 
 library.add(faHeartPulse, faPencil, faLocationDot, faRightToBracket, faCrown, faBars, faChevronDown, faChevronUp, faXmark, faMagnifyingGlass, faGlobe, faHeart, faUsersGear)
 dom.watch()
+

@@ -1,50 +1,84 @@
 import { Controller } from "@hotwired/stimulus";
-import { patch } from "@rails/request.js";
+import { patch, post } from "@rails/request.js";
+import Swal from "sweetalert2";
 
 // Connects to data-controller="send"
 export default class extends Controller {
-  static targets = ["name", "description", "container"];
+  static targets = [
+    "name",
+    "description",
+    "category",
+    "people",
+    "container",
+    "drawer",
+    "images",
+    "form",
+    "public",
+  ];
 
   async update() {
     try {
       this.trimDays();
 
-      const data = {
-        name: this.nameTarget.value,
-        description: this.descriptionTarget.value,
-        days: +this.containerTarget.dataset.days,
-        locations: {},
-      };
+      let locations = {};
 
       const dayCount = document
         .querySelector("#plan")
         .querySelectorAll(".day").length;
 
       for (let i = 1; i <= dayCount; i++) {
-        data.locations[`day${i}`] = [];
+        locations[`day${i}`] = [];
         const sites = document
           .querySelector(`#plan-day-${i}`)
           .querySelectorAll(".site");
 
         sites.forEach((site) => {
-          data.locations[`day${i}`].push(
-            site.id.split("-").map((el) => +el || el)
-          );
+          const updatedSite = site.id.split("-").map((el) => +el || el);
+          updatedSite.push(site.querySelector(".stay-time").textContent);
+          locations[`day${i}`].push(updatedSite);
         });
       }
 
       const id = document.querySelector("#top").dataset.id;
 
-      const res = await patch(`/plans/${id}`, {
-        body: JSON.stringify({ data }),
-        responseKind: "json",
-      });
+      const form = new FormData();
 
-      const { redirect_url } = await res.json;
+      const files = this.imagesTarget.files;
 
-      if (!res.ok) alert("Something went wrong!");
+      form.append("name", this.nameTarget.value);
+      form.append("description", this.descriptionTarget.value);
+      form.append("days", +this.containerTarget.dataset.days);
+      form.append("people", +this.peopleTarget.value);
+      form.append("public", this.publicTarget.checked);
+      form.append("category", this.categoryTarget.value);
+      form.append("locations", JSON.stringify(locations));
 
-      window.location.replace(redirect_url);
+      for (let i = 0; i < files.length; i++) {
+        form.append("images[]", files[i]);
+      }
+
+      let res;
+
+      if (!id) {
+        res = await post("/plans", {
+          body: form,
+          responseKind: "json",
+        });
+      } else {
+        res = await patch(`/plans/${id}`, {
+          body: form,
+          responseKind: "json",
+        });
+      }
+
+      const resInfo = await res.json;
+
+      if (!res.ok)
+        return this.alertErrors(
+          resInfo.errors.map((el) => el.split(" ")[1]).join(" ")
+        );
+
+      window.location.replace(resInfo.redirect_url);
     } catch (err) {
       alert(err.message);
     }
@@ -52,11 +86,11 @@ export default class extends Controller {
 
   addDay() {
     const dayElement = `
-    <div class="relative px-4 day">
+    <div class="relative px-4 day w-48 min-h-[200px]">
       <h4 class="text-xl text-gray-900 font-bold">第 ${
         +this.containerTarget.dataset.days + 1
       } 天</h4>
-      <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+      <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
       <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
         +this.containerTarget.dataset.days + 1
       }">
@@ -69,11 +103,17 @@ export default class extends Controller {
   }
 
   removeDay() {
+    if (+this.containerTarget.dataset.days <= 1) {
+      return this.alertErrors("行程不得少於一天");
+    }
+
     const sitesInLastDay = this.containerTarget.lastElementChild
       .querySelector(".sites-list")
       .querySelectorAll(".site").length;
 
-    if (sitesInLastDay) return alert("移除天數前，請先移除該天所有行程。");
+    if (sitesInLastDay) {
+      return this.alertErrors("移除天數前，請先移除該天所有行程。");
+    }
 
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
@@ -89,5 +129,33 @@ export default class extends Controller {
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
     return this.trimDays();
+  }
+
+  toggleFav() {
+    this.drawerTarget.classList.toggle("-translate-x-56");
+    this.formTarget.classList.toggle("w-full");
+    this.formTarget.classList.toggle("w-10/12");
+  }
+
+  alertErrors(message) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      customClass: {
+        container: "flash_style",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "error",
+      title: message,
+    });
   }
 }

@@ -2,45 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .navbar-menu {
-  @apply absolute right-0 bg-white shadow-md md:shadow-none top-16 md:static md:flex-row md:items-center
+  @apply absolute right-0 bg-white shadow-md md:shadow-none top-16 md:static md:flex-row md:items-center;
 }
 
 .input-field {
-  @apply block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full
+  @apply block w-full px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none;
 }
 
 .input-checkbox {
-  @apply inline-block block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
+  @apply block inline-block px-3 py-2 mt-2 border border-gray-200 rounded-md shadow outline-none;
 }
 
 .type-list {
-  @apply inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2
+  @apply inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full;
 }
 
-.field_with_errors input{
-  @apply rounded-lg w-full border-4 border-red-600
+.field_with_errors input {
+  @apply w-full border-4 border-red-600 rounded-lg;
 }
 
-.btn-category{
-  @apply w-32 bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center
+.btn-category {
+  @apply inline-flex items-center w-32 px-6 py-2 font-bold tracking-wide text-gray-800 bg-white border-b-2 border-indigo-500 rounded shadow-md hover:border-indigo-600 hover:bg-indigo-500 hover:text-white;
 }
 
-.field_with_errors textarea{
-  @apply rounded-lg w-full border-4 border-red-600
+.field_with_errors textarea {
+  @apply w-full border-4 border-red-600 rounded-lg;
 }
 
-.btn-square{
-  @apply text-black text-center inline-block px-4 py-2 rounded-lg shadow-sm cursor-pointer w-full
+.btn-square {
+  @apply inline-block w-full px-4 py-2 text-center text-black rounded-lg shadow-sm cursor-pointer;
 }
 
-.btn-round{
-  @apply text-black text-center inline-block px-4 py-2 rounded-full shadow-sm cursor-pointer
+.btn-round {
+  @apply inline-block px-4 py-2 text-center text-black rounded-full shadow-sm cursor-pointer;
 }
 
 .btn-sm {
-  @apply px-3 py-1 text-sm w-28;
+  @apply h-auto px-3 text-sm w-28;
 }
 
 .btn-xs {
@@ -48,38 +47,47 @@
 }
 
 .btn-gray {
-  @apply  bg-gray-100 hover:bg-gray-300;
+  @apply bg-gray-100 hover:bg-gray-300;
 }
 
 .btn-green {
-  @apply  bg-gray-100 hover:bg-green-500;
+  @apply bg-gray-100 hover:bg-green-500;
 }
 
 .btn-red {
-  @apply  bg-gray-100 hover:bg-red-500;
+  @apply bg-gray-100 hover:bg-red-500;
 }
 
 .btn-blue {
-  @apply  bg-gray-100 hover:bg-blue-300;
+  @apply bg-gray-100 hover:bg-blue-300;
 }
 
 .btn-amber {
-  @apply  bg-amber-100 hover:bg-amber-300;
+  @apply bg-amber-100 hover:bg-amber-300;
 }
 
 .btn-black {
-  @apply  text-white bg-black hover:bg-green-600;
+  @apply text-white bg-black hover:bg-green-600;
 }
 
-.btn-VIP{
-  @apply  text-white bg-black;
+.btn-VIP {
+  @apply text-white bg-black;
 }
 
-.home-text{
-  @apply overflow-hidden border-black rounded-md hover:transform hover:translate-y-3 hover:shadow-lg ;
+.home-text {
+  @apply overflow-hidden border-black rounded-md hover:transform hover:shadow-lg;
 }
-.home-title{
-  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform 
+.home-title {
+  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform relative after:absolute after:bg-indigo-600 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300;
+}
+@layer components {
+  /* 評價功能的星星radio */
+  .comment-star {
+    @apply bg-yellow-400 select-none mask mask-star-2 checked:bg-yellow-400 text-amber-500 checked:bg-none hover:animate-bounce;
+  }
+  .comment-star-hidden {
+    @apply opacity-0 select-none rating-hidden checked:bg-none;
+  }
 }
 
 /* 以下為分頁樣式 */

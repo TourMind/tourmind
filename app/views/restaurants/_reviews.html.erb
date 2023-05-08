@@ -1,7 +1,19 @@
-<div>
-  <h2 class="font-bold text-2xl py-3">評等和評論</h2>
-  <hr class="h-px my-8 bg-gray-200">
+<div class="space-y-4 overflow-y-auto h-64 ">
+  <% @restaurant.comments.each do |comment| %>
+    <div class="p-4 max-w-lg truncate ...">
+      <p>By <%= comment.user.email %> </p>
+      <%= star_rating(comment.rating) %>
+      <div class="flex flex-row space-x-4 ">
+        <% comment.images.each do |image| %>
+          <%= image_tag image.url, class: 'w-1/5 mx-1' %>
+        <% end %>
+      </div>
+      <p><%= comment.content %></p>
+      <%= comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    </div>
+  <% end %>
 </div>
+
 <div>
   <h3 class="text-lg mb-2">評等</h3>
   <div class="flex justify-between">
