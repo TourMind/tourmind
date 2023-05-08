@@ -52,24 +52,23 @@
     <%= render "plan_overview"%>
   </div>
 </main>
- <section class='w-full'>
-    <div class='p-4 bg-white border'>
+<section class='w-full container mx-auto'>
   <div data-controller="butt">
     <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
       發表評論
     </a>
     <div class="hidden" data-butt-target="form" >
       <%= render "comments/comment", comment: Comment.new, plan:@plan %>
-  <section class="min-w-full my-5 px-4">
-    <div class="overflow-y-auto h-60 ">
-      <div id="comment-list">
-<% @plan.comments.each do |comment| %>
-  <%= render partial: 'comment', locals: { comment: comment } %>
-<% end %>
-
+      <div class="min-w-full my-5 px-4">
+        <div class="overflow-y-auto h-60 ">
+          <div id="comment-list">
+          <% @plan.comments.each do |comment| %>
+            <%= render partial: 'comment', locals: { comment: comment } %>
+          <% end %>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-    </div>
-  </section>
+  </div>
+</section>
   
