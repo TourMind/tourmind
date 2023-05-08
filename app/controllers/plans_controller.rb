@@ -1,7 +1,8 @@
 class PlansController < ApplicationController
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
-  before_action :authenticate_user!, except: %i[index show]
+  before_action :authenticate_user!,
+                except: %i[index show day_info plan_overview]
   before_action :find_favorites, only: %i[new edit]
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
@@ -78,7 +79,9 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    return redirect_to plans_path, notice: '刪除成功' if current_user == @plan.user && @plan.destroy
+    if current_user == @plan.user && @plan.destroy
+      return redirect_to plans_path, notice: '刪除成功'
+    end
 
     redirect_to plans_path, alert: '你不是這個行程的擁有者'
   end
@@ -96,7 +99,7 @@ class PlansController < ApplicationController
   private
 
   def find_plan
-    @plan = Plan.find(params[:id])
+    @plan = Plan.friendly.find(params[:id])
   end
 
   def plan_params
@@ -108,7 +111,7 @@ class PlansController < ApplicationController
       :public,
       :category,
       :locations,
-      images: []
+      images: [],
     )
   end
 

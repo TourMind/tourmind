@@ -9,7 +9,7 @@
             <% if current_user.plans.any? %>
               <% current_user.plans.order(id: :desc).each do |plan| %>
                 <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                  <%= link_to plan_path(plan.id), class: "inline-block" do %>
+                  <%= link_to plan_path(plan), class: "inline-block" do %>
                     <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="h-auto w-full" />
                     <div class="p-5 flex flex-col gap-5 h-auto">
                       <div class="font-bold"><%= plan.name %></div>
@@ -44,7 +44,7 @@
           <div class="flex gap-5 w-max py-5">
             <% @plans.select {|plan| plan.category == category }.each do |plan| %>
               <div class="w-48 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                <%= link_to plan_path(plan.id), class: "inline-block" do %>
+                <%= link_to plan_path(plan), class: "inline-block" do %>
                   <% if plan.images.present? %>
                     <img src="<%= plan.images[0].url %>" alt="plant" class="h-auto w-full" />
                   <% else %>

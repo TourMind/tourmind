@@ -108,4 +108,9 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
-      
+        plan:
+          attributes:
+            name:
+              blank: "行程名稱為必填"
+            description:
+              blank: "行程簡介為必填"
