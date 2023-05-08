@@ -124,7 +124,7 @@ export default class extends Controller {
       .querySelector(".sites-list")
       .querySelectorAll(".site").length;
 
-    if (sitesInLastDay) return;
+    if (sitesInLastDay || +this.containerTarget.dataset.days === 1) return;
 
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
