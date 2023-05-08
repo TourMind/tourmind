@@ -3,8 +3,8 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[show edit update destroy]
   helper_method :star_rating
-  before_action :total_rating, only: %i[index show]
-  before_action :comment_rating, only: %i[index]
+  before_action :comment_rating, only: %i[index show]
+
   # GET /restaurants or /restaurants.json
   def index
     declare_params
@@ -104,7 +104,7 @@ class RestaurantsController < ApplicationController
     stars = ''
     if rating.present?
       full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.5 ? 1 : 0
+      half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
       full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
       half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
@@ -113,10 +113,6 @@ class RestaurantsController < ApplicationController
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
     stars.html_safe
-  end
-  def total_rating
-    @average_rating = Comment.average_rating
-    @comment_count = Comment.where.not(content: nil).count
   end
   def comment_rating
     @restaurant_data = {}

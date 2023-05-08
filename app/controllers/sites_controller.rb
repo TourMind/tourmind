@@ -3,8 +3,8 @@
 class SitesController < ApplicationController
   before_action :set_site, only: %i[show edit update destroy]
   helper_method :star_rating
-  before_action :total_rating, only: %i[index show]
-  before_action :comment_rating, only: %i[index]
+  before_action :comment_rating, only: %i[index show]
+
   def index
     @city_options = %w[台北市 新北市]
     @site_type_options = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
@@ -74,7 +74,7 @@ class SitesController < ApplicationController
     stars = ''
     if rating.present?
       full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.5 ? 1 : 0
+      half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
       full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
       half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
@@ -84,10 +84,7 @@ class SitesController < ApplicationController
     end
     stars.html_safe
   end
-  def total_rating
-    @average_rating = Comment.average_rating
-    @comment_count = Comment.where.not(content: nil).count
-  end
+
   def comment_rating
     @site_data = {}
     Site.all.each do |site|

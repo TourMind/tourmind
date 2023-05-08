@@ -5,9 +5,9 @@
   <div class="flex flex-wrap">
     <ul class="flex-col p-4">
       <% if @comments_score.present? %>
-        <h2 class="font-bold">評分：<%= star_rating(@average_rating) %>
-                                   <%= sprintf('%.1f', @average_rating) %><%= @comment_count == 0 ? '0則評論' : "#{@comment_count}則評論" %>
-        </h2>
+        <h2 class="font-bold">評分：<span><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
+                                   <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
+                                   (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)</span>
       <% else %>
         <p>尚未有評論</p>
       <% end %>
