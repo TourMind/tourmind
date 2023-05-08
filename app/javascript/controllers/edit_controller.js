@@ -25,8 +25,7 @@ export default class extends Controller {
 
       let locations = {};
 
-      const dayCount = this.containerTarget
-        .querySelectorAll(".day").length;
+      const dayCount = this.containerTarget.querySelectorAll(".day").length;
 
       for (let i = 1; i <= dayCount; i++) {
         locations[`day${i}`] = [];
@@ -75,10 +74,11 @@ export default class extends Controller {
 
       const resInfo = await res.json;
 
-      if (!res.ok)
+      if (!res.ok) {
         return this.alertErrors(
-          resInfo.errors.map((el) => el.split(" ")[1]).join(" ")
+          resInfo.errors.map((el) => el.split(" ")[1]).join("\n")
         );
+      }
 
       window.location.replace(resInfo.redirect_url);
     } catch (err) {
