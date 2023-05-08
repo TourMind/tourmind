@@ -15,7 +15,9 @@ Rails.application.routes.draw do
     resources :comments, only: [:create,:new]
   end
 
-  resources :plans
+  resources :plans do 
+    resources :comments
+  end
   get '/day_info', to: 'plans#day_info'
   get '/plan_overview', to: 'plans#plan_overview'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

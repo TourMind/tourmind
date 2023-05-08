@@ -12,20 +12,19 @@
       <% end %>
     </div>
     <section class="flex w-full h-96 mt-3 gap-2 relative">
-      <!-- component -->
       <button class="flex justify-center opacity-80 group absolute right-3 bottom-3 h-7 w-28 overflow-hidden rounded-full bg-slate-800 text-lg shadow">
         <div class="absolute inset-0 w-0 bg-white transition-all duration-[250ms] ease-out group-hover:w-full"></div>
         <span class="relative text-white group-hover:text-black text-sm self-center">查看所有照片</span>
       </button>
       <div class="h-full w-2/3 overflow-hidden">
-        <img src="<%=@plan.images[0].present? ? @plan.images[0] : "https://fakeimg.pl/350x200/?text=TourMind"%>"  alt="" class="object-fit w-full h-full">
+        <img src="<%=@plan.images[0].present? ? @plan.images[0] : "https://fakeimg.pl/350x200/?text=TourMind"%>" class="object-fit w-full h-full">
       </div>
       <div class="h-full w-1/3 flex flex-col gap-2">
         <div class="h-1/2 w-full overflow-hidden">
-          <img src="<%=@plan.images[1].present? ? @plan.images[1] : "https://fakeimg.pl/350x200/?text=TourMind"%>" alt="" class="object-fit w-full h-full">
+          <img src="<%=@plan.images[1].present? ? @plan.images[1] : "https://fakeimg.pl/350x200/?text=TourMind"%>"  class="object-fit w-full h-full">
         </div>
         <div class="h-1/2 w-full  overflow-hidden">
-          <img src="<%=@plan.images[2].present? ? @plan.images[2] : "https://fakeimg.pl/350x200/?text=TourMind"%>" alt="" class="object-fit w-full h-full">
+          <img src="<%=@plan.images[2].present? ? @plan.images[2] : "https://fakeimg.pl/350x200/?text=TourMind"%>"  class="object-fit w-full h-full">
         </div>
       </div>
     </section>
@@ -34,13 +33,10 @@
         <h1 class="mt-8 text-3xl font-medium"><%= @plan.name %></h1>
         <p class="mt-2 text-sm underline text-slate-700"><a href="">提供者： <%= @plan.user.name.present? || @plan.user.email %> </a></p>
         <div class="flex items-center my-3">
-          <svg aria-hidden="true" class="w-7 h-7 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          <svg aria-hidden="true" class="w-7 h-7 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          <svg aria-hidden="true" class="w-7 h-7 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          <svg aria-hidden="true" class="w-7 h-7 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          <svg aria-hidden="true" class="w-7 h-7 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          <p class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">4.95</p>
-          <p class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:underline"><a href="">87則評論</a></p>
+          <span><%= star_rating(@plan_data[@plan.id][:average_rating]) %>
+                <%= sprintf('%.1f', @plan_data[@plan.id][:average_rating]) %>
+                (<%= @plan_data[@plan.id][:comment_count] %>則評論)
+          </span>
         </div>
         <p class="my-3 w-3/4 text-slate-700 text-m"><%= @plan.description %></p>
         <div class="border-y-2 border-slate-300 w-full">
@@ -56,3 +52,24 @@
     <%= render "plan_overview"%>
   </div>
 </main>
+ <section class='w-full'>
+    <div class='p-4 bg-white border'>
+  <div data-controller="butt">
+    <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+      發表評論
+    </a>
+    <div class="hidden" data-butt-target="form" >
+      <%= render "comments/comment", comment: Comment.new, plan:@plan %>
+  <section class="min-w-full my-5 px-4">
+    <div class="overflow-y-auto h-60 ">
+      <div id="comment-list">
+<% @plan.comments.each do |comment| %>
+  <%= render partial: 'comment', locals: { comment: comment } %>
+<% end %>
+
+      </div>
+    </div>
+  </section>
+    </div>
+  </section>
+  
