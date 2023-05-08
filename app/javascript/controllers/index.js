@@ -6,9 +6,6 @@ import { application } from "./application";
 import EditController from "./edit_controller";
 application.register("edit", EditController);
 
-import FlashController from "./flash_controller";
-application.register("flash", FlashController);
-
 import MapController from "./map_controller";
 application.register("map", MapController);
 
@@ -23,6 +20,9 @@ application.register("filter", FilterController);
 
 import ButtController from "./butt_controller";
 application.register("butt", ButtController);
+
+import FlashController from "./flash_controller";
+application.register("flash", FlashController);
 
 import CommentController from "./comment_controller";
 application.register("comment", CommentController);
