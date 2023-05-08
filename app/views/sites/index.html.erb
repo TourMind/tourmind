@@ -1,21 +1,21 @@
 <div data-controller="filter">
-  <div class="w-full flex justify-around lg:hidden">
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
+  <div class="flex justify-around w-full lg:hidden">
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
       data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
   <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)]">
     <section data-filter-target="filterMenu"
-      class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md"
+      class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg lg:block lg:static lg:w-72 h-max bd"
       style="z-index: 1">
-      <div class="lg:hidden flex justify-end pt-6">
+      <div class="flex justify-end pt-6 lg:hidden">
         <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
       </div>
       <%= form_tag(sites_path, {method: :get,class:'border-b py-6'}) do |form| %>
-        <div class="border-b py-6">
+        <div class="py-6 border-b">
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
             <% @city_options.each do | city |%>
               <li class="py-1">
                 <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -24,11 +24,11 @@
             <% end %>
           </ul>
         </div>
-        <div class="border-b py-6">
+        <div class="py-6 border-b">
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             景點類型<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
             <% @site_type_options.each do | site_type |%>
               <li class="py-1">
                 <%= check_box_tag "site_types[]", site_type, @site_types.include?(site_type) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -41,7 +41,7 @@
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             寵物友善搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
             <% @pet_friendly_options.each do | pet_friendly |%>
               <li class="py-1">
                 <%= check_box_tag "pet_friendly[]", pet_friendly, @pet_friendly.include?(pet_friendly) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -55,7 +55,7 @@
     </section>
     <section class="flex-grow w-3/5">
       <div class='flex justify-between'>
-        <h1 class='text-center text-4xl font-bold'>景點</h1>
+        <h1 class='text-4xl font-bold text-center'>景點</h1>
         <%= link_to '新增景點' , new_site_path(@site), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
           font-medium'%>
       </div>
@@ -65,20 +65,20 @@
             <%= @sites.total_count %> 個景點
           <% end %>
         </div>
-        <form class="max-h-10 flex justify-center py-1">
-          <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
+        <form class="flex justify-center py-1 max-h-10">
+          <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
             <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
-              class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
-            <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
+              class="h-1 mx-1 bg-transparent border-0 focus:ring-transparent">
+            <button type="submit" class="btn-add"><i class="w-3 mr-2 fas fa-search"></i></button>
           </div>
         </form>
       </div>
-      <section class="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
         <% @sites.each do |site| %>
-          <div class="bg-white rounded-md overflow-hidden shadow-lg">
+          <div class="overflow-hidden bg-white rounded-md shadow-lg">
             <div class="relative">
               <%= render 'favorite', object: site, size:'text-4xl'%>
-              <%= link_to site_path(site.id) do %>
+              <%= link_to site_path(site) do %>
                 <div class=" text-gray-700 md:h-[15rem] w-full">
                   <% if site.images.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.images.first.url %>" alt="Site Pic">
@@ -91,7 +91,7 @@
               </div>
             <% end %>
             <div class="flex-grow p-2 m-2">
-              <h2 class="text-xl font-medium py-4">
+              <h2 class="py-4 text-xl font-medium">
                 <%= site.name %>
               </h2>
               <ul>
@@ -99,13 +99,14 @@
                   <h2 class="font-bold">評分：<%= star_rating(@site_data[site.id][:average_rating]) %>
                                              <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
                                              (<%= @site_data[site.id][:comment_count] %>則評論)
+                  </h2>
                 <% else %>
                   <p>尚未有評論</p>
                 <% end %>
                 <li>簡介:<%= site.intro&.truncate(30)%>
                 </li>
               </ul>
-              <div class=" mt-2">
+              <div class="mt-2 ">
                 <h2 class="font-medium">景點類型</h2>
                 <% if site.site_types.present? %>
                   <ul class="flex flex-wrap mt-2">

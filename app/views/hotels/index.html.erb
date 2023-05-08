@@ -1,21 +1,21 @@
 <div data-controller="filter">
-  <div class="w-full flex justify-around lg:hidden">
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
+  <div class="flex justify-around w-full lg:hidden">
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
       data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
   <div class="bg-white">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-filter-target="filterMenu"
-        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md" style="z-index: 1">
-        <div class="lg:hidden flex justify-end pt-6">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg lg:block lg:static lg:w-72 h-max bd" style="z-index: 1">
+        <div class="flex justify-end pt-6 lg:hidden">
           <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
         <%= form_tag(hotels_path, {method: :get,class:'border-b py-6'}) do |form| %>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
               <% @city_options.each do | city |%>
                 <li class="py-1">
                   <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -24,11 +24,11 @@
               <% end %>
             </ul>
           </div>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
               <% @hotel_types_options.each do | hotel_types |%>
                 <li class="py-1">
                   <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -41,7 +41,7 @@
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               設備<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
-            <ul class="flex flex-col overflow-hidden max-h-0 max-h-96 px-2">
+            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
               <% @equipment_options.each do | equipment |%>
                 <li class="py-1">
                   <%= check_box_tag "equipment[]", equipment, @equipment.include?(equipment) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -55,26 +55,26 @@
       </section>
       <section class="flex-grow w-3/5">
         <div class='flex justify-between'>
-          <h1 class='text-center text-4xl font-bold'>住宿</h1>
+          <h1 class='text-4xl font-bold text-center'>住宿</h1>
           <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
           font-medium'%>
         </div>
-        <div class="flex justify-between items-center">
+        <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @hotels.present? %>
               <%= @hotels.total_count %> 家住宿
             <% end %>
           </div>
           <form class="flex justify-center py-1">
-            <div class="border-2 rounded-full flex items-center  border-gray-700 bg-gray-100">
+            <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
               <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
-                class="mx-1 border-0 bg-transparent focus:ring-transparent h-1">
-              <button type="submit" class="btn-add"><i class="fas fa-search w-3 mr-2"></i></button>
+                class="h-1 mx-1 bg-transparent border-0 focus:ring-transparent">
+              <button type="submit" class="btn-add"><i class="w-3 mr-2 fas fa-search"></i></button>
             </div>
           </form>
         </div>
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-2"><% @hotels.each do |hotel| %>
-            <div class="bg-white rounded-md overflow-hidden shadow-lg">
+        <section class="grid grid-cols-1 gap-2 md:grid-cols-3"><% @hotels.each do |hotel| %>
+            <div class="overflow-hidden bg-white rounded-md shadow-lg">
               <div class="relative">
                 <%= render 'favorite', object: hotel, size:'text-4xl'%>
                 <%= link_to hotel_path(hotel) do %>
@@ -90,8 +90,8 @@
                 </div>
               <% end %>
               <div class="flex-grow p-2 m-2">
-                <div class="flex justify-between items-center">
-                  <h2 class="text-xl font-medium py-4">
+                <div class="flex items-center justify-between">
+                  <h2 class="py-4 text-xl font-medium">
                     <%= hotel.name %>
                   </h2>
                   <ul class="flex flex-wrap mt-2">

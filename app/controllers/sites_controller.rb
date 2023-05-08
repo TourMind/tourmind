@@ -62,7 +62,7 @@ class SitesController < ApplicationController
   private
 
   def set_site
-    @site = Site.find(params[:id])
+    @site = Site.friendly.find(params[:id])
   end
 
   def site_params
