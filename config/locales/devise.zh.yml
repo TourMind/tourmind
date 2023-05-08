@@ -28,7 +28,7 @@ zh:
       password_change:
         subject: "密碼已更改"
     omniauth_callbacks:
-      failure: '由於 "%{reason}"，我們無法從%{kind}驗證您'
+      failure: "由於 \"%{reason}\"，我們無法從%{kind}驗證您"
       success: "從%{kind}帳戶成功驗證"
     passwords:
       no_token: "如果您不是從重設密碼的電子郵件進入此頁面，則無法訪問此頁面。如果您確實是從重設密碼的電子郵件進入的，請確保使用了提供的完整URL"

@@ -18,7 +18,9 @@ export default class extends Controller {
 
   async update() {
     try {
-      this.trimDays();
+      const valid = this.trimDays();
+
+      if (!valid) return this.alertErrors("行程不得為空白！");
 
       let locations = {};
 
@@ -124,7 +126,11 @@ export default class extends Controller {
       .querySelector(".sites-list")
       .querySelectorAll(".site").length;
 
-    if (sitesInLastDay || +this.containerTarget.dataset.days === 1) return;
+    if (+this.containerTarget.dataset.days === 1 && sitesInLastDay === 0) {
+      return false;
+    }
+
+    if (sitesInLastDay) return true;
 
     this.containerTarget.dataset.days = +this.containerTarget.dataset.days - 1;
     this.containerTarget.lastElementChild.remove();
