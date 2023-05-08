@@ -16,7 +16,12 @@ class PlansController < ApplicationController
   end
 
   def new
-    @plan = Plan.new
+    if current_user.plans.count <= Plan.plans_limit_number(current_user)
+      @plan = Plan.new
+    else
+      flash[:alert] = "已達新增上限，請升級會員！"
+      redirect_to plans_path
+    end
   end
 
   def create
