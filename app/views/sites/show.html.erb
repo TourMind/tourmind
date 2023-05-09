@@ -85,14 +85,15 @@
       </iframe>
     </div>
   </div>
-    <div class="px-4 bg-white col-span-5">
-      <h2 class="font-bold text-2xl ">評等和評論</h2>
-      <div class="overflow-y-auto h-40 ">
-        <div id="comment-list">
-          <%= render partial: "comment", collection: @site.comments %>
-        </div>
+  <div class="px-4 bg-white col-span-5">
+    <h2 class="font-bold text-2xl ">評等和評論</h2>
+    <div class="overflow-y-auto h-40 ">
+      <div id="comment-list">
+        <%= render partial: "comment", collection: @site.comments %>
       </div>
     </div>
+  </div>
+  <section class='w-full'>
   <div data-controller="butt">
     <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
       發表評論
@@ -100,4 +101,4 @@
     <div class="hidden" data-butt-target="form" >
       <%= render "comments/comment", comment: Comment.new, site:@site %>
     </div>
-  </div>
+  </section>
