@@ -78,6 +78,7 @@ zh:
       min_height_error: "圖像高度應大於 %{min_height}px"
       max_height_error: "圖像高度應小於 %{max_height}px"
   activerecord:
+
     errors:
       models:
         site:
@@ -88,6 +89,7 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
+
             stay_duration:
               not_a_number: "停留時間必須是數字"
               not_in_range: "停留時間必須介於0.5至24小時之間"
@@ -100,6 +102,16 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
+
+        
+        plan:
+          attributes:
+            name:
+              blank: "行程名稱為必填"
+            description:
+              blank: "行程簡介為必填"
+        
+
         restaurant:
           attributes:
             name:
