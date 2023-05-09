@@ -62,7 +62,7 @@
         <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @hotels.present? %>
-              <%= @hotels.total_count %> 家住宿
+              <%= @hotels.count %> / <%= Hotel.count %> 家住宿
             <% end %>
           </div>
           <form class="flex justify-center py-1">
@@ -132,9 +132,7 @@
             </div>
           <% end %>
         </section>
-        <div>
-          <%= paginate @hotels%>
-        </div>
+        <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
       </section>
     </section>
   </div>
