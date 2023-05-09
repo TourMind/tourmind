@@ -52,22 +52,21 @@
     <%= render "plan_overview"%>
   </div>
 </main>
-<section class='w-full container mx-auto'>
+  <div class="mx-auto container bg-white col-span-5">
+    <h2 class="font-bold text-2xl ">評等和評論</h2>
+    <div class="overflow-y-auto h-40 ">
+      <div id="comment-list">
+        <%= render partial: "comment", collection: @plan.comments %>
+      </div>
+    </div>
+  </div>
+<section class='w-full mx-auto container'>
   <div data-controller="butt">
     <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
       發表評論
     </a>
     <div class="hidden" data-butt-target="form" >
       <%= render "comments/comment", comment: Comment.new, plan:@plan %>
-      <div class="min-w-full my-5 px-4">
-        <div class="overflow-y-auto h-60 ">
-          <div id="comment-list">
-          <% @plan.comments.each do |comment| %>
-            <%= render partial: 'comment', locals: { comment: comment } %>
-          <% end %>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
