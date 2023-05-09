@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if params[:restaurant_id]
       @commentable = Restaurant.friendly.find(params[:restaurant_id])
     elsif params[:site_id]
-      @commentable = Site.find(params[:site_id])
+      @commentable = Site.friendly.find(params[:site_id])
     elsif params[:hotel_id]
       @commentable = Hotel.friendly.find(params[:hotel_id])
     elsif  
