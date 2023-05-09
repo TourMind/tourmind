@@ -149,18 +149,22 @@
                     <ul class="flex flex-wrap mt-2">
                       <% if restaurant.cuisine_types.present? %>
                         <% restaurant.cuisine_types.each do |cuisine_type| %>
-                          <li
-                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                            <%= cuisine_type %>
-                          </li>
+                          <%= link_to restaurants_path(cuisine_types: [cuisine_type]) do %>
+                            <li
+                                class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                              <%= cuisine_type %>
+                            </li>
+                          <% end %>
                         <% end %>
                       <% end %>
                       <% if restaurant.atmostphere.present? %>
                         <% restaurant.atmostphere.each do |atmostphere| %>
-                          <li
-                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                            <%= atmostphere %>
-                          </li>
+                          <%= link_to restaurants_path(atmostphere: [atmostphere]) do %>
+                            <li
+                                class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                              <%= atmostphere %>
+                            </li>
+                          <% end %>
                         <% end %>
                       <% end %>
                     </ul>
