@@ -6,7 +6,6 @@ namespace :data do
         User.count.times do
             amounts = amt.sample
             user = users.sample
-            p user
             order = Order.create(amount: amounts, pay_time: Time.now, status: '付款成功', user_id: user.id)
 
             if amounts == 50
@@ -18,10 +17,6 @@ namespace :data do
             end
 
             user.update(diamond_grade: grade)
-
-            p user
-            p '='*20
-            p order
         end
         p 'generate order done'
     end 
