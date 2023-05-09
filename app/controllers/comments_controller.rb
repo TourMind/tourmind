@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
     elsif params[:hotel_id]
       @commentable = Hotel.friendly.find(params[:hotel_id])
     elsif  
-      @commentable = Plan.find(params.fetch(:plan_id, nil))
+      @commentable = Plan.friendly.find(params.fetch(:plan_id, nil))
     end
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
