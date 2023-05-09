@@ -4,12 +4,15 @@ class PlansController < ApplicationController
   before_action :authenticate_user!,
                 except: %i[index show day_info plan_overview]
   before_action :find_favorites, only: %i[new edit]
-
+  helper_method :star_rating
+  before_action :comment_rating, only: %i[index show]
   def index
     @plans = Plan.where(public: true).order(id: :desc)
   end
 
   def show
+    @comment = Comment.new
+    @comments = @plan.comments
     return if (user_signed_in? && current_user == @plan.user) || @plan.public
 
     redirect_to plans_path, alert: '你沒有權限查看此行程！'
@@ -22,7 +25,7 @@ class PlansController < ApplicationController
   def create
     plan_data = plan_params
     plan_data[:locations] = update_locations(plan_data, nil)
-
+    @commentable = @plan
     new_plan = current_user.plans.new(plan_data)
 
     if new_plan.save
@@ -187,5 +190,29 @@ class PlansController < ApplicationController
           next({ name: site.name, type: '景點', id: site.id, stay_time: 0 })
         end
       end
+  end
+  def star_rating(rating)
+    stars = ''
+    if rating.present?
+      full_stars = rating.to_i
+      half_stars = rating - full_stars >= 0.1 ? 1 : 0
+      empty_stars = 5 - full_stars - half_stars
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
+    else
+      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
+    end
+    stars.html_safe
+  end
+
+  def comment_rating
+    @plan_data = {}
+    Plan.all.each do |plan|
+      @plan_data[plan.id] = {
+        average_rating: plan.comments.average(:rating).to_f,
+        comment_count: plan.comments.where.not(content: nil).count
+      }
+    end
   end
 end

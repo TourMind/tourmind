@@ -3,9 +3,9 @@ class Plan < ApplicationRecord
 
   validates :name, :description, presence: true
   belongs_to :user
+  has_many :comments, as: :commentable, dependent: :destroy
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-
   mount_uploaders :images, ImageUploader
 
   def self.category_options
