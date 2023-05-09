@@ -15,7 +15,7 @@
     </div>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md mr-4 rounded-md overflow-hidden relative'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative'>
       <% if @site.images.present? %>
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
@@ -30,7 +30,7 @@
           <% end %>
         <% end %>
       <% else %>
-        <%= image_tag src="https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover col-span-full row-span-full w-full h-full' %>
+        <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class:'object-cover col-span-full row-span-full w-full h-full' %>
       <% end %>
     </div>
   </section>
