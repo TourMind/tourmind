@@ -60,7 +60,11 @@
       <div class="flex justify-between">
         <div class="py-2">
           <% if @sites.present? %>
+<<<<<<< HEAD
             <%= @sites.count %> / <%= Site.count %> 個景點
+=======
+            <%= @site.count %> / <%= Site.count %> 個景點
+>>>>>>> 06f0f16 (added hotel, site, restaurant page using pagy)
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :site_types%>
