@@ -7,13 +7,15 @@ export default class extends Controller {
 
   async connect() {
     const loader = new Loader({
-      apiKey: "",
+      apiKey: "AIzaSyCbGXEm0gRpmOs2t86CItDhZTBB2Gq0_EM",
       version: "weekly",
     });
 
     await loader.load();
     const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+      suppressMarkers: true,
+    });
 
     const locArr = [];
     const nameArr = [];
@@ -33,34 +35,30 @@ export default class extends Controller {
 
     const map = new google.maps.Map(this.mapTarget, {
       center,
-      zoom: 11,
+      zoom: 12,
     });
-    // directionsRenderer.setMap(map);
 
-    // const waypoints = locArr.map((el, i, arr) => {
-    //   if (i === 0 || i === arr.length - 1) return;
-    //   return { location: el, stopover: true };
-    // });
+    directionsRenderer.setMap(map);
 
-    // const req = {
-    //   origin: locArr[0],
-    //   destination: locArr[locArr.length - 1],
-    //   waypoints,
-    //   travelMode: "DRIVING",
-    //   drivingOptions: {
-    //     departureTime: Date.now(),
-    //     trafficModel: "optimistic",
-    //   },
-    // };
+    const waypoints = locArr.slice(1, -1).map((el) => {
+      return { location: el, stopover: true };
+    });
 
-    // directionsService.route(req, function (res, status) {
-    //   if (status == "OK") {
-    //     directionsRenderer.setDirections(res);
-    //   }
-    // });
+    const req = {
+      origin: locArr[0],
+      destination: locArr[locArr.length - 1],
+      waypoints,
+      travelMode: "DRIVING",
+    };
+
+    directionsService.route(req, function (res, status) {
+      if (status == "OK") {
+        directionsRenderer.setDirections(res);
+      }
+    });
 
     locArr.forEach((loc, i) => {
-      const contentString = `<div id="content"><h3>${nameArr[i]}</h3></div>`;
+      const contentString = nameArr[i];
 
       const infowindow = new google.maps.InfoWindow({
         content: contentString,
