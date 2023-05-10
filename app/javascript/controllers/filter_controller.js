@@ -20,7 +20,7 @@ export default class extends Controller {
     const filterOptions = event.currentTarget.nextElementSibling;
 
     icon.classList.toggle('rotate-180');
-    filterOptions.classList.toggle('max-h-96');
+    filterOptions.classList.toggle('max-h-full');
   }
 
   registerCheckboxEvent(targets) {
@@ -45,3 +45,7 @@ export default class extends Controller {
     window.location.replace(url)
   }
 }
+
+
+
+
