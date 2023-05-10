@@ -1,8 +1,8 @@
 <% if params[tags].present?%>
   <% params[tags].each do |type| %>
-    <li
-      class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+    <button data-filter-target="tags" data-action="click->filter#removeTag" data-tag-name="<%= type %>" data-col-name="<%= tags %>"
+      class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full '>
       <%= type %>
-    </li>
+    </button>
   <% end %>
 <% end %>

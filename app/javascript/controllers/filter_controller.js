@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="filter"
 export default class extends Controller {
-  static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn"]
+  static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn", "tags"]
 
   connect() {
     this.registerCheckboxEvent(this.filterCheckboxTargets);
@@ -29,5 +29,23 @@ export default class extends Controller {
         this.filterSubmitBtnTarget.click()
       })
     })
+  }
+
+  removeTag(event) {
+    const tagName = event.currentTarget.getAttribute('data-tag-name')
+    const colName = event.currentTarget.getAttribute('data-col-name')
+    const tagsParam = new URLSearchParams(window.location.search).getAll(colName+'[]')
+    console.log(tagsParam)
+    const updatedTagsParam = tagsParam.filter(tag => tag !== tagName)
+    console.log(updatedTagsParam)
+
+    const urlParams = new URLSearchParams(window.location.search)
+    urlParams.delete(colName+'[]')
+    updatedTagsParam.forEach(tag => {
+      urlParams.append(colName+'[]', tag)
+    })
+    console.log(urlParams.toString())
+    const url = `${window.location.pathname}?${urlParams.toString()}`
+    window.location.replace(url)
   }
 }
