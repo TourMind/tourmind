@@ -56,7 +56,7 @@
       <section class="flex-grow w-3/5">
         <div class='flex justify-between'>
           <h1 class='text-4xl font-bold text-center'>住宿</h1>
-          <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-lg py-3 px-3 bg-blue-500 inline-block text-white
+          <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-full py-3 px-3 bg-indigo-600 inline-block text-white text-sm
           font-medium'%>
         </div>
         <div class="flex items-center justify-between">
@@ -65,11 +65,19 @@
               <%= @hotels.count %> / <%= Hotel.count %> 家住宿
             <% end %>
           </div>
-          <form class="flex justify-center py-1">
-            <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
-              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..."
-                class="h-1 mx-1 bg-transparent border-0 focus:ring-transparent">
-              <button type="submit" class="btn-add"><i class="w-3 mr-2 fas fa-search"></i></button>
+          <form class="flex justify-center py-1 max-h-10">
+            <div class="flex items-center">
+              <div class="relative">
+                <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full py-2 pl-12 pr-8 leading-5 bg-white border border-gray-300 rounded-full focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+                  <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1c3.86 0 7 3.14 7 7 0 1.94-.79 3.7-2.07 4.97l4.96 4.97-1.41 1.41-4.97-4.96A6.959 6.959 0 0 1 9 15c-3.86 0-7-3.14-7-7s3.14-7 7-7zm0 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
+                  </svg>
+                </div>
+              </div>
+              <button type="submit" class="px-4 py-2 ml-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-full hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                搜尋
+              </button>
             </div>
           </form>
         </div>
@@ -101,41 +109,44 @@
                   </ul>
                 </div>
                 <ul>
-               <% if hotel.comments.any? %>
-                  <h2 class="font-bold">評分：<%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
-                                             <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
-                                             (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
-                <% else %>
-                  <p>尚未有評論</p>
-                <% end %>
-                  <li>簡介:<%= hotel.intro&.truncate(30)%>
-                  </li>
-                </ul>
-                <div class="mt-2">
-                </div>
-                <div class="mt-2">
-                  <h2 class="font-medium">飯店設備</h2>
-                  <% if hotel.equipment.present? %>
-                    <ul class="flex flex-wrap mt-2">
-                      <% hotel.equipment.each do |equipment| %>
-                        <li
+                  <% if hotel.comments.any? %>
+                    <h2 class="font-bold">評分：<%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                      <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                      (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+                    <% else %>
+                      <p>尚未有評論</p>
+                    <% end %>
+                    <li>簡介:<%= hotel.intro&.truncate(30)%>
+                    </li>
+                  </ul>
+                  <div class="mt-2">
+                  </div>
+                  <div class="mt-2">
+                    <h2 class="font-medium">飯店設備</h2>
+                    <% if hotel.equipment.present? %>
+                      <ul class="flex flex-wrap mt-2">
+                        <% hotel.equipment.each do |equipment| %>
+                          <li
                             class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                          <%= equipment %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  <% else %>
-                    <p>沒有類型資料</p>
-                  <% end %>
+                            <%= equipment %>
+                          </li>
+                        <% end %>
+                      </ul>
+                    <% else %>
+                      <p>沒有類型資料</p>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </section>
+          <div>
+            <%= paginate @hotels%>
+          </div>
         </section>
         <% if @hotels.count >= 6 || @pagy.page > 1%>
           <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
         <% end %>
       </section>
-    </section>
+    </div>
   </div>
-</div>
