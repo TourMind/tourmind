@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   include Rails.application.routes.url_helpers
+  helper_method :show_guide?
   # 設定語言為中文
   before_action :set_locale
   def set_locale
@@ -22,6 +23,10 @@ class ApplicationController < ActionController::Base
     else
       redirect_to user_line_omniauth_authorize_path
     end
+  end
+  def show_guide?
+    # 返回 true 表示顯示 guide，返回 false 表示不顯示
+    [HotelsController, SitesController,RestaurantsController,FavoritesController,PlansController].include?(self.class)
   end
   # 404:沒有找到紀錄
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
