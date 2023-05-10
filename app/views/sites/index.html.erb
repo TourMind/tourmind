@@ -64,6 +64,9 @@
           <% if @sites.present? %>
             <%= @sites.total_count %> 個景點
           <% end %>
+          <%= render "tag", tags: :address%>
+          <%= render "tag", tags: :site_types%>
+          <%= render "tag", tags: :pet_friendly%>
         </div>
         <form class="flex justify-center py-1 max-h-10">
           <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
@@ -112,10 +115,12 @@
                 <% if site.site_types.present? %>
                   <ul class="flex flex-wrap mt-2">
                     <% site.site_types.each do |site_type| %>
-                      <li
-                            class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                        <%= site_type %>
-                      </li>
+                      <%= link_to sites_path(site_types: [site_type]) do %>
+                        <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                          <%= site_type %>
+                        </li>
+                      <% end %>
                     <% end %>
                   </ul>
                 <% else %>

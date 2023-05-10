@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="filter"
 export default class extends Controller {
-  static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn", "tags"]
+  static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn"]
 
   connect() {
     this.registerCheckboxEvent(this.filterCheckboxTargets);
