@@ -1,44 +1,44 @@
 <div class="sm:hidden">
   <label for="menu" class="sr-only">選單</label>
-  <select id="menu" onchange="window.location.href=this.value" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+  <select id="menu" onchange="window.location.href=this.value" class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
     <option value="" disabled selected>請選擇</option>
     <option value="<%= sites_path %>">景點</option>
     <option value="<%= restaurants_path %>">餐廳</option>
     <option value="<%= restaurants_path %>">飯店</option>
     <option value="<%= plans_path %>">行程規劃</option>
   </select>
-  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
+  <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
+    <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
   </div>
 </div>
 
 <div>
   <div class="flex justify-center my-6">
-    <div class="flex hidden sm:flex container">
+    <div class="container flex hidden sm:flex">
       <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
-        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
         <h2 class="text-xl font-semibold">住宿</h2>
       </div>
       <% end %>
       <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
-        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
         <h2 class="text-xl font-semibold">景點</h2>
         </div>
       <% end %>
       <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
-        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
           <h2 class="text-xl font-semibold">餐廳</h2>
         </div>
       <% end %>
       <%= link_to plans_path , class: "inline-block w-1/4" do %>
-      <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+      <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
         <h2 class="text-xl font-semibold">行程規劃</h2>
       </div>
       <% end %>
     </div>
 </div>
 
-<section class="relative container mx-auto">
+<section class="container relative mx-auto">
   <img src="https://ak-d.tripcdn.com/images/0104h1200081fkqhn9FAA.jpg" alt="圖片" class="w-full h-96">
   <div class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-1/2">
     <div class="container mx-auto">
@@ -54,10 +54,10 @@
   </div>
 </section>
 
-<section class="container flex mx-auto py-6">
+<section class="container flex py-6 mx-auto">
   <% @plans.sample(3).each_with_index do |plan, index| %>
   <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 Jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
-  <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+  <a href="<%= plan_path(plan.id) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
     <div class="w-full"><%= image_tag plan.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if plan.images.present?%></div>
     <div class="text">
       <h2 data-splitting=""><%= plan.name %></h2>
@@ -69,91 +69,91 @@
 </section>
 
 
-<section class="container mx-auto py-6">
+<section class="container py-6 mx-auto">
   <h2 class="py-4">熱門飯店</h2>
   <div class="flex rounded-lg ">
     <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
     <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-      <a href="<%= restaurants_path(restaurant) %>" class="px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
-        <div class="relative transform image-container rounded-lg">
+      <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+        <div class="relative transform rounded-lg image-container">
           <div class="w-full"><%= image_tag restaurant.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if restaurant.images.present?%></div>
-          <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+          <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
             <span>熱門景點</span>
           </div>
           <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
+            <span class="text-3xl text-red-500">&#x2665;</span>
           </div>
         </div>
-        <p class="text-gray-700 text-lg font-medium leading-tight mb-2 mr-2"><%= restaurant.name %></p>
+        <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
         <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
             <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
             (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
         </p>
-        <p class="text-gray-600 text-sm mt-2"><%= restaurant.intro&.truncate(30) %></p>
+        <p class="mt-2 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
       </a>
     </div>
     <% end %>
   </div>
 </section>
-<section class="container mx-auto flex py-6">
-  <div class="w-64 carousel rounded-box mr-4">
+<section class="container flex py-6 mx-auto">
+  <div class="w-64 mr-4 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="carousel-item w-full image-container">
+      <div class="w-full carousel-item image-container">
         <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 carousel rounded-box mr-4">
+  <div class="w-64 mr-4 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="carousel-item w-full image-container">
+      <div class="w-full carousel-item image-container">
         <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 carousel rounded-box mr-4">
+  <div class="w-64 mr-4 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="carousel-item w-full image-container">
+      <div class="w-full carousel-item image-container">
         <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 carousel rounded-box mr-4">
+  <div class="w-64 mr-4 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="carousel-item w-full image-container">
+      <div class="w-full carousel-item image-container">
         <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
       </div>
     <% end %>
   </div>
   <div class="w-64 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="carousel-item w-full image-container">
+      <div class="w-full carousel-item image-container">
         <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
       </div>
     <% end %>
   </div>
 </section>
-<section class="container mx-auto py-6">
+<section class="container py-6 mx-auto">
   <div class="relative bg-white rounded-lg " style="height:auto" data-controller="moving">
     <div data-moving-target="slides" class="flex">
       <div class="flex">
         <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
         <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-          <a href="<%= restaurants_path(restaurant) %>" class="rounded-lg focus:bg-gray-700 transition duration-300 ease-in-out">
+          <a href="<%= restaurants_path(restaurant) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
             <div class="relative image-container rounded-xl">
               <%= image_tag restaurant.images.first.url,style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
-              <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+              <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
                 <span>飯店推薦</span>
               </div>
               <div class="absolute top-0 right-0 m-3">
-                <span class="text-red-500 text-3xl">&#x2665;</span>
+                <span class="text-3xl text-red-500">&#x2665;</span>
               </div>
             </div>
-            <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
             <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
               <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
               (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
             </p>
-            <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+            <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
           </a>
         </div>
         <% end %>
@@ -163,53 +163,53 @@
       <div class="flex">
         <% @hotels.sample(4).each_with_index do |hotel, index| %>
         <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-          <a href="<%= hotels_path(hotel) %>" class="rounded-lg focus:bg-gray-700 transition duration-300 ease-in-out">
+          <a href="<%= hotels_path(hotel) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
             <div class="relative image-container rounded-xl">
               <%= image_tag hotel.images.first.url,style: "width:100%; height:300px; object-fit:cover;" if hotel.images.present? %>
-              <div class="absolute top-0 left-0 m-3 bg-gray-900 text-white text-sm font-medium py-1 px-2 rounded">
+              <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
                 <span>飯店推薦</span>
               </div>
               <div class="absolute top-0 right-0 m-3">
-                <span class="text-red-500 text-3xl">&#x2665;</span>
+                <span class="text-3xl text-red-500">&#x2665;</span>
               </div>
             </div>
-            <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= hotel.name %></p>
+            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
             <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
               <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
               (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
             </p>
-            <p class="text-gray-600 text-sm mb-4"><%= hotel.intro&.truncate(30) %></p>
+            <p class="mb-4 text-sm text-gray-600"><%= hotel.intro&.truncate(30) %></p>
           </a>
         </div>
         <% end %>
       </div>
     </div>
-    <button data-action="click->moving#prevSlide" class="absolute top-1/2 transform -translate-y-1/2 left-0 rounded-full bg-gray-200 w-6 h-6">
+    <button data-action="click->moving#prevSlide" class="absolute left-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">
       <i class="fa-solid fa-circle-chevron-left fa-2xl"></i>
     </button>
-    <button data-action="click->moving#nextSlide" class="absolute top-1/2 transform -translate-y-1/2 right-0 rounded-full bg-gray-200 w-6 h-6">
+    <button data-action="click->moving#nextSlide" class="absolute right-0 w-6 h-6 transform -translate-y-1/2 bg-gray-200 rounded-full top-1/2">
       <i class="fa-solid fa-circle-chevron-right fa-2xl"></i>
     </button>
   </div>
 </section>
-<section class="carousel container mx-auto py-6">
+<section class="container py-6 mx-auto carousel">
   <div class="carousel-item">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="bg-white rounded-lg  md:w-1/2 lg:w-1/3 xl:w-1/4 mr-2">
-        <a href="<%= restaurants_path(restaurant) %>" class="px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+      <div class="mr-2 bg-white rounded-lg md:w-1/2 lg:w-1/3 xl:w-1/4">
+        <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
         <div class="relative image-container rounded-xl">
           <%= image_tag restaurant.images.first.url, style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
           <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
+            <span class="text-3xl text-red-500">&#x2665;</span>
           </div>
         </div>
         <div class="">
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+          <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
           <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
             <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
             (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
           </p>
-          <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+          <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
         </div>
         </a>
       </div>
@@ -217,28 +217,28 @@
   </div>
   <div class="carousel-item">
     <% @restaurants.sample(4).each do |restaurant| %>
-      <div class="bg-white rounded-lg  md:w-1/2 lg:w-1/3 xl:w-1/4 mr-2">
-        <a href="<%= restaurants_path(restaurant) %>" class="px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+      <div class="mr-2 bg-white rounded-lg md:w-1/2 lg:w-1/3 xl:w-1/4">
+        <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
         <div class="relative image-container rounded-xl">
           <%= image_tag restaurant.images.first.url, style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
           <div class="absolute top-0 right-0 m-3">
-            <span class="text-red-500 text-3xl">&#x2665;</span>
+            <span class="text-3xl text-red-500">&#x2665;</span>
           </div>
         </div>
         <div class="">
-          <p class="text-gray-700 text-lg font-medium leading-tight mb-2"><%= restaurant.name %></p>
+          <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
           <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
             <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
             (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
           </p>
-          <p class="text-gray-600 text-sm mb-4"><%= restaurant.intro&.truncate(30) %></p>
+          <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
         </div>
         </a>
       </div>
     <% end %>
   </div>
 </section>
-<footer class="footer p-10 bg-base-200 text-base-content">
+<footer class="p-10 footer bg-base-200 text-base-content">
   <div>
     <span class="footer-title">Services</span>
     <a class="link link-hover">Branding</a>
