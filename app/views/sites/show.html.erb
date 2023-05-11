@@ -10,7 +10,7 @@
           (<%= @site_data[@site.id][:comment_count] %>則評論)
         </span>
       <% else %>
-        <p>尚未有評論</p>
+        <span>尚未有評論</span>
       <% end %>
       <%= render "favoritebtn", object:@site, size:'text-lg'%>
     </div>
@@ -38,7 +38,7 @@
   <div class='flex py-4 flex-col lg:flex-row'>
     <div class="w-full lg:w-2/3 mr-4">
       <div class='pb-4 px-4 shadow-md'>
-        <div class='text-2xl font-bold py-2'>詳細資料</div>
+        <h2 class='text-2xl font-bold py-2'>詳細資料</h2>
         <ul>
           <li class="text-lg py-2">
             <span class='font-bold'>建議停留時間：</span><%=@site.stay_duration%> 小時
@@ -50,7 +50,7 @@
         </ul>
       </div>
       <div class='p-4 shadow-md'>
-        <div class='text-2xl font-bold py-2'>位置和聯絡方式</div>
+        <h2 class='text-2xl font-bold py-2'>位置和聯絡方式</h2>
         <ul>
           <li class="text-lg py-2">
             <span class='font-bold'>地址：</span><%=@site.address%>
@@ -64,7 +64,7 @@
         </ul>
       </div>
       <div class='p-4 shadow-md'>
-        <div class="text-2xl font-bold py-2">景點類型</div>
+        <h2 class="text-2xl font-bold py-2">景點類型</h2>
         <ul class='flex flex-wrap py-2'>
           <% @site.site_types.each do |site_type| %>
             <%= link_to sites_path(site_types: [site_type]) do %>
