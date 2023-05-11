@@ -166,7 +166,9 @@
             </div>
           <% end %>
         </section>
-        <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+        <% if Restaurant.count > 6 %>
+          <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+        <% end %>
       </section>
     </section>
   </div>
