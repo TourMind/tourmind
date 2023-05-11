@@ -52,7 +52,7 @@
       <div class='p-4'>
         <% if @hotel.equipment.present? %>
           <h2 class="text-2xl font-bold">住宿設備</h2>
-          <ul class='flex flex-wrap py-2'>
+          <ul>
             <% @hotel.equipment.each do |option| %>
               <%= link_to hotels_path(equipment: [option]) do %>
                 <li class='inline-block py-1 px-2 mr-2 mt-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
@@ -95,14 +95,20 @@
   <section class='w-full'>
     <div data-controller="butt">
       <div class="my-2">
-        <a data-action="click->butt#toggleCommentForm" class="bg-gray-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-gray-400 border-2 transition-all duration-400" href="#comment-form">
-          發表評論
-        </a>
-        <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
-        <%= link_to '返回住宿列表' , hotels_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
-        <div class="hidden p-4" data-butt-target="form" >
-          <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
-        </div>
+        <% if current_user && current_user.role == 1 %>
+          <a data-action="click->butt#toggleCommentForm" class="bg-gray-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-gray-400 border-2 transition-all duration-400" href="#comment-form">
+            發表評論
+          </a>
+          <%= link_to '返回上一頁' , :back, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
+          <div class="hidden p-4" data-butt-target="form" >
+            <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+          </div>
+        <% elsif current_user && current_user.role == 0 %>
+          <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
+          <%= link_to "返回住宿後台", dashboard_hotels_path, class:"bg-white inline-block text-blue-500 focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-blue-400 hover:text-white border-2 transition-all duration-400" %>
+        <%else%>
+          <%= link_to '返回上一頁' , :back, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
+        <%end%>
       </div>
     </section>
   </div>
