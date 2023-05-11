@@ -56,8 +56,8 @@
 
 <section class="container flex mx-auto py-6">
   <% @plans.sample(3).each_with_index do |plan, index| %>
-  <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 card <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
-  <a href="<%= plan_path(plan.id) %>" class="px-6 rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+  <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 Jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
+  <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
     <div class="w-full"><%= image_tag plan.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if plan.images.present?%></div>
     <div class="text">
       <h2 data-splitting=""><%= plan.name %></h2>
