@@ -47,6 +47,8 @@ class PageController < ApplicationController
       @sites = Site.all
       @restaurant = Restaurant.first
       @restaurants = Restaurant.all
+      @plan = Plan.first
+      @plans = Plan.all
     end
     def comment_rating
       @restaurant_data = {}
