@@ -12,7 +12,6 @@ module Users
         flash[:alert] = '會員已到期！'
       end
       stored_location_for(resource_or_scope) || root_path
-      
     end
 
     private
