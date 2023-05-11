@@ -1,13 +1,14 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
     <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
-      data-action="click->filter#toggleFilterMenu">篩選
+      data-action="click->filter#toggleFilterMenu">
+      篩選
     </div>
   </div>
   <div class="bg-white">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-filter-target="filterMenu"
-        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg border-4 border-indigo-200 lg:block lg:sticky lg:w-72 h-max bd" style="z-index: 1">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max" style="z-index: 1">
         <div class="flex justify-end pt-6 lg:hidden">
           <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
