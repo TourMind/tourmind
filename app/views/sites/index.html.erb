@@ -99,6 +99,7 @@
                   <h2 class="font-bold">評分：<%= star_rating(@site_data[site.id][:average_rating]) %>
                                              <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
                                              (<%= @site_data[site.id][:comment_count] %>則評論)
+
                   </h2>
                 <% else %>
                   <p>尚未有評論</p>
