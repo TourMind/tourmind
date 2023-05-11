@@ -12,7 +12,7 @@
         </div>
         <%= form_tag(restaurants_path, {method: :get,class:'border-b py-6'}) do |form| %>
           <h3 class="font-bold">所有篩選類別</h3>
-          <div class="border-b py-6">
+          <div class="border-b py-6  border-gray-400">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -25,7 +25,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="py-6 border-b">
+          <div class="border-b py-6  border-gray-400">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               餐廳類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -38,7 +38,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="py-6 border-b">
+          <div class="border-b py-6  border-gray-400">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               價位<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -51,7 +51,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="py-6 border-b">
+          <div class="border-b py-6  border-gray-400">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               菜系<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
