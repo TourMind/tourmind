@@ -46,7 +46,7 @@ class PageController < ApplicationController
       @restaurants = Restaurant.all
       @plan = Plan.first
       @plans = Plan.all
-
+    end
   def comment_rating
     @restaurant_data = {}
     Restaurant.all.each do |restaurant|
