@@ -62,7 +62,7 @@
       <div class="flex justify-between">
         <div class="py-2">
           <% if @sites.present? %>
-            <%= @site.count %> / <%= Site.count %> 個景點
+            <%= @sites.count %> / <%= Site.count %> 個景點
           <% end %>
         </div>
         <form class="flex justify-center py-1 max-h-10">
@@ -125,7 +125,7 @@
           </div>
         <% end %>
       </section>
-      <% if Site.count > 6 %>
+      <% if @sites.count >= 6 || @pagy.page > 1%>
         <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
       <% end %>
     </section>
