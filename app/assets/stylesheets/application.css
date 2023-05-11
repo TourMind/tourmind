@@ -14,7 +14,70 @@
  *= require_self
  */
 
-.flash_style {
-    top: 60px !important;
-    right: 10px !important;
+ top: 60px !important;
+ right: 10px !important;
+}
+.image-container {
+ position: relative;
+ overflow: hidden;
+}
+
+.image-container img {
+ transition: transform 0.5s ease-in-out;
+}
+
+.image-container:hover img {
+ transform: scale(1.2);
+}
+
+.comment-form-wrapper {
+ display: none;
+}
+
+.Jogging {
+    position: relative;
+    width: 33.333333%;
+    height: 300px;
+    overflow: hidden;
+    cursor: pointer;
+}
+  
+.Jogging img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+  
+.Jogging:hover img {
+    transform: scale(1.2);
+}
+  
+.Jogging .text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: transform 0.5s ease;
+    transform: translateY(100%);
+}
+  
+.Jogging:hover .text {
+    transform: translateY(0);
+}
+  
+.Jogging .text h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+  
+.Jogging .text p {
+    font-size: 16px;
+    margin-bottom: 0;
+    text-align: justify;
 }
