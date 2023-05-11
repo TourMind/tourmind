@@ -17,6 +17,23 @@ export default class extends Controller {
     "public",
   ];
 
+  initialize() {
+    this.Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      customClass: {
+        container: "flash_style",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+  }
+
   async update() {
     try {
       const valid = this.trimDays();
@@ -148,22 +165,7 @@ export default class extends Controller {
   }
 
   alertErrors(message) {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      customClass: {
-        container: "flash_style",
-      },
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
-    });
-
-    Toast.fire({
+    this.Toast.fire({
       icon: "error",
       title: message,
     });
