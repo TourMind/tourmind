@@ -1,9 +1,9 @@
-<div class="container m-auto pb-4">
+<div class="container pb-4 m-auto">
   <h1 class='flex p-4 text-2xl font-bold'>
     <%= @site.name %>
   </h1>
   <div class="flex flex-wrap">
-    <div class="flex p-4 items-center">
+    <div class="flex items-center p-4">
       <% if @comments_score.present? %>
         <h2 class="font-bold">評分：<span><%= star_rating(@site_data[@site.id][:average_rating]) %>
                                    <%= sprintf('%.1f', @site_data[@site.id][:average_rating]) %>
@@ -34,10 +34,10 @@
       <% end %>
     </div>
   </section>
-  <div class='flex py-4 flex-col lg:flex-row'>
-    <div class="w-full lg:w-2/3 mr-4">
-      <div class='pb-4 px-4 border-b-2 border-gray-300'>
-        <div class='text-2xl font-bold pb-2'>詳細資料</div>
+  <div class='flex flex-col py-4 lg:flex-row'>
+    <div class="w-full mr-4 lg:w-2/3">
+      <div class='px-4 pb-4 border-b-2 border-gray-300'>
+        <div class='pb-2 text-2xl font-bold'>詳細資料</div>
         <ul>
           <li>
             <span class='font-bold'>停留時間：</span><%=@site.stay_duration%>
@@ -49,7 +49,7 @@
         </ul>
       </div>
       <div class='p-4 border-b-2 border-gray-300'>
-        <div class='text-2xl font-bold pb-2'>位置和聯絡方式</div>
+        <div class='pb-2 text-2xl font-bold'>位置和聯絡方式</div>
         <ul>
           <li>
             <span class='font-bold'>地址：</span><%=@site.address%>
@@ -63,12 +63,14 @@
         </ul>
       </div>
       <div class='p-4'>
-        <div class="text-2xl font-bold pb-2">景點類型</div>
+        <div class="pb-2 text-2xl font-bold">景點類型</div>
         <ul class='flex flex-wrap'>
           <% @site.site_types.each do |site_type| %>
-            <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-              <%=site_type%>
-            </li>
+            <%= link_to sites_path(site_types: [site_type]) do %>
+              <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                <%=site_type%>
+              </li>
+            <% end %>
           <% end %>
         </ul>
       </div>
