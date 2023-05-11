@@ -19,7 +19,7 @@
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-full px-2">
               <% Restaurant::SECTION_OPTIONS.each do | city |%>
                 <li class="py-1">
-                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                   <%=city%>
                 </li>
               <% end %>
@@ -32,7 +32,7 @@
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-full px-2">
               <% Restaurant::RESTAURANT_TYPE.each do | type |%>
                 <li class="py-1">
-                  <%= check_box_tag "restaurant_type[]", type, @restaurant_type.include?(type) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "restaurant_type[]", type, @restaurant_type.include?(type) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                   <%=type%>
                 </li>
               <% end %>
@@ -45,7 +45,7 @@
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-full px-2">
               <% Restaurant::PRICE_RANGE.each do | price_range |%>
                 <li class="py-1">
-                  <%= check_box_tag "price_range[]", price_range, @price_range.include?(price_range) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "price_range[]", price_range, @price_range.include?(price_range) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                   <%=price_range%>
                 </li>
               <% end %>
@@ -58,7 +58,7 @@
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-full px-2">
               <% Restaurant::CUISINE_OPTIONS.each do | cuisine_type |%>
                 <li class="py-1">
-                  <%= check_box_tag "cuisine_types[]", cuisine_type, @cuisine_types.include?(cuisine_type) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "cuisine_types[]", cuisine_type, @cuisine_types.include?(cuisine_type) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                   <%=cuisine_type%>
                 </li>
               <% end %>
@@ -71,7 +71,7 @@
             <ul class="flex flex-col overflow-hidden max-h-0 max-h-full px-2">
               <% Restaurant::ATMOSTPHERE.each do | atmostphere |%>
                 <li class="py-1">
-                  <%= check_box_tag "atmostphere[]", atmostphere, @atmostphere.include?(atmostphere) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                  <%= check_box_tag "atmostphere[]", atmostphere, @atmostphere.include?(atmostphere) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                   <%=atmostphere%>
                 </li>
               <% end %>
