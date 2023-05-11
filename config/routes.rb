@@ -31,13 +31,20 @@ Rails.application.routes.draw do
   # 付款成功
   get '/pricing/paymentok', to: 'page#paymentok'
   # 訂單資訊
-  get '/order', to: 'order#index'
-  get '/pricing/oder', to: 'page#oder'
+  resources :orders, only: %i[index show]
+  # 管理員後台
+  get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
+
+
   resources :hotels do
     resources :comments, only: [:create,:new]
   end
+
   resources :sites do
     resources :comments, only: [:create,:new]
   end 
 
+  resources :orders, only: %i[index show]
+  # 管理員後台
+  get 'dashboard/users', to: 'dashboard#users'
 end

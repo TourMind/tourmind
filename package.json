@@ -15,6 +15,7 @@
     "@rails/request.js": "^0.0.8",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.4",
+    "chart.js": "^4.3.0",
     "daisyui": "^2.51.5",
     "sortablejs": "^1.15.0",
     "sweetalert2": "^11.7.3",
