@@ -83,7 +83,8 @@
             </div>
           </form>
         </div>
-        <section class="grid grid-cols-1 gap-2 md:grid-cols-3"><% @hotels.each do |hotel| %>
+        <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
+          <% @hotels.each do |hotel| %>
             <div class="overflow-hidden bg-white rounded-md shadow-lg">
               <div class="relative">
                 <%= render 'favorite', object: hotel, size:'text-4xl'%>
