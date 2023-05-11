@@ -76,6 +76,7 @@ class RestaurantsController < ApplicationController
 
   def get_min_max_price
     return unless params[:price_range].present?
+
     selected_price_ranges = params[:price_range].map { |price_range| price_range.split('~') }
     selected_price_ranges.each do |min_price_str, max_price_str|
       @min_price << min_price_str.to_i
@@ -101,26 +102,28 @@ class RestaurantsController < ApplicationController
       whitelisted[:atmostphere].reject!(&:empty?)
     end
   end
+
   def star_rating(rating)
     stars = ''
     if rating.present?
       full_stars = rating.to_i
       half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
     stars.html_safe
   end
+
   def comment_rating
     @restaurant_data = {}
     Restaurant.all.each do |restaurant|
       @restaurant_data[restaurant.id] = {
         average_rating: restaurant.comments.average(:rating).to_f,
-        comment_count: restaurant.comments.where.not(content: nil).count
+        comment_count: restaurant.comments.where.not(content: nil).count,
       }
     end
   end

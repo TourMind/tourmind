@@ -90,6 +90,11 @@
             <% else %>
               <span>沒有找到符合條件的餐廳</span>
             <% end %>
+            <%= render "tag", tags: :address%>
+            <%= render "tag", tags: :restaurant_type%>
+            <%= render "tag", tags: :price_range%>
+            <%= render "tag", tags: :cuisine_types%>
+            <%= render "tag", tags: :atmostphere%>
           </div>
           <form class="flex justify-center mb-2 max-h-10">
             <div class="flex items-center">
@@ -127,9 +132,11 @@
                   <h2 class="w-3/5 py-4 text-xl font-medium">
                     <%= restaurant.name %>
                   </h2>
-                  <span class="inline-block px-3 py-1 mt-4 font-semibold text-center text-gray-700 bg-gray-200 rounded-full text-md">
-                    <%= restaurant.restaurant_type%>
-                  </span>
+                  <%= link_to restaurants_path(restaurant_type: [restaurant.restaurant_type]) do %>
+                    <span class="inline-block px-3 py-1 mt-4 font-semibold text-center text-gray-700 bg-gray-200 rounded-full text-md">
+                      <%= restaurant.restaurant_type%>
+                    </span>
+                  <% end %>
                 </div>
                 <ul>
                   <li><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
@@ -151,18 +158,22 @@
                     <ul class="flex flex-wrap mt-2">
                       <% if restaurant.cuisine_types.present? %>
                         <% restaurant.cuisine_types.each do |cuisine_type| %>
-                          <li
-                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                            <%= cuisine_type %>
-                          </li>
+                          <%= link_to restaurants_path(cuisine_types: [cuisine_type]) do %>
+                            <li
+                                class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                              <%= cuisine_type %>
+                            </li>
+                          <% end %>
                         <% end %>
                       <% end %>
                       <% if restaurant.atmostphere.present? %>
                         <% restaurant.atmostphere.each do |atmostphere| %>
-                          <li
-                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                            <%= atmostphere %>
-                          </li>
+                          <%= link_to restaurants_path(atmostphere: [atmostphere]) do %>
+                            <li
+                                class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                              <%= atmostphere %>
+                            </li>
+                          <% end %>
                         <% end %>
                       <% end %>
                     </ul>

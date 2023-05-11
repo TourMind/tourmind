@@ -10,4 +10,3 @@
 #     config.fog_directory  = '' # 存储桶名称
 #     config.fog_public = nil
 #   end
-  
