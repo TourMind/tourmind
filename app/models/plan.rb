@@ -7,6 +7,7 @@ class Plan < ApplicationRecord
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
+
   mount_uploaders :images, ImageUploader
 
   def self.category_options

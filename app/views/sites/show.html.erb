@@ -15,7 +15,7 @@
     </div>
   </div>
   <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
-    <div class='relative grid w-full grid-cols-3 grid-rows-2 gap-1 overflow-hidden rounded-md shadow-md max-h-96'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative'>
       <% if @site.images.present? %>
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
@@ -85,17 +85,17 @@
       </iframe>
     </div>
   </div>
-  <div class="col-span-5 px-4 bg-white">
-    <h2 class="text-2xl font-bold ">評等和評論</h2>
-    <div class="h-40 overflow-y-auto ">
+  <div class="px-4 bg-white col-span-5">
+    <h2 class="font-bold text-2xl ">評等和評論</h2>
+    <div class="overflow-y-auto h-40 ">
       <div id="comment-list">
         <%= render partial: "comment", collection: @site.comments %>
       </div>
     </div>
   </div>
   <section class='w-full'>
-  <section data-controller="butt">
-    <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
+  <div data-controller="butt">
+    <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
       發表評論
     </a>
     <div class="hidden" data-butt-target="form" >
