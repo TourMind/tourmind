@@ -1,23 +1,23 @@
 <div class="container m-auto">
-  <h1 class='flex text-4xl font-bold p-4'>
+  <h1 class="flex text-4xl font-bold p-4">
     <%= @hotel.name %>
   </h1>
   <div class="flex flex-wrap">
-    <ul class="flex px-4 items-center">
+    <div class="flex px-4 items-center">
       <% if @comments_score.present? %>
         <span><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
           <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
           (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)
         </span>
       <% else %>
-        <p>尚未有評論</p>
+        <span>尚未有評論</span>
       <% end %>
       <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
-    </ul>
+    </div>
     <span class="flex items-center text-md font-semibold"><%= @hotel.hotel_types%></span>
   </div>
-  <section class='flex justify-center p-4 shadow-md md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative'>
+  <section class="flex justify-center p-4 shadow-md md:w-90%">
+    <div class="grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative">
       <% if @hotel.images.present? %>
         <% @hotel.images.each_with_index do |image, index| %>
           <% if index == 0 %>
@@ -40,7 +40,7 @@
   <div class='flex py-4 flex-col lg:flex-row'>
     <div class="w-full lg:w-2/3 mr-4">
       <div class='pb-4 px-4 shadow-md'>
-        <div class='text-2xl font-bold py-2'>詳細資料</div>
+        <h2 class='text-2xl font-bold py-2'>詳細資料</h2>
         <ul>
           <li class="flex text-lg py-2">
             <span class='font-bold'>星級：</span><%=@hotel.star_rating%>
@@ -52,7 +52,7 @@
         </ul>
       </div>
       <div class='p-4 shadow-md'>
-        <div class='text-2xl font-bold py-2'>位置和聯絡方式</div>
+        <h2 class='text-2xl font-bold py-2'>位置和聯絡方式</h2>
         <ul>
           <li class="flex text-lg py-2">
             <span class='font-bold'>地址：</span><%=@hotel.address%>
@@ -66,7 +66,7 @@
         </ul>
       </div>
       <div class='p-4 shadow-md'>
-        <div class="text-2xl font-bold py-2 ">飯店設備</div>
+        <h2 class="text-2xl font-bold py-2 ">飯店設備</h2>
         <ul class='flex flex-wrap py-2'>
           <% @hotel.equipment.each do |equipment| %>
             <%= link_to hotels_path(equipment: [equipment]) do %>
@@ -90,9 +90,9 @@
       </iframe>
     </div>
   </div>
-  <div class="col-span-5 px-4 bg-white">
-    <h2 class="text-2xl font-bold ">評等和評論</h2>
-    <div class="h-40 overflow-y-auto ">
+  <div class="px-4 bg-white col-span-5">
+    <h2 class="font-bold text-2xl">評等和評論</h2>
+    <div class="overflow-y-auto h-40">
       <div id="comment-list">
         <%= render partial: "comment", collection: @hotel.comments %>
       </div>
