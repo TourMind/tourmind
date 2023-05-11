@@ -89,9 +89,7 @@ class PlansController < ApplicationController
   end
 
   def destroy
-    if current_user == @plan.user && @plan.destroy
-      return redirect_to plans_path, notice: '刪除成功'
-    end
+    return redirect_to plans_path, notice: '刪除成功' if current_user == @plan.user && @plan.destroy
 
     redirect_to plans_path, alert: '你不是這個行程的擁有者'
   end
@@ -121,7 +119,7 @@ class PlansController < ApplicationController
       :public,
       :category,
       :locations,
-      images: [],
+      images: []
     )
   end
 
@@ -201,15 +199,16 @@ class PlansController < ApplicationController
         end
       end
   end
+
   def star_rating(rating)
     stars = ''
     if rating.present?
       full_stars = rating.to_i
       half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
@@ -221,7 +220,7 @@ class PlansController < ApplicationController
     Plan.all.each do |plan|
       @plan_data[plan.id] = {
         average_rating: plan.comments.average(:rating).to_f,
-        comment_count: plan.comments.where.not(content: nil).count
+        comment_count: plan.comments.where.not(content: nil).count,
       }
     end
   end

@@ -64,6 +64,9 @@
             <% if @hotels.present? %>
               <%= @hotels.total_count %> 家住宿
             <% end %>
+            <%= render "tag", tags: :address%>
+            <%= render "tag", tags: :hotel_types%>
+            <%= render "tag", tags: :equipment%>
           </div>
           <form class="flex justify-center py-1">
             <div class="flex items-center bg-gray-100 border-2 border-gray-700 rounded-full">
@@ -95,9 +98,11 @@
                     <%= hotel.name %>
                   </h2>
                   <ul class="flex flex-wrap mt-2">
-                    <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                      <%= hotel.hotel_types %>
-                    </li>
+                    <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
+                      <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                        <%= hotel.hotel_types %>
+                      </li>
+                    <% end %>
                   </ul>
                 </div>
                 <ul>
@@ -118,10 +123,12 @@
                   <% if hotel.equipment.present? %>
                     <ul class="flex flex-wrap mt-2">
                       <% hotel.equipment.each do |equipment| %>
-                        <li
-                            class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                          <%= equipment %>
-                        </li>
+                        <%= link_to hotels_path(equipment: [equipment]) do %>
+                          <li
+                              class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                            <%= equipment %>
+                          </li>
+                        <% end %>
                       <% end %>
                     </ul>
                   <% else %>

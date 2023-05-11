@@ -5,7 +5,6 @@ class Hotel < ApplicationRecord
 
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-  has_many :comments, as: :commentable
   validates :name, :tel, :address, presence: true
 
   has_many :comments, as: :commentable, dependent: :destroy

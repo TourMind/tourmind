@@ -3,8 +3,8 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  #寄信
-  config.action_mailer.default_url_options = { :host => "tourmind.fly.dev" }
+  # 寄信
+  config.action_mailer.default_url_options = { host: 'tourmind.fly.dev' }
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: Rails.application.credentials[:mailgun_api_key],
