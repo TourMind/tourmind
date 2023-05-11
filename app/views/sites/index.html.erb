@@ -1,17 +1,21 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
     <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
-      data-action="click->filter#toggleFilterMenu">篩選</div>
+      data-action="click->filter#toggleFilterMenu">
+      篩選
+    </div>
   </div>
   <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)]">
     <section data-filter-target="filterMenu"
       class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max"
       style="z-index: 1">
       <div class="flex justify-end pt-6 lg:hidden">
-        <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
+        <button data-action="click->filter#toggleFilterMenu">
+          <i class="text-lg fa-solid fa-xmark"></i>
+        </button>
       </div>
       <%= form_tag(sites_path, {method: :get,class:'border-b py-6'}) do |form| %>
-        <h3 class="font-bold">所有篩選類別</h3>
+        <div class="font-bold">所有篩選類別</div>
         <div class="py-6 border-b  border-gray-400">
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
@@ -19,7 +23,7 @@
           <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
             <% @city_options.each do | city |%>
               <li class="py-1">
-                <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                 <%=city%>
               </li>
             <% end %>
@@ -32,7 +36,7 @@
           <ul class="flex flex-col px-2 mb-2 overflow-hidden max-h-0 max-h-full">
             <% @site_type_options.each do | site_type |%>
               <li class="py-1">
-                <%= check_box_tag "site_types[]", site_type, @site_types.include?(site_type) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                <%= check_box_tag "site_types[]", site_type, @site_types.include?(site_type) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                 <%=site_type%>
               </li>
             <% end %>
@@ -45,7 +49,7 @@
           <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
             <% @pet_friendly_options.each do | pet_friendly |%>
               <li class="py-1">
-                <%= check_box_tag "pet_friendly[]", pet_friendly, @pet_friendly.include?(pet_friendly) , {class: "mr-2 checkbox checkbox-sm", data:{filter_target:"filterCheckbox"}} %>
+                <%= check_box_tag "pet_friendly[]", pet_friendly, @pet_friendly.include?(pet_friendly) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
                 <%=pet_friendly%>
               </li>
             <% end %>
@@ -98,24 +102,24 @@
                     <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg" , class:'object-cover w-full h-full' %>
                   <% end %>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
             <div class="flex-grow p-2 m-2">
-              <h2 class="py-4 text-xl font-medium w-3/5">
-                <%= site.name %>
-              </h2>
-              <ul>
+              <div>
+                <h2 class="py-4 text-xl font-medium w-3/5">
+                  <%= site.name %>
+                </h2>
                 <% if site.comments.any? %>
-                  <h2 class="font-bold">評分：<%= star_rating(@site_data[site.id][:average_rating]) %>
+                  <span class="font-bold"><%= star_rating(@site_data[site.id][:average_rating]) %>
                     <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
                     (<%= @site_data[site.id][:comment_count] %>則評論)
-                  </h2>
+                  </span>
                 <% else %>
-                  <p>尚未有評論</p>
+                  <span>尚未有評論</span>
                 <% end %>
-                <li>簡介:<%= site.intro&.truncate(30)%>
-                </li>
-              </ul>
+                <div>簡介:<%= site.intro&.truncate(30)%>
+                </div>
+              </div>
               <div class="mt-2 ">
                 <h2 class="font-medium">景點類型</h2>
                 <% if site.site_types.present? %>
