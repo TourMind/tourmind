@@ -416,7 +416,6 @@ DEPENDENCIES
   dotenv-rails (~> 2.7)
   faker (~> 3.2)
   fog-aws
-  faker (~> 3.2)
   foreman (~> 0.87.2)
   friendly_id (~> 5.4)
   geocoder (~> 1.8, >= 1.8.1)
