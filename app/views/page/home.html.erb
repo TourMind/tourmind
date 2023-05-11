@@ -11,8 +11,35 @@
     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
   </div>
 </div>
+
+<div>
+  <div class="flex justify-center my-6">
+    <div class="flex hidden sm:flex container">
+      <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <h2 class="text-xl font-semibold">住宿</h2>
+      </div>
+      <% end %>
+      <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <h2 class="text-xl font-semibold">景點</h2>
+        </div>
+      <% end %>
+      <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+          <h2 class="text-xl font-semibold">餐廳</h2>
+        </div>
+      <% end %>
+      <%= link_to plans_path , class: "inline-block w-1/4" do %>
+      <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <h2 class="text-xl font-semibold">行程規劃</h2>
+      </div>
+      <% end %>
+    </div>
+</div>
+
 <section class="relative container mx-auto">
-  <img src="https://picsum.photos/200/300/?gravity=east" alt="圖片" class="w-full h-96">
+  <img src="https://ak-d.tripcdn.com/images/0104h1200081fkqhn9FAA.jpg" alt="圖片" class="w-full h-96">
   <div class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-1/2">
     <div class="container mx-auto">
       <h2 class="mb-4 text-2xl font-bold text-white md:text-3xl">探索你的玩樂世界</h2>
@@ -26,44 +53,21 @@
     </div>
   </div>
 </section>
-<section class="flex container mx-auto py-6">
-  <div class="w-full sm:w-1/2 md:w-1/3 mr-2 pt-2">
-    <div class="relative">
-      <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
-      <div class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-50 transition duration-300 ease-in-out">
-        <div class="p-4 bg-gray-900 rounded-md text-white w-full h-full">
-          <h3 class="text-lg font-medium mb-2 ">City 1</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere enim vel tellus posuere rutrum. Sed a felis quis sapien faucibus vestibulum.</p>
-          <a href="#" class="mt-4 inline-block px-4 py-2 rounded-md bg-white text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 transition duration-300 ease-in-out">Explore</a>
-        </div>
-      </div>
+
+<section class="container flex mx-auto py-6">
+  <% @plans.sample(3).each_with_index do |plan, index| %>
+  <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 Jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
+  <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+    <div class="w-full"><%= image_tag plan.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if plan.images.present?%></div>
+    <div class="text">
+      <h2 data-splitting=""><%= plan.name %></h2>
+      <p data-splitting=""><%= plan.description&.truncate(60) %></p>
     </div>
+    </a>
   </div>
-  <div class="w-full sm:w-1/2 md:w-1/3 mr-2 pt-2">
-    <div class="relative">
-      <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
-      <div class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-50 transition duration-300 ease-in-out">
-        <div class="p-4 bg-gray-900 rounded-md text-white w-full h-full">
-          <h3 class="text-lg font-medium mb-2 ">City 1</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere enim vel tellus posuere rutrum. Sed a felis quis sapien faucibus vestibulum.</p>
-          <a href="#" class="mt-4 inline-block px-4 py-2 rounded-md bg-white text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 transition duration-300 ease-in-out">Explore</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-full sm:w-1/2 md:w-1/3 pt-2">
-    <div class="relative">
-      <img class="w-full h-auto rounded-md shadow-lg" src="https://picsum.photos/400/300" alt="City 1">
-      <div class="absolute top-0 left-0 w-full h-full opacity-0 hover:opacity-50 transition duration-300 ease-in-out">
-        <div class="p-4 bg-gray-900 rounded-md text-white w-full h-full">
-          <h3 class="text-lg font-medium mb-2 ">City 1</h3>
-          <p>行程名稱</p>
-          <a href="#" class="mt-4 inline-block px-4 py-2 rounded-md bg-white text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:bg-gray-200 focus:text-gray-900 transition duration-300 ease-in-out">Explore</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%end%>
 </section>
+
 <section class="container mx-auto py-6">
   <h2 class="py-4">熱門飯店</h2>
   <div class="flex rounded-lg ">
@@ -267,3 +271,4 @@
     </div>
   </div>
 </footer>
+
