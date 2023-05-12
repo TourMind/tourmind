@@ -1,11 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "overlay"]
+  static targets = ["modal", "overlay", "frame"]
 
   connect() {
     this.hideModal()
-    console.log('test')
   }
 
   showModal() {
@@ -31,4 +30,9 @@ export default class extends Controller {
       this.hideModal()
     }
   }
+
+  hideFrame() {
+    this.frameTarget.classList.add("hidden")
+  }
+  
 }
