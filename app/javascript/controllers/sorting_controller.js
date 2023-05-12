@@ -15,6 +15,10 @@ export default class extends Controller {
     if (this.element.id === "delete-btn") {
       return this.deleteBtn(this.element);
     }
+
+    if (this.element.id === "plan") {
+      return this.planOverview(this.element);
+    }
   }
 
   favList(element) {
@@ -26,7 +30,7 @@ export default class extends Controller {
       },
       animation: 150,
       sort: false,
-      onClone: function (e) {
+      onClone: (e) => {
         e.clone.id = e.item.id;
       },
     });
@@ -47,6 +51,16 @@ export default class extends Controller {
       ghostClass: "hidden",
       onAdd: (e) => {
         e.target.querySelector(".site").remove();
+      },
+    });
+  }
+
+  planOverview(element) {
+    new Sortable(element, {
+      animation: 150,
+      ghostClass: "opacity-0",
+      onEnd: () => {
+        this.dispatch("change");
       },
     });
   }
