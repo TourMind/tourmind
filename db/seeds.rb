@@ -117,6 +117,7 @@ sites2 = {
 
 categories = %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
 
+Plan.destroy_all
 10.times do
   Plan.create!(
     name: '臺北城市文化探險之旅',
