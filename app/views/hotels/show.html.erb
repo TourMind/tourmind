@@ -34,13 +34,12 @@
       <% else %>
         <%= image_tag src="https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?", class:'object-cover col-span-full row-span-full w-full h-full' %>
       <% end %>
-      <%= render 'favorite', object:@hotel, size:'text-6xl'%>
     </div>
   </section>
-  <div class='flex py-4 flex-col lg:flex-row'>
-    <div class="w-full lg:w-2/3 mr-4">
-      <div class='pb-4 px-4 shadow-md'>
-        <h2 class='text-2xl font-bold py-2'>詳細資料</h2>
+  <div class='flex flex-col py-4 lg:flex-row'>
+    <div class="w-full lg:w-2/3 mr-4 shadow-md ">
+      <div class="p-4">
+        <h2 class='text-2xl font-bold'>詳細資料</h2>
         <ul>
           <li class="flex text-lg py-2">
             <span class='font-bold'>星級：</span><%=@hotel.star_rating%>
@@ -51,8 +50,25 @@
           </li>
         </ul>
       </div>
+      <div class='p-4'>
+        <h2 class="text-2xl font-bold">飯店設備</h2>
+        <ul class='flex flex-wrap py-2'>
+          <% @hotel.equipment.each do |equipment| %>
+            <%= link_to hotels_path(equipment: [equipment]) do %>
+              <li class='inline-block py-1 px-2 mr-2 mt-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                <%=equipment%>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col justify-center w-full mr-4 lg:w-1/3">
       <div class='p-4 shadow-md'>
-        <h2 class='text-2xl font-bold py-2'>位置和聯絡方式</h2>
+        <h2 class='text-2xl font-bold'>位置和聯絡方式</h2>
+        <iframe
+          class="w-full h-[15rem] mx-auto" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=<%= "#{@hotel.name} #{@hotel.address}" %>" allowfullscreen>
+        </iframe>
         <ul>
           <li class="flex text-lg py-2">
             <span class='font-bold'>地址：</span><%=@hotel.address%>
@@ -65,32 +81,15 @@
           </li>
         </ul>
       </div>
-      <div class='p-4 shadow-md'>
-        <h2 class="text-2xl font-bold py-2 ">飯店設備</h2>
-        <ul class='flex flex-wrap py-2'>
-          <% @hotel.equipment.each do |equipment| %>
-            <%= link_to hotels_path(equipment: [equipment]) do %>
-              <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%=equipment%>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
-      <div class='p-4'>
-        <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'rounded-md py-2 px-5 bg-indigo-300 inline-block font-medium'%>
-        <%= link_to '返回飯店列表' , hotels_path, class:'rounded-md py-2 px-5 bg-indigo-300 inline-block font-medium' %>
-        <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
-          class: 'rounded-md py-2 px-5 bg-gray-300 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
-      </div>
-    </div>
-    <div class="flex justify-center w-full px-4 lg:w-1/3">
-      <iframe
-          class="w-full h-[15rem] mx-auto" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=<%= "#{@hotel.name} #{@hotel.address}" %>" allowfullscreen>
-      </iframe>
     </div>
   </div>
-  <div class="px-4 bg-white col-span-5">
+  <div class="p-4">
+    <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'rounded-md py-2 px-5 text-white bg-indigo-600 inline-block font-medium'%>
+    <%= link_to '返回飯店列表' , hotels_path, class:'rounded-md py-2 px-5 text-white bg-indigo-600 inline-block font-medium' %>
+    <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
+          class: 'rounded-md py-2 px-5 text-white bg-gray-600 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
+  </div>
+  <div class="p-4 bg-white col-span-5">
     <h2 class="font-bold text-2xl">評等和評論</h2>
     <div class="overflow-y-auto h-40">
       <div id="comment-list">
