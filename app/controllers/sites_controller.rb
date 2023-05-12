@@ -67,7 +67,7 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
-                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [],)
+                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [])
   end
 
   def star_rating(rating)
@@ -76,9 +76,9 @@ class SitesController < ApplicationController
       full_stars = rating.to_i
       half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
@@ -90,7 +90,7 @@ class SitesController < ApplicationController
     Site.all.each do |site|
       @site_data[site.id] = {
         average_rating: site.comments.average(:rating).to_f,
-        comment_count: site.comments.where.not(content: nil).count
+        comment_count: site.comments.where.not(content: nil).count,
       }
     end
   end

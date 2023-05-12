@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+source 'https://rubygems.org/'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.0'
@@ -49,6 +49,7 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem "faker", "~> 3.2"
 end
 
 group :development do
@@ -63,6 +64,7 @@ group :development do
   # gem 'rack-mini-profiler', '~> 2.0'
   gem 'rubocop-rails', '~> 2.19'
   gem 'spring'
+  gem 'web-console', '>= 4.1.0'
 end
 
 group :test do
@@ -83,3 +85,5 @@ gem 'friendly_id', '~> 5.4'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'pagy'
+gem 'foreman', '~> 0.87.2'
