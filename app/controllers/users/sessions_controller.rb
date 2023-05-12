@@ -3,7 +3,7 @@
 module Users
   class SessionsController < Devise::SessionsController
     def after_sign_out_path_for(_resource_or_scope)
-      new_user_session_path
+      request.referer || root_path
     end
 
     def after_sign_in_path_for(resource_or_scope)
@@ -11,9 +11,9 @@ module Users
         current_user.update(diamond_grade: '一般會員')
         flash[:alert] = '會員已到期！'
       end
-      stored_location_for(resource_or_scope) || root_path
-      
+      request.referer || root_path
     end
+    
 
     private
     def format_date(date)
