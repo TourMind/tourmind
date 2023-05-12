@@ -99,21 +99,23 @@ export default class extends Controller {
 
       window.location.replace(resInfo.redirect_url);
     } catch (err) {
-      alert(err.message);
+      console.log(err);
     }
   }
 
   addDay() {
     const dayElement = `
     <div class="relative px-4 day min-h-[150px] bg-white">
-        <button data-action="click->edit#deleteDay" type="button" class="bg-white rounded-md p-2 inline-flex ml-auto text-gray-400 hover:text-gray-500 hover:bg-gray-100 absolute right-3.5">
+      <div class="flex justify-between items-center">
+        <h4 class="text-xl text-gray-900 font-bold day-title">第 ${
+          +this.containerTarget.dataset.days + 1
+        } 天</h4>
+        <button data-action="click->edit#deleteDay" type="button" class="bg-white rounded-md p-2 flex ml-auto text-gray-400 hover:text-gray-500 hover:bg-gray-100">
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-      <h4 class="text-xl text-gray-900 font-bold day-title">第 ${
-        +this.containerTarget.dataset.days + 1
-      } 天</h4>
+      </div>
       <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
       <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
         +this.containerTarget.dataset.days + 1
