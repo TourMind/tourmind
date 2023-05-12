@@ -1,0 +1,8 @@
+<% if params[tags].present?%>
+  <% params[tags].each do |tag| %>
+    <button data-action="click->filter#removeTag" data-tag-name="<%= tag %>" data-col-name="<%= tags %>"
+      class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300'>
+      <%= tag %> <i class="ml-1 fa fa-times-circle" aria-hidden="true"></i>
+    </button>
+  <% end %>
+<% end %>
