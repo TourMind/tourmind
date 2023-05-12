@@ -12,11 +12,17 @@ export default class extends Controller {
     });
 
     await loader.load();
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+      suppressMarkers: true,
+    });
 
     const locArr = [];
+    const nameArr = [];
 
     this.dayTarget.querySelectorAll(".site").forEach((el) => {
       locArr.push({ lat: +el.dataset.lat, lng: +el.dataset.lng });
+      nameArr.push(el.dataset.name);
     });
 
     const locLat = locArr.map((el) => el.lat).sort((a, b) => a - b);
@@ -29,13 +35,45 @@ export default class extends Controller {
 
     const map = new google.maps.Map(this.mapTarget, {
       center,
-      zoom: 11,
+      zoom: 12,
     });
 
-    locArr.forEach((loc) => {
-      new google.maps.Marker({
+    directionsRenderer.setMap(map);
+
+    const waypoints = locArr.slice(1, -1).map((el) => {
+      return { location: el, stopover: true };
+    });
+
+    const req = {
+      origin: locArr[0],
+      destination: locArr[locArr.length - 1],
+      waypoints,
+      travelMode: "DRIVING",
+    };
+
+    directionsService.route(req, function (res, status) {
+      if (status == "OK") {
+        directionsRenderer.setDirections(res);
+      }
+    });
+
+    locArr.forEach((loc, i) => {
+      const contentString = nameArr[i];
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+
+      const marker = new google.maps.Marker({
         position: loc,
         map,
+      });
+
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+        });
       });
     });
   }

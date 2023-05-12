@@ -17,6 +17,23 @@ export default class extends Controller {
     "public",
   ];
 
+  initialize() {
+    this.Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      customClass: {
+        container: "flash_style",
+      },
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+  }
+
   async update() {
     try {
       const valid = this.trimDays();
@@ -24,7 +41,6 @@ export default class extends Controller {
       if (!valid) return this.alertErrors("行程不得為空白！");
 
       let locations = {};
-
       const dayCount = this.containerTarget.querySelectorAll(".day").length;
 
       for (let i = 1; i <= dayCount; i++) {
@@ -41,9 +57,7 @@ export default class extends Controller {
       }
 
       const id = this.idTarget.dataset.id;
-
       const form = new FormData();
-
       const files = this.imagesTarget.files;
 
       form.append("name", this.nameTarget.value);
@@ -144,22 +158,7 @@ export default class extends Controller {
   }
 
   alertErrors(message) {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      customClass: {
-        container: "flash_style",
-      },
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener("mouseenter", Swal.stopTimer);
-        toast.addEventListener("mouseleave", Swal.resumeTimer);
-      },
-    });
-
-    Toast.fire({
+    this.Toast.fire({
       icon: "error",
       title: message,
     });
