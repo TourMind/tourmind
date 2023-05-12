@@ -146,12 +146,11 @@
             <% end %>
           </section>
           <div>
-            <%= paginate @hotels%>
+            <% if @hotels.count >= 6 || @pagy.page > 1%>
+              <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+            <% end %>
           </div>
         </section>
-        <% if @hotels.count >= 6 || @pagy.page > 1%>
-          <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
-        <% end %>
       </section>
     </div>
   </div>
