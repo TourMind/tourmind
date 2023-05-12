@@ -1,0 +1,8 @@
+
+<div class="fixed inset-0 z-50 flex items-center justify-center hidden" data-modal-target="modal" data-action="click->modal#overlayClick">
+  <div class="fixed inset-0 bg-gray-900 opacity-50" data-modal-target="overlay"></div>
+  <div class="bg-white p-10 rounded-lg z-10 relative">
+    <button data-action="click->modal#hideModal" class="absolute right-2 top-2 text-white rounded-lg"><%= image_tag("close.png", class: "")%></button>
+    <%= turbo_frame_tag "login" %>
+  </div>
+</div>
