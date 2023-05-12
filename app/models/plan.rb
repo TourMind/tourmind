@@ -7,12 +7,17 @@ class Plan < ApplicationRecord
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
   mount_uploaders :images, ImageUploader
+  friendly_id :name, use: :slugged
 
   def self.category_options
     %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
   end
 
-  friendly_id :name, use: :slugged
+  def self.set_color(type)
+    return "restaurant" if type == "餐廳"
+    return "hotel" if type == "住宿"
+    return "site" if type == "景點"
+  end
 
   def should_generate_new_friendly_id?
     name_changed? || slug.blank?

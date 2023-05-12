@@ -110,11 +110,11 @@ export default class extends Controller {
         <h4 class="text-xl text-gray-900 font-bold day-title">第 ${
           +this.containerTarget.dataset.days + 1
         } 天</h4>
-        <button data-action="click->edit#deleteDay" type="button" class="bg-white rounded-md p-2 flex ml-auto text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+        <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        </svg>
+      </button>
       </div>
       <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
       <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
