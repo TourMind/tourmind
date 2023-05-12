@@ -60,7 +60,7 @@
       <div class="flex justify-between">
         <div class="py-2">
           <% if @sites.present? %>
-            <%= @sites.total_count %> 個景點
+            <%= @sites.count %> / <%= Site.count %> 個景點
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :site_types%>
@@ -136,9 +136,9 @@
           </div>
         <% end %>
       </section>
-      <div>
-        <%= paginate @sites%>
-      </div>
+      <% if @sites.count >= 6 || @pagy.page > 1%>
+        <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+      <% end %>
     </section>
   </section>
 </div>

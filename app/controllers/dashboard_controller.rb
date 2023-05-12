@@ -10,6 +10,5 @@ class DashboardController < ApplicationController
     @bd_count = User.where(diamond_grade: '藍鑽會員').count
     @rd_count = User.where(diamond_grade: '紅鑽會員').count
     @prices = Order.sum(:amount)
-
   end
 end

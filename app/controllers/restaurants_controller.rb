@@ -7,6 +7,7 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants or /restaurants.json
   def index
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id),items: 6)
     declare_params
     get_min_max_price
 

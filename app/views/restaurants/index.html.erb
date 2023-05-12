@@ -1,17 +1,17 @@
 <div data-controller="filter">
-  <div class="w-full flex justify-around lg:hidden">
-    <div class="border flex-grow text-center py-2 font-medium text-sm cursor-pointer"
+  <div class="flex justify-around w-full lg:hidden">
+    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
       data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
   <div class="bg-white">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
       <section data-filter-target="filterMenu"
-        class="hidden lg:block absolute left-0 top-0 lg:static lg:w-72 w-full h-max bg-white px-6 mr-3 bd shadow-lg rounded-md" style="z-index: 1">
-        <div class="lg:hidden flex justify-end pt-6">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg lg:block lg:static lg:w-72 h-max bd" style="z-index: 1">
+        <div class="flex justify-end pt-6 lg:hidden">
           <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
         </div>
         <%= form_tag(restaurants_path, {method: :get,class:'border-b py-6'}) do |form| %>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -24,7 +24,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               餐廳類型<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -37,7 +37,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               價位<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -50,7 +50,7 @@
               <% end %>
             </ul>
           </div>
-          <div class="border-b py-6">
+          <div class="py-6 border-b">
             <div class="py-2" data-action="click->filter#toggleFilterCategory">
               菜系<i class="px-1 fa-solid fa-chevron-down"></i>
             </div>
@@ -83,10 +83,10 @@
         <div class='flex justify-between'>
           <h1 class='text-center text-4xl font-bold'>餐廳</h1>
         </div>
-        <div class="flex justify-between items-center">
+        <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @restaurants.present? %>
-              <%= @restaurants.total_count %> 家餐廳
+              <%= @restaurants.count %> / <%= Restaurant.count %> 家餐廳
             <% else %>
               <span>沒有找到符合條件的餐廳</span>
             <% end %>
@@ -112,15 +112,15 @@
             </div>
           </form>
         </div>
-        <section class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+        <section class="grid grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3">
           <% @restaurants.each do |restaurant| %>
-            <div class="bg-white rounded-md overflow-hidden shadow-lg">
+            <div class="overflow-hidden bg-white rounded-md shadow-lg">
               <div class="relative">
                 <%= render "favorite", object:restaurant, size:"text-4xl"%>
                 <%= link_to restaurant_path(restaurant) do %>
                   <div class=" text-gray-700 md:h-[15rem] w-full">
                     <% if restaurant.images.present? %>
-                      <img class="object-fit w-full h-full" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+                      <img class="w-full h-full object-fit" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
                     <% else %>
                       <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'object-cover w-full h-full' %>
                     <% end %>
@@ -128,8 +128,8 @@
                 </div>
               <% end %>
               <div class="flex-grow p-2 m-2">
-                <div class= "flex justify-between items-start">
-                  <h2 class="text-xl font-medium py-4 w-3/5">
+                <div class= "flex items-start justify-between">
+                  <h2 class="w-3/5 py-4 text-xl font-medium">
                     <%= restaurant.name %>
                   </h2>
                   <%= link_to restaurants_path(restaurant_type: [restaurant.restaurant_type]) do %>
@@ -146,7 +146,7 @@
                   <li class= "mt-2"><%= restaurant.intro&.truncate(70)%>
                   </li>
                 </ul>
-                <div class="mt-2 flex">
+                <div class="flex mt-2">
                   <ul class="flex flex-wrap mt-2">
                     <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
                       均消:<%= restaurant.price.to_i %>
@@ -183,9 +183,9 @@
             </div>
           <% end %>
         </section>
-        <div>
-          <%= paginate @restaurants%>
-        </div>
+        <% if @restaurants.count >= 6 || @pagy.page > 1%>
+          <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+        <% end %>
       </section>
     </section>
   </div>

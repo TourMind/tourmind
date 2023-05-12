@@ -1,7 +1,8 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
     <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
-      data-action="click->filter#toggleFilterMenu">篩選</div>
+      data-action="click->filter#toggleFilterMenu">篩選
+    </div>
   </div>
   <div class="bg-white">
     <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
@@ -60,7 +61,7 @@
         <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @hotels.present? %>
-              <%= @hotels.total_count %> 家住宿
+              <%= @hotels.count %> / <%= Hotel.count %> 家住宿
             <% end %>
             <%= render "tag", tags: :address%>
             <%= render "tag", tags: :hotel_types%>
@@ -82,7 +83,8 @@
             </div>
           </form>
         </div>
-        <section class="grid grid-cols-1 gap-2 md:grid-cols-3"><% @hotels.each do |hotel| %>
+        <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
+          <% @hotels.each do |hotel| %>
             <div class="overflow-hidden bg-white rounded-md shadow-lg">
               <div class="relative">
                 <%= render 'favorite', object: hotel, size:'text-4xl'%>
@@ -144,7 +146,9 @@
             <% end %>
           </section>
           <div>
-            <%= paginate @hotels%>
+            <% if @hotels.count >= 6 || @pagy.page > 1%>
+              <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+            <% end %>
           </div>
         </section>
       </section>

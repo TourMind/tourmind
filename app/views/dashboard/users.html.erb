@@ -82,6 +82,8 @@
         </table>
     </div>
     <br>
-    <div class="flex justify-center"><%= raw pagy_nav(@pagy) %></div>
+     <% if @users.count >= 10 || @pagy.page > 1 %>
+      <div class="flex justify-center"><%= raw pagy_nav(@pagy) %></div>
+    <% end %>
   </section>
 </div>
