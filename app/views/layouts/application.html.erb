@@ -10,9 +10,12 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/guide' %>
-    <%= yield %>
+    <div data-controller="modal">
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/guide' %>
+      <%= render 'shared/modal' %>
+      <%= yield %>
+    </div>
     <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
   </body>
 </html>

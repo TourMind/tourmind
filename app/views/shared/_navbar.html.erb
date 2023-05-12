@@ -74,7 +74,7 @@
           <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray align-middle"  %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "會員登入" , new_user_session_path, class: "btn-round btn-sm btn-black" %>
+          <%= link_to "會員登入" , new_user_session_path, data: { action: "click->modal#toggleModal", turbo_frame: :login },class: "btn-round btn-sm btn-black" %>
         </li>
         <li class="px-5 py-2 md:px-2">
           <%= link_to "註冊", new_user_registration_path, class: "btn-round btn-sm btn-gray" %>
