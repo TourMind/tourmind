@@ -188,6 +188,7 @@ export default class extends Controller {
     this.containerTarget.dataset.days = days.length;
     days.forEach((day, i) => {
       day.querySelector(".day-title").textContent = `第 ${i + 1} 天`;
+      day.querySelector(".sites-list").id = `plan-day-${i + 1}`;
     });
   }
 }
