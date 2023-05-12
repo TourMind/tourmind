@@ -15,7 +15,7 @@ class ImageUploader < CarrierWave::Uploader::Base
     Rails.application.credentials.aws[:bucket]
   end
 
-  # 指定 AWS 访问凭证
+  # 指定 AWS 
   def fog_credentials
     {
       provider:              'AWS',
