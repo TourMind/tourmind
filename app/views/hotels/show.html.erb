@@ -71,7 +71,7 @@
         <ul class='flex flex-wrap'>
           <% @hotel.equipment.each do |equipment| %>
             <%= link_to hotels_path(equipment: [equipment]) do %>
-              <li class='inline-block px-2 py-1 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+              <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
                 <%=equipment%>
               </li> 
             <% end %>

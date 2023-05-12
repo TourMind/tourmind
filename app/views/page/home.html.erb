@@ -14,31 +14,31 @@
 
 <div>
   <div class="flex justify-center my-6">
-    <div class="container flex hidden sm:flex">
+    <div class="flex hidden sm:flex container">
       <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
-        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">住宿</h2>
       </div>
       <% end %>
       <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
-        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">景點</h2>
         </div>
       <% end %>
       <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
-        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
           <h2 class="text-xl font-semibold">餐廳</h2>
         </div>
       <% end %>
       <%= link_to plans_path , class: "inline-block w-1/4" do %>
-      <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+      <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">行程規劃</h2>
       </div>
       <% end %>
     </div>
 </div>
 
-<section class="container relative mx-auto">
+<section class="relative container mx-auto">
   <img src="https://ak-d.tripcdn.com/images/0104h1200081fkqhn9FAA.jpg" alt="圖片" class="w-full h-96">
   <div class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-1/2">
     <div class="container mx-auto">
@@ -54,10 +54,10 @@
   </div>
 </section>
 
-<section class="container flex py-6 mx-auto">
+<section class="container flex mx-auto py-6">
   <% @plans.sample(3).each_with_index do |plan, index| %>
   <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 Jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
-  <a href="<%= plan_path(plan.id) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+  <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
     <div class="w-full"><%= image_tag plan.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if plan.images.present?%></div>
     <div class="text">
       <h2 data-splitting=""><%= plan.name %></h2>
@@ -69,7 +69,7 @@
 </section>
 
 
-<section class="container py-6 mx-auto">
+<section class="container mx-auto py-6">
   <h2 class="py-4">熱門飯店</h2>
   <div class="flex rounded-lg ">
     <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
