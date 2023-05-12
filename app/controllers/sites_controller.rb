@@ -6,6 +6,7 @@ class SitesController < ApplicationController
   before_action :comment_rating, only: %i[index show]
 
   def index
+    @pagy, @site = pagy(Site.all.order(:id),items: 6)
     @city_options = %w[台北市 新北市]
     @site_type_options = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
     @pet_friendly_options = %w[可攜寵物]
@@ -67,7 +68,7 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
-                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [],)
+                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [])
   end
 
   def star_rating(rating)
@@ -76,9 +77,9 @@ class SitesController < ApplicationController
       full_stars = rating.to_i
       half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'}
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'}
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'}
+      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
+      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
+      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
@@ -90,7 +91,7 @@ class SitesController < ApplicationController
     Site.all.each do |site|
       @site_data[site.id] = {
         average_rating: site.comments.average(:rating).to_f,
-        comment_count: site.comments.where.not(content: nil).count
+        comment_count: site.comments.where.not(content: nil).count,
       }
     end
   end

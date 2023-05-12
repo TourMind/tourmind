@@ -3,13 +3,27 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
   # process resize_to_fit: [200,200]
-  storage :file
+  # storage :file
   # Choose what kind of storage to use for this uploader:
 
-  # storage :fog
+  storage :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  # 指定 S3 bucket
+  def fog_directory
+    Rails.application.credentials.aws[:bucket]
+  end
+
+  # 指定 AWS 访问凭证
+  def fog_credentials
+    {
+      provider:              'AWS',
+      aws_access_key_id:     Rails.application.credentials.aws[:access_key_id],
+      aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+      region:                Rails.application.credentials.aws[:region]
+    }
+  end
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

@@ -8,6 +8,7 @@ import "@hotwired/turbo-rails";
 //FONTAWESOME
 import "scripts";
 
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();

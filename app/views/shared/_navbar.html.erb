@@ -20,8 +20,7 @@
         </li>
         <li class="px-5 py-2 md:px-2">
           <% if current_user.diamond_grade == '一般會員'%>
-            <%= link_to "升級會員", pricing_path,
-                                            class: "btn-round btn-sm btn-gray"  %>
+            <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray"  %>
           <% elsif current_user.diamond_grade == '白鑽會員' %>
             <%= link_to order_path do %>
               <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 訂單資訊</span>
@@ -37,7 +36,7 @@
           <% end %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
+            <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
         </li>
         <li class="px-5 py-2 md:px-2">
           <%= link_to "個人設定", edit_user_registration_path, class: "btn-round btn-sm btn-gray align-middle" %>
@@ -47,25 +46,38 @@
         <% if current_user.avatar_url == nil || current_user.avatar_url == ''%>
           <%=link_to image_tag("user_default_avatar.png", class: "w-10 rounded-full truncate")%>
         <% else %>
-          <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10 mr-2")%>
+          <%=link_to image_tag(current_user.avatar_url, class: "rounded-full w-10 h-10")%>
         <% end %>
       </i>
       <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
-        <i class="fa-solid fa-bars fa-xl"></i>
+          <i class="fa-solid fa-bars fa-xl"></i>
+      </button>
+    <% elsif current_user && current_user.role == 0 %>
+      <span class="px-2 py-2"><%= current_user.email %></span>
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+        <li class="px-5 py-2 md:px-2">
+          <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-sm btn-black" %>
+        </li>
+        <li class="px-5 py-2 md:px-2">
+          <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
+        </li>
+      </ul>
+      <i class="rounded-full ring ring-primary ring-offset-base-100">
+          <i class="p-2 fa-solid fa-users-gear"></i>
+      </i>
+      <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
+          <i class="fa-solid fa-bars fa-xl"></i>
       </button>
     <% else %>
       <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style= "z-index: 99">
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "升級會員", pricing_path,
-                                        class: "btn-round btn-sm btn-gray align-middle"  %>
+          <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray align-middle"  %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "會員登入" , new_user_session_path, 
-                                        class: "btn-round btn-sm btn-black" %>
+          <%= link_to "會員登入" , new_user_session_path, class: "btn-round btn-sm btn-black" %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "註冊", new_user_registration_path, 
-                                        class: "btn-round btn-sm btn-gray" %>
+          <%= link_to "註冊", new_user_registration_path, class: "btn-round btn-sm btn-gray" %>
         </li>
       </ul>
       <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">

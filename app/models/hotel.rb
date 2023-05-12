@@ -2,10 +2,10 @@
 
 class Hotel < ApplicationRecord
   extend FriendlyId
-
+  paginates_per 6
+  
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
-  has_many :comments, as: :commentable
   validates :name, :tel, :address, presence: true
 
   has_many :comments, as: :commentable, dependent: :destroy
@@ -41,7 +41,7 @@ class Hotel < ApplicationRecord
     where(sql_query_condition.join(' AND '))
   end
 
-  paginates_per 6
+  # 上傳圖片
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
 end

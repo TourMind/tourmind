@@ -78,8 +78,10 @@
   @apply overflow-hidden border-black rounded-md hover:transform hover:shadow-lg;
 }
 .home-title {
-  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform relative after:absolute after:bg-indigo-600 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300;
+  @apply bg-white p-4 flex items-center justify-center h-full transition-all duration-500 transform relative after:absolute after:bg-indigo-600 after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-right after:scale-x-0 hover:after:origin-bottom-left hover:after:scale-x-100 after:transition-transform after:ease-in-out after:duration-300 rounded-b-lg border-b-4 after:rounded-b-lg overflow-hidden;
 }
+
+
 @layer components {
   /* 評價功能的星星radio */
   .comment-star {
@@ -88,4 +90,35 @@
   .comment-star-hidden {
     @apply opacity-0 select-none rating-hidden checked:bg-none;
   }
+}
+
+
+/* 以下為分頁樣式 */
+
+.pagy-nav.pagination {
+  @apply inline-flex -space-x-px rounded-md shadow-sm isolate;
+}
+
+.page.next a {
+  @apply relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 focus:z-20;
+}
+
+.page.prev a {
+  @apply relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 focus:z-20;
+}
+
+.page.next.disabled {
+  @apply relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 border border-gray-300 rounded-r-md bg-slate-100 hover:bg-gray-50 focus:z-20;
+}
+
+.page.prev.disabled {
+  @apply relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 border border-gray-300 rounded-l-md bg-slate-100 hover:bg-gray-50 focus:z-20;
+}
+
+.page a, .page.gap {
+  @apply relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50 focus:z-20;
+}
+
+.page.active {
+  @apply relative z-10 inline-flex items-center px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-500 bg-indigo-50 focus:z-20;
 }
