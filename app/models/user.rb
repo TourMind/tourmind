@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   has_many :orders
   has_many :plans
+  has_many :collaborations
+  has_many :shared_plans, through: :collaborations, source: :plan
 
   has_many :comments, dependent: :destroy
   # 驗證必填欄位
