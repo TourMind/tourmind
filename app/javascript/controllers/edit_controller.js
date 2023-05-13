@@ -16,8 +16,15 @@ export default class extends Controller {
     "form",
     "public",
     "submitBtn",
+    "submitText",
     "spinner",
   ];
+
+  connect() {
+    if (!this.idTarget.dataset.id) {
+      this.submitTextTarget.textContent = "建立新行程";
+    }
+  }
 
   initialize() {
     this.Toast = Swal.mixin({
