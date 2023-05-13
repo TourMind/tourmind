@@ -9,7 +9,7 @@
   <div class="flex items-center px-2">
     <% if current_user &&  current_user.role == 1 %>
       <span class="px-2 py-2"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99">
         <li class="px-2 py-2 md:px-2">
           <span class="mr-2 btn-round btn-sm btn-gray">
               <i class="fa-solid fa-heart fa-bounce" style="color: #ff0000;"></i>
@@ -46,7 +46,7 @@
       </button>
     <% elsif current_user && current_user.role == 0 %>
       <span class="px-2 py-2"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99">
         <li class="px-5 py-2 md:px-2">
           <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-sm btn-black" %>
         </li>
@@ -61,7 +61,7 @@
           <i class="fa-solid fa-bars fa-xl"></i>
       </button>
     <% else %>
-      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex">
+      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style="z-index: 99">
         <li class="px-5 py-2 md:px-2">
           <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray align-middle"  %>
         </li>
