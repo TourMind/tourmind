@@ -8,6 +8,9 @@ class Plan < ApplicationRecord
   has_many :favorites, as: :favorable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
 
+  has_many :collaborations
+  has_many :editors, through: :collaborations, source: :user
+
   mount_uploaders :images, ImageUploader
   friendly_id :name, use: :slugged
 
@@ -30,13 +33,13 @@ class Plan < ApplicationRecord
   end
 
   def self.plans_limit_number(current_user)
-    if current_user.diamond_grade == '一般會員'
+    if current_user.diamond_grade == "一般會員"
       return 1
-    elsif current_user.diamond_grade == '白鑽會員'
+    elsif current_user.diamond_grade == "白鑽會員"
       return 3
-    elsif current_user.diamond_grade == '藍鑽會員'
+    elsif current_user.diamond_grade == "藍鑽會員"
       return 5
-    elsif current_user.diamond_grade == '紅鑽會員'
+    elsif current_user.diamond_grade == "紅鑽會員"
       return Float::INFINITY #正無窮大
     end
   end
