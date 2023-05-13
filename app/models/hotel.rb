@@ -3,7 +3,7 @@
 class Hotel < ApplicationRecord
   extend FriendlyId
   paginates_per 6
-  
+
   # 喜愛清單關聯
   has_many :favorites, as: :favorable, dependent: :destroy
   validates :name, :tel, :address, presence: true
@@ -18,7 +18,7 @@ class Hotel < ApplicationRecord
 
   def self.search(keyword)
     where('name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword OR equipment::text ILIKE ANY (ARRAY[:keywords])',
-          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"])
+          keyword: "%#{keyword}%", keywords: ["%#{keyword}%"],)
   end
 
   friendly_id :name, use: :slugged

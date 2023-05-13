@@ -2,7 +2,6 @@
   <% if restaurant.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
-
       <ul>
         <% restaurant.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,23 +9,19 @@
       </ul>
     </div>
   <% end %>
-
   <div class = "grid grid-cols-2 gap-2">
     <div class="my-5">
       <%= form.label "店名" %>
       <%= form.text_field :name, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "地址" %>
       <%= form.text_field :address, class: "input-field" %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "簡介" %>
       <%= form.text_area :intro, rows: 4, class: "input-field" %>
     </div>
-
     <div class='my-5'>
       <%= form.label :images, '照片 (預設第一張為封面圖)' %>
       <% restaurant.images.each do |image| %>
@@ -34,43 +29,36 @@
       <% end %>
       <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
             w-full' %>
+      <%= form.hidden_field :images_cache %>
     </div>
-
     <div class="my-5">
       <%= form.label "電話" %>
       <%= form.telephone_field :tel, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "網站" %>
       <%= form.text_field :website, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "價位" %>
       <%= form.number_field :price, min: 0, class: "input-field" %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "餐廳類型"%>
       <%= form.select :restaurant_type, Restaurant.restaurant_type_list %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "料理類型 (可以複選)", class: "block"%>
       <%= form.collection_check_boxes(:cuisine_types, Restaurant.cuisine_list, :first, :last) do |option| %>
         <%= option.label(class:"input-checkbox") { option.check_box + option.text } %>
-      <%end%> 
+      <%end%>
     </div>
-
-
     <div class="my-5 col-span-2">
       <%= form.label "氣氛 (可以複選)", class: "block"%>
       <%= form.collection_check_boxes(:atmostphere, Restaurant.atmostphere_list, :first, :last) do |option| %>
         <%= option.label(class:"input-checkbox") { option.check_box + option.text } %>
-      <%end%> 
+      <%end%>
     </div>
-
   </div>
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

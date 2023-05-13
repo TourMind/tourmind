@@ -7,7 +7,7 @@ class HotelsController < ApplicationController
   before_action :check_permission, only: %i[new edit]
   
   def index
-    @pagy, @hotels = pagy(Hotel.all.order(:id),items: 6)
+    @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     @city_options = %w[台北市 新北市]
     @hotel_types_options = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
     @equipment_options = %w[無線網路(WIFI) 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 腳踏車租賃 24小時櫃檯接待]
@@ -31,7 +31,18 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = Hotel.new(hotel_params)
+    params = hotel_params
+    if params[:remove_images].present?
+      image_cache = JSON.parse(params[:images_cache])
+      params[:remove_images].reverse.each do |index|
+        image_cache.delete_at(index.to_i)
+      end
+      params[:images_cache] = JSON.generate(image_cache)
+      params.extract!(:remove_images)
+    end
+
+    @hotel = Hotel.new(params)
+
     if @hotel.save
       redirect_to hotels_path, notice: '新增成功!'
     else
@@ -42,13 +53,20 @@ class HotelsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @hotel.comments
-    @comments_score = @comments.average(:rating).try(:round, 1)
   end
 
   def edit; end
 
   def update
-    if @hotel.update(hotel_params)
+    params = hotel_params
+    if params[:remove_images].present?
+      params[:remove_images].reverse.each do |index|
+        params[:images].delete_at(index.to_i)
+      end
+      params.extract!(:remove_images)
+    end
+
+    if @hotel.update(params)
       redirect_to hotel_path(@hotel), notice: '更新成功!'
     else
       render :edit
@@ -68,7 +86,7 @@ class HotelsController < ApplicationController
 
   def hotel_params
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, :remove_images, :images_cache, equipment: [], images: [])
+                                  :hotel_types, :images_cache, equipment: [], images: [], remove_images: [],)
   end
 
   def star_rating(rating)
