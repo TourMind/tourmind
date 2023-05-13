@@ -39,7 +39,7 @@
           w-full' %>
   </div>
   <div class="flex flex-wrap">
-    <%= form.label :images, '照片' %>
+    <%= form.label :images,  '照片 (預設第一張為封面圖)' %>
     <% site.images.each do |image| %>
       <%= hidden_field_tag "site[images][]", image.identifier, id: "site_images_#{image.identifier}" %>
       <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
