@@ -15,6 +15,8 @@ export default class extends Controller {
     "id",
     "form",
     "public",
+    "submitBtn",
+    "spinner",
   ];
 
   initialize() {
@@ -74,6 +76,8 @@ export default class extends Controller {
 
       let res;
 
+      this.addSpinner();
+
       if (!id) {
         res = await post("/plans", {
           body: form,
@@ -89,9 +93,11 @@ export default class extends Controller {
       const resInfo = await res.json;
 
       if (!res.ok) {
-        return this.alertErrors(
+        this.alertErrors(
           resInfo.errors.map((el) => el.split(" ")[1]).join("\n")
         );
+        this.removeSpinner();
+        return;
       }
 
       window.location.replace(resInfo.redirect_url);
@@ -187,5 +193,15 @@ export default class extends Controller {
       day.querySelector(".day-title").textContent = `第 ${i + 1} 天`;
       day.querySelector(".sites-list").id = `plan-day-${i + 1}`;
     });
+  }
+
+  addSpinner() {
+    const spinner = `
+    <div class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status" data-edit-target="spinner"></div>`;
+    this.submitBtnTarget.insertAdjacentHTML("afterbegin", spinner);
+  }
+
+  removeSpinner() {
+    this.spinnerTarget.remove();
   }
 }
