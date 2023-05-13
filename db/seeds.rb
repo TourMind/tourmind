@@ -7,7 +7,79 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+nature = {
+  day1: [
+    {
+      name: '白石湖吊橋',
+      stay_time: 240,
+      type: '景點',
+      lat: 25.099377,
+      lng: 121.586956,
+      intro: '隱身在內湖的紫色巨龍，是少有的無懸吊纜繩的隱形吊橋，步道沿途還有同心池、夫妻樹、古椎埤、春秋步道和親子餐廳，很適合親子旅遊和浪漫約會，這時還有百合花綻放！',
+      phone: ' 02 2759 3001',
+    },
 
+    {
+    name: '煮雲軒茶館',
+    stay_time: 120,
+    type: '餐廳',
+    lat: 25.09876453,
+    lng: 121.5874356,
+    intro: '到了之後剛好店家要包裝，趁機拍一下，底下是加購的雞油馬鈴薯，超級香，細火慢慢悶烤而成的桶仔雞顏色相當漂亮',
+    address: '台北市內湖區內湖路三段181號',
+    price: 300-900
+    },
+    {
+      name: '大溝溪生態治水園區',
+      stay_time: 300,
+      type: '景點',
+      lat: 25.08944558,
+      lng: 121.5983770,
+      intro: '大溝溪生態治水園區又稱為大溝溪親水公園，是網友許美惠小姐貢獻的台北踏青景點，雖然我沒有完全照她建議的路線走，但4萬株花卉鋪成的繽紛花海，卻是年初五全家到內湖健行，第一個景點也是最重要的目的地。與北投社三層崎公園彩虹花毯有異曲同工之妙，不太相同的是，三層崎花海是位於山坡上，大溝溪花毯則位於水岸凹地，一個用仰角看，一個是俯角看，趣味不同。據說，設計靈感來自日本建築師石上純也的Art Biotop水上花園景觀。',
+      address: '台北市內湖區',
+    },
+    {
+      name: '饗趣31義式景觀餐廳',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.08295433,
+      lng: 121.6040659,
+      intro: '希望給予都會人們視覺與味蕾文化之間令人幸福的融合魔術提供都會人們歡呼美食的悠閒時光。雖然義式料理街上眾多，仍希望讓老饕們感受不同口味差異及餐飲特色，盡其所能地品嘗更多食材的原始風味。有情有義招牌德國大豬腳、肉汁鮮美的菲力牛排、香嫰可口的魚排、舒肥鎖汁的嫰煎雞肉….，每個餐點都是廚師們反覆的研究與確認，即使有著成本考量，即使有著繁複的工序，但仍有一定堅持。',
+      address: '台北市內湖區成功路五段31號',
+    },
+    {
+      name: '凱旋酒店',
+      stay_time: 480,
+      type: '住宿',
+      lat: 25.07901351,
+      lng: 121.5791092,
+      intro: '以風格設計的華麗姿態，引領旅者走入無限想像的廊道，結合歐式輕古典與現代時尚主義視覺風格，追求著優雅生活中的各式品味。',
+    },
+  ],
+  day2: [
+    {
+      name: '新山夢湖',
+      stay_time: 180,
+      type: '景點',
+      lat: 25.1308228,
+      lng: 121.636432,
+    },
+    {
+      name: '食養山房(汐萬路)',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.1297917, 
+      lng: 121.627178,
+    },
+    {
+      name: '富民親水公園',
+      stay_time: 240,
+      type: '景點',
+      lat: 25.1350090,
+      lng: 121.674911,
+    },
+  ],
+}
 sites = {
   day1: [
     {
@@ -114,36 +186,421 @@ sites2 = {
     },
   ],
 }
-
+nature2 = {
+  day1: [
+    {
+      name: '北海岸觀音山國家風景區',
+      stay_time: 240,
+      type: '景點',
+      lat: 25.283698, 
+      lng: 121.519078,
+    },
+    {
+      name: '麟山鼻木棧道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.2831560, 
+      lng: 121.5106259,
+    },
+    {
+      name: '老屋營業中',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.2851074, 
+      lng: 121.5109256,
+    },
+    {
+      name: '白沙灣海水浴場',
+      stay_time: 240,
+      type: '景點',
+      lat: 25.2846923, 
+      lng: 121.5172317,
+    },
+    {
+      name: '麟山鼻遊憩區',
+      stay_time: 180,
+      type: '景點',
+      lat: 25.2889666, 
+      lng: 121.5112260,
+    },
+    {
+      name: '老屋營業中',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.2851074, 
+      lng: 121.5109256,
+    },
+    {
+      name: '白沙灣濱海民宿',
+      stay_time: 180,
+      type: '住宿',
+      lat: 25.2869855, 
+      lng: 121.5108006,
+    },
+  ],
+  day2: [
+    {
+      name: '麟山鼻木棧道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.283234, 
+      lng: 121.510502,
+    },
+    {
+      name: '麟山鼻步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.28095,
+      lng: 121.50770,
+    },
+    {
+      name: '海角一樂園景觀餐廳',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.278384, 
+      lng: 121.509749,
+    },
+    {
+      name: '三生步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.269237, 
+      lng: 121.510031,
+    },
+    {
+      name: '三芝賞桐步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.259359, 
+      lng: 121.522324,
+    },
+    {
+      name: '咖啡樹景觀花園Coffee Tree',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.251395, 
+      lng: 121.535703,
+    },
+    {
+      name: '一畝田民宿',
+      stay_time: 120,
+      type: '住宿',
+      lat: 25.255095, 
+      lng: 121.518839,
+    },
+  ],
+  day3: [
+    {
+      name: '青山瀑布連接尖山湖紀念碑步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.241604, 
+      lng: 121.564384, 
+    },
+    {
+      name: '青山瀑布',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.23986, 
+      lng: 121.55689,
+    },
+    {
+      name: '興隆海產餐廳',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.248724,
+      lng: 121.507896,
+    },
+    {
+      name: '淺水灣海濱公園',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.252289, 
+      lng: 121.469944,
+    },
+    {
+      name: '三塊厝港灣',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.229856, 
+      lng: 121.441163,
+    },
+    {
+      name: '淡水紅毛城',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.176158, 
+      lng: 121.433592,
+    },
+  ],
+}
+nature3 = {
+  day1: [
+    {
+      name: '平菁街櫻花巷',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.1307655, 
+      lng: 121.5720294,
+    },
+    {
+      name: '鵝尾山水田',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.128667, 
+      lng: 121.574475,
+    },
+    {
+      name: '內雙溪戲水區',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.120327, 
+      lng: 121.579245, 
+    },
+    {
+      name: '大豐花園餐廳',
+      stay_time: 100,
+      type: '餐廳',
+      lat: 25.120366, 
+      lng: 121.582003,
+    },
+    {
+      name: '碧溪步道',
+      stay_time: 180,
+      type: '景點',
+      lat: 25.114389, 
+      lng: 121.580890,
+    },
+    {
+      name: '雞吉君拉麵',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.087071, 
+      lng: 121.566978,
+    },
+    {
+      name: '沐蘭精品旅館台北館',
+      stay_time: 120,
+      type: '住宿',
+      lat: 25.081707, 
+      lng: 121.561828,
+    },
+  ],
+  day2: [
+    {
+      name: '金面山親山步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.089755, 
+      lng: 121.568259,
+    },
+    {
+      name: '金面山大岩壁',
+      stay_time: 60,
+      type: '景點',
+      lat: 25.092122, 
+      lng: 121.570324,
+    },
+    {
+      name: '興蓬萊台菜海鮮餐廳',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.120870, 
+      lng: 121.530929,
+    },
+    {
+      name: '天母古道親山步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.127837, 
+      lng: 121.533839,
+    },
+    {
+      name: '天母水管路古道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.132050, 
+      lng: 121.535464, 
+    },
+    {
+      name: '草山夜未眠景觀餐廳',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.134294, 
+      lng: 121.535485, 
+    },
+    {
+      name: '沃田旅店',
+      stay_time: 120,
+      type: '住宿',
+      lat: 25.123663, 
+      lng: 121.531523, 
+    },
+  ],
+  day3: [
+    {
+      name: '北投社三層崎公園',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.145828, 
+      lng: 121.493083, 
+    },
+    {
+      name: '貴子坑親山步道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.15383, 
+      lng: 121.49033, 
+    },
+    {
+      name: '三空泉農園',
+      stay_time: 120,
+      type: '餐廳',
+      lat: 25.166293, 
+      lng: 121.474437,
+    },
+    {
+      name: '滬尾櫻花大道',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.169506, 
+      lng: 121.461355, 
+    },
+    {
+      name: '淡水紅毛城',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.176140, 
+      lng: 121.432852, 
+    },
+    {
+      name: '淡水紅毛城',
+      stay_time: 120,
+      type: '景點',
+      lat: 25.178354, 
+      lng: 121.448902, 
+    },
+    {
+      name: '淡水將捷金鬱金香酒店',
+      stay_time: 120,
+      type: '住宿',
+      lat: 25.177732, 
+      lng: 121.430105, 
+    },
+  ]
+}
 categories = %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
 
 Plan.destroy_all
-10.times do
+1.times do
   Plan.create!(
-    name: '臺北城市文化探險之旅',
+    name: '臺北城市自然探險之旅',
     description:
-      '這個兩天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將參觀台灣藝術家的作品，探索熱鬧的藝文場所，品嚐當地美食。第二天，您將欣賞中國古代文物和藝術品，放鬆身心，欣賞城市全景。這個行程適合喜歡城市探險和文化體驗的旅行者。',
+      '這個兩天的行程將帶你遊覽臺北市的自然風光。第一天，您將前往臺北市周邊的自然保護區，欣賞壯觀的瀑布、湖泊和森林，並體驗生態旅遊。在晚上，您可以品嚐當地的美食。第二天，您將前往北海岸，欣賞海灘和海岸線的美景，並體驗各種海洋活動。這個行程適合喜歡自然探險和體驗的旅行者。',
     days: 2,
-    locations: sites,
+    locations: nature,
     user_id: 1,
     public: true,
-    category: categories.sample,
+    category: "自然",
   )
-
   Plan.create!(
-    name: '臺北城市自然和現代化之旅',
+    name: '臺北城市自然探險之旅',
     description:
-      '這個三天的行程將帶你遊覽臺北市的文化、美食、自然和現代化等多個方面。第一天，您將欣賞中國古代藝術品、探索著名的夜市、欣賞現代化建築的壯觀。第二天，您將欣賞壯麗的自然風光、探索台灣溫泉的歷史和文化。',
+      '這個三天的行程將帶你遊覽臺北市的多個方面，包括文化、美食和自然。第一天，您可以參觀臺北市的知名景點，例如國家宮殿博物館和台北101大樓，並品嚐當地美食。第二天，您可以前往臺北市周邊的自然保護區，欣賞壯觀的瀑布、湖泊和森林，並體驗生態旅遊。在晚上，您可以再次品嚐當地的美食。第三天，您可以前往北海岸欣賞海灘和海岸線的美景，並體驗各種海洋活動。這個行程適合喜歡城市探險、自然探險和文化體驗的旅行者。',
     days: 3,
-    locations: sites2,
+    locations: nature2,
     user_id: 1,
     public: true,
-    category: categories.sample,
+    category: "自然",
+  )
+  Plan.create!(
+    name: '臺北城市自然探險之旅',
+    description:
+      '這個三天的行程將帶你遊覽臺北市的多個方面，包括文化、美食和自然。第一天，您可以參觀臺北市的知名景點，例如國家宮殿博物館和台北101大樓，並品嚐當地美食。第二天，您可以前往臺北市周邊的自然保護區，欣賞壯觀的瀑布、湖泊和森林，並體驗生態旅遊。在晚上，您可以再次品嚐當地的美食。第三天，您可以前往北海岸欣賞海灘和海岸線的美景，並體驗各種海洋活動。這個行程適合喜歡城市探險、自然探險和文化體驗的旅行者。',
+    days: 3,
+    locations: nature3,
+    user_id: 1,
+    public: true,
+    category: "自然",
   )
 end
-
 # 以下是景點新增8處
 Site.destroy_all
+Site.create(
+  name: '大溝溪生態治水園區',
+  website: 'https://www.travel.taipei/zh-tw/attraction/details/2269',
+  address: '台北市內湖區',
+  latitude: 25.08929687, 
+  longitude: 121.5984743, 
+  stay_duration: 2,
+  intro:
+    '這個以日本水上花園為靈感的公共區域擁有清幽的景觀。',
+  pet_friendly: '可攜寵物',
+  site_types: %w[自然景觀],
+  tel: '0227208889',
+  images: '',
+  parking: '是',
+)
+Site.create(
+  name: '白石湖吊橋',
+  website: 'https://www.travel.taipei/zh-tw/attraction/details/231',
+  address: '台北市內湖區碧山巖開漳聖王廟',
+  latitude: 25.09999774, 
+  longitude: 121.5872373, 
+  stay_duration: 2,
+  intro:
+    '全長 116 公尺的狹窄吊橋，象徵一條飛龍橫越山谷，並可飽覽山景。',
+  pet_friendly: '可攜寵物',
+  site_types: %w[自然景觀 觀光勝地],
+  tel: '0227593001',
+  images: '',
+  parking: '是',
+)
+Site.create(
+  name: '富民親水公園',
+  website: 'https://taiwantour.info/keelung-mystery/',
+  address: '基隆市七堵區瑪陵坑',
+  latitude: 25.13619449, 
+  longitude: 121.6753038, 
+  stay_duration: 2,
+  intro:
+    '山巒與森林環繞的小型湖泊，設有步道，是熱門的拍照景點。',
+  pet_friendly: '可攜寵物',
+  site_types: %w[自然景觀 觀光勝地],
+  tel: '',
+  images: '',
+  parking: '是',
+)
+Site.create(
+  name: '富民親水公園',
+  website: 'https://taiwantour.info/keelung-mystery/',
+  address: '基隆市七堵區瑪陵坑',
+  latitude: 25.13619449, 
+  longitude: 121.6753038, 
+  stay_duration: 2,
+  intro:
+    '山巒與森林環繞的小型湖泊，設有步道，是熱門的拍照景點。',
+  pet_friendly: '可攜寵物',
+  site_types: %w[自然景觀 觀光勝地],
+  tel: '',
+  images: '',
+  parking: '是',
+)
+Site.create(
+  name: '新山夢湖',
+  website: 'https://www.facebook.com/dreamlakecoffie/?locale=zh_TW',
+  address: '新北市汐止區夢湖路',
+  latitude: 25.12808752, 
+  longitude: 121.6360876,
+  stay_duration: 2,
+  intro:
+    '山巒與森林環繞的小型湖泊，設有步道，是熱門的拍照景點。',
+  pet_friendly: '可攜寵物',
+  site_types: %w[自然景觀 觀光勝地],
+  tel: '0935263218',
+  images: '',
+  parking: '是',
+)
 Site.create(
   name: '松山文創園區',
   website: 'https://www.songshanculturalpark.org/',
@@ -288,6 +745,47 @@ Site.create(
 
 Restaurant.destroy_all
 Restaurant.create(
+  name: '饗趣31義式景觀餐廳',
+  intro:
+    "希望給予都會人們視覺與味蕾文化之間令人幸福的融合魔術提供都會人們歡呼美食的悠閒時光。雖然義式料理街上眾多，仍希望讓老饕們感受不同口味差異及餐飲特色，盡其所能地品嘗更多食材的原始風味。有情有義招牌德國大豬腳、肉汁鮮美的菲力牛排、香嫰可口的魚排、舒肥鎖汁的嫰煎雞肉….，每個餐點都是廚師們反覆的研究與確認，即使有著成本考量，即使有著繁複的工序，但仍有一定堅持。",
+  address: '台北市內湖區成功路五段31號',
+  tel: '0227913281',
+  website: 'https://www.facebook.com/DillDahuPark/?locale=zh_TW',
+  price: 120,
+  restaurant_type: '義式料理',
+  atmostphere: %w[舒適休閒],
+  lat: 25.0828474, 
+  long: 121.603958, 
+)
+Restaurant.create(
+  name: '煮雲軒茶館',
+  intro:
+    "碧山野味餐廳位於碧山巖寺廟牌樓旁，亦即碧山巖停車場的上方，是一家網路上風評不錯的台式餐廳，雖然店內沒有什麼裝璜，但是用餐環境還不錯，生意很好，服務人員且十分客氣，讓客人有賓至如歸的感覺，這裡的食材非常新鮮、味道好、份量又多，價位也很公道實在。",
+  address: '台北市內湖區碧山路32-1號',
+  tel: '0227919636',
+  website: 'https://angela51.com/baishihu-restaurant/',
+  price: 120,
+  restaurant_type: '台菜',
+  atmostphere: %w[舒適休閒],
+  lat: 25.1003196, 
+  long: 121.585541, 
+)
+Restaurant.create(
+  name: '食養山房(汐萬路)',
+  intro:
+    "知道食養山房這間餐廳好一陣子，被無菜單料理吸引，被那深居山嵐中的景色給吸引，想著要來這裡吃一頓午餐，讓身心都清靜一回，
+    原先是決定來此慶祝黛咪生日的，不過當時訂位已經滿到兩個月後，只好延後改來慶祝家族紀念日(抱著還是要吃到的決心),
+    那天上午開著車繞啊繞的，好久沒有來到汐止了，街道景象實在陌生。漸漸的車開進山裡，窗外只剩一片綠意，透著緩緩升起的日光。",
+  address: '台灣新北市汐止區汐萬路三段366巷6號',
+  tel: '0226462266',
+  website: 'https://eatlovephoto.com/blog/post/223839095',
+  price: 120,
+  restaurant_type: '台灣小吃/台菜',
+  atmostphere: %w[舒適休閒],
+  lat: 25.1281082, 
+  long: 121.625806,
+)
+Restaurant.create(
   name: '甘霖涼麵-永和店',
   intro:
     "我們是涼麵店，也有賣熱拌麵
@@ -422,6 +920,20 @@ Restaurant.create(
 
 # 以下為飯店新增11筆
 Hotel.destroy_all
+Hotel.create(
+  name: '凱旋酒店',
+  website: 'https://www.justpalacehotel.com.tw/',
+  star_rating: '4星級飯店',
+  address: '台北市內湖區江南街55號',
+  latitude: 25.07773349, 
+  longitude: 121.5780821,
+  intro:
+    '以風格設計的華麗姿態，引領旅者走入無限想像的廊道，結合歐式輕古典與現代時尚主義視覺風格，追求著優雅生活中的各式品味，在無邊際的夢想國度裡，我們為您提供超乎「值」與「質」的服務!',
+  hotel_types: '飯店',
+  tel: '(02)87527888',
+  images: '',
+  equipment: %w[無線網路(WIFI) 停車場/停車位 早餐服務 24小時櫃檯接待 行李存放 乾洗服務 健身中心],
+)
 Hotel.create(
   name: '和苑三井花園飯店台北忠孝',
   website: 'https://www.gardenhotels.co.jp/taipei-zhongxiao/tw/',

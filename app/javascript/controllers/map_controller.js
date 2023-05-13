@@ -7,7 +7,7 @@ export default class extends Controller {
 
   async connect() {
     const loader = new Loader({
-      apiKey: "",
+      apiKey: "AIzaSyCk4860WbBFgdzW8qppn1rja3aJiUJ17xE",
       version: "weekly",
     });
 
