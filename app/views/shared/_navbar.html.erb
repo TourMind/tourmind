@@ -1,37 +1,45 @@
 <nav class="static top-0 flex items-center justify-between h-16 bg-white shadow-xl" data-controller="navbar">
   <div class="flex items-center ml-4">
-    <%= link_to root_path, class: 'cursor-default' do %>
-      <%= image_tag 'logo.png',size: '30x30', class: 'inline-block' %>
-      <span class="align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
-      <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
+    <%= link_to root_path do %>
+      <%= image_tag 'logo.png',size: '35x35', class: 'inline-block' %>
+      <span class="text-lg align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
+      <span class="items-center text-lg align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
     <% end %>
   </div>
   <div class="flex items-center px-2">
-    <% if current_user &&  current_user.role == 1 %>
-      <span class="px-2 py-2"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
-        <li class="px-2 py-2 md:px-2">
-          <span class="mr-2 btn-round btn-sm btn-gray">
+    <% if current_user %>
+      <span class="px-2 py-2 text-lg"><%= current_user.email %></span>
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right md:justify-center navbar-menu md:flex" style="z-index: 99">
+        <li class="px-5 py-2 md:px-2">
+          <%= link_to favorites_path do %>
+            <span class="mr-2 btn-round btn-sm btn-gray">
               <i class="fa-solid fa-heart fa-bounce" style="color: #ff0000;"></i>
-              <%= link_to '喜愛清單', favorites_path %>
-          </span>
+              喜愛清單
+            </span>
+          <% end %>
         </li>
         <li class="px-5 py-2 md:px-2">
           <% if current_user.diamond_grade == '一般會員'%>
             <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray"  %>
           <% elsif current_user.diamond_grade == '白鑽會員' %>
-            <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
+            <%= link_to order_path do %>
+              <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 訂單資訊</span>
+            <% end %>
           <% elsif current_user.diamond_grade == '藍鑽會員' %>
-            <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 藍鑽會員</span>
+            <%= link_to order_path do %>
+              <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 訂單資訊</span>
+            <% end %>
           <% elsif current_user.diamond_grade == '紅鑽會員' %>
-            <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員</span>
+            <%= link_to order_path do %>
+              <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 訂單資訊</span>
+            <% end %>
           <% end %>
         </li>
         <li class="px-5 py-2 md:px-2">
             <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
         </li>
         <li class="px-5 py-2 md:px-2">
-            <%= link_to "設置", edit_user_registration_path, class: "btn-round btn-sm btn-gray align-middle" %>
+          <%= link_to "個人設定", edit_user_registration_path, class: "btn-round btn-sm btn-gray align-middle" %>
         </li>
       </ul>
       <i class="rounded-full ring ring-primary ring-offset-base-100">
@@ -61,7 +69,7 @@
           <i class="fa-solid fa-bars fa-xl"></i>
       </button>
     <% else %>
-      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex">
+      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style= "z-index: 99">
         <li class="px-5 py-2 md:px-2">
           <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray align-middle"  %>
         </li>
