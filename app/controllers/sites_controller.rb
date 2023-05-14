@@ -7,16 +7,15 @@ class SitesController < ApplicationController
   before_action :check_permission, only: %i[new edit]
 
   def index
-    # @pagy, @site = pagy(Site.all.order(:id), items: 6)
     declare_params
 
     @pagy, @sites = if params[:keyword].present?
-               pagy(Site.search(params[:keyword]).order(updated_at: :desc), items: 6)
-             elsif @address.present? || @site_types.present? || @pet_friendly.present?
-               pagy(Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc), items: 6)
-             else
-               pagy(Site.order(updated_at: :desc), items: 6)
-             end
+                      pagy(Site.search(params[:keyword]).order(updated_at: :desc), items: 6)
+                    elsif @address.present? || @site_types.present? || @pet_friendly.present?
+                      pagy(Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc), items: 6)
+                    else
+                      pagy(Site.order(updated_at: :desc), items: 6)
+                    end
     flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
   end
 

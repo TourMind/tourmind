@@ -7,15 +7,14 @@ class HotelsController < ApplicationController
   before_action :check_permission, only: %i[new edit]
 
   def index
-    # @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     declare_params
     @pagy, @hotels = if params[:keyword].present?
-                pagy(Hotel.search(params[:keyword]).order(updated_at: :desc), items: 6)
-              elsif @address.present? || @hotel_types.present? || @equipment.present?
-                pagy(Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc), items: 6)
-              else
-                pagy(Hotel.order(updated_at: :desc), items: 6)
-              end
+                       pagy(Hotel.search(params[:keyword]).order(updated_at: :desc), items: 6)
+                     elsif @address.present? || @hotel_types.present? || @equipment.present?
+                       pagy(Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc), items: 6)
+                     else
+                       pagy(Hotel.order(updated_at: :desc), items: 6)
+                     end
     flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
   end
 
