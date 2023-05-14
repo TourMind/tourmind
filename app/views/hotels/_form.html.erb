@@ -46,13 +46,8 @@
       <% @hotel.images.each_with_index do |image, index| %>
         <div class="relative">
           <label class="absolute top-1 right-3">
-            <<<<<<< HEAD
             <%= form.check_box "remove_images", {class: "hidden",multiple: true, data:{action:"change->form#hiddenImage"}}, image.identifier, nil %>
             <i class="cursor-pointer fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white"></i>
-            =======
-            <%= form.check_box "remove_images", {class: "hidden",multiple: true, data:{action:"change->form#hiddenImage"}}, index, nil %>
-            <i class="cursor-pointer ml-1 fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white"></i>
-            >>>>>>> e6bc8f3 (WIP update btn)
           </label>
           <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
           <%= hidden_field_tag "hotel[images][]", image.identifier, id: "hotel_images_#{image.identifier}" %>
@@ -85,6 +80,5 @@
   <div class='inline'>
     <%= form.submit '提交' , class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"
         %>
-    <%= link_to '返回住宿列表', dashboard_hotels_path, class:'ml-2 rounded-lg py-3 px-5 bg-blue-500 inline-block text-white font-medium' %>
   </div>
 <% end %>
