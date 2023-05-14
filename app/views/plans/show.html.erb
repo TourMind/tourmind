@@ -1,6 +1,6 @@
 <main class="container w-11/12 mx-auto flex">
   <div class="flex flex-col mt-10 w-full">
-    <div data-controller="share">
+    <div data-controller="share" data-id="<%= @plan.id %>" data-share-target="planId">
       <%= link_to plans_path do %>
         <div class="bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400">
           <span>所有行程</span>
@@ -21,7 +21,7 @@
           <div class="share-btn relative cursor-pointer inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 border-2 transition-all duration-400 select-none" data-action="click->share#toggleSearch" data-share-target="searchBtn">
             <span class="inline-block text-red-500">&#x2665;</span>
             <span>邀請旅伴一起編輯</span>
-            <div class="search-drop-down absolute left-0 z-10 w-96 mt-1 text-gray-500 transition-all ease-in-out" data-share-target="menu" data-action="click->share#preventProp">
+            <div class="search-drop-down absolute left-0 z-10 w-80 mt-1 text-gray-500 transition-all ease-in-out cursor-default" data-share-target="menu" data-action="click->share#preventProp">
               <div class="relative">
                 <form data-action="submit->share#searchUser">
                   <div class="bg-gray-100 w-full h-16 rounded-xl mb-3 shadow-lg p-2 relative ">
@@ -47,6 +47,24 @@
                       <div class="font-bold text-lg">Tom</div>
                     </div>
                   </div> %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="share-btn relative cursor-pointer inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 border-2 transition-all duration-400 select-none" data-action="click->share#toggleSharedList" data-share-target="shareBtn">
+            <span>共同編輯名單</span>
+            <div class="search-drop-down absolute left-0 z-10 w-64 mt-1 text-gray-500 transition-all ease-in-out" data-share-target="sharedList">
+              <div class="bg-gray-100 w-full rounded-xl shadow-xl overflow-hidden relative transition-all ease-in-out">
+                <!-- items -->
+                <div class="w-full flex p-3 pl-4 items-center hover:bg-gray-200 rounded-lg cursor-pointer">
+                  <div class="mr-4">
+                    <div class="h-11 w-11 rounded-sm flex items-center justify-center">
+                      <img class="w-full h-full rounded-full truncate" src="/assets/user_default_avatar-4d250da78bcf1e681853cae1acb1174c0dcf35a31321d507fc27adf6591b2059.png">
+                    </div>
+                  </div>
+                  <div>
+                    <div class="font-bold text-lg">Tom</div>
+                  </div>
                 </div>
               </div>
             </div>
