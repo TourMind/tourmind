@@ -22,20 +22,12 @@ class HotelsController < ApplicationController
   end
 
   def create
-    params = hotel_params
-    if params[:remove_images].present?
-      image_cache = JSON.parse(params[:images_cache])
-      params[:remove_images].reverse.each do |index|
-        image_cache.delete_at(index.to_i)
-      end
-      params[:images_cache] = JSON.generate(image_cache)
-      params.extract!(:remove_images)
-    end
+    params = Image::ImageService.remove_image(hotel_params)
 
     @hotel = Hotel.new(params)
 
     if @hotel.save
-      redirect_to hotels_path, notice: '新增成功!'
+      redirect_to hotels_path, notice: '飯店新增成功'
     else
       render :new
     end
@@ -49,16 +41,10 @@ class HotelsController < ApplicationController
   def edit; end
 
   def update
-    params = hotel_params
-    if params[:remove_images].present?
-      params[:remove_images].reverse.each do |index|
-        params[:images].delete_at(index.to_i)
-      end
-      params.extract!(:remove_images)
-    end
+    params = Image::ImageService.remove_image(hotel_params)
 
     if @hotel.update(params)
-      redirect_to hotel_path(@hotel), notice: '更新成功!'
+      redirect_to hotel_path(@hotel), notice: '飯店更新成功'
     else
       render :edit
     end
@@ -66,7 +52,7 @@ class HotelsController < ApplicationController
 
   def destroy
     @hotel.destroy
-    redirect_to hotels_path, notice: '已刪除!'
+    redirect_to hotels_path, notice: '飯店刪除成功'
   end
 
   private

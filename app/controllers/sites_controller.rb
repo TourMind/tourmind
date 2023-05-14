@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   before_action :comment_rating, only: %i[index show]
 
   def index
-    @pagy, @site = pagy(Site.all.order(:id),items: 6)
+    @pagy, @site = pagy(Site.all.order(:id), items: 6)
     @city_options = %w[台北市 新北市]
     @site_type_options = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
     @pet_friendly_options = %w[可攜寵物]
@@ -30,9 +30,11 @@ class SitesController < ApplicationController
   end
 
   def create
-    @site = Site.new(site_params)
+    params = Image::ImageService.remove_image(site_params)
+
+    @site = Site.new(params)
     if @site.save
-      redirect_to sites_path, notice: '新增成功'
+      redirect_to sites_path, notice: '景點新增成功'
     else
       render :new
     end
@@ -47,8 +49,9 @@ class SitesController < ApplicationController
   def edit; end
 
   def update
-    if @site.update(site_params)
-      redirect_to site_path(@site), notice: '更新成功'
+    params = Image::ImageService.remove_image(site_params)
+    if @site.update(params)
+      redirect_to site_path(@site), notice: '景點更新成功'
     else
       render :edit
     end
@@ -57,7 +60,7 @@ class SitesController < ApplicationController
   def destroy
     set_site
     @site.destroy
-    redirect_to sites_path, notice: '已刪除!'
+    redirect_to sites_path, notice: '景點刪除成功'
   end
 
   private
@@ -68,7 +71,7 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
-                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [])
+                                 :stay_duration, :intro, :pet_friendly, :images_cache, site_types: [], images: [], remove_images: [],)
   end
 
   def star_rating(rating)

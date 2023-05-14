@@ -7,14 +7,15 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants or /restaurants.json
   def index
-    @pagy, @restaurants = pagy(Restaurant.all.order(:id),items: 6)
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 6)
     declare_params
     get_min_max_price
 
     @restaurants = if params[:keyword].present?
                      Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
                    elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
-                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price, @max_price).order(updated_at: :desc).page(params[:page])
+                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
+                                       @max_price,).order(updated_at: :desc).page(params[:page])
                    else
                      Restaurant.order(updated_at: :desc).page(params[:page])
                    end
@@ -38,7 +39,8 @@ class RestaurantsController < ApplicationController
 
   # POST /restaurants or /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    params = Image::ImageService.remove_image(restaurant_params)
+    @restaurant = Restaurant.new(params)
     if @restaurant.save
       get_location
       redirect_to restaurants_path, notice: '餐廳新增成功'
@@ -49,7 +51,8 @@ class RestaurantsController < ApplicationController
 
   # PATCH/PUT /restaurants/1 or /restaurants/1.json
   def update
-    if @restaurant.update(restaurant_params)
+    params = Image::ImageService.remove_image(restaurant_params)
+    if @restaurant.update(params)
       get_location
       redirect_to restaurant_url(@restaurant), notice: '餐廳更新成功'
     else
@@ -97,7 +100,7 @@ class RestaurantsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def restaurant_params
     params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
-                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }).tap do |whitelisted|
+                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }, { remove_images: [] },).tap do |whitelisted|
       whitelisted[:cuisine_types].reject!(&:empty?)
       whitelisted[:atmostphere].reject!(&:empty?)
     end

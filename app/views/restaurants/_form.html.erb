@@ -1,4 +1,4 @@
-<%= form_with(model: restaurant, class: "contents") do |form| %>
+<%= form_with(model: restaurant, class: "contents", data: { controller: 'form' }) do |form| %>
   <% if restaurant.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
@@ -24,11 +24,23 @@
     </div>
     <div class='my-5'>
       <%= form.label :images, '照片 (預設第一張為封面圖)' %>
-      <% restaurant.images.each do |image| %>
-        <%= hidden_field :restaurant, :images, multiple: true, value: image.identifier %>
-      <% end %>
-      <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
-            w-full' %>
+      <div class="flex flex-wrap" data-form-target="imageList">
+        <% restaurant.images.each_with_index do |image, index| %>
+          <div class="relative">
+            <label class="absolute top-1 right-3">
+              <%= form.check_box "remove_images", {class: "hidden",multiple: true, data:{action:"change->form#hiddenImage"}}, image.identifier, nil %>
+              <i class="cursor-pointer fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white"></i>
+            </label>
+            <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
+            <%= hidden_field_tag "restaurant[images][]", image.identifier, id: "restaurant_images_#{image.identifier}" %>
+          </div>
+        <% end %>
+        <div class="cursor-pointer w-32 h-32 shadow rounded px-2 flex justify-center items-center" data-action="click->form#openUploadDialog" data-upload-button>
+          <i class="fa-solid fa-circle-plus text-3xl"></i>
+        </div>
+      </div>
+      <input type="file" class="hidden" data-form-target="uploadTmpFileElem" accept="image/jpeg,image/gif,image/png,image/jpg" data-action="change->form#uploadImage" multiple>
+      <%= form.file_field :images, multiple: true, class: 'hidden', accept: 'image/jpeg,image/gif,image/png,image/jpg', data:{form_target: "uploadFileElem"}%>
       <%= form.hidden_field :images_cache %>
     </div>
     <div class="my-5">
