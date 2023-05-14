@@ -42,19 +42,23 @@
   </div>
   <div>
     <%= form.label :images, '照片 (預設第一張為封面圖)' %>
-    <div class="flex" data-form-target="imageList">
+    <div class="flex flex-wrap" data-form-target="imageList">
       <% @hotel.images.each_with_index do |image, index| %>
         <div class="relative">
           <label class="absolute top-1 right-3">
             <%= form.check_box "remove_images", {class: "hidden",multiple: true, data:{action:"change->form#hiddenImage"}}, index, nil %>
-            <i class="ml-1 fa fa-times-circle"></i>
+            <i class="cursor-pointer ml-1 fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white"></i>
           </label>
           <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
           <%= hidden_field_tag "hotel[images][]", image.identifier, id: "hotel_images_#{image.identifier}" %>
         </div>
       <% end %>
+      <div class="cursor-pointer w-32 h-32 shadow rounded px-2 flex justify-center items-center" data-action="click->form#openUploadDialog" data-upload-button>
+        <i class="fa-solid fa-circle-plus text-3xl"></i>
+      </div>
     </div>
-    <%= form.file_field :images, multiple: true, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full', accept: 'image/jpeg,image/gif,image/png,image/jpg', data:{action:"change->form#uploadImage", form_target: "inputFileElem"}%>
+    <input type="file" class="hidden" data-form-target="uploadTmpFileElem" accept="image/jpeg,image/gif,image/png,image/jpg" data-action="change->form#uploadImage" multiple>
+    <%= form.file_field :images, multiple: true, class: 'hidden', accept: 'image/jpeg,image/gif,image/png,image/jpg', data:{form_target: "uploadFileElem"}%>
     <%= form.hidden_field :images_cache %>
   </div>
   <div class='my-5'>
@@ -74,8 +78,9 @@
       <% end %>
     </div>
   </div>
-  <div class='inline'>
-    <%= form.submit '提交' , class:'rounded-lg py-3 px-5 bg-blue-500 text-white inline-block font-medium cursor-pointer'
+  <div class='inline text'>
+    <%= form.submit '提交' , class:'btn bg-hotel opacity-70 hover:opacity-100 hover:bg-hotel'
         %>
+    <%= link_to '返回飯店列表', hotels_path, class:'btn leading-3 text-hotel border-hotel bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-hotel' %>
   </div>
 <% end %>
