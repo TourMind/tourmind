@@ -1,5 +1,6 @@
 <section class="flex items-center justify-center w-full h-screen">
   <%= turbo_frame_tag "login" do %>
+    <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
     <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
       <div class="form-value">
           <div class="m-8 field ">
