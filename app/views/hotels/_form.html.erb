@@ -62,14 +62,13 @@
     <%= form.hidden_field :images_cache %>
   </div>
   <div class='my-5'>
-    <%= form.label :hotel_types , '住宿類型' %>
-    <%= form.select :hotel_types , options_for_select([ '飯店' , '民宿' , '度假村' , '青年旅館' , '日租套房','奢華酒店' ], selected: @hotel.hotel_types) %>
+    <%= form.label :hotel_types, '住宿類型' %>
+    <%= form.select :hotel_types, options_for_select(Hotel::HOTEL_TYPES_OPTIONS, selected: @hotel.hotel_types) %>
   </div>
   <div class='my-5'>
     <%= form.label :equipment , '飯店設備' , class:'block'%>
-    <% equipment =%w[無線網路(WIFI) 游泳池 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 自助洗衣服務 腳踏車租賃 24小時櫃檯接待] %>
     <div>
-      <% equipment.each do |equipment| %>
+      <% Hotel::EQUIPMENT_OPTIONS.each do |equipment| %>
         <label class='inline-flex items-center mr-4'>
           <%= check_box_tag 'hotel[equipment][]' , equipment, @hotel.equipment.include?(equipment),
                   class:'h-5 w-5 text-gray-600' %>
