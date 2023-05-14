@@ -72,17 +72,6 @@ export default class extends Controller {
 
     removeElement();
 
-    const createUploadButton = () => {
-      const uploadButton = document.createElement('div');
-      uploadButton.className = 'cursor-pointer w-32 h-32 shadow rounded px-2 flex justify-center items-center';
-      uploadButton.dataset.action = "click->form#openUploadDialog";
-      uploadButton.dataset.uploadButton = "";
-      uploadButton.innerHTML = `<i class="fa-solid fa-circle-plus"></i>`;
-      return uploadButton;
-    }
-
-    removeElement();
-
     for (let i = 0; i < images.length; i++) {
       const image = images[i];
       const dataUrl = URL.createObjectURL(image);
