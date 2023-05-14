@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <div class="flex items-center px-2">
-    <% if current_user %>
+    <% if current_user && current_user.role == 1 %>
       <span class="px-2 py-2 text-lg"><%= current_user.email %></span>
       <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right md:justify-center navbar-menu md:flex" style="z-index: 99">
         <li class="px-5 py-2 md:px-2">
