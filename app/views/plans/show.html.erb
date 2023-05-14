@@ -18,14 +18,14 @@
               <span>刪除行程</span>
             </div>
           <% end %>
-          <div class="share-btn relative cursor-pointer inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 border-2 transition-all duration-400" data-action="click->share#toggleSearch" data-share-target="searchBtn">
+          <div class="share-btn relative cursor-pointer inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 border-2 transition-all duration-400 select-none" data-action="click->share#toggleSearch" data-share-target="searchBtn">
             <span class="inline-block text-red-500">&#x2665;</span>
             <span>邀請旅伴一起編輯</span>
             <div class="search-drop-down absolute left-0 z-10 w-96 mt-1 text-gray-500 transition-all ease-in-out" data-share-target="menu" data-action="click->share#preventProp">
               <div class="relative">
                 <form data-action="submit->share#searchUser">
                   <div class="bg-gray-100 w-full h-16 rounded-xl mb-3 shadow-lg p-2 relative ">
-                    <input type="text" placeholder="輸入email來邀請" class="w-full h-full text-md rounded-lg border-none" data-share-target="keyword"/>
+                    <input type="text" placeholder="輸入email來尋找旅伴" class="w-full h-full text-md rounded-lg border-none" data-share-target="keyword"/>
                     <div class="absolute right-5 top-0 h-full flex items-center">
                       <button type="submit">
                         <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" width="512px" height="512px">

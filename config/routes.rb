@@ -18,9 +18,12 @@ Rails.application.routes.draw do
   resources :plans do 
     resources :comments
   end
+
+  # 行程相關路性
+  get '/check_user', to: 'plans#check_user'
   get '/day_info', to: 'plans#day_info'
   get '/plan_overview', to: 'plans#plan_overview'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   resources :comments
 
   # 升級方案
