@@ -53,10 +53,10 @@
       <div class='p-4'>
         <h2 class="text-2xl font-bold">飯店設備</h2>
         <ul class='flex flex-wrap py-2'>
-          <% @hotel.equipment.each do |equipment| %>
-            <%= link_to hotels_path(equipment: [equipment]) do %>
+          <% Hotel::EQUIPMENT_OPTIONS.each do |option| %>
+            <%= link_to hotels_path(equipment: [option]) do %>
               <li class='inline-block py-1 px-2 mr-2 mt-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%=equipment%>
+                <%=option%>
               </li>
             <% end %>
           <% end %>
