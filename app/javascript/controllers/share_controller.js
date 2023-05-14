@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
+import { get, post } from "@rails/request.js";
 import Swal from "sweetalert2";
-import { get } from "@rails/request.js";
 
 // Connects to data-controller="share"
 export default class extends Controller {
@@ -13,6 +13,8 @@ export default class extends Controller {
     "sharedList",
     "addBtn",
     "planId",
+    "userCard",
+    "editors",
   ];
 
   initialize() {
@@ -30,6 +32,8 @@ export default class extends Controller {
         toast.addEventListener("mouseleave", Swal.resumeTimer);
       },
     });
+
+    this.id = this.planIdTarget.dataset.id;
   }
 
   async searchUser(e) {
@@ -57,11 +61,43 @@ export default class extends Controller {
       return;
     }
 
-    this.resultTarget.innerHTML = this.userCard(data.profilePic, data.userName);
+    this.resultTarget.innerHTML = this.userCard(
+      data.userId,
+      data.profilePic,
+      data.userName
+    );
   }
 
-  addEditor() {
+  async addEditor() {
     this.addBtnTarget.innerHTML = this.loadingIcon();
+    const res = await post(`/plans/${this.id}/add_editor`, {
+      body: { userId: this.userCardTarget.dataset.id },
+      responseKind: "json",
+    });
+
+    if (!res.ok) {
+      this.addBtnTarget.innerHTML = "";
+      return this.alertErrors("新增失敗");
+    }
+
+    const data = await res.json;
+    this.addBtnTarget.innerHTML = this.checkIcon();
+
+    if (this.editorsTarget.id === "empty") {
+      this.editorsTarget.innerHTML = this.userCard(
+        data.userId,
+        data.profilePic,
+        data.userName
+      );
+
+      this.editorsTarget.id = "";
+      return;
+    }
+
+    this.editorsTarget.insertAdjacentHTML(
+      "afterbegin",
+      this.userCard(data.userId, data.profilePic, data.userName)
+    );
   }
 
   preventProp(e) {
@@ -114,9 +150,9 @@ export default class extends Controller {
     </div>`;
   }
 
-  userCard(profilePic, userName) {
+  userCard(userId, profilePic, userName) {
     return `
-    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between">
+    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between" data-id=${userId} data-share-target="userCard">
       <div class="flex items-center">
         <div class="mr-4">
           <div class="h-11 w-11 rounded-sm flex items-center justify-center">

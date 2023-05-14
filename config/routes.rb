@@ -16,12 +16,12 @@ Rails.application.routes.draw do
   end
 
   resources :plans do 
+    post 'add_editor', on: :member
     resources :comments
   end
 
   # 行程相關路性
   get '/check_user', to: 'plans#check_user'
-  post '/plan/:id/add_editor', to: 'plans#add_editor'
   get '/day_info', to: 'plans#day_info'
   get '/plan_overview', to: 'plans#plan_overview'
 
