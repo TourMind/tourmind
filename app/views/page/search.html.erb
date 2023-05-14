@@ -1,0 +1,14 @@
+<h2>Restaurants</h2>
+<% @restaurants.each do |restaurant| %>
+  <p><%= link_to restaurant.name, restaurant_path(restaurant) %></p>
+<% end %>
+
+<h2>Hotels</h2>
+<% @hotels.each do |hotel| %>
+  <p><%= link_to hotel.name, hotel_path(hotel) %></p>
+<% end %>
+
+<h2>Attractions</h2>
+<% @sites.each do |site| %>
+  <p><%= link_to site.name, site_path(site) %></p>
+<% end %>

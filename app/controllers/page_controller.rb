@@ -4,7 +4,46 @@ class PageController < ApplicationController
   before_action :authenticate_user!, only: [:pricing]
   before_action :comment_all, :total_rating, :comment_rating, only: [:home]
   helper_method :star_rating
-  def home; end
+  def home
+    @keyword = params[:keyword]
+    if @keyword.present?
+      # 用于存储所有符合搜索条件的结果的数组
+      results = []
+      results += Restaurant.where("name LIKE ?", "%#{@keyword}%")
+      results += Hotel.where("name LIKE ?", "%#{@keyword}%")
+      results += Site.where("name LIKE ?", "%#{@keyword}%")
+  
+      # 如果有符合条件的结果，则跳转到第一个结果的页面
+      if results.present?
+        if results.first.is_a?(Site)
+          redirect_to sites_path(q: @keyword)
+        elsif results.first.is_a?(Restaurant)
+          redirect_to restaurants_path(q: @keyword)
+        elsif results.first.is_a?(Hotel)
+          redirect_to hotels_path(q: @keyword)
+        end
+        return
+      end
+    end
+  end
+  def search
+    @query = params[:query]
+    @restaurants = Restaurant.where("name LIKE ?", "%#{@query}%")
+    @hotels = Hotel.where("name LIKE ?", "%#{@query}%")
+    @sites = Site.where("name LIKE ?", "%#{@query}%")
+  
+    if @restaurants.present?
+      render "restaurants/index", restaurants: @restaurants, query: @query
+    elsif @hotels.present?
+      render "hotels/index", hotels: @hotels, query: @query
+    elsif @sites.present?
+      render "sites/index", sites: @sites, query: @query
+    else
+      # 如果没有搜索到符合条件的数据，可以渲染一个空的结果页面，或者提示用户没有找到任何数据
+      flash.now[:alert] = "No results found for your search."
+      render "search_empty"
+    end
+  end   
 
   def pricing
     @option_a = Newebpay::Mpg.new(50, current_user.id).form_info

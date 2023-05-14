@@ -10,6 +10,7 @@ Rails.application.routes.draw do
                omniauth_callbacks: 'users/omniauth_callbacks',
                passwords: 'users/passwords'
              }
+             
 
   resources :favorites, only: %i[index create destroy]
   resources :restaurants do
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
 
   # 404畫面
   get '/404', to: "application#record_not_found"
+  get 'search', to: 'page#search'
 
   resources :hotels do
     resources :comments, only: [:create,:new]
