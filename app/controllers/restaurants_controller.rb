@@ -13,13 +13,13 @@ class RestaurantsController < ApplicationController
     get_min_max_price
 
     @pagy, @restaurants = if params[:keyword].present?
-                     pagy(Restaurant.search(params[:keyword]).order(updated_at: :desc), items: 6)
-                   elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
-                     pagy(Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
-                                       @max_price,).order(updated_at: :desc), items: 6)
-                   else
-                     pagy(Restaurant.order(updated_at: :desc), items: 6)
-                   end
+                            pagy(Restaurant.search(params[:keyword]).order(updated_at: :desc), items: 6)
+                          elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
+                            pagy(Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
+                                                   @max_price,).order(updated_at: :desc), items: 6,)
+                          else
+                            pagy(Restaurant.order(updated_at: :desc), items: 6)
+                          end
     flash.now[:alert] = '沒有找到符合條件的餐廳' and return if @restaurants.empty?
   end
 
