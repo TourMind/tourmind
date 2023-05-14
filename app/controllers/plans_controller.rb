@@ -121,7 +121,10 @@ class PlansController < ApplicationController
       return
     end
 
-    render json: { status: 'User not found' }, status: :unprocessable_entity
+    render json: { error: 'User not found' }, status: :unprocessable_entity
+  end
+
+  def add_editor
   end
 
   private

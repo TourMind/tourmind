@@ -4,7 +4,16 @@ import { get } from "@rails/request.js";
 
 // Connects to data-controller="share"
 export default class extends Controller {
-  static targets = ["searchBtn", "menu", "keyword", "result"];
+  static targets = [
+    "searchBtn",
+    "menu",
+    "keyword",
+    "result",
+    "shareBtn",
+    "sharedList",
+    "addBtn",
+    "planId",
+  ];
 
   initialize() {
     this.Toast = Swal.mixin({
@@ -51,6 +60,10 @@ export default class extends Controller {
     this.resultTarget.innerHTML = this.userCard(data.profilePic, data.userName);
   }
 
+  addEditor() {
+    this.addBtnTarget.innerHTML = this.loadingIcon();
+  }
+
   preventProp(e) {
     e.stopPropagation();
   }
@@ -72,6 +85,14 @@ export default class extends Controller {
     this.clearResult();
   }
 
+  toggleSharedList() {
+    this.keywordTarget.value = "";
+    this.sharedListTarget.classList.toggle("search-drop-down");
+    this.sharedListTarget.classList.toggle("search-drop-down-active");
+    this.shareBtnTarget.classList.toggle("share-btn");
+    this.shareBtnTarget.classList.toggle("share-btn-active");
+  }
+
   hideResultBox() {
     this.resultTarget.classList.add("result-hidden");
     this.resultTarget.classList.remove("result-active");
@@ -89,21 +110,29 @@ export default class extends Controller {
   loadingCard() {
     return `
     <div class="w-full justify-center flex p-3 pl-4 items-center hover:bg-gray-300 rounded-lg cursor-pointer">
-      <div class="inline-block h-11 w-11 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status" data-edit-target="spinner">
-      </div>
+      <div class="w-11 h-11">${this.loadingIcon()}</div>
     </div>`;
   }
 
   userCard(profilePic, userName) {
     return `
-    <div class="w-full flex p-3 pl-4 items-center hover:bg-gray-300 rounded-lg cursor-pointer">
-      <div class="mr-4">
-        <div class="h-11 w-11 rounded-sm flex items-center justify-center">
-          <img class="w-full h-full rounded-full truncate" src="${profilePic}">
+    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between">
+      <div class="flex items-center">
+        <div class="mr-4">
+          <div class="h-11 w-11 rounded-sm flex items-center justify-center">
+            <img class="w-full h-full rounded-full truncate" src="${profilePic}">
+          </div>
+        </div>
+        <div>
+          <div class="font-bold text-lg">${userName}</div>
         </div>
       </div>
-      <div>
-        <div class="font-bold text-lg">${userName}</div>
+      <div class="h-8 w-8 mr-3 cursor-pointer" data-share-target="addBtn" data-action="click->share#addEditor">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" xml:space="preserve">
+          <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+          <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+          <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+        </svg>
       </div>
     </div>
     `;
@@ -121,5 +150,25 @@ export default class extends Controller {
         <div class="font-bold text-lg">沒有這個使用者</div>
       </div>
     </div>`;
+  }
+
+  checkIcon() {
+    return `
+    <svg class="h-full w-full" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.837 17.837" xml:space="preserve" fill="#669c35">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <g><path style="fill:#77bb41;" d="M16.145,2.571c-0.272-0.273-0.718-0.273-0.99,0L6.92,10.804l-4.241-4.27 c-0.272-0.274-0.715-0.274-0.989,0L0.204,8.019c-0.272,0.271-0.272,0.717,0,0.99l6.217,6.258c0.272,0.271,0.715,0.271,0.99,0 L17.63,5.047c0.276-0.273,0.276-0.72,0-0.994L16.145,2.571z"></path>
+        </g>
+      </g>
+    </svg>
+    `;
+  }
+
+  loadingIcon() {
+    return `
+    <div class="inline-block h-full w-full animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status" data-edit-target="spinner">
+    </div>
+    `;
   }
 }
