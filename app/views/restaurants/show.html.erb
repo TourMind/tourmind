@@ -33,17 +33,19 @@
         <h2 class="font-bold text-2xl py-3">評等和評論</h2>
         <div class="overflow-y-auto h-40 ">
           <div id="comment-list">
-              <%= render partial: "comment", collection: @restaurant.comments %>
+            <%= render partial: "comment", collection: @restaurant.comments %>
           </div>
         </div>
       </div>
     </section>
-    <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to '返回餐廳列表', restaurants_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div data-controller="butt">
-      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" href="#comment-form">
+      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-400 inline-block font-medium" href="#comment-form">
         發表評論
       </a>
+      <%= link_to '編輯餐廳資訊', edit_restaurant_path(@restaurant),  class:"btn bg-restaurant opacity-70 hover:opacity-100 hover:bg-restaurant border-restaurant" %>
+      <%= link_to '返回餐廳列表', restaurants_path, class:"btn leading-3 text-restaurant border-restaurant bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-restaurant" %>
+      <%= link_to '刪除餐廳資訊' , restaurant_path(@restaurant), method: :delete,
+           class:'btn leading-3 text-white border-restaurant bg-red-600 opacity-70 hover:opacity-100 hover:bg-white hover:border-restaurant' , data: { confirm: '您確定要刪除餐廳嗎？' } %>
       <div class="hidden" data-butt-target="form" >
         <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
       </div>
