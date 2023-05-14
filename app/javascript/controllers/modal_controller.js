@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "overlay", "frame"]
+  static targets = ["modal", "overlay", "frame", "form"]
 
   connect() {
     this.hideModal()
@@ -33,6 +33,18 @@ export default class extends Controller {
 
   hideFrame() {
     this.frameTarget.classList.add("hidden")
+  }
+
+  toggle(event) {
+    event.preventDefault()
+    const frameName = event.target.dataset.frame
+    this.frameTargets.forEach(frame => {
+      if (frame.dataset.frame === frameName) {
+        frame.classList.remove('hidden')
+      } else {
+        frame.classList.add('hidden')
+      }
+    })
   }
   
 }
