@@ -41,3 +41,6 @@ application.register("sorting", SortingController)
 
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
+
+import FormController from "./form_controller"
+application.register("form", FormController)

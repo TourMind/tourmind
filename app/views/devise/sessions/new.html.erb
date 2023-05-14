@@ -11,7 +11,7 @@
               的最好服務
             </span>
           </div>
-          <%= form_for(resource, as: resource_name, url: session_path(resource_name), date:{ turbo: true }, html: { "data-turbo-frame": "_top" }) do |f| %>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { controller: :form}) do |f| %> 
             <div class="relative m-2 field">
               <%= image_tag "email.png", class: "h-10 w-10 inline-block absolute right-0 z-2"%>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "請輸入信箱帳號...", class: "rounded-lg w-full inline-block"%>
@@ -22,7 +22,7 @@
               <%= f.password_field :password, autocomplete: "current-password", placeholder: "請輸入密碼...(最少6個字)", class: "rounded-lg text-black w-full" %>
             </div>
             <div class="m-2 field">
-              <%= f.submit "確認登入", class: "btn-square btn-green ", data: { action: "click->modal#hideModal" } %>
+              <%= f.submit "確認登入", class: "btn-square btn-green " %>
             </div>
             <div class="m-2 field">
               <% if devise_mapping.registerable? && controller_name != 'registrations' %>
@@ -31,7 +31,7 @@
             </div>
             <div class="m-2 field">
               <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-                <%= link_to "忘記密碼?", new_password_path(resource_name), class: "btn-square btn-red" %><br />
+                <%= link_to "忘記密碼?", new_password_path(resource_name), class: "btn-square btn-red", data: { turbo_frame: :forgot, action: "click->modal#hideFrame"} %><br />
               <% end %>
             </div>
           <% end %>

@@ -13,7 +13,6 @@ module Users
       end
       request.referer || root_path
     end
-    
 
     private
     def format_date(date)

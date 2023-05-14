@@ -13,7 +13,7 @@
             </span>
           </div>
           
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { controller: :form}) do |f| %>
             <div class="relative m-2 field">
               <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "請輸入您的暱稱...", class: "rounded-lg w-full inline-block"%>
             </div>
