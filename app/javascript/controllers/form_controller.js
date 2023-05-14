@@ -56,13 +56,11 @@ export default class extends Controller {
       imageContainer.className = 'relative';
       imageContainer.dataset.newImage = "";
       imageContainer.innerHTML = `
-      <i class="absolute top-1 right-3 ml-1 fa fa-times-circle" data-action="click->form#deleteImage" 
-      data-form-index-param="${index}"
-      ></i>
+      <i class="absolute top-1 right-3 cursor-pointer fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white" data-action="click->form#deleteImage" 
+      data-form-index-param="${index}"></i>
       <img class="w-32 h-32 object-cover rounded px-2" src="${dataUrl}">`
       return imageContainer;
     }
-
     const createUploadButton = () => {
       const uploadButton = document.createElement('div');
       uploadButton.className = 'cursor-pointer w-32 h-32 shadow rounded px-2 flex justify-center items-center';
