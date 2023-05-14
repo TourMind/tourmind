@@ -43,8 +43,4 @@ Rails.application.routes.draw do
   resources :sites do
     resources :comments, only: [:create,:new]
   end 
-
-  resources :orders, only: %i[index show]
-  # 管理員後台
-  get 'dashboard/users', to: 'dashboard#users'
 end

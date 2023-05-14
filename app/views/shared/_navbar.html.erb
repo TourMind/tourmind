@@ -22,15 +22,15 @@
           <% if current_user.diamond_grade == '一般會員'%>
             <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray"  %>
           <% elsif current_user.diamond_grade == '白鑽會員' %>
-            <%= link_to order_path do %>
+            <%= link_to order_path(current_user.id) do %>
               <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 訂單資訊</span>
             <% end %>
           <% elsif current_user.diamond_grade == '藍鑽會員' %>
-            <%= link_to order_path do %>
+            <%= link_to order_path(current_user.id) do %>
               <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 訂單資訊</span>
             <% end %>
           <% elsif current_user.diamond_grade == '紅鑽會員' %>
-            <%= link_to order_path do %>
+            <%= link_to order_path(current_user.id) do %>
               <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 訂單資訊</span>
             <% end %>
           <% end %>
