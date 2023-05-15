@@ -97,11 +97,8 @@
       </a>
       <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:'btn bg-hotel opacity-70 hover:opacity-100 hover:bg-hotel border-hotel '%>
       <%= link_to '返回住宿列表' , hotels_path, class:'btn leading-3 text-hotel border-hotel bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-hotel' %>
-      <%= link_to '刪除住宿資訊' , hotel_path(@hotel), method: :delete,
-          class:'btn leading-3 text-white border-hotel bg-red-600 opacity-70 hover:opacity-100 hover:bg-white hover:border-hotel' , data: { confirm: '您確定要刪除住宿嗎？' } %>
       <div class="hidden" data-butt-target="form" >
         <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>

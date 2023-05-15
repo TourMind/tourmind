@@ -117,8 +117,6 @@
       </a>
       <%= link_to '編輯景點資訊' , edit_site_path(@site), class:'btn bg-site opacity-70 hover:opacity-100 hover:bg-site border-site'%>
       <%= link_to '返回景點列表' , sites_path, class:'btn leading-3 text-site border-site bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-site' %>
-      <%= link_to '刪除景點資訊' , site_path(@site), method: :delete,
-           class:'btn leading-3 text-white border-site bg-red-600 opacity-70 hover:opacity-100 hover:bg-white hover:border-site' , data: { confirm: '您確定要刪除景點嗎？' } %>
       <div class="hidden" data-butt-target="form" >
         <%= render "comments/comment", comment: Comment.new, site:@site %>
       </div>

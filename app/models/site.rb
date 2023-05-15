@@ -20,7 +20,7 @@ class Site < ApplicationRecord
                                                                                                     website.present?
                                                                                                   }
 
-# 關鍵字搜尋
+  # 關鍵字搜尋
   def self.search(keyword)
     where(
       'name LIKE :keyword OR address LIKE :keyword',
