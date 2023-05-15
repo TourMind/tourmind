@@ -63,7 +63,7 @@ class RestaurantsController < ApplicationController
   # DELETE /restaurants/1 or /restaurants/1.json
   def destroy
     @restaurant.destroy
-    redirect_to restaurants_url, notice: '餐廳刪除成功'
+    redirect_to dashboard_restaurants_url, notice: '餐廳刪除成功'
   end
 
   private

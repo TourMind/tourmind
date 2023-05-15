@@ -74,5 +74,7 @@
   </div>
   <div class="inline">
     <%= form.submit '提交' , class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
+    <%= link_to "返回餐廳頁面", @restaurant, class:"bg-white inline-block text-blue-500 focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-blue-400 hover:text-white border-2 transition-all duration-400" %>
+    <%= link_to "返回餐廳列表", dashboard_restaurants_path, class:"bg-white inline-block text-blue-500 focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-blue-400 hover:text-white border-2 transition-all duration-400" %>
   </div>
 <% end %>
