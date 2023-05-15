@@ -7,7 +7,7 @@ require 'json'
 desc 'generate sites for test'
 namespace :data do
     task :generate_sites => :environment do
-        MAX_PAGES = 10
+        MAX_PAGES = 2
         url_contry = 'https://hk.trip.com/travel-guide/taiwan-100076/cities/'
         html = URI.open(url_contry).read
         doc = Nokogiri::HTML.parse(html)

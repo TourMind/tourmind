@@ -8,7 +8,7 @@ require 'uri'
 desc 'generate restaurants for test'
 namespace :data do
     task :generate_restaurants => :environment do
-        MAX_PAGES = 10
+        MAX_PAGES = 2
         restaurant_arr = %w[餐廳 酒吧及夜店 小吃 麵包糕點 咖啡和茶 甜點 特色食品市場]
         cuisine_arr = ['中式料理', '日式料理', '亞洲料理', '健康料理', '印度料理', '台灣小吃/台菜', '壽司', '墨西哥料理', '法式料理', '美式料理', '燒肉', '韓式料理', '越南料理', '海鮮料理', '義式料理']
         atmostphere_arr =%w[浪漫 大自然 舒適休閒 安靜 熱鬧 歷史悠久 藝術氛圍]

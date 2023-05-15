@@ -38,3 +38,8 @@ Things you may want to cover:
   - 快速新增假用戶與訂單(一次20筆)
     -  rails data:generate_user     
     -  rails data:generate_order   
+
+  - 爬蟲新增飯店/景點/住宿(一次20筆)
+    - rails data:generate_user  
+    - rails data:generate_site 
+    - rails data:generate_restaurants  
