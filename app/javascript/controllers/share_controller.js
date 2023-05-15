@@ -15,6 +15,7 @@ export default class extends Controller {
     "planId",
     "userCard",
     "editors",
+    "removeBtn",
   ];
 
   initialize() {
@@ -87,7 +88,8 @@ export default class extends Controller {
       this.editorsTarget.innerHTML = this.userCard(
         data.userId,
         data.profilePic,
-        data.userName
+        data.userName,
+        "remove"
       );
 
       this.editorsTarget.id = "";
@@ -95,9 +97,13 @@ export default class extends Controller {
     }
 
     this.editorsTarget.insertAdjacentHTML(
-      "afterbegin",
-      this.userCard(data.userId, data.profilePic, data.userName)
+      "beforeend",
+      this.userCard(data.userId, data.profilePic, data.userName, "remove")
     );
+  }
+
+  async removeEditor() {
+    this.removeBtnTarget.innerHTML = this.loadingIcon();
   }
 
   preventProp(e) {
@@ -122,7 +128,6 @@ export default class extends Controller {
   }
 
   toggleSharedList() {
-    this.keywordTarget.value = "";
     this.sharedListTarget.classList.toggle("search-drop-down");
     this.sharedListTarget.classList.toggle("search-drop-down-active");
     this.shareBtnTarget.classList.toggle("share-btn");
@@ -150,7 +155,7 @@ export default class extends Controller {
     </div>`;
   }
 
-  userCard(userId, profilePic, userName) {
+  userCard(userId, profilePic, userName, option) {
     return `
     <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between" data-id=${userId} data-share-target="userCard">
       <div class="flex items-center">
@@ -163,13 +168,7 @@ export default class extends Controller {
           <div class="font-bold text-lg">${userName}</div>
         </div>
       </div>
-      <div class="h-8 w-8 mr-3 cursor-pointer" data-share-target="addBtn" data-action="click->share#addEditor">
-        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" xml:space="preserve">
-          <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
-          <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
-          <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
-        </svg>
-      </div>
+      ${option === "remove" ? this.removeBtn() : this.addBtn()}
     </div>
     `;
   }
@@ -177,10 +176,8 @@ export default class extends Controller {
   errorCard() {
     return `
     <div class="w-full flex p-3 pl-4 items-center hover:bg-gray-300 rounded-lg cursor-pointer">
-      <div class="mr-4">
-        <div class="h-11 w-11 rounded-sm flex items-center justify-center">
-          <svg height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Error_1_"><g id="Error"><circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;"/><path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z" id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;"/></g></g></g></svg>
-        </div>
+      <div class="mr-4 h-11 w-11">
+        ${this.errorIcon()}
       </div>
       <div>
         <div class="font-bold text-lg">沒有這個使用者</div>
@@ -204,6 +201,38 @@ export default class extends Controller {
   loadingIcon() {
     return `
     <div class="inline-block h-full w-full animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status" data-edit-target="spinner">
+    </div>
+    `;
+  }
+
+  errorIcon() {
+    return `
+    <div class="w-full h-full rounded-sm flex items-center justify-center">
+      <svg height="32" style="overflow:visible;enable-background:new 0 0 32 32" viewBox="0 0 32 32" width="32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><g id="Error_1_"><g id="Error"><circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;"/><path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z" id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;"/></g></g></g></svg>
+    </div>
+    `;
+  }
+
+  addBtn() {
+    return `
+    <div class="h-8 w-8 mr-3 cursor-pointer" data-share-target="addBtn" data-action="click->share#addEditor">
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" xml:space="preserve">
+        <circle style="fill:#43B05C;" cx="25" cy="25" r="25"/>
+        <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="25" y1="13" x2="25" y2="38"/>
+        <line style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="37.5" y1="25" x2="12.5" y2="25"/>
+      </svg>
+    </div>
+    `;
+  }
+
+  removeBtn() {
+    return `
+    <div class="h-8 w-8 mr-3 cursor-pointer" data-share-target="removeBtn" data-action="click->share#removeEditor">
+      <svg class="w-full h-full" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.879px" height="122.879px" viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879" xml:space="preserve">
+        <g>
+          <path fill-rule="evenodd" clip-rule="evenodd" fill="#FF4141" d="M61.44,0c33.933,0,61.439,27.507,61.439,61.439 s-27.506,61.439-61.439,61.439C27.507,122.879,0,95.372,0,61.439S27.507,0,61.44,0L61.44,0z M73.451,39.151 c2.75-2.793,7.221-2.805,9.986-0.027c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.076,12.249 c2.729,2.77,2.689,7.257-0.08,10.022c-2.773,2.765-7.23,2.758-9.955-0.013L61.446,71.54L49.428,83.728 c-2.75,2.793-7.22,2.805-9.986,0.027c-2.763-2.776-2.776-7.293-0.027-10.084L51.48,61.434L39.403,49.185 c-2.728-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.953,0.013l11.997,12.165L73.451,39.151L73.451,39.151z"/>
+        </g>
+      </svg>
     </div>
     `;
   }

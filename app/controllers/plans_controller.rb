@@ -108,7 +108,7 @@ class PlansController < ApplicationController
     user = User.find_by(email: params[:email])
 
     if user != nil
-      profile_pic = user.avatar_url || default_avatar
+      profile_pic = user.avatar_url || user.default_avatar
       user_name = user.name || '此使用者沒有設定姓名'
 
       render json: {
@@ -129,7 +129,7 @@ class PlansController < ApplicationController
 
     plan.editors << user
 
-    profile_pic = user.avatar_url || default_avatar
+    profile_pic = user.avatar_url || user.default_avatar
     user_name = user.name || '此使用者沒有設定姓名'
 
     render json: {
@@ -235,10 +235,6 @@ class PlansController < ApplicationController
           next({ name: site.name, type: '景點', id: site.id, stay_time: 0 })
         end
       end
-  end
-
-  def default_avatar
-    '/assets/user_default_avatar-4d250da78bcf1e681853cae1acb1174c0dcf35a31321d507fc27adf6591b2059.png'
   end
 
   def star_rating(rating)
