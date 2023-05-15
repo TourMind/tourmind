@@ -76,12 +76,13 @@ export default class extends Controller {
       responseKind: "json",
     });
 
+    const data = await res.json;
+
     if (!res.ok) {
       this.addBtnTarget.innerHTML = this.errorIcon();
-      return this.alertErrors("新增失敗");
+      return this.alertErrors(data.error);
     }
 
-    const data = await res.json;
     this.addBtnTarget.innerHTML = this.checkedIcon();
 
     if (this.editorsTarget.id === "empty") {

@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_many :orders
   has_many :plans
-  has_many :collaborations
+  has_many :collaborations, dependent: :destroy
   has_many :shared_plans, through: :collaborations, source: :plan
 
   has_many :comments, dependent: :destroy
@@ -70,5 +70,17 @@ class User < ApplicationRecord
 
   def default_avatar
     '/assets/user_default_avatar-4d250da78bcf1e681853cae1acb1174c0dcf35a31321d507fc27adf6591b2059.png'
+  end
+
+  def plans_limit_number
+    if diamond_grade == '一般會員'
+      1
+    elsif diamond_grade == '白鑽會員'
+      3
+    elsif diamond_grade == '藍鑽會員'
+      5
+    elsif diamond_grade == '紅鑽會員'
+      Float::INFINITY # 正無窮大
+    end
   end
 end
