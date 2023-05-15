@@ -17,7 +17,8 @@ export default class extends Controller {
     document.documentElement.classList.remove("overflow-y-hidden")
   }
 
-  toggleModal() {
+  toggleModal(e) {
+    this.toggle(e)
     if (this.modalTarget.classList.contains("hidden")) {
       this.showModal()
     } else {
@@ -36,9 +37,10 @@ export default class extends Controller {
   }
 
   toggle(event) {
-    event.preventDefault()
     const frameName = event.target.dataset.frame
+    console.log(frameName)
     this.frameTargets.forEach(frame => {
+      console.log(frame)
       if (frame.dataset.frame === frameName) {
         frame.classList.remove('hidden')
       } else {
