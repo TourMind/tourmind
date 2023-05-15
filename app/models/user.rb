@@ -67,4 +67,8 @@ class User < ApplicationRecord
     [['請選擇城市'], ['台北市'], ['新北市'], ['宜蘭'], ['花蓮'], ['高雄'], ['台南'],
      ['台東'], ['新竹'], ['彰化'], ['嘉義'], ['南投'], ['屏東']]
   end
+
+  def default_avatar
+    '/assets/user_default_avatar-4d250da78bcf1e681853cae1acb1174c0dcf35a31321d507fc27adf6591b2059.png'
+  end
 end
