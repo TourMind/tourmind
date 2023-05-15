@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { get, post } from "@rails/request.js";
+import { get, post, destroy } from "@rails/request.js";
 import Swal from "sweetalert2";
 
 // Connects to data-controller="share"
@@ -13,7 +13,6 @@ export default class extends Controller {
     "sharedList",
     "addBtn",
     "planId",
-    "userCard",
     "editors",
     "removeBtn",
   ];
@@ -69,10 +68,12 @@ export default class extends Controller {
     );
   }
 
-  async addEditor() {
+  async addEditor(e) {
+    const userId = e.target.closest(".editor").dataset.id;
     this.addBtnTarget.innerHTML = this.loadingIcon();
+
     const res = await post(`/plans/${this.id}/add_editor`, {
-      body: { userId: this.userCardTarget.dataset.id },
+      body: { userId },
       responseKind: "json",
     });
 
@@ -102,8 +103,14 @@ export default class extends Controller {
     );
   }
 
-  async removeEditor() {
-    this.removeBtnTarget.innerHTML = this.loadingIcon();
+  async removeEditor(e) {
+    const card = e.target.closest(".editor");
+    const editorId = card.dataset.id;
+    e.currentTarget.innerHTML = this.loadingIcon();
+
+    const res = await destroy(`/plans/${this.id}/editor/${editorId}`);
+
+    if (!res.ok) return this.alertErrors("伺服器沒有回應");
   }
 
   preventProp(e) {
@@ -157,7 +164,7 @@ export default class extends Controller {
 
   userCard(userId, profilePic, userName, option) {
     return `
-    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between" data-id=${userId} data-share-target="userCard">
+    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between editor transition-all ease-in-out" data-id=${userId}>
       <div class="flex items-center">
         <div class="mr-4">
           <div class="h-11 w-11 rounded-sm flex items-center justify-center">
