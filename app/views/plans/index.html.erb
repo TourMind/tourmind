@@ -15,26 +15,24 @@
           <div class="overflow-x-scroll">
             <div class="flex gap-5 py-5 w-max">
               <% current_user.shared_plans.each do |plan| %>
-                <% current_user.shared_plans.order(id: :desc).each do |plan| %>
-                  <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                    <%= link_to plan_path(plan), class: "inline-block" do %>
-                      <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
-                      <div class="flex flex-col h-auto gap-5 p-5">
-                        <div class="font-bold"><%= plan.name %></div>
+                <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+                  <%= link_to plan_path(plan), class: "inline-block" do %>
+                    <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
+                    <div class="flex flex-col h-auto gap-5 p-5">
+                      <div class="font-bold"><%= plan.name %></div>
+                      <div>
+                        <div class="flex items-center my-3">
+                          <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
+                          <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
+                        </div>
+                        <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
                         <div>
-                          <div class="flex items-center my-3">
-                            <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
-                            <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
-                          </div>
-                          <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
-                          <div>
-                            <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
-                          </div>
+                          <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
                         </div>
                       </div>
-                    <% end %>
-                  </div>
-                <% end %>
+                    </div>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           </div>

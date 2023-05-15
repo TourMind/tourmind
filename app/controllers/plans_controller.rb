@@ -13,7 +13,10 @@ class PlansController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @plan.comments
-    return if (user_signed_in? && current_user == @plan.user) || @plan.public
+    if (user_signed_in? && current_user == @plan.user) || @plan.public ||
+       @plan.editors.include?(current_user)
+      return
+    end
 
     redirect_to plans_path, alert: '你沒有權限查看此行程！'
   end
@@ -21,8 +24,8 @@ class PlansController < ApplicationController
   def new
     @plan = Plan.new
 
-    if current_user.plans.count >= Plan.plans_limit_number(current_user)
-      return redirect_to plans_path, alert: "已達新增上限，請升級會員！" 
+    if current_user.plans.count >= current_user.plans_limit_number
+      return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
   end
 
@@ -44,13 +47,14 @@ class PlansController < ApplicationController
   end
 
   def edit
-    if current_user.plans.count >= Plan.plans_limit_number(current_user)
-      return redirect_to plans_path, alert: "已達新增上限，請升級會員！" 
+    if current_user.plans.count >= current_user.plans_limit_number &&
+       current_user != @plan.user && !@plan.editors.include?(current_user)
+      return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
 
-    unless current_user == @plan.user
-        @plan.name = ''
-        @plan.description = ''
+    unless current_user == @plan.user || @plan.editors.include?(current_user)
+      @plan.name = ''
+      @plan.description = ''
     end
 
     render :new
@@ -60,7 +64,7 @@ class PlansController < ApplicationController
     plan_data = plan_params
     plan_data[:locations] = update_locations(plan_data, @plan)
 
-    if current_user == @plan.user
+    if current_user == @plan.user || @plan.editors.include?(current_user)
       if @plan.update(plan_data)
         render json: { status: 'success', redirect_url: "/plans/#{@plan.id}" }
         return
@@ -105,13 +109,13 @@ class PlansController < ApplicationController
   def check_user
     user = User.find_by(email: params[:email])
 
-    if user != nil
+    unless user.nil?
       render json: {
-               status: 'success',
-               userId: user.id,
-               profilePic: user.avatar_url || user.default_avatar,
-               userName: user.name || '此使用者沒有設定姓名',
-             }
+        status: 'success',
+        userId: user.id,
+        profilePic: user.avatar_url || user.default_avatar,
+        userName: user.name || '此使用者沒有設定姓名',
+      }
       return
     end
 
@@ -122,6 +126,17 @@ class PlansController < ApplicationController
     plan = Plan.find(params[:id])
     user = User.find(params[:userId])
 
+    return head status: :unauthorized if current_user != plan.user
+
+    if current_user == user || plan.editors.include?(user)
+      render json: {
+               status: 'Failed',
+               error: current_user == user ? '不能將自己加入共同編輯' : '該使用者已存在於共同編輯名單',
+             },
+             status: :unprocessable_entity
+      return
+    end
+
     plan.editors << user
 
     render json: {
@@ -130,12 +145,13 @@ class PlansController < ApplicationController
       profilePic: user.avatar_url || user.default_avatar,
       userName: user.name || '此使用者沒有設定姓名',
     }
-
   end
 
   def remove_editor
     plan = Plan.find(params[:id])
     user = User.find(params[:user_id])
+
+    return head status: :unauthorized if current_user != plan.user
 
     plan.editors.destroy(user)
   end
@@ -214,7 +230,7 @@ class PlansController < ApplicationController
       all_favorites.map do |fav|
         if fav.favorable_type == 'Restaurant'
           restaurant = Restaurant.find(fav.favorable_id)
-          next({ name: restaurant.name, type: '餐廳', id: restaurant.id, stay_time: 0 })          
+          next({ name: restaurant.name, type: '餐廳', id: restaurant.id, stay_time: 0 })
         end
 
         if fav.favorable_type == 'Hotel'
@@ -235,9 +251,16 @@ class PlansController < ApplicationController
       full_stars = rating.to_i
       half_stars = rating - full_stars >= 0.1 ? 1 : 0
       empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
+      full_stars.times do
+        stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'
+      end
+      half_stars.times do
+        stars +=
+          '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'
+      end
+      empty_stars.times do
+        stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'
+      end
     else
       5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
     end
