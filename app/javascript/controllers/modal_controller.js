@@ -38,9 +38,7 @@ export default class extends Controller {
 
   toggle(event) {
     const frameName = event.target.dataset.frame
-    console.log(frameName)
     this.frameTargets.forEach(frame => {
-      console.log(frame)
       if (frame.dataset.frame === frameName) {
         frame.classList.remove('hidden')
       } else {
