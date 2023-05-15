@@ -2,14 +2,14 @@
   <h1 class="font-bold text-4xl">Dashboard Hotels</h1>
 </div>
 <div class="m-4">
-  <span class="text-xl font-bold">總共<%= @hotels.count %>家住宿</span>
+  <span class="text-xl font-bold">總共<%= Hotel.count %>家住宿</span>
   <form class="m-4 my-6">
-    <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢姓名、電話、信箱...">
+    <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢名稱.地址...">
     <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer " value="查詢">
   </form>
   <section>
-    <div style='border-bottom: 2px solid #eaeaea'>
-      <ul class='flex cursor-pointer'>
+    <div class='flex justify-between border-b-2 solid bg-white'>
+      <ul class='flex cursor-pointer '>
         <li class='px-6 py-2 text-xl font-bold bg-gray-100 rounded-t-lg'>
           <%= link_to "用戶資料", dashboard_users_path %>
         </li>
@@ -18,8 +18,7 @@
           <%= link_to '餐廳', new_restaurant_path %>
         </li>
         <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
-          <i class="fa-solid fa-plus"></i>
-          <%= link_to '景點', new_site_path %>
+          <%= link_to '景點', dashboard_sites_path %>
         </li>
         <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
           <%= link_to '住宿', dashboard_hotels_path %>
@@ -29,7 +28,7 @@
           <%= link_to '行程規劃', new_plan_path %>
         </li>
       </ul>
-      <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium'%>
+      <%= link_to '新增住宿' , new_hotel_path(@hotel), class:'rounded-md py-2 px-5 mr-8 bg-blue-600 text-white inline-block font-medium hover:text-blue-600 hover:bg-white border-blue-600 border-2 text-white'%>
     </div>
     <div>
       <table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
@@ -48,12 +47,12 @@
           <% @hotels.each do |hotel|%>
             <tr class="hover:bg-gray-50">
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= hotel.id %></th>
-              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= hotel.name %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to hotel.name, hotel_path(hotel) %></th>
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= hotel.tel %></th>
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= hotel.address %></th>
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= hotel.hotel_types %></th>
-              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '編輯', edit_hotel_path(hotel.id), class: "mt-2 rounded-lg py-2 px-3 bg-blue-400 inline-block font-medium text-white" %></th>
-              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '刪除',  hotel_path(hotel.id),method: :delete, class: "mt-2 rounded-lg py-2 px-3 bg-red-400 inline-block font-medium text-white", data:{confirm:'您確定要刪除此筆資料嗎？'} %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '編輯', edit_hotel_path(hotel), class: "mt-2 rounded-lg py-2 px-3 bg-blue-400 inline-block font-medium text-white hover:bg-white hover:text-blue-400 border-blue-400 border-2" %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '刪除',  hotel_path(hotel),method: :delete, class: "mt-2 rounded-lg py-2 px-3 bg-red-400 inline-block font-medium text-white hover:bg-white hover:text-red-400 border-red-400 border-2", data:{confirm:'您確定要刪除此筆資料嗎？'} %></th>
             </tr>
           <% end %>
         </tbody>

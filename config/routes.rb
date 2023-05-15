@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   # 管理員後台
   get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
   get '/dashboard/hotels', to: 'dashboard#hotels', as: 'dashboard_hotels'
+  get '/dashboard/sites', to: 'dashboard#sites', as: 'dashboard_sites'
+  get '/dashboard/restaurants', to: 'dashboard#restaurants', as: 'dashboard_restaurants'
 
   # 404畫面
   get '/404', to: "application#record_not_found"

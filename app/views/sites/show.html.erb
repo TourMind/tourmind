@@ -4,14 +4,11 @@
   </h1>
   <div class="flex flex-wrap">
     <div class="flex px-4 items-center">
-      <% if @comments_score.present? %>
-        <span><%= star_rating(@site_data[@site.id][:average_rating]) %>
-          <%= sprintf('%.1f', @site_data[@site.id][:average_rating]) %>
-          (<%= @site_data[@site.id][:comment_count] %>則評論)
-        </span>
-      <% else %>
-        <span>尚未有評論</span>
-      <% end %>
+      <span class="mr-2">
+        <%= star_rating(@site_data[@site.id][:average_rating]) %>
+        <%= sprintf('%.1f', @site_data[@site.id][:average_rating]) %>
+      </span>
+      <span class="mr-2">(<%= @site_data[@site.id][:comment_count] %>則評論)</span>
       <%= render "favoritebtn", object:@site, size:'text-lg'%>
     </div>
   </div>
@@ -105,10 +102,8 @@
   <div class="bg-white full lg:w-2/3 ">
     <div class='mr-2 pb-4 border-b-2 border-gray-300'>
       <h2 id="comment-heading" class="text-2xl font-bold p-4">評等和評論</h2>
-      <div class="">
-        <div id="comment-list">
-          <%= render partial: "comment", collection: @paginated_comments %>
-        </div>
+      <div id="comment-list">
+        <%= render partial: "comment", collection: @paginated_comments %>
       </div>
       <%= render "pagy" %>
     </div>
@@ -121,5 +116,6 @@
       <div class="hidden" data-butt-target="form" >
         <%= render "comments/comment", comment: Comment.new, site:@site %>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
