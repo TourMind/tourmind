@@ -15,4 +15,15 @@ class DashboardController < ApplicationController
       @prices = Order.sum(:amount)
     end
   end
+
+  def hotels
+    @pagy, @hotels = pagy(Hotel.all.order(:id))
+    @hotels = @hotels.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def destroy
+    @hotel = Hotel.find(params[:id])
+    @hotel.destroy
+    redirect_to dashboard_hotels_path
+  end
 end
