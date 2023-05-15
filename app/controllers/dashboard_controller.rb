@@ -21,9 +21,13 @@ class DashboardController < ApplicationController
     @hotels = @hotels.search(params[:keyword]) if params[:keyword].present?
   end
 
-  def destroy
-    @hotel = Hotel.find(params[:id])
-    @hotel.destroy
-    redirect_to dashboard_hotels_path
+  def sites
+    @pagy, @sites = pagy(Site.all.order(:id))
+    @sites = @sites.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def restaurants
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id))
+    @restaurants = @restaurants.search(params[:keyword]) if params[:keyword].present?
   end
 end
