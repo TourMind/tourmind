@@ -18,6 +18,7 @@ export default class extends Controller {
     "submitBtn",
     "submitText",
     "spinner",
+    "lockVersion",
   ];
 
   connect() {
@@ -75,6 +76,7 @@ export default class extends Controller {
       form.append("people", +this.peopleTarget.value);
       form.append("public", this.publicTarget.checked);
       form.append("category", this.categoryTarget.value);
+      form.append("lock_version", this.lockVersionTarget.value);
       form.append("locations", JSON.stringify(locations));
 
       for (let i = 0; i < files.length; i++) {
@@ -97,17 +99,18 @@ export default class extends Controller {
         });
       }
 
-      const resInfo = await res.json;
+      const data = await res.json;
 
       if (!res.ok) {
-        this.alertErrors(
-          resInfo.errors.map((el) => el.split(" ")[1]).join("\n")
-        );
+        this.alertErrors(data.errors);
+        if (data.reload) {
+          return setTimeout(() => location.reload(true), 3500);
+        }
         this.removeSpinner();
         return;
       }
 
-      window.location.replace(resInfo.redirect_url);
+      window.location.replace(data.redirect_url);
     } catch (err) {
       console.log(err);
     }

@@ -16,7 +16,7 @@
             <div class="flex gap-5 py-5 w-max">
               <% current_user.shared_plans.each do |plan| %>
                 <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                  <%= link_to plan_path(plan), class: "inline-block" do %>
+                  <%= link_to plan_path(plan.id), class: "inline-block" do %>
                     <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
                     <div class="flex flex-col h-auto gap-5 p-5">
                       <div class="font-bold"><%= plan.name %></div>
@@ -47,7 +47,7 @@
             <% if current_user.plans.any? %>
               <% current_user.plans.order(id: :desc).each do |plan| %>
                 <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                  <%= link_to plan_path(plan), class: "inline-block" do %>
+                  <%= link_to plan_path(plan.id), class: "inline-block" do %>
                     <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
                     <div class="flex flex-col h-auto gap-5 p-5">
                       <div class="font-bold"><%= plan.name %></div>
@@ -82,7 +82,7 @@
           <div class="flex gap-5 py-5 w-max">
             <% @plans.select {|plan| plan.category == category }.each do |plan| %>
               <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
-                <%= link_to plan_path(plan), class: "inline-block" do %>
+                <%= link_to plan_path(plan.id), class: "inline-block" do %>
                   <% if plan.images.present? %>
                     <img src="<%= plan.images[0].url %>" alt="plant" class="w-full h-auto" />
                   <% else %>
