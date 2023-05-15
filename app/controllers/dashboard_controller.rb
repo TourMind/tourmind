@@ -11,4 +11,15 @@ class DashboardController < ApplicationController
     @rd_count = User.where(diamond_grade: '紅鑽會員').count
     @prices = Order.sum(:amount)
   end
+
+  def hotels
+    @pagy, @hotels = pagy(Hotel.all.order(:id))
+    @hotels = @hotels.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def destroy
+    @hotel = Hotel.find(params[:id])
+    @hotel.destroy
+    redirect_to dashboard_hotels_path
+  end
 end

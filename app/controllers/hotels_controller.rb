@@ -5,7 +5,7 @@ class HotelsController < ApplicationController
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
   def index
-    @pagy, @hotels = pagy(Hotel.all.order(:id),items: 6)
+    @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     @city_options = %w[台北市 新北市]
     @hotel_types_options = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
     @equipment_options = %w[無線網路(WIFI) 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 腳踏車租賃 24小時櫃檯接待]
@@ -47,7 +47,7 @@ class HotelsController < ApplicationController
 
   def update
     if @hotel.update(hotel_params)
-      redirect_to hotel_path(@hotel), notice: '更新成功!'
+      redirect_to hotel_path(@hotel), notice: '住宿已更新成功!'
     else
       render :edit
     end
@@ -55,7 +55,7 @@ class HotelsController < ApplicationController
 
   def destroy
     @hotel.destroy
-    redirect_to hotels_path, notice: '已刪除!'
+    redirect_to dashboard_hotels_path, notice: '住宿已删除成功！'
   end
 
   private
@@ -66,7 +66,7 @@ class HotelsController < ApplicationController
 
   def hotel_params
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, :remove_images, :images_cache, equipment: [], images: [])
+                                  :hotel_types, :remove_images, :images_cache, equipment: [], images: [],)
   end
 
   def star_rating(rating)
