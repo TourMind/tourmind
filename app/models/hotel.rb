@@ -32,12 +32,12 @@ class Hotel < ApplicationRecord
 
   # 篩選
   def self.filter(address, hotel_types, equipment)
-    where_clause = []
-    where_clause << "address ~ '#{address.join('|')}'" if address.present?
-    where_clause << "hotel_types ~ '#{hotel_types.join('|')}'" if hotel_types.present?
-    where_clause << "equipment @> '{#{equipment.join(',')}}'" if equipment.present?
+    sql_query_condition = []
+    sql_query_condition << "address ~ '#{address.join('|')}'" if address.present?
+    sql_query_condition << "hotel_types ~ '#{hotel_types.join('|')}'" if hotel_types.present?
+    sql_query_condition << "equipment @> '{#{equipment.join(',')}}'" if equipment.present?
 
-    where(where_clause.join(' AND ')) unless where_clause.empty?
+    where(sql_query_condition.join(' AND ')) unless sql_query_condition.empty?
   end
 
   # friendly_id
