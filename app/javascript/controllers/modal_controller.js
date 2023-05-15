@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "overlay", "frame", "form"]
+  static targets = ["modal", "overlay", "frame"]
 
   connect() {
     this.hideModal()

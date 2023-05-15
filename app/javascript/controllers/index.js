@@ -49,5 +49,5 @@ application.register("chatbase", ChatbaseController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
-import FormController from "./form_controller"
-application.register("form", FormController)
+import TurboformController from "./turboform_controller"
+application.register("turboform", TurboformController)
