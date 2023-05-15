@@ -47,7 +47,7 @@
                 <% if @plan.editors != [] %>
                   <% @plan.editors.each do |editor| %>
                     <!-- items -->
-                    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between editor transition-all ease-in-out" data-id="<%= editor.id %>">
+                    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between editor transition-all ease-in-out relative" data-id="<%= editor.id %>">
                       <div class="flex items-center">
                         <div class="mr-4">
                           <div class="h-11 w-11 rounded-sm flex items-center justify-center">
@@ -102,10 +102,6 @@
           <img src="<%= @plan.images[1] %>" class="object-cover w-full h-full">
         </div>
       <% else %>
-        <button class="flex justify-center opacity-80 group absolute right-3 bottom-3 h-7 w-28 overflow-hidden rounded-full bg-slate-800 text-lg shadow">
-          <div class="absolute inset-0 w-0 bg-white transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-          <span class="relative text-white group-hover:text-black text-sm self-center">查看所�������照片</span>
-        </button>
         <div class="h-full w-2/3 overflow-hidden">
           <img src="<%= @plan.images[0] %>" class="object-cover w-full h-full">
         </div>
@@ -131,9 +127,9 @@
         </div>
         <p class="my-3 w-3/4 text-slate-700 text-m"><%= @plan.description %></p>
         <div class="border-y-2 border-slate-300 w-full">
-          <p class="my-3 text-slate-700 text-m">適合人數��� <%= @plan.people || 1 %> 人</p>
+          <p class="my-3 text-slate-700 text-m">適合人數： <%= @plan.people || 1 %> 人</p>
           <p class="my-3 text-slate-700 text-m">所需時間： <%= @plan.days %> 天</p>
-          <p class="my-3 text-slate-700 text-m">分���： <%= @plan.category %></p>
+          <p class="my-3 text-slate-700 text-m">分類： <%= @plan.category %></p>
           <% if user_signed_in? && current_user == @plan.user %>
             <p class="my-3 text-blue-600 text-m">行程公開狀態： <%= @plan.public ? "所有人皆可查看" : "私人行程" %></p>
           <% end %>

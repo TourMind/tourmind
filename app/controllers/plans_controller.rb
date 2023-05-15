@@ -19,11 +19,10 @@ class PlansController < ApplicationController
   end
 
   def new
-    if current_user.plans.count < Plan.plans_limit_number(current_user)
-      @plan = Plan.new
-    else
-      flash[:alert] = "已達新增上限，請升級會員！"
-      redirect_to plans_path
+    @plan = Plan.new
+
+    if current_user.plans.count >= Plan.plans_limit_number(current_user)
+      return redirect_to plans_path, alert: "已達新增上限，請升級會員！" 
     end
   end
 
@@ -45,17 +44,16 @@ class PlansController < ApplicationController
   end
 
   def edit
-    if current_user.plans.count < Plan.plans_limit_number(current_user)
-      unless current_user == @plan.user
+    if current_user.plans.count >= Plan.plans_limit_number(current_user)
+      return redirect_to plans_path, alert: "已達新增上限，請升級會員！" 
+    end
+
+    unless current_user == @plan.user
         @plan.name = ''
         @plan.description = ''
-      end
-
-      render :new
-    else
-      flash[:alert] = "已達新增上限，請升級會員！"
-      redirect_to plans_path
     end
+
+    render :new
   end
 
   def update
@@ -216,14 +214,7 @@ class PlansController < ApplicationController
       all_favorites.map do |fav|
         if fav.favorable_type == 'Restaurant'
           restaurant = Restaurant.find(fav.favorable_id)
-          next(
-            {
-              name: restaurant.name,
-              type: '餐廳',
-              id: restaurant.id,
-              stay_time: 0,
-            }
-          )
+          next({ name: restaurant.name, type: '餐廳', id: restaurant.id, stay_time: 0 })          
         end
 
         if fav.favorable_type == 'Hotel'

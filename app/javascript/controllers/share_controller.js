@@ -14,7 +14,6 @@ export default class extends Controller {
     "addBtn",
     "planId",
     "editors",
-    "removeBtn",
   ];
 
   initialize() {
@@ -78,12 +77,12 @@ export default class extends Controller {
     });
 
     if (!res.ok) {
-      this.addBtnTarget.innerHTML = "";
+      this.addBtnTarget.innerHTML = this.errorIcon();
       return this.alertErrors("新增失敗");
     }
 
     const data = await res.json;
-    this.addBtnTarget.innerHTML = this.checkIcon();
+    this.addBtnTarget.innerHTML = this.checkedIcon();
 
     if (this.editorsTarget.id === "empty") {
       this.editorsTarget.innerHTML = this.userCard(
@@ -106,11 +105,24 @@ export default class extends Controller {
   async removeEditor(e) {
     const card = e.target.closest(".editor");
     const editorId = card.dataset.id;
-    e.currentTarget.innerHTML = this.loadingIcon();
+    const button = e.currentTarget;
+    button.innerHTML = this.loadingIcon();
 
     const res = await destroy(`/plans/${this.id}/editor/${editorId}`);
 
-    if (!res.ok) return this.alertErrors("伺服器沒有回應");
+    if (!res.ok) return this.alertErrors("刪除失敗");
+
+    button.innerHTML = this.checkedIcon();
+
+    setTimeout(() => card.classList.add("opacity-0"), 1000);
+    setTimeout(() => {
+      card.remove();
+      if (!this.editorsTarget.querySelector(".editor")) {
+        this.toggleSharedList();
+        this.editorsTarget.id = "empty";
+        this.editorsTarget.innerHTML = this.noEditorCard();
+      }
+    }, 1500);
   }
 
   preventProp(e) {
@@ -164,7 +176,7 @@ export default class extends Controller {
 
   userCard(userId, profilePic, userName, option) {
     return `
-    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between editor transition-all ease-in-out" data-id=${userId}>
+    <div class="w-full flex p-3 pl-4 items-center rounded-lg justify-between editor transition-all ease-in-out relative" data-id=${userId}>
       <div class="flex items-center">
         <div class="mr-4">
           <div class="h-11 w-11 rounded-sm flex items-center justify-center">
@@ -192,7 +204,15 @@ export default class extends Controller {
     </div>`;
   }
 
-  checkIcon() {
+  noEditorCard() {
+    return `
+    <div class="w-full flex p-3 pl-4 items-center hover:bg-gray-200 rounded-lg cursor-pointer justify-center">
+      <div class="font-meduim text-md">此行程還沒有共同編輯者</div>
+    </div>
+    `;
+  }
+
+  checkedIcon() {
     return `
     <svg class="h-full w-full" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.837 17.837" xml:space="preserve" fill="#669c35">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -234,7 +254,7 @@ export default class extends Controller {
 
   removeBtn() {
     return `
-    <div class="h-8 w-8 mr-3 cursor-pointer" data-share-target="removeBtn" data-action="click->share#removeEditor">
+    <div class="h-8 w-8 mr-3 cursor-pointer" data-action="click->share#removeEditor">
       <svg class="w-full h-full" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="122.879px" height="122.879px" viewBox="0 0 122.879 122.879" enable-background="new 0 0 122.879 122.879" xml:space="preserve">
         <g>
           <path fill-rule="evenodd" clip-rule="evenodd" fill="#FF4141" d="M61.44,0c33.933,0,61.439,27.507,61.439,61.439 s-27.506,61.439-61.439,61.439C27.507,122.879,0,95.372,0,61.439S27.507,0,61.44,0L61.44,0z M73.451,39.151 c2.75-2.793,7.221-2.805,9.986-0.027c2.764,2.776,2.775,7.292,0.027,10.083L71.4,61.445l12.076,12.249 c2.729,2.77,2.689,7.257-0.08,10.022c-2.773,2.765-7.23,2.758-9.955-0.013L61.446,71.54L49.428,83.728 c-2.75,2.793-7.22,2.805-9.986,0.027c-2.763-2.776-2.776-7.293-0.027-10.084L51.48,61.434L39.403,49.185 c-2.728-2.769-2.689-7.256,0.082-10.022c2.772-2.765,7.229-2.758,9.953,0.013l11.997,12.165L73.451,39.151L73.451,39.151z"/>
