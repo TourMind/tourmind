@@ -32,6 +32,7 @@ class PlansController < ApplicationController
   def create
     plan_data = plan_params
     plan_data[:locations] = update_locations(plan_data, nil)
+    plan_data.delete(:lock_version)
     @commentable = @plan
     new_plan = current_user.plans.new(plan_data)
 
@@ -62,21 +63,35 @@ class PlansController < ApplicationController
 
   def update
     plan_data = plan_params
-    plan_data[:locations] = update_locations(plan_data, @plan)
 
     if current_user == @plan.user || @plan.editors.include?(current_user)
-      if @plan.update(plan_data)
-        render json: { status: 'success', redirect_url: "/plans/#{@plan.id}" }
+      begin
+        plan_data[:locations] = update_locations(plan_data, @plan)
+
+        if @plan.update(plan_data)
+          render json: { status: 'success', redirect_url: "/plans/#{@plan.id}" }
+          return
+        end
+
+        render json: {
+                errors: @plan.errors.full_messages.map { |el| el.split(" ")[1] }.join("\n"),
+              },
+              status: :unprocessable_entity
+        return
+      
+      rescue ActiveRecord::StaleObjectError, NoMethodError
+
+        render json: {
+          errors: "行程已被共同編輯者更新，\n將在3秒後重新整理，\n以查看最新的內容。",
+          reload: "true"
+        },
+        status: :unprocessable_entity
         return
       end
-
-      render json: {
-               errors: @plan.errors.full_messages,
-             },
-             status: :unprocessable_entity
-      return
     end
 
+    plan_data[:locations] = update_locations(plan_data, @plan)
+    plan_data.delete(:lock_version)
     new_plan = current_user.plans.new(plan_data)
 
     if new_plan.save
@@ -171,6 +186,7 @@ class PlansController < ApplicationController
       :public,
       :category,
       :locations,
+      :lock_version,
       images: []
     )
   end

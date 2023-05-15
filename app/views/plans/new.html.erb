@@ -129,6 +129,7 @@
                 <span class="inline-block" data-edit-target="submitText">更新行程</span>
               </div>
             </div>
+            <%= form.hidden_field :lock_version, data: {edit_target: "lockVersion"} %>
           <% end %>
         </div>
       </div>

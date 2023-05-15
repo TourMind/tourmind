@@ -8,7 +8,7 @@
       <% end %>
       <% if user_signed_in? %>
         <% if current_user == @plan.user %>
-          <%= link_to edit_plan_path(@plan) do %>
+          <%= link_to edit_plan_path(@plan.id) do %>
             <div class="bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400">
               <span>編輯行程</span>
             </div>
@@ -76,13 +76,13 @@
             </div>
           </div>
         <% elsif @plan.editors.include?(current_user) %>
-          <%= link_to edit_plan_path(@plan) do %>
+          <%= link_to edit_plan_path(@plan.id) do %>
             <div class="bg-rose-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400">
               <span>共同編輯</span>
             </div>
           <% end %>
         <% else %>
-          <%= link_to edit_plan_path(@plan) do %>
+          <%= link_to edit_plan_path(@plan.id) do %>
             <div class="bg-rose-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400">
               <span class="inline-block text-red-500">&#x2665;</span>
               <span>修改並儲存為自己的行程！</span>
