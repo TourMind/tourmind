@@ -25,7 +25,11 @@ class HotelsController < ApplicationController
   end
 
   def new
-    @hotel = Hotel.new
+    if current_user.nil? || current_user.role != 0
+      redirect_to hotels_path, alert: '權限不足！'
+    else
+      @hotel = Hotel.new
+    end
   end
 
   def create

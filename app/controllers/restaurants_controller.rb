@@ -30,7 +30,11 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants/new
   def new
-    @restaurant = Restaurant.new
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
+    else
+      @restaurant = Restaurant.new
+    end
   end
 
   # GET /restaurants/1/edit

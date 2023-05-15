@@ -26,7 +26,11 @@ class SitesController < ApplicationController
   end
 
   def new
-    @site = Site.new
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
+    else
+      @site = Site.new
+    end
   end
 
   def create
