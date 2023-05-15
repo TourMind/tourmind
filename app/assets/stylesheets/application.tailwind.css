@@ -39,7 +39,7 @@
 }
 
 .btn-sm {
-  @apply h-auto px-3 text-sm w-28;
+  @apply w-32 h-auto px-2 text-base;
 }
 
 .btn-xs {
