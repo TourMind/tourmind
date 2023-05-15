@@ -1,7 +1,6 @@
 <section class="flex items-center justify-center w-full h-screen">
-  <%= turbo_frame_tag "signup", target: :_top do %>
-    <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
-      <%= link_to image_tag("close.png", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
+  <%= turbo_frame_tag "signup" do %>
+    <div class="relative flex items-center justify-center bg-white rounded-lg form-box w-400 h-450 shadow-gary-500/50">
       <div class="form-value">
           <div class="m-8 field ">
             <%= image_tag("logo.png", class: "w-10 h-10 mb-2") %>
