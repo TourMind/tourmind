@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index show]
   # 管理員後台
   get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
+  get '/dashboard/hotels', to: 'dashboard#hotels', as: 'dashboard_hotels'
 
 
   resources :hotels do

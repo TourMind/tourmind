@@ -44,9 +44,8 @@ class HotelsController < ApplicationController
 
   def update
     params = Image::ImageService.remove_image(hotel_params)
-
-    if @hotel.update(params)
-      redirect_to hotel_path(@hotel), notice: '飯店更新成功'
+    if @hotel.update(hotel_params)
+      redirect_to hotel_path(@hotel), notice: '住宿已更新成功!'
     else
       render :edit
     end
@@ -54,7 +53,7 @@ class HotelsController < ApplicationController
 
   def destroy
     @hotel.destroy
-    redirect_to hotels_path, notice: '飯店刪除成功'
+    redirect_to dashboard_hotels_path, notice: '住宿已删除成功！'
   end
 
   private
