@@ -1,4 +1,6 @@
 <div class='w-full mx-auto md:w-2/3'>
   <h1 class='text-4xl font-bold'>編輯景點</h1>
   <%= render 'form', site: @site  %>
+  <%= link_to "返回景點頁面", @site, class:"bg-white inline-block text-blue-500 focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-blue-400 hover:text-white border-2 transition-all duration-400" %>
+  <%= link_to "返回景點列表", dashboard_sites_path, class:"bg-white inline-block text-blue-500 focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-blue-400 hover:text-white border-2 transition-all duration-400" %>
 </div>

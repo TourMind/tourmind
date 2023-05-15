@@ -1,8 +1,7 @@
-<%= form_with(model: restaurant, class: "contents") do |form| %>
+<%= form_with(model: restaurant, class: "contents", data: { controller: 'form' }) do |form| %>
   <% if restaurant.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(restaurant.errors.count, "error") %> prohibited this restaurant from being saved:</h2>
-
       <ul>
         <% restaurant.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,69 +9,70 @@
       </ul>
     </div>
   <% end %>
-
   <div class = "grid grid-cols-2 gap-2">
     <div class="my-5">
       <%= form.label "店名" %>
       <%= form.text_field :name, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "地址" %>
       <%= form.text_field :address, class: "input-field" %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "簡介" %>
       <%= form.text_area :intro, rows: 4, class: "input-field" %>
     </div>
-
     <div class='my-5'>
       <%= form.label :images, '照片 (預設第一張為封面圖)' %>
-      <% restaurant.images.each do |image| %>
-        <%= hidden_field :restaurant, :images, multiple: true, value: image.identifier %>
-      <% end %>
-      <%= form.file_field :images, multiple: true, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
-            w-full' %>
+      <div class="flex flex-wrap" data-form-target="imageList">
+        <% restaurant.images.each_with_index do |image, index| %>
+          <div class="relative">
+            <label class="absolute top-1 right-3">
+              <%= form.check_box "remove_images", {class: "hidden",multiple: true, data:{action:"change->form#hiddenImage"}}, image.identifier, nil %>
+              <i class="cursor-pointer fa fa-times-circle shadow-[0_0_0_2px_rgba(255,255,255,0.3)] rounded-full text-white"></i>
+            </label>
+            <%= image_tag image.url, class: "w-32 h-32 object-cover rounded px-2" %>
+            <%= hidden_field_tag "restaurant[images][]", image.identifier, id: "restaurant_images_#{image.identifier}" %>
+          </div>
+        <% end %>
+        <div class="cursor-pointer w-32 h-32 shadow rounded px-2 flex justify-center items-center" data-action="click->form#openUploadDialog" data-upload-button>
+          <i class="fa-solid fa-circle-plus text-3xl"></i>
+        </div>
+      </div>
+      <input type="file" class="hidden" data-form-target="uploadTmpFileElem" accept="image/jpeg,image/gif,image/png,image/jpg" data-action="change->form#uploadImage" multiple>
+      <%= form.file_field :images, multiple: true, class: 'hidden', accept: 'image/jpeg,image/gif,image/png,image/jpg', data:{form_target: "uploadFileElem"}%>
+      <%= form.hidden_field :images_cache %>
     </div>
-
     <div class="my-5">
       <%= form.label "電話" %>
       <%= form.telephone_field :tel, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "網站" %>
       <%= form.text_field :website, class: "input-field" %>
     </div>
-
     <div class="my-5">
       <%= form.label "價位" %>
       <%= form.number_field :price, min: 0, class: "input-field" %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "餐廳類型"%>
       <%= form.select :restaurant_type, Restaurant.restaurant_type_list %>
     </div>
-
     <div class="my-5 col-span-2">
       <%= form.label "料理類型 (可以複選)", class: "block"%>
       <%= form.collection_check_boxes(:cuisine_types, Restaurant.cuisine_list, :first, :last) do |option| %>
         <%= option.label(class:"input-checkbox") { option.check_box + option.text } %>
-      <%end%> 
+      <%end%>
     </div>
-
-
     <div class="my-5 col-span-2">
       <%= form.label "氣氛 (可以複選)", class: "block"%>
       <%= form.collection_check_boxes(:atmostphere, Restaurant.atmostphere_list, :first, :last) do |option| %>
         <%= option.label(class:"input-checkbox") { option.check_box + option.text } %>
-      <%end%> 
+      <%end%>
     </div>
-
   </div>
   <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit '提交' , class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
   </div>
 <% end %>

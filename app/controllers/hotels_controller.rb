@@ -6,14 +6,7 @@ class HotelsController < ApplicationController
   before_action :comment_rating, only: %i[index show]
   def index
     @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
-    @city_options = %w[台北市 新北市]
-    @hotel_types_options = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
-    @equipment_options = %w[無線網路(WIFI) 停車場/停車位 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 腳踏車租賃 24小時櫃檯接待]
-
-    @address = params[:address] || []
-    @hotel_types = params[:hotel_types] || []
-    @equipment = params[:equipment] || []
-
+    declare_params
     @hotels = if params[:keyword].present?
                 Hotel.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
               elsif @address.present? || @hotel_types.present? || @equipment.present?
@@ -29,9 +22,12 @@ class HotelsController < ApplicationController
   end
 
   def create
-    @hotel = Hotel.new(hotel_params)
+    params = Image::ImageService.remove_image(hotel_params)
+
+    @hotel = Hotel.new(params)
+
     if @hotel.save
-      redirect_to hotels_path, notice: '新增成功!'
+      redirect_to hotels_path, notice: '飯店新增成功'
     else
       render :new
     end
@@ -40,14 +36,15 @@ class HotelsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @hotel.comments
-    @comments_score = @comments.average(:rating).try(:round, 1)
   end
 
   def edit; end
 
   def update
-    if @hotel.update(hotel_params)
-      redirect_to hotel_path(@hotel), notice: '住宿已更新成功!'
+    params = Image::ImageService.remove_image(hotel_params)
+
+    if @hotel.update(params)
+      redirect_to hotel_path(@hotel), notice: '住宿更新成功'
     else
       render :edit
     end
@@ -55,7 +52,7 @@ class HotelsController < ApplicationController
 
   def destroy
     @hotel.destroy
-    redirect_to dashboard_hotels_path, notice: '住宿已删除成功！'
+    redirect_to dashboard_hotels_path, notice: '住宿已删除成功'
   end
 
   private
@@ -66,7 +63,7 @@ class HotelsController < ApplicationController
 
   def hotel_params
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
-                                  :hotel_types, :remove_images, :images_cache, equipment: [], images: [],)
+                                  :hotel_types, :images_cache, equipment: [], images: [], remove_images: [],)
   end
 
   def star_rating(rating)
@@ -92,5 +89,11 @@ class HotelsController < ApplicationController
         comment_count: hotel.comments.where.not(content: nil).count,
       }
     end
+  end
+
+  def declare_params
+    @address = params[:address] || []
+    @hotel_types = params[:hotel_types] || []
+    @equipment = params[:equipment] || []
   end
 end

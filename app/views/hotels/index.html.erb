@@ -1,156 +1,135 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
     <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
-      data-action="click->filter#toggleFilterMenu">篩選
+      data-action="click->filter#toggleFilterMenu">
+      篩選
     </div>
   </div>
-  <div class="bg-white">
-    <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)]">
-      <section data-filter-target="filterMenu"
-        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-lg lg:block lg:static lg:w-72 h-max bd" style="z-index: 1">
-        <div class="flex justify-end pt-6 lg:hidden">
-          <button data-action="click->filter#toggleFilterMenu"><i class="text-lg fa-solid fa-xmark"></i></button>
-        </div>
-        <%= form_tag(hotels_path, {method: :get,class:'border-b py-6'}) do |form| %>
-          <div class="py-6 border-b">
-            <div class="py-2" data-action="click->filter#toggleFilterCategory">
-              地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
-            </div>
-            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
-              <% @city_options.each do | city |%>
-                <li class="py-1">
-                  <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
-                  <%=city%>
-                </li>
-              <% end %>
-            </ul>
+  <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)]">
+    <section data-filter-target="filterMenu"
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max bd" style="z-index: 1">
+      <div class="flex justify-end pt-6 lg:hidden">
+        <button data-action="click->filter#toggleFilterMenu">
+          <i class="text-lg fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <%= form_tag(hotels_path, {method: :get,class:'border-b py-6'}) do |form| %>
+        <div class="font-bold">所有篩選類別</div>
+        <div class="py-6 border-b border-400">
+          <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
+            地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <div class="py-6 border-b">
-            <div class="py-2" data-action="click->filter#toggleFilterCategory">
-              住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
-            </div>
-            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
-              <% @hotel_types_options.each do | hotel_types |%>
-                <li class="py-1">
-                  <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
-                  <%=hotel_types%>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-          <div class="py-6">
-            <div class="py-2" data-action="click->filter#toggleFilterCategory">
-              設備<i class="px-1 fa-solid fa-chevron-down"></i>
-            </div>
-            <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
-              <% @equipment_options.each do | equipment |%>
-                <li class="py-1">
-                  <%= check_box_tag "equipment[]", equipment, @equipment.include?(equipment) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
-                  <%=equipment%>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-          <%= submit_tag "submit", {class:'hidden', data:{filter_target:"filterSubmitBtn"}} %>
-        <% end %>
-      </section>
-      <section class="flex-grow w-3/5">
-        <div class='flex justify-between'>
-          <h1 class='text-4xl font-bold text-center'>住宿</h1>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="py-2">
-            <% if @hotels.present? %>
-              <%= @hotels.count %> / <%= Hotel.count %> 家住宿
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
+            <% Hotel::CITY_OPTIONS.each do | city |%>
+              <li class="py-1">
+                <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
+                <%=city%>
+              </li>
             <% end %>
-            <%= render "tag", tags: :address%>
-            <%= render "tag", tags: :hotel_types%>
-            <%= render "tag", tags: :equipment%>
-          </div>
-          <form class="flex justify-center mb-2 max-h-10">
-            <div class="flex items-center">
-              <div class="relative">
-                <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full pl-14 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1c3.86 0 7 3.14 7 7 0 1.94-.79 3.7-2.07 4.97l4.96 4.97-1.41 1.41-4.97-4.96A6.959 6.959 0 0 1 9 15c-3.86 0-7-3.14-7-7s3.14-7 7-7zm0 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
-                  </svg>
-                </div>
-              </div>
-              <button type="submit" class="ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                搜尋
-              </button>
-            </div>
-          </form>
+          </ul>
         </div>
-        <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
-          <% @hotels.each do |hotel| %>
-            <div class="overflow-hidden bg-white rounded-md shadow-lg">
-              <div class="relative">
-                <%= render 'favorite', object: hotel, size:'text-4xl'%>
-                <%= link_to hotel_path(hotel) do %>
-                  <div class=" text-gray-700 md:h-[15rem] w-full">
-                    <% if hotel.images.present? %>
-                      <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
-                    <% elsif hotel.image.url.present? %>
-                      <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
-                    <% else %>
-                      <%= image_tag "https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?" , class:'object-cover w-full h-full' %>
-                    <% end %>
-                  </div>
+        <div class="py-6 border-b border-gray-400">
+          <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
+            住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
+            <% Hotel::HOTEL_TYPES_OPTIONS.each do | hotel_types |%>
+              <li class="py-1">
+                <%= check_box_tag "hotel_types[]", hotel_types, @hotel_types.include?(hotel_types) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
+                <%=hotel_types%>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="py-6">
+          <div class="py-2" data-action="click->filter#toggleFilterCategory">
+            設備<i class="px-1 fa-solid fa-chevron-down"></i>
+          </div>
+          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
+            <% Hotel::EQUIPMENT_OPTIONS.each do | equipment |%>
+              <li class="py-1">
+                <%= check_box_tag "equipment[]", equipment, @equipment.include?(equipment) , {class: "mr-2 checkbox", data:{filter_target:"filterCheckbox"}} %>
+                <%=equipment%>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <%= submit_tag "submit", {class:'hidden', data:{filter_target:"filterSubmitBtn"}} %>
+      <% end %>
+    </section>
+    <section class="flex-grow w-3/5">
+      <div class='flex justify-between'>
+        <h1 class='text-4xl font-bold text-center'>住宿</h1>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="py-2">
+          <% if @hotels.present? %>
+            <%= @hotels.count %> / <%= Hotel.count %> 家住宿
+          <% end %>
+          <%= render "tag", tags: :address%>
+          <%= render "tag", tags: :hotel_types%>
+          <%= render "tag", tags: :equipment%>
+        </div>
+        <%= render partial: "keyword" %>
+      </div>
+      <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
+        <% @hotels.each do |hotel| %>
+          <div class="overflow-hidden bg-white rounded-md shadow-lg">
+            <div class="relative">
+              <%= render 'favorite', object: hotel, size:'text-4xl'%>
+              <%= link_to hotel_path(hotel) do %>
+                <div class=" text-gray-700 md:h-[15rem] w-full">
+                  <% if hotel.images.present? %>
+                    <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
+                  <% else %>
+                    <%= image_tag "https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?" , class:'object-cover w-full h-full' %>
+                  <% end %>
                 </div>
               <% end %>
-              <div class="flex-grow p-2 m-2">
-                <div class="flex items-center justify-between">
-                  <h2 class="py-4 text-xl font-medium">
-                    <%= hotel.name %>
-                  </h2>
+            </div>
+            <div class="flex-grow p-2 m-2">
+              <div class="flex items-center justify-between">
+                <h2 class="w-3/5 py-4 text-xl font-medium">
+                  <%= hotel.name %>
+                </h2>
+                <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
+                  <span class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                    <%= hotel.hotel_types %>
+                  </span>
+                <% end %>
+              </div>
+              <ul>
+                <li><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                  (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+                </li>
+                <li class= "mt-2"><%= hotel.intro&.truncate(70)%>
+                </li>
+              </ul>
+              <div class="mt-2">
+                <span class="font-medium">飯店設備</span>
+                <% if hotel.equipment.present? %>
                   <ul class="flex flex-wrap mt-2">
-                    <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
-                      <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                        <%= hotel.hotel_types %>
+                    <% hotel.equipment.each do |equipment| %>
+                      <li
+                            class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                        <%= equipment %>
                       </li>
                     <% end %>
                   </ul>
-                </div>
-                <ul>
-                  <% if hotel.comments.any? %>
-                    <h2 class="font-bold">評分：<%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
-                      <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
-                      (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
-                    <% else %>
-                      <p>尚未有評論</p>
-                    <% end %>
-                    <li>簡介:<%= hotel.intro&.truncate(30)%>
-                    </li>
-                  </ul>
-                  <div class="mt-2">
-                  </div>
-                  <div class="mt-2">
-                    <h2 class="font-medium">飯店設備</h2>
-                    <% if hotel.equipment.present? %>
-                      <ul class="flex flex-wrap mt-2">
-                        <% hotel.equipment.each do |equipment| %>
-                          <li
-                            class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                            <%= equipment %>
-                          </li>
-                        <% end %>
-                      </ul>
-                    <% else %>
-                      <p>沒有類型資料</p>
-                    <% end %>
-                  </div>
-                </div>
+                <% else %>
+                  <span>沒有類型資料</span>
+                <% end %>
               </div>
-            <% end %>
-          </section>
-          <div>
-            <% if @hotels.count >= 6 || @pagy.page > 1%>
-              <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
-            <% end %>
+            </div>
           </div>
-        </section>
+        <% end %>
       </section>
-    </div>
-  </div>
+      <div>
+        <% if @hotels.count >= 6 || @pagy.page > 1%>
+          <div class="flex justify-center mt-4"><%= raw pagy_nav(@pagy) %></div>
+        <% end %>
+      </div>
+    </section>
+  </section>
+</div>
