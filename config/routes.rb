@@ -17,10 +17,11 @@ Rails.application.routes.draw do
 
   resources :plans do 
     post 'add_editor', on: :member
+    delete 'editor/:user_id', to: 'plans#remove_editor' , on: :member
     resources :comments
   end
 
-  # 行程相關路性
+  # 行程相關路徑
   get '/check_user', to: 'plans#check_user'
   get '/day_info', to: 'plans#day_info'
   get '/plan_overview', to: 'plans#plan_overview'

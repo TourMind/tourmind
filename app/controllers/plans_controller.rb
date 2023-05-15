@@ -108,14 +108,11 @@ class PlansController < ApplicationController
     user = User.find_by(email: params[:email])
 
     if user != nil
-      profile_pic = user.avatar_url || user.default_avatar
-      user_name = user.name || '此使用者沒有設定姓名'
-
       render json: {
                status: 'success',
                userId: user.id,
-               profilePic: profile_pic,
-               userName: user_name,
+               profilePic: user.avatar_url || user.default_avatar,
+               userName: user.name || '此使用者沒有設定姓名',
              }
       return
     end
@@ -129,16 +126,20 @@ class PlansController < ApplicationController
 
     plan.editors << user
 
-    profile_pic = user.avatar_url || user.default_avatar
-    user_name = user.name || '此使用者沒有設定姓名'
-
     render json: {
       status: 'success',
       userId: user.id,
-      profilePic: profile_pic,
-      userName: user_name,
+      profilePic: user.avatar_url || user.default_avatar,
+      userName: user.name || '此使用者沒有設定姓名',
     }
 
+  end
+
+  def remove_editor
+    plan = Plan.find(params[:id])
+    user = User.find(params[:user_id])
+
+    plan.editors.destroy(user)
   end
 
   private
