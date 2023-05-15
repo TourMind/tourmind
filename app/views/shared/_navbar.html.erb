@@ -9,7 +9,7 @@
   <div class="flex items-center px-2">
     <% if current_user &&  current_user.role == 1 %>
       <span class="px-2 py-2"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 5;">
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 10;">
         <li class="px-2 py-2 md:px-2">
           <%= link_to favorites_path do %>
             <span class="mr-2 btn-round btn-sm btn-gray">
