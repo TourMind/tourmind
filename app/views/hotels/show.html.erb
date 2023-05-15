@@ -25,7 +25,6 @@
               <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% elsif index < 3 %>
-            <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
             <div>
               <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
@@ -93,16 +92,17 @@
   </div>
   <section class='w-full'>
     <div data-controller="butt">
-      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-400 inline-block font-medium" href="#comment-form">
-        發表評論
-      </a>
-      <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:'btn bg-hotel opacity-70 hover:opacity-100 hover:bg-hotel border-hotel '%>
-      <%= link_to '返回住宿列表' , hotels_path, class:'btn leading-3 text-hotel border-hotel bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-hotel' %>
-      <%= link_to '刪除住宿資訊' , hotel_path(@hotel), method: :delete,
-          class:'btn leading-3 text-white border-hotel bg-red-600 opacity-70 hover:opacity-100 hover:bg-white hover:border-hotel' , data: { confirm: '您確定要刪除住宿嗎？' } %>
-      <div class="hidden" data-butt-target="form" >
-        <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+      <div class="my-2">
+        <a data-action="click->butt#toggleCommentForm" class="bg-gray-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-gray-400 border-2 transition-all duration-400" href="#comment-form">
+          發表評論
+        </a>
+        <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
+        <%= link_to '返回住宿列表' , hotels_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
+        <%= link_to '刪除住宿資訊' , hotel_path(@hotel), method: :delete,
+         class:"bg-red-500 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400" , data: { confirm: '您確定要刪除住宿嗎？' } %>
+        <div class="hidden p-4" data-butt-target="form" >
+          <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+        </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>

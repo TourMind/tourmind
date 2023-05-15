@@ -14,8 +14,9 @@
         </button>
       </div>
       <%= form_tag(hotels_path, {method: :get,class:'border-b py-6'}) do |form| %>
-        <div class="py-6 border-b">
-          <div class="py-2" data-action="click->filter#toggleFilterCategory">
+        <div class="font-bold">所有篩選類別</div>
+        <div class="py-6 border-b border-400">
+          <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
           <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
@@ -27,8 +28,8 @@
             <% end %>
           </ul>
         </div>
-        <div class="py-6 border-b">
-          <div class="py-2" data-action="click->filter#toggleFilterCategory">
+        <div class="py-6 border-b border-gray-400">
+          <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             住宿類型<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
           <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
@@ -88,29 +89,23 @@
             </div>
             <div class="flex-grow p-2 m-2">
               <div class="flex items-center justify-between">
-                <h2 class="py-4 text-xl font-medium">
+                <h2 class="w-3/5 py-4 text-xl font-medium">
                   <%= hotel.name %>
                 </h2>
-                <ul class="flex flex-wrap mt-2">
-                  <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
-                    <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                      <%= hotel.hotel_types %>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
-              <div>
-                <% if hotel.comments.any? %>
-                  <span class="font-bold"><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
-                    <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
-                    (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+                <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
+                  <span class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                    <%= hotel.hotel_types %>
                   </span>
-                <% else %>
-                  <span>尚未有評論</span>
                 <% end %>
-                <div>簡介:<%= hotel.intro&.truncate(30)%>
-                </div>
               </div>
+              <ul>
+                <li><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                  (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+                </li>
+                <li class= "mt-2"><%= hotel.intro&.truncate(70)%>
+                </li>
+              </ul>
               <div class="mt-2">
                 <span class="font-medium">飯店設備</span>
                 <% if hotel.equipment.present? %>

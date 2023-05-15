@@ -24,7 +24,6 @@
               <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
           <% elsif index < 3 %>
-            <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
             <div>
               <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
             </div>
@@ -52,7 +51,7 @@
       <div class='px-4 py-8'>
         <h2 class="text-2xl font-bold">景點類型</h2>
         <ul class='flex flex-wrap py-2'>
-          <% @site.site_types.each do |site_type| %>
+          <% Site::SITE_TYPE_OPTIONS.each do |site_type| %>
             <%= link_to sites_path(site_types: [site_type]) do %>
               <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
                 <%=site_type%>
@@ -98,15 +97,17 @@
   </div>
   <section class='w-full'>
     <div data-controller="butt">
-      <a data-action="click->butt#toggleCommentForm" class="mt-2 rounded-lg py-3 px-5 bg-gray-400 inline-block font-medium" href="#comment-form">
-        發表評論
-      </a>
-      <%= link_to '編輯景點資訊' , edit_site_path(@site), class:'btn bg-site opacity-70 hover:opacity-100 hover:bg-site border-site'%>
-      <%= link_to '返回景點列表' , sites_path, class:'btn leading-3 text-site border-site bg-white opacity-70 hover:opacity-100 hover:bg-white hover:border-site' %>
-      <%= link_to '刪除景點資訊' , site_path(@site), method: :delete,
-           class:'btn leading-3 text-white border-site bg-red-600 opacity-70 hover:opacity-100 hover:bg-white hover:border-site' , data: { confirm: '您確定要刪除景點嗎？' } %>
-      <div class="hidden" data-butt-target="form" >
-        <%= render "comments/comment", comment: Comment.new, site:@site %>
+      <div class="m-2">
+        <a data-action="click->butt#toggleCommentForm" class="bg-gray-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-gray-400 border-2 transition-all duration-400" href="#comment-form">
+          發表評論
+        </a>
+        <%= link_to '編輯景點資訊' , edit_site_path(@site), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
+        <%= link_to '返回景點列表' , sites_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
+        <%= link_to '刪除景點資訊' , site_path(@site), method: :delete,
+           class:"bg-red-500 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400"  , data: { confirm: '您確定要刪除景點嗎？' } %>
+        <div class="hidden p-4" data-butt-target="form" >
+          <%= render "comments/comment", comment: Comment.new, site:@site %>
+        </div>
       </div>
     </div>
   </section>
