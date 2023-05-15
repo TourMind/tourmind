@@ -6,105 +6,105 @@
     <ul class="flex-col p-4">
       <% if @comments_score.present? %>
         <h2 class="font-bold">評分：<span><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
-                                   <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
-                                   (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)</span>
-      <% else %>
-        <p>尚未有評論</p>
-      <% end %>
-      <button class="px-2 py-1 text-white bg-gray-700 rounded-full">加入喜愛清單</button>
-    </ul>
-  </div>
-  <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
-    <div class='relative grid w-full grid-cols-3 grid-rows-2 gap-1 overflow-hidden rounded-md shadow-md max-h-96'>
-      <% if @hotel.images.present? %>
-        <% @hotel.images.each_with_index do |image, index| %>
-          <% if index == 0 %>
-            <div class="col-span-2 row-span-2">
-              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
-            </div>
-          <% elsif index < 3 %>
-            <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
-            <div>
-              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
-            </div>
-          <% end %>
+            <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
+            (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)</span>
+        <% else %>
+          <p>尚未有評論</p>
         <% end %>
-      <% else %>
-        <%= image_tag src="https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?", class:'object-cover col-span-full row-span-full w-full h-full' %>
-      <% end %>
-      <%= render 'favorite', object:@hotel, size:'text-6xl'%>
+        <button class="px-2 py-1 text-white bg-gray-700 rounded-full">加入喜愛清單</button>
+      </ul>
     </div>
-  </section>
-  <div class='flex flex-col py-4 lg:flex-row'>
-    <div class="w-full mr-4 lg:w-2/3">
-      <div class='px-4 pb-4 border-b-2 border-gray-300'>
-        <div class='pb-2 text-2xl font-bold'>詳細資料</div>
-        <ul>
-          <li>
-            <span class='font-bold'>星級：</span><%=@hotel.star_rating%>
-          </li>
-          <li>
-            <span class='font-bold'>類型：</span><%=@hotel.hotel_types%>
-          </li>
-          <li class="flex">
-            <span class='font-bold whitespace-nowrap'>簡介：</span>
-            <span><%=@hotel.intro%></span>
-          </li>
-        </ul>
-      </div>
-      <div class='p-4 border-b-2 border-gray-300'>
-        <div class='pb-2 text-2xl font-bold'>位置和聯絡方式</div>
-        <ul>
-          <li>
-            <span class='font-bold'>地址：</span><%=@hotel.address%>
-          </li>
-          <li>
-            <span class='font-bold'>電話：</span><%=@hotel.tel%>
-          </li>
-          <li>
-            <%= link_to '網站連結(請點我)' , @hotel.website, target: "_blank", class:'font-bold' %>
-          </li>
-        </ul>
-      </div>
-      <div class='p-4'>
-        <div class="pb-2 text-2xl font-bold">飯店設備</div>
-        <ul class='flex flex-wrap'>
-          <% @hotel.equipment.each do |equipment| %>
-            <%= link_to hotels_path(equipment: [equipment]) do %>
-              <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%=equipment%>
-              </li> 
+    <section class='flex justify-center pb-4 border-b-2 border-gray-300 md:w-90%'>
+      <div class='relative grid w-full grid-cols-3 grid-rows-2 gap-1 overflow-hidden rounded-md shadow-md max-h-96'>
+        <% if @hotel.images.present? %>
+          <% @hotel.images.each_with_index do |image, index| %>
+            <% if index == 0 %>
+              <div class="col-span-2 row-span-2">
+                <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
+              </div>
+            <% elsif index < 3 %>
+              <%# 先暫時移除第2張圖片起,裁切不同圖片大小設定 %>
+              <div>
+                <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
+              </div>
             <% end %>
           <% end %>
-        </ul>
+        <% else %>
+          <%= image_tag src="https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?", class:'object-cover col-span-full row-span-full w-full h-full' %>
+        <% end %>
+        <%= render 'favorite', object:@hotel, size:'text-6xl'%>
       </div>
-      <div class='p-4'>
-        <%= link_to '編輯飯店資訊' , edit_hotel_path(@hotel), class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium'%>
-        <%= link_to '返回飯店列表' , hotels_path, class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium' %>
-        <%= link_to '刪除飯店資訊' , hotel_path(@hotel), method: :delete,
+    </section>
+    <div class='flex flex-col py-4 lg:flex-row'>
+      <div class="w-full mr-4 lg:w-2/3">
+        <div class='px-4 pb-4 border-b-2 border-gray-300'>
+          <div class='pb-2 text-2xl font-bold'>詳細資料</div>
+          <ul>
+            <li>
+              <span class='font-bold'>星級：</span><%=@hotel.star_rating%>
+            </li>
+            <li>
+              <span class='font-bold'>類型：</span><%=@hotel.hotel_types%>
+            </li>
+            <li class="flex">
+              <span class='font-bold whitespace-nowrap'>簡介：</span>
+              <span><%=@hotel.intro%></span>
+            </li>
+          </ul>
+        </div>
+        <div class='p-4 border-b-2 border-gray-300'>
+          <div class='pb-2 text-2xl font-bold'>位置和聯絡方式</div>
+          <ul>
+            <li>
+              <span class='font-bold'>地址：</span><%=@hotel.address%>
+            </li>
+            <li>
+              <span class='font-bold'>電話：</span><%=@hotel.tel%>
+            </li>
+            <li>
+              <%= link_to '網站連結(請點我)' , @hotel.website, target: "_blank", class:'font-bold' %>
+            </li>
+          </ul>
+        </div>
+        <div class='p-4'>
+          <div class="pb-2 text-2xl font-bold">飯店設備</div>
+          <ul class='flex flex-wrap'>
+            <% @hotel.equipment.each do |equipment| %>
+              <%= link_to hotels_path(equipment: [equipment]) do %>
+                <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                  <%=equipment%>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <div class='p-4'>
+          <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium'%>
+          <%= link_to '返回上一頁' , :back, class:'rounded-md py-2 px-5 bg-blue-300 inline-block font-medium' %>
+          <%= link_to '刪除住宿資訊' , hotel_path(@hotel), method: :delete,
           class: 'rounded-md py-2 px-5 bg-gray-200 inline-block font-medium' , data: { confirm: '您確定要刪除這家飯店嗎？' } %>
+        </div>
       </div>
-    </div>
-    <div class="flex justify-center w-full lg:w-1/3">
-      <iframe
+      <div class="flex justify-center w-full lg:w-1/3">
+        <iframe
         width="400" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=<%= "#{@hotel.name} #{@hotel.address}" %>" allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-  <div class="col-span-5 px-4 bg-white">
-    <h2 class="text-2xl font-bold ">評等和評論</h2>
-    <div class="h-40 overflow-y-auto ">
-      <div id="comment-list">
-        <%= render partial: "comment", collection: @hotel.comments %>
+        </iframe>
       </div>
     </div>
-  </div>
-  <section class='w-full'>
-  <div data-controller="butt">
-    <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
-      發表評論
-    </a>
-    <div class="hidden" data-butt-target="form" >
-      <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+    <div class="col-span-5 px-4 bg-white">
+      <h2 class="text-2xl font-bold ">評等和評論</h2>
+      <div class="h-40 overflow-y-auto ">
+        <div id="comment-list">
+          <%= render partial: "comment", collection: @hotel.comments %>
+        </div>
+      </div>
     </div>
-  </section>
+    <section class='w-full'>
+      <div data-controller="butt">
+        <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
+          發表評論
+        </a>
+        <div class="hidden" data-butt-target="form" >
+          <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+        </div>
+      </section>

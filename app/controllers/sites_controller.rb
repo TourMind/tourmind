@@ -6,7 +6,7 @@ class SitesController < ApplicationController
   before_action :comment_rating, only: %i[index show]
 
   def index
-    @pagy, @site = pagy(Site.all.order(:id),items: 6)
+    @pagy, @site = pagy(Site.all.order(:id), items: 6)
     @city_options = %w[台北市 新北市]
     @site_type_options = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
     @pet_friendly_options = %w[可攜寵物]
@@ -57,7 +57,7 @@ class SitesController < ApplicationController
   def destroy
     set_site
     @site.destroy
-    redirect_to sites_path, notice: '已刪除!'
+    redirect_to dashboard_sites_path, notice: '已刪除!'
   end
 
   private
@@ -68,7 +68,7 @@ class SitesController < ApplicationController
 
   def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
-                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [])
+                                 :stay_duration, :intro, :pet_friendly, :remove_images, :images_cache, site_types: [], images: [],)
   end
 
   def star_rating(rating)
