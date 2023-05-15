@@ -42,6 +42,8 @@ application.register("picture", PictureController)
 
 import ShareController from "./share_controller"
 application.register("share", ShareController)
+import SearchController from "./search_controller"
+application.register("search", SearchController)
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)

@@ -54,7 +54,8 @@ Rails.application.routes.draw do
 
   # 404畫面
   get '/404', to: "application#record_not_found"
-  get 'search', to: 'page#search'
+  get 'search', to: 'page#search', as: 'page_search'
+
 
   resources :hotels do
     resources :comments, only: [:create,:new]
