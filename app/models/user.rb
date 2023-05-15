@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :shared_plans, through: :collaborations, source: :plan
 
   has_many :comments, dependent: :destroy
+  mount_uploader :avatar, ImageUploader
   # 驗證必填欄位
   # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
   validates :email,

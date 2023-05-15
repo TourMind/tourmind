@@ -14,13 +14,21 @@
           </div>
           
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { controller: :turboform}) do |f| %>
-            <div class="field">
-              <%= f.hidden_field :avatar_url %>
-              <% if current_user.avatar_url == nil || current_user.avatar_url == '' %>
-                <%=image_tag("user_default_avatar.png", class: "rounded-full w-20 h-20 m-auto")%>
-              <% else %>
-                <%=image_tag(current_user.avatar_url, class: "rounded-full w-20 h-20 m-auto")%>
-              <% end %>
+            <div class="ffield flex justify-center items-center">
+              <div class="avatar-container">
+                <%= f.hidden_field :avatar %>
+                <% if current_user.avatar.blank? %>
+                  <%= image_tag("user_default_avatar.png", class: "rounded-full w-20 h-20") %>
+                <% else %>
+                  <%= image_tag(current_user.avatar.url, class: "rounded-full w-20 h-20") %>
+                <% end %>
+                <label for="avatar_upload" class="camera-overlay">
+                  <div class="camera-icon">
+                    <i class="fa-solid fa-camera fa-2xl"></i>
+                  </div>
+                </label>
+                <%= f.file_field :avatar, accept: "image/*", id: "avatar_upload", class: "sr-only" %>
+              </div>
             </div>
             <div class="relative m-2 field">
               <%= f.select :city, User.city_list, {}, class: "w-full text-black bg-white rounded-lg" %>
