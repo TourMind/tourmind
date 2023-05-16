@@ -93,11 +93,13 @@
                 <h2 class="py-4 text-xl font-medium w-3/5">
                   <%= site.name %>
                 </h2>
-                <%= link_to sites_path(pet_friendly: [site.pet_friendly]) do %>
-                  <span class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                    <%= site.pet_friendly %>
-                  </span>
-                <% end %>
+                <% if site.pet_friendly.present? %>
+                  <%= link_to sites_path(pet_friendly: [site.pet_friendly]) do %>
+                    <span class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                      <%= site.pet_friendly %>
+                    </span>
+                  <% end %>
+                <%end%>
               </div>
               <ul>
                 <li><%= star_rating(@site_data[site.id][:average_rating]) %>
@@ -108,8 +110,8 @@
                 </li>
               </ul>
               <div class="mt-2 ">
-                <h2 class="font-medium">景點類型</h2>
                 <% if site.site_types.present? %>
+                  <h2 class="font-medium">景點類型</h2>
                   <ul class="flex flex-wrap mt-2">
                     <% site.site_types.each do |site_type| %>
                       <%= link_to sites_path(site_types: [site_type]) do %>
@@ -120,8 +122,6 @@
                       <% end %>
                     <% end %>
                   </ul>
-                <% else %>
-                  <span>沒有類型資料</span>
                 <% end %>
               </div>
             </div>
