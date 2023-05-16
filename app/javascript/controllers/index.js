@@ -38,3 +38,9 @@ application.register("navbar", NavbarController);
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import TurboformController from "./turboform_controller"
+application.register("turboform", TurboformController)

@@ -1,0 +1,11 @@
+
+<div class="fixed inset-0 z-50 flex items-center justify-center hidden" data-modal-target="modal" data-action="click->modal#overlayClick" id = "modal">
+  <div class="fixed inset-0 bg-gray-900 opacity-50" data-modal-target="overlay"></div>
+  <div class="bg-white rounded-lg z-10 relative p-3">
+    <button data-action="click->modal#hideModal" class="absolute right-1 top-1 z-20 text-white rounded-lg"><%= image_tag("close.png", class: "h-5 w-5 m-2")%></button>
+    <%= turbo_frame_tag "login", data: { modal_target: :frame, frame: :login }%>
+    <%= turbo_frame_tag "signup", data: { modal_target: :frame, frame: :signup }%>
+    <%= turbo_frame_tag "forgot", data: { modal_target: :frame, frame: :forgot }%>
+    <%= turbo_frame_tag "edit_profile", data: { modal_target: :frame, frame: :edit_profile }%>
+  </div>
+</div>
