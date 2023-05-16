@@ -10,7 +10,9 @@ class PageController < ApplicationController
   end
   def search
     @query = params[:query]
-
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 4)
+    @pagy, @hotels = pagy(Hotel.all.order(:id), items: 4)
+    @pagy, @sites = pagy(Site.all.order(:id), items: 4)
     # 搜尋所有模型的數據
     @restaurants = Restaurant.where("name LIKE ?", "%#{@query}%")
     @hotels = Hotel.where("name LIKE ?", "%#{@query}%")

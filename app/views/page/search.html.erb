@@ -1,21 +1,10 @@
 <div class = "bg-white mb-12 ">
   <main class="container mx-auto pt-12 max-w-screen-xl">
     <div class="flex">
-      <form class="flex justify-start mb-2 max-h-10" action="<%= page_search_path %>" method="get">
-        <div class="flex items-center">
-          <div class="relative">
-            <input type="text" name="query" value="<%= params[:query] %>" placeholder="請輸入名稱/地址/類型..." class="block w-full pl-14 pr-10 py-2 marker:border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
-            <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1c3.86 0 7 3.14 7 7 0 1.94-.79 3.7-2.07 4.97l4.96 4.97-1.41 1.41-4.97-4.96A6.959 6.959 0 0 1 9 15c-3.86 0-7-3.14-7-7s3.14-7 7-7zm0 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
-              </svg>
-            </div>
-          </div>
-          <button type="submit" class="ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-            搜尋
-          </button>
-        </div>
-      </form>
+      <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex justify-center mb-2 max-h-10") do |form| %>
+      <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full pl-8 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
+      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" %>
+      <% end %>    
     </div>
     <h1 class="font-bold text-2xl">搜尋結果: &ldquo;<%= @query %>&rdquo;</h1>
     <div data-controller="favorite">
@@ -37,17 +26,20 @@
         <h2 class="font-bold text-3xl my-2">全部</h2>
         <div class="flex flex-wrap">
           <% if @hotels.present? %>
-            <div>
+            <div class="w-full bg-gray-200 p-4 mb-4">
+              <span>飯店</span>
               <%= render "hotel" %>
             </div>
           <% end %>
           <% if @restaurants.present? %>
-            <div>
+            <div class="w-full bg-gray-200 p-4 mb-4">
+              <span>餐廳</span>
               <%= render "restaurant" %>
             </div>
           <% end %>
           <% if @sites.present? %>
-            <div>
+            <div class="w-full bg-gray-200 p-4 mb-4">
+              <span>景點</span>
               <%= render "site" %>
             </div>
           <% end %>
