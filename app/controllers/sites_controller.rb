@@ -37,6 +37,8 @@ class SitesController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @site.comments
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
+    @comments_score = @comments.average(:rating).try(:round, 1)
   end
 
   def edit; end

@@ -17,6 +17,8 @@ class PlansController < ApplicationController
        @plan.editors.include?(current_user)
       return
     end
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
+    return if (user_signed_in? && current_user == @plan.user) || @plan.public
 
     redirect_to plans_path, alert: '你沒有權限查看此行程！'
   end

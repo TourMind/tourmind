@@ -1,0 +1,28 @@
+  <% if @comments.count >= 6 || @pagy.page > 1%>
+    <nav class="flex justify-center">
+        <ul class="pagination flex space-x-2">
+        <% if @pagy.prev %>
+          <li class="page-item">
+            <a class="page-link btn" href="<%= url_for(page: @pagy.prev, anchor: 'comment-heading') %>">Previous</a>
+          </li>
+        <% end %>
+        <% @pagy.series.each do |item| %>
+          <% if item.is_a? Integer %>
+            <li class="page-item <%= 'active' if item == @pagy.page %>">
+              <a class="page-link btn" href="<%= url_for(page: item, anchor: 'comment-heading') %>"><%= item %></a>
+            </li>
+          <% else %>
+            <li class="page-item disabled">
+              <span class="page-link btn"><%= item %></span>
+            </li>
+          <% end %>
+        <% end %>
+        <% if @pagy.next %>
+          <li class="page-item">
+            <a class="page-link btn" href="<%= url_for(page: @pagy.next, anchor: 'comment-heading') %>">Next</a>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
+</div>

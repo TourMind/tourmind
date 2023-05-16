@@ -28,6 +28,7 @@ class RestaurantsController < ApplicationController
     @google_api_key = Rails.application.credentials.GOOGLE_API_KEY
     @comment = Comment.new
     @comments = @restaurant.comments
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
   # GET /restaurants/new

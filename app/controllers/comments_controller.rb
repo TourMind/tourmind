@@ -4,11 +4,7 @@ class CommentsController < ApplicationController
 
   def index
     @average_rating = Comment.average_rating
-    @comments = if params[:content].present?
-                  Comment.by_content(params[:keyword])
-                else
-                  Comment.all
-                end
+
   end
 
   def new
@@ -28,8 +24,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
-        format.turbo_stream { redirect_to @commentable, notice: 'Comment was successfully created.' }
-        format.html { redirect_to @commentable, notice: 'Comment was successfully created.' }
+        format.turbo_stream { redirect_to @commentable, notice: '評論成功 ' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.turbo_stream { render turbo_stream: turbo_stream.replace(@comment, partial: 'comments/form', locals: { comment: @comment }) }
