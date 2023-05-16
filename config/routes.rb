@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   # 管理員後台
   get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
 
+  # 404畫面
+  get '/404', to: "application#record_not_found"
 
   resources :hotels do
     resources :comments, only: [:create,:new]

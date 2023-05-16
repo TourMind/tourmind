@@ -112,7 +112,7 @@ export default class extends Controller {
 
       window.location.replace(data.redirect_url);
     } catch (err) {
-      console.log(err);
+      window.location.replace("/404");
     }
   }
 
@@ -187,6 +187,10 @@ export default class extends Controller {
   }
 
   deleteDay(e) {
+    if (+this.containerTarget.dataset.days <= 1) {
+      return this.alertErrors("行程不得少於一天");
+    }
+
     const day = e.target.closest(".day");
     const siteInDay = day.querySelectorAll(".site").length;
 
