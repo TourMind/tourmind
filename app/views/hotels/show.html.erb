@@ -50,16 +50,18 @@
         </ul>
       </div>
       <div class='p-4'>
-        <h2 class="text-2xl font-bold">住宿設備</h2>
-        <ul class='flex flex-wrap py-2'>
-          <% Hotel::EQUIPMENT_OPTIONS.each do |option| %>
-            <%= link_to hotels_path(equipment: [option]) do %>
-              <li class='inline-block py-1 px-2 mr-2 mt-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%=option%>
-              </li>
+        <% if @hotel.equipment.present? %>
+          <h2 class="text-2xl font-bold">住宿設備</h2>
+          <ul class='flex flex-wrap py-2'>
+            <% @hotel.equipment.each do |option| %>
+              <%= link_to hotels_path(equipment: [option]) do %>
+                <li class='inline-block py-1 px-2 mr-2 mt-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                  <%=option%>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
+          </ul>
+        <%end%>
       </div>
     </div>
     <div class="flex flex-col justify-center w-full mr-4 lg:w-1/3">
@@ -98,8 +100,6 @@
         </a>
         <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
         <%= link_to '返回住宿列表' , hotels_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
-        <%= link_to '刪除住宿資訊' , hotel_path(@hotel), method: :delete,
-         class:"bg-red-500 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400" , data: { confirm: '您確定要刪除住宿嗎？' } %>
         <div class="hidden p-4" data-butt-target="form" >
           <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
         </div>

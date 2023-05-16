@@ -45,13 +45,8 @@
         </a>
         <%= link_to '編輯餐廳資訊' , edit_restaurant_path(@restaurant), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
         <%= link_to '返回餐廳列表' , restaurants_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
-        <%= link_to '刪除餐廳資訊' , restaurant_path(@restaurant), method: :delete,
-           class:"bg-red-500 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-red-500 border-2 transition-all duration-400"  , data: { confirm: '您確定要刪除餐廳嗎？' } %>
         <div class="hidden p-4" data-butt-target="form" >
           <%= render "comments/comment", comment: Comment.new, restaurant:@restaurant %>
-        </div>
-        <div class="hidden p-4" data-butt-target="form" >
-          <%= render "comments/comment", comment: Comment.new, restaurant: @restaurant %>
         </div>
       </div>
     </div>
