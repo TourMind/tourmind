@@ -4,8 +4,16 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     def create
       user = User.new(account_register_params)
-      user.save
-      sign_in_and_redirect user, event: :authentication
+
+      if user.save
+        sign_in_and_redirect user, event: :authentication
+        flash.discard(:alert)
+        return
+      end
+
+      build_resource(account_register_params)
+      flash[:alert] = "密碼與確認密碼不符，請重新輸入相同的密碼。"
+      render :new
     end
 
     # 更新使用者資訊
