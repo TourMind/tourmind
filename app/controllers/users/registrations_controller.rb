@@ -22,7 +22,7 @@ module Users
     end
 
     def account_register_params
-      params.require(:user).permit(:email, :name, :city, :tel, :avatar_url, :password)
+      params.require(:user).permit(:email, :name, :city, :tel, :avatar_url, :password, :password_confirmation)
     end
   end
 end
