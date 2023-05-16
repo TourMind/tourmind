@@ -75,9 +75,9 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
-    t.json "images"
     t.string "slug"
     t.string "scraped_photo"
+    t.json "images"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
     t.integer "role", default: 1
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -180,6 +181,5 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
   add_foreign_key "collaborations", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "users"
-  add_foreign_key "orders", "users"
   add_foreign_key "plans", "users"
 end
