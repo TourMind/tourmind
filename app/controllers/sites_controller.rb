@@ -4,7 +4,8 @@ class SitesController < ApplicationController
   before_action :set_site, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
-
+  before_action :check_permission, only: %i[new edit]
+  
   def index
     @pagy, @site = pagy(Site.all.order(:id),items: 6)
     @city_options = %w[台北市 新北市]
@@ -93,6 +94,12 @@ class SitesController < ApplicationController
         average_rating: site.comments.average(:rating).to_f,
         comment_count: site.comments.where.not(content: nil).count,
       }
+    end
+  end
+
+  def check_permission
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
     end
   end
 end
