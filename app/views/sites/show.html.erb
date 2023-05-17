@@ -49,8 +49,8 @@
         </ul>
       </div>
       <div class='px-4 py-8'>
-        <h2 class="text-2xl font-bold">景點類型</h2>
         <% if @site.site_types.present? %>
+          <h2 class="text-2xl font-bold">景點類型</h2>
           <ul class='flex flex-wrap py-2'>
             <% @site.site_types.each do |site_type| %>
               <%= link_to sites_path(site_types: [site_type]) do %>
