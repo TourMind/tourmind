@@ -1,0 +1,16 @@
+<div data-controller="chatbase">
+  <div data-chatbase-target="chatbaseBtn" class="hidden iframe-container drop-shadow-lg" style="z-index: 99">
+    <iframe
+      src="https://www.chatbase.co/chatbot-iframe/IiNcapBrf2z87kIZlSeJe"
+      width="100%"
+      height="100%"
+      frameborder="0"
+    >
+    </iframe>
+  </div>
+
+  <button data-action="click->chatbase#toggleChatbaseBtn" style="z-index: 99"
+          class="inline-block h-auto p-4 text-xl text-center bg-orange-500 rounded-full cursor-pointer iframe-container-btn nowrap">
+    <i class="fa-solid fa-comment fa-xl" style="color: #ffffff;"></i>  
+  </button>
+</div>
