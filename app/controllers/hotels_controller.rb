@@ -4,6 +4,8 @@ class HotelsController < ApplicationController
   before_action :set_hotel, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
+  before_action :check_permission, only: %i[new edit]
+
   def index
     @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     declare_params
@@ -95,5 +97,11 @@ class HotelsController < ApplicationController
     @address = params[:address] || []
     @hotel_types = params[:hotel_types] || []
     @equipment = params[:equipment] || []
+  end
+
+  def check_permission
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
+    end
   end
 end

@@ -75,7 +75,7 @@
       <% Site::SITE_TYPE_OPTIONS.each do |site_type| %>
         <label class='inline-flex items-center mr-4'>
           <%= check_box_tag 'site[site_types][]' , site_type,@site.site_types.include?(site_type),
-                  class: 'h-5 w-5 text-gray-600' %>
+                  class: 'h-5 w-5 text-gray-600 checkbox' %>
           <%= site_type %>
         </label>
       <% end %>

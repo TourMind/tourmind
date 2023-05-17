@@ -71,7 +71,7 @@
       <% Hotel::EQUIPMENT_OPTIONS.each do |equipment| %>
         <label class='inline-flex items-center mr-4'>
           <%= check_box_tag 'hotel[equipment][]' , equipment, @hotel.equipment.include?(equipment),
-                  class:'h-5 w-5 text-gray-600' %>
+                  class:'h-5 w-5 text-gray-600 checkbox' %>
           <%= equipment %>
         </label>
       <% end %>

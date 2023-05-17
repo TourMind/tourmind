@@ -7,10 +7,10 @@
     <% end %>
   </div>
   <div class="flex items-center px-2">
-    <% if current_user && current_user.role == 1 %>
-      <span class="px-2 py-2 text-lg"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right md:justify-center navbar-menu md:flex" style="z-index: 99">
-        <li class="px-5 py-2 md:px-2">
+    <% if current_user &&  current_user.role == 1 %>
+      <span class="px-2 py-2"><%= current_user.email %></span>
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 10;">
+        <li class="px-2 py-2 md:px-2">
           <%= link_to favorites_path do %>
             <span class="mr-2 btn-round btn-sm btn-gray">
               <i class="fa-solid fa-heart fa-bounce" style="color: #ff0000;"></i>
@@ -39,7 +39,7 @@
             <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "個人設定", edit_user_registration_path, class: "btn-round btn-sm btn-gray align-middle" %>
+            <%= link_to "設置", edit_user_registration_path, data: { action: "click->modal#toggleModal", turbo_frame: :edit_profile, frame: :edit_profile }, class: "btn-round btn-sm btn-gray align-middle" %>
         </li>
       </ul>
       <i class="rounded-full ring ring-primary ring-offset-base-100">
@@ -54,7 +54,7 @@
       </button>
     <% elsif current_user && current_user.role == 0 %>
       <span class="px-2 py-2"><%= current_user.email %></span>
-      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 99;">
+      <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 10;">
         <li class="px-5 py-2 md:px-2">
           <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-sm btn-black" %>
         </li>
@@ -69,15 +69,12 @@
           <i class="fa-solid fa-bars fa-xl"></i>
       </button>
     <% else %>
-      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style= "z-index: 99">
+      <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style= "z-index: 10">
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray align-middle"  %>
+          <%= link_to "會員登入" , new_user_session_path, data: { action: "click->modal#toggleModal", turbo_frame: :login, frame: :login }, class: "btn-round btn-sm btn-black" %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "會員登入" , new_user_session_path, class: "btn-round btn-sm btn-black" %>
-        </li>
-        <li class="px-5 py-2 md:px-2">
-          <%= link_to "註冊", new_user_registration_path, class: "btn-round btn-sm btn-gray" %>
+          <%= link_to "註冊", new_user_registration_path, data: { action: "click->modal#toggleModal", turbo_frame: :signup, frame: :signup }, class: "btn-round btn-sm btn-gray" %>
         </li>
       </ul>
       <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">

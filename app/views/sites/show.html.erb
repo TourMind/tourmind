@@ -49,16 +49,18 @@
         </ul>
       </div>
       <div class='px-4 py-8'>
-        <h2 class="text-2xl font-bold">景點類型</h2>
-        <ul class='flex flex-wrap py-2'>
-          <% Site::SITE_TYPE_OPTIONS.each do |site_type| %>
-            <%= link_to sites_path(site_types: [site_type]) do %>
-              <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%=site_type%>
-              </li>
+        <% if @site.site_types.present? %>
+          <h2 class="text-2xl font-bold">景點類型</h2>
+          <ul class='flex flex-wrap py-2'>
+            <% @site.site_types.each do |site_type| %>
+              <%= link_to sites_path(site_types: [site_type]) do %>
+                <li class='inline-block py-1 px-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                  <%=site_type%>
+                </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
+          </ul>
+        <%end%>
       </div>
     </div>
     <div class="flex flex-col justify-center w-full lg:w-1/3">
