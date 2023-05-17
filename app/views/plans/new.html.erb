@@ -82,13 +82,17 @@
                   </div>
                 <% end %>
               <% else %>
-                <div class="relative px-4 day w-48 min-h-[150px]">
-                  <h4 class="text-xl text-gray-900 font-bold">第 1 天</h4>
-                  <div class="absolute h-full border border-dashed border-slate-600 border-opacity-20 "></div>
-                  <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-1" >
-                    <%# this div is here to prevent weird animation problem %>
-                    <div></div>
+                <div class="relative px-4 day min-h-[150px] bg-white">
+                  <div class="flex justify-between items-center">
+                    <h4 class="text-xl text-gray-900 font-bold day-title">第 1 天</h4>
+                    <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
+                      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
+                  <div class="absolute h-full border border-dashed border-slate-600 border-opacity-20 "></div>
+                  <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-1" ></div>
                 </div>
               <% end %>
             </div>
@@ -120,7 +124,12 @@
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.file_field :images, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "images"}, multiple: true, accept: "image/png,image/gif,image/jpeg" %>
             </div>
-            <div data-action="click->edit#update" class="cursor-pointer inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">更新行程</div>
+            <div data-action="click->edit#update" class="cursor-pointer inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-5 rounded">
+              <div class="flex items-center gap-2" data-edit-target="submitBtn">
+                <span class="inline-block" data-edit-target="submitText">更新行程</span>
+              </div>
+            </div>
+            <%= form.hidden_field :lock_version, data: {edit_target: "lockVersion"} %>
           <% end %>
         </div>
       </div>

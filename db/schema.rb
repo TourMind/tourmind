@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_08_090406) do
+ActiveRecord::Schema.define(version: 2023_05_15_171232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collaborations", force: :cascade do |t|
+    t.bigint "plan_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_collaborations_on_plan_id"
+    t.index ["user_id"], name: "index_collaborations_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
@@ -41,6 +50,17 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "hotels", force: :cascade do |t|
     t.string "name"
     t.string "website"
@@ -66,8 +86,8 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
-    t.integer "user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -83,6 +103,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.boolean "public", default: false
     t.json "images"
     t.string "slug"
+    t.integer "lock_version", default: 0, null: false
     t.index ["slug"], name: "index_plans_on_slug", unique: true
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -116,7 +137,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.string "longitude"
     t.float "stay_duration"
     t.text "intro"
-    t.string "pet_freindly"
+    t.string "pet_friendly"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "site_types", default: [], array: true
@@ -151,10 +172,10 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
+  add_foreign_key "collaborations", "plans"
+  add_foreign_key "collaborations", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "plans", "users"
-  add_foreign_key "orders", "users"
 end
