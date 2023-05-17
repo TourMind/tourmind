@@ -25,6 +25,9 @@ application.register("filter", FilterController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
+import FormController from "./form_controller"
+application.register("form", FormController)
+
 import MapController from "./map_controller"
 application.register("map", MapController)
 
