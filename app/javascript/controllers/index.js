@@ -40,6 +40,9 @@ application.register("navbar", NavbarController)
 import PictureController from "./picture_controller"
 application.register("picture", PictureController)
 
+import ShareController from "./share_controller"
+application.register("share", ShareController)
+
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
 
