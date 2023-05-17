@@ -43,26 +43,26 @@
  display: none;
 }
 
-.Jogging {
+.jogging {
   position: relative;
   width: 33.333333%;
   height: 300px;
   overflow: hidden;
   cursor: pointer;
 }
-
-.Jogging img {
+Jogging
+.jogging img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.Jogging:hover img {
+.jogging:hover img {
   transform: scale(1.2);
 }
 
-.Jogging .text {
+.jogging .text {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -75,17 +75,17 @@
   transform: translateY(100%);
 }
 
-.Jogging:hover .text {
+.jogging:hover .text {
   transform: translateY(0);
 }
 
-.Jogging .text h2 {
+.jogging .text h2 {
   font-size: 22px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.Jogging .text p {
+.jogging .text p {
   font-size: 16px;
   margin-bottom: 0;
   text-align: justify;
