@@ -8,6 +8,7 @@ Rails.application.routes.draw do
                registrations: 'users/registrations',
                sessions: 'users/sessions',
                omniauth_callbacks: 'users/omniauth_callbacks',
+               passwords: 'users/passwords'
              }
 
   resources :favorites, only: %i[index create destroy]
@@ -16,11 +17,16 @@ Rails.application.routes.draw do
   end
 
   resources :plans do 
+    post 'add_editor', on: :member
+    delete 'editor/:user_id', to: 'plans#remove_editor' , on: :member
     resources :comments
   end
+
+  # 行程相關路徑
+  get '/check_user', to: 'plans#check_user'
   get '/day_info', to: 'plans#day_info'
   get '/plan_overview', to: 'plans#plan_overview'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   resources :comments
 
   # 升級方案
@@ -35,6 +41,8 @@ Rails.application.routes.draw do
   # 管理員後台
   get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
 
+  # 404畫面
+  get '/404', to: "application#record_not_found"
 
   resources :hotels do
     resources :comments, only: [:create,:new]
