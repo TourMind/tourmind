@@ -92,7 +92,7 @@ class HotelsController < ApplicationController
       }
     end
   end
-
+  
   def declare_params
     @address = params[:address] || []
     @hotel_types = params[:hotel_types] || []

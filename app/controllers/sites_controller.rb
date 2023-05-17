@@ -92,6 +92,7 @@ class SitesController < ApplicationController
     end
   end
 
+
   def declare_params
     @address = params[:address] || []
     @site_types = params[:site_types] || []
