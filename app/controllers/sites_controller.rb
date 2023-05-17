@@ -7,8 +7,15 @@ class SitesController < ApplicationController
   before_action :check_permission, only: %i[new edit]
 
   def index
-    @pagy, @site = pagy(Site.all.order(:id), items: 6)
-    declare_params
+    @pagy, @site = pagy(Site.all.order(:id),items: 6)
+    @city_options = %w[台北市 新北市]
+    @site_type_options = %w[建築人文 自然風光 展覽中心 宗教場所 公園/主題樂園 歷史遺跡 戶外運動 傳統文化 觀光圈 生活休閒]
+    @pet_friendly_options = %w[可攜寵物]
+
+    @address = params[:address] || []
+    @site_types = params[:site_types] || []
+    @pet_friendly = params[:pet_friendly] || []
+
     @sites = if params[:keyword].present?
                Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
              elsif @address.present? || @site_types.present? || @pet_friendly.present?

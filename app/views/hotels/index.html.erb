@@ -81,6 +81,10 @@
                 <div class=" text-gray-700 md:h-[15rem] w-full">
                   <% if hotel.images.present? %>
                     <img class="object-cover w-full h-full" src="<%= hotel.images.first.url %>" alt="Hotel Pic">
+                  <% elsif hotel.image.url.present? %>
+                    <img class="object-cover w-full h-full" src="<%= hotel.image.url %>" alt="Hotel Pic">
+                  <% elsif hotel.scraped_photo.present? %>
+                    <%= image_tag hotel.scraped_photo, {class: "w-full h-full object-cover"}%>
                   <% else %>
                     <%= image_tag "https://digital.ihg.com/is/image/ihg/kimpton-taipei-6003129789-16x9?" , class:'object-cover w-full h-full' %>
                   <% end %>

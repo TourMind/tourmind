@@ -29,6 +29,22 @@
             </div>
           <% end %>
         <% end %>
+      <% elsif @site.scraped_photos.present? %>
+        <% if @site.scraped_photos.length < 3 %>
+          <div class="col-span-3 row-span-2 ">
+            <%= image_tag @site.scraped_photos[0], class: 'object-cover w-full h-full' %>
+          </div>
+        <% elsif @site.scraped_photos.length >= 3 %>
+          <div class="col-span-2 row-span-2">
+            <%= image_tag @site.scraped_photos[0], class: 'object-cover w-full h-full' %>
+          </div>
+          <div class="col-span-1 ">
+            <%= image_tag @site.scraped_photos[1], class: 'object-cover w-full h-full' %>
+          </div>
+          <div class="col-span-1 ">
+            <%= image_tag @site.scraped_photos[2], class: 'object-cover w-full h-full' %>
+          </div>
+        <% end %>
       <% else %>
         <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class:'object-cover col-span-full row-span-full w-full h-full' %>
       <% end %>
