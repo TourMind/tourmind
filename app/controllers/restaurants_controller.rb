@@ -4,17 +4,19 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
+  before_action :check_permission, only: %i[new edit]
 
   # GET /restaurants or /restaurants.json
   def index
-    @pagy, @restaurants = pagy(Restaurant.all.order(:id),items: 6)
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 6)
     declare_params
     get_min_max_price
 
     @restaurants = if params[:keyword].present?
                      Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
                    elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
-                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price, @max_price).order(updated_at: :desc).page(params[:page])
+                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
+                                       @max_price,).order(updated_at: :desc).page(params[:page])
                    else
                      Restaurant.order(updated_at: :desc).page(params[:page])
                    end
@@ -38,7 +40,8 @@ class RestaurantsController < ApplicationController
 
   # POST /restaurants or /restaurants.json
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    params = Image::ImageService.remove_image(restaurant_params)
+    @restaurant = Restaurant.new(params)
     if @restaurant.save
       get_location
       redirect_to restaurants_path, notice: '餐廳新增成功'
@@ -49,7 +52,8 @@ class RestaurantsController < ApplicationController
 
   # PATCH/PUT /restaurants/1 or /restaurants/1.json
   def update
-    if @restaurant.update(restaurant_params)
+    params = Image::ImageService.remove_image(restaurant_params)
+    if @restaurant.update(params)
       get_location
       redirect_to restaurant_url(@restaurant), notice: '餐廳更新成功'
     else
@@ -97,7 +101,7 @@ class RestaurantsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def restaurant_params
     params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
-                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }).tap do |whitelisted|
+                                       :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }, { remove_images: [] },).tap do |whitelisted|
       whitelisted[:cuisine_types].reject!(&:empty?)
       whitelisted[:atmostphere].reject!(&:empty?)
     end
@@ -125,6 +129,12 @@ class RestaurantsController < ApplicationController
         average_rating: restaurant.comments.average(:rating).to_f,
         comment_count: restaurant.comments.where.not(content: nil).count,
       }
+    end
+  end
+
+  def check_permission
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
     end
   end
 end

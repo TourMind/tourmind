@@ -25,6 +25,9 @@ application.register("filter", FilterController)
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 
+import FormController from "./form_controller"
+application.register("form", FormController)
+
 import MapController from "./map_controller"
 application.register("map", MapController)
 
@@ -42,3 +45,9 @@ application.register("share", ShareController)
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import TurboformController from "./turboform_controller"
+application.register("turboform", TurboformController)
