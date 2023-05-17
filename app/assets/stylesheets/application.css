@@ -71,7 +71,7 @@ margin-bottom: 20px;
     height: 100%;
     padding: 10px;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(87, 85, 85, 0.7);
     transition: transform 0.5s ease;
     transform: translateY(100%);
   }
