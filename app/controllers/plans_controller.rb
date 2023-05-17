@@ -112,6 +112,7 @@ class PlansController < ApplicationController
   end
 
   def day_info
+    @google_api_key = Rails.application.credentials.google_api_key
     @day = params[:day].to_i
 
     render 'day_nav'

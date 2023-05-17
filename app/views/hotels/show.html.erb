@@ -68,7 +68,7 @@
       <div class='p-4 shadow-md'>
         <h2 class='text-2xl font-bold'>位置和聯絡方式</h2>
         <iframe
-          class="w-full h-[15rem] mx-auto" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=<%= "#{@hotel.name} #{@hotel.address}" %>" allowfullscreen>
+          class="w-full h-[15rem] mx-auto" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<%=@google_api_key%>&q=<%= "#{@hotel.name} #{@hotel.address}" %>" allowfullscreen>
         </iframe>
         <ul>
           <li class="flex text-lg py-2">
