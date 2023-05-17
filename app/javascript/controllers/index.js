@@ -46,6 +46,9 @@ application.register("share", ShareController)
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
 
+import ChatbaseController from "./chatbase_controller"
+application.register("chatbase", ChatbaseController)
+
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 

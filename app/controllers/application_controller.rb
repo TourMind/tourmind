@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = :zh
   end
+  
 
   # 用在需要在先登入才能進行動作
   # 根據 URL 中包含的信息，判斷應該重定向到哪個第三方驗證頁面

@@ -7,7 +7,7 @@ export default class extends Controller {
 
   async connect() {
     const loader = new Loader({
-      apiKey: "",
+      apiKey: this.dayTarget.dataset.key,
       version: "weekly",
     });
 

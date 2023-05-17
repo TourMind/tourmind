@@ -36,6 +36,7 @@ class HotelsController < ApplicationController
   end
 
   def show
+    @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
     @comments = @hotel.comments
   end

@@ -42,6 +42,7 @@ class SitesController < ApplicationController
   end
 
   def show
+    @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
     @comments = @site.comments
   end
