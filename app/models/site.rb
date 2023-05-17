@@ -12,10 +12,10 @@ class Site < ApplicationRecord
   # 欄位必填驗證
   validates :name, :address, presence: true
   # 格式驗證
-  validates :stay_duration,
-            numericality: { greater_than_or_equal_to: 0.5, less_than_or_equal_to: 24, message: '必須介於0.5至24小時之間' }, format: { with: /\A\d+(\.5|\.0)?\z/, message: '只能是整數或小數點後為 0 或 5 的數字' }
-  validates :tel, allow_blank: true,
-                  format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
+  # validates :stay_duration,
+  #          numericality: { greater_than_or_equal_to: 0.5, less_than_or_equal_to: 24, message: '必須介於0.5至24小時之間' }, format: { with: /\A\d+(\.5|\.0)?\z/, message: '只能是整數或小數點後為 0 或 5 的數字' }
+  # validates :tel, allow_blank: true,
+  #                format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp, message: '請輸入有效的網址' }, if: lambda {
                                                                                                     website.present?
                                                                                                   }

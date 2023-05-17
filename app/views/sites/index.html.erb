@@ -82,6 +82,8 @@
                 <div class=" text-gray-700 md:h-[15rem] w-full">
                   <% if site.images.present? %>
                     <img class="object-cover w-full h-full" src="<%= site.images.first.url %>" alt="Site Pic">
+                  <% elsif site.scraped_photos.present? %>
+                    <img class="object-cover w-full h-full" src="<%= site.scraped_photos.first %>" alt="Site Pic">
                   <% else %>
                     <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg" , class:'object-cover w-full h-full' %>
                   <% end %>

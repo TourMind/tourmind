@@ -10,8 +10,8 @@ class Hotel < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   # 欄位必填驗證以及格式驗證
   validates :name, :address, presence: true
-  validates :tel, presence: true,
-                  format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
+  # validates :tel, presence: true,
+  #                 format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
   validates :website, format: { with: URI::DEFAULT_PARSER.make_regexp, message: '請輸入有效的網址' }, if: lambda {
                                                                                                     website.present?
                                                                                                   }

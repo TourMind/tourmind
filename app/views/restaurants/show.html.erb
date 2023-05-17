@@ -1,37 +1,49 @@
 <div class="container mx-auto">
   <div class="mx-auto">
-    <Section class = "p-3 relative">
+    <Section class = "relative p-3">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
-    <section class = "justify-center flex px-4 grid grid-cols-5 gap-2 overflow-hidden py-4 shadow-lg rounded-lg" >
+    <section class = "flex grid justify-center grid-cols-5 gap-2 px-4 py-4 overflow-hidden rounded-lg shadow-lg" >
       <% if @restaurant.images.present? %>
-        <div class = "col-span-5 lg:col-span-3 relative h-96">
+        <div class = "relative col-span-5 lg:col-span-3 h-96">
           <%= image_tag @restaurant.images[0].url, {class: "w-full h-full object-fill"}%>
         </div>
-        <div class = "col-span-5 lg:col-span-2 flex flex-col gap-2 h-96">
-          <div class="h-1/2 w-full overflow-hidden">
+        <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-96">
+          <div class="w-full overflow-hidden h-1/2">
             <%= image_tag @restaurant.images[1].url, {class: "object-fit w-full h-full"} if @restaurant.images[1].present?%>
           </div>
-          <div class="h-1/2 w-full overflow-hidden">
+          <div class="w-full overflow-hidden h-1/2">
             <%= image_tag @restaurant.images[2].url, {class: "object-fit w-full h-full"} if @restaurant.images[2].present?%>
           </div>
         </div>
+      <% elsif @restaurant.scraped_photos.present? %>
+        <div class = "relative col-span-5 lg:col-span-3 h-96">
+          <%= image_tag @restaurant.scraped_photos[0], {class: "w-full h-full object-fill"}%>
+        </div>
+        <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-96">
+          <div class="w-full overflow-hidden h-1/2">
+            <%= image_tag @restaurant.scraped_photos[1], {class: "object-fit w-full h-full"} if @restaurant.scraped_photos[1].present?%>
+          </div>
+          <div class="w-full overflow-hidden h-1/2">
+            <%= image_tag @restaurant.scraped_photos[2], {class: "object-fit w-full h-full"} if @restaurant.scraped_photos[2].present?%>
+          </div>
+        </div>
       <% else %>
-        <div class = "col-span-5 relative h-96">
+        <div class = "relative col-span-5 h-96">
           <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
         </div>
       <% end %>
     </section>
-    <section class="min-w-full grid grid-cols-5 gap-2 flex my-5">
-      <div class="p-8 bg-white col-span-5 lg:col-span-3 shadow-lg rounded-lg">
+    <section class="flex grid min-w-full grid-cols-5 gap-2 my-5">
+      <div class="col-span-5 p-8 bg-white rounded-lg shadow-lg lg:col-span-3">
         <%= render "description", restaurant:@restaurant%>
       </div>
-      <div class="p-8 bg-white col-span-5 lg:col-span-2 shadow-lg rounded-lg">
+      <div class="col-span-5 p-8 bg-white rounded-lg shadow-lg lg:col-span-2">
         <%= render "location", restaurant:@restaurant%>
       </div>
-      <div class="p-4 bg-white col-span-5">
-        <h2 class="font-bold text-2xl py-3">評等和評論</h2>
-        <div class="overflow-y-auto h-40 ">
+      <div class="col-span-5 p-4 bg-white">
+        <h2 class="py-3 text-2xl font-bold">評等和評論</h2>
+        <div class="h-40 overflow-y-auto ">
           <div id="comment-list">
             <%= render partial: "comment", collection: @restaurant.comments %>
           </div>
