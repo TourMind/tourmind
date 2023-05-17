@@ -105,4 +105,10 @@ class SitesController < ApplicationController
     @site_types = params[:site_types] || []
     @pet_friendly = params[:pet_friendly] || []
   end
+
+  def check_permission
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
+    end
+  end
 end

@@ -105,4 +105,10 @@ class HotelsController < ApplicationController
     @hotel_types = params[:hotel_types] || []
     @equipment = params[:equipment] || []
   end
+
+  def check_permission
+    if current_user.nil? || current_user.role != 0
+      redirect_to sites_path, alert: '權限不足！'
+    end
+  end
 end
