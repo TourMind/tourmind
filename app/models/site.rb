@@ -23,10 +23,10 @@ class Site < ApplicationRecord
   # 關鍵字搜尋
   def self.search(keyword)
     where(
-      'name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword',
+      'name LIKE :keyword OR address LIKE :keyword',
       keyword: "%#{keyword}%",
     ).or(
-      where('equipment::text ILIKE ANY (ARRAY[:keywords])', keywords: ["%#{keyword}%"]),
+      where('site_types::text ILIKE ANY (ARRAY[:keywords])', keywords: ["%#{keyword}%"]),
     )
   end
 
