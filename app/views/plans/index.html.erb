@@ -12,26 +12,26 @@
       <section>
         <div class="border-b-2  border-slate-300 mb-12 pb-12">
           <h1 class="text-xl font-bold pl-3">共同編輯</h1>
-          <div class="overflow-x-scroll">
+          <div class="overflow-x-auto">
             <div class="flex gap-5 py-5 w-max">
-              <% current_user.shared_plans.each do |plan| %>
-                <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+              <% current_user.shared_plans.each_with_index do |plan, i| %>
+                <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl flex flex-col">
                   <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                    <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
-                    <div class="flex flex-col h-auto gap-5 p-5">
-                      <div class="font-bold"><%= plan.name %></div>
-                      <div>
-                        <div class="flex items-center my-3">
-                          <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
-                          <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
-                        </div>
-                        <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
-                        <div>
-                          <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
-                        </div>
-                      </div>
-                    </div>
+                    <img src="<%= plan.images.present? ? plan.images[0].url :  (i == 0 ? "https://chenka.s3.amazonaws.com/uploads/plan/images/16/%E6%88%AA%E5%9C%96_2023-05-18_%E4%B8%8A%E5%8D%8811.26.54.png" : "https://fakeimg.pl/350x200/?text=TourMind")  %>"  alt="plant" class="w-full h-28 object-cover" />
                   <% end %>
+                  <div class="flex flex-col gap-5 p-5 h-full justify-between">
+                    <div class="font-bold"><%= plan.name %></div>
+                    <div>
+                      <div class="flex items-center my-3">
+                        <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
+                        <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
+                      </div>
+                      <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
+                      <%= link_to plan_path(plan.id), class: "inline-block" do %>
+                        <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
               <% end %>
             </div>
@@ -42,27 +42,27 @@
     <section>
       <div class="border-b-2  border-slate-300 mb-12 pb-12">
         <h1 class="text-xl font-bold pl-3">我的行程</h1>
-        <div class="overflow-x-scroll">
+        <div class="overflow-x-auto">
           <div class="flex gap-5 py-5 w-max">
             <% if current_user.plans.any? %>
               <% current_user.plans.order(id: :desc).each do |plan| %>
-                <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+                <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl flex flex-col">
                   <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                    <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-auto" />
-                    <div class="flex flex-col h-auto gap-5 p-5">
-                      <div class="font-bold"><%= plan.name %></div>
-                      <div>
-                        <div class="flex items-center my-3">
-                          <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
-                          <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
-                        </div>
-                        <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
-                        <div>
-                          <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
-                        </div>
-                      </div>
-                    </div>
+                    <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-28 object-cover"/>
                   <% end %>
+                  <div class="flex flex-col gap-5 p-5 h-full justify-between">
+                    <div class="font-bold"><%= plan.name %></div>
+                    <div>
+                      <div class="flex items-center my-3">
+                        <span><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
+                        <span>(<%= @plan_data[plan.id][:comment_count] %>)</span>
+                      </div>
+                      <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
+                      <%= link_to plan_path(plan.id), class: "inline-block" do %>
+                        <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
               <% end %>
             <% else %>
@@ -78,30 +78,26 @@
     <section>
       <div class="pb-12 mb-12 border-b-2 border-slate-300">
         <h1 class="text-xl font-bold pl-3"><%= category %>之旅</h1>
-        <div class="overflow-x-scroll">
+        <div class="overflow-x-auto">
           <div class="flex gap-5 py-5 w-max">
             <% @plans.select {|plan| plan.category == category }.each do |plan| %>
-              <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+              <div class="w-48 ml-3 overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl flex flex-col">
                 <%= link_to plan_path(plan.id), class: "inline-block" do %>
-                  <% if plan.images.present? %>
-                    <img src="<%= plan.images[0].url %>" alt="plant" class="w-full h-auto" />
-                  <% else %>
-                    <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind" , class:'h-auto w-full' %>
-                  <% end %>
-                  <div class="flex flex-col h-auto gap-5 p-5">
-                    <div class="font-bold"><%= plan.name %></div>
-                    <div>
-                      <div class="flex items-center my-3">
-                        <span class=""><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
-                        <span class="">(<%= @plan_data[plan.id][:comment_count] %>)</span>
-                      </div>
-                      <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
-                      <div>
-                        <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
-                      </div>
-                    </div>
-                  </div>
+                  <img src="<%= plan.images.present? ? plan.images[0].url : "https://fakeimg.pl/350x200/?text=TourMind" %>" alt="plant" class="w-full h-28 object-cover"/>
                 <% end %>
+                <div class="flex flex-col gap-5 p-5 h-full justify-between">
+                  <div class="font-bold"><%= plan.name %></div>
+                  <div>
+                    <div class="flex items-center my-3">
+                      <span class=""><%= star_rating(@plan_data[plan.id][:average_rating]) %></span>
+                      <span class="">(<%= @plan_data[plan.id][:comment_count] %>)</span>
+                    </div>
+                    <div class="mb-5 text-xs text-slate-500">為期<%= plan.days %>天的行程 </div>
+                    <%= link_to plan_path(plan.id), class: "inline-block" do %>
+                      <button class="inline-block px-3 pb-1 text-indigo-100 duration-75 bg-indigo-600 rounded-md w-fit hover:bg-indigo-500 hover:shadow-md"><span class="text-xs">詳細資訊</span></button>
+                    <% end %>
+                  </div>
+                </div>
               </div>
             <% end %>
           </div>
