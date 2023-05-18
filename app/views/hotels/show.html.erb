@@ -1,7 +1,10 @@
 <div class="container m-auto">
-  <h1 class="flex text-4xl font-bold p-4">
-    <%= @hotel.name %>
-  </h1>
+  <div class="flex py-2">
+    <h1 class="text-4xl font-bold px-4">
+      <%= @hotel.name %>
+    </h1>
+    <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
+  </div>
   <div class="flex flex-wrap">
     <div class="flex px-4 items-center">
       <span class="mr-2">
@@ -9,7 +12,6 @@
         <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
       </span>
       <span class="mr-2">(<%= @hotel_data[@hotel.id][:comment_count] %>則評論)</span>
-      <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
     </div>
     <span class="flex items-center text-md font-semibold"><%= @hotel.hotel_types%></span>
   </div>
