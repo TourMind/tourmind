@@ -4,14 +4,11 @@
   </h1>
   <div class="flex flex-wrap">
     <div class="flex px-4 items-center">
-      <% if @comments_score.present? %>
-        <span><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
-          <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
-          (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)
-        </span>
-      <% else %>
-        <span>尚未有評論</span>
-      <% end %>
+      <span class="mr-2">
+        <%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
+        <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
+      </span>
+      <span class="mr-2">(<%= @hotel_data[@hotel.id][:comment_count] %>則評論)</span>
       <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
     </div>
     <span class="flex items-center text-md font-semibold"><%= @hotel.hotel_types%></span>

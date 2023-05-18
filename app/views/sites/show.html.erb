@@ -4,14 +4,11 @@
   </h1>
   <div class="flex flex-wrap">
     <div class="flex px-4 items-center">
-      <% if @comments_score.present? %>
-        <span><%= star_rating(@site_data[@site.id][:average_rating]) %>
-          <%= sprintf('%.1f', @site_data[@site.id][:average_rating]) %>
-          (<%= @site_data[@site.id][:comment_count] %>則評論)
-        </span>
-      <% else %>
-        <span>尚未有評論</span>
-      <% end %>
+      <span class="mr-2">
+        <%= star_rating(@site_data[@site.id][:average_rating]) %>
+        <%= sprintf('%.1f', @site_data[@site.id][:average_rating]) %>
+      </span>
+      <span class="mr-2">(<%= @site_data[@site.id][:comment_count] %>則評論)</span>
       <%= render "favoritebtn", object:@site, size:'text-lg'%>
     </div>
   </div>
