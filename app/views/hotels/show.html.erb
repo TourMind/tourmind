@@ -45,9 +45,6 @@
         <h2 class='text-2xl font-bold'>詳細資料</h2>
         <ul>
           <li class="flex text-lg py-2">
-            <span class='font-bold'>星級：</span><%=@hotel.star_rating%>
-          </li>
-          <li class="flex text-lg py-2">
             <span class='font-bold whitespace-nowrap'>簡介：</span>
             <span><%=@hotel.intro%></span>
           </li>
@@ -81,32 +78,28 @@
           <li class="flex text-lg py-2">
             <span class='font-bold'>電話：</span><%=@hotel.tel%>
           </li>
-          <li class="flex text-lg py-2">
-            <%= link_to '網站連結(請點我)' , @hotel.website, target: "_blank", class:'font-bold' %>
-          </li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="p-4 bg-white col-span-5">
-    <h2 class="font-bold text-2xl">評等和評論</h2>
-    <div class="overflow-y-auto h-40">
-      <div id="comment-list">
-        <%= render partial: "comment", collection: @hotel.comments %>
-      </div>
-    </div>
-  </div>
-  <section class='w-full'>
-    <div data-controller="butt">
-      <div class="my-2">
-        <a data-action="click->butt#toggleCommentForm" class="bg-gray-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-gray-400 border-2 transition-all duration-400" href="#comment-form">
-          發表評論
-        </a>
-        <%= link_to '編輯住宿資訊' , edit_hotel_path(@hotel), class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400"%>
-        <%= link_to '返回住宿列表' , hotels_path, class:"bg-blue-400 inline-block text-white focus:outline-none focus:ring-4 rounded-full text-md px-3 py-1 hover:bg-white hover:text-blue-500 border-2 transition-all duration-400" %>
-        <div class="hidden p-4" data-butt-target="form" >
-          <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+  <div class="bg-white full lg:w-2/3 ">
+    <div class='mr-2 pb-4 '>
+      <h2 id="comment-heading" class="text-2xl font-bold p-4">評等和評論</h2>
+      <div class="">
+        <div id="comment-list">
+          <%= render partial: "comment", collection: @paginated_comments %>
         </div>
       </div>
-    </section>
+      <%= render "pagy" %>
+    </div>
   </div>
+</div>
+<section class='container pb-4 m-auto'>
+  <div data-controller="butt" class="bg-white full lg:w-2/3">
+    <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
+      發表評論
+    </a>
+    <div class="hidden" data-butt-target="form" >
+      <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+    </div>
+  </section>

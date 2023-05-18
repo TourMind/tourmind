@@ -8,17 +8,17 @@ class RestaurantsController < ApplicationController
 
   # GET /restaurants or /restaurants.json
   def index
-    @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 6)
+    # @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 6)
     declare_params
     get_min_max_price
 
-    @restaurants = if params[:keyword].present?
-                     Restaurant.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+    @pagy, @restaurants = if params[:keyword].present?
+                     pagy(Restaurant.search(params[:keyword]).order(updated_at: :desc), items: 6)
                    elsif @address.present? || @restaurant_type.present? || @cuisine_types.present? || @atmostphere.present? || @price_range.present?
-                     Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
-                                       @max_price,).order(updated_at: :desc).page(params[:page])
+                     pagy(Restaurant.filter(@address, @restaurant_type, @cuisine_types, @atmostphere, @min_price,
+                                       @max_price,).order(updated_at: :desc), items: 6)
                    else
-                     Restaurant.order(updated_at: :desc).page(params[:page])
+                     pagy(Restaurant.order(updated_at: :desc), items: 6)
                    end
     flash.now[:alert] = '沒有找到符合條件的餐廳' and return if @restaurants.empty?
   end
@@ -28,6 +28,7 @@ class RestaurantsController < ApplicationController
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
     @comments = @restaurant.comments
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
   # GET /restaurants/new
@@ -43,7 +44,6 @@ class RestaurantsController < ApplicationController
     params = Image::ImageService.remove_image(restaurant_params)
     @restaurant = Restaurant.new(params)
     if @restaurant.save
-      get_location
       redirect_to restaurants_path, notice: '餐廳新增成功'
     else
       render :new, status: :unprocessable_entity
@@ -54,7 +54,6 @@ class RestaurantsController < ApplicationController
   def update
     params = Image::ImageService.remove_image(restaurant_params)
     if @restaurant.update(params)
-      get_location
       redirect_to restaurant_url(@restaurant), notice: '餐廳更新成功'
     else
       render :edit, status: :unprocessable_entity

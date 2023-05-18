@@ -87,7 +87,7 @@
         <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @restaurants.present? %>
-              <%= @restaurants.count %> / <%= Restaurant.count %> 家餐廳
+              <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
             <% else %>
               <span>沒有找到符合條件的餐廳</span>
             <% end %>

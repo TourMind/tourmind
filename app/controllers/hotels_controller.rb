@@ -7,14 +7,14 @@ class HotelsController < ApplicationController
   before_action :check_permission, only: %i[new edit]
 
   def index
-    @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
+    # @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     declare_params
-    @hotels = if params[:keyword].present?
-                Hotel.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+    @pagy, @hotels = if params[:keyword].present?
+                pagy(Hotel.search(params[:keyword]).order(updated_at: :desc), items: 6)
               elsif @address.present? || @hotel_types.present? || @equipment.present?
-                Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc).page(params[:page])
+                pagy(Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc), items: 6)
               else
-                Hotel.order(updated_at: :desc).page(params[:page])
+                pagy(Hotel.order(updated_at: :desc), items: 6)
               end
     flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
   end
@@ -39,6 +39,7 @@ class HotelsController < ApplicationController
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
     @comments = @hotel.comments
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
   def edit; end

@@ -14,33 +14,33 @@
  *= require_self
  */
 .flash_style {
- top: 60px !important;
- right: 10px !important;
+  top: 60px !important;
+  right: 10px !important;
 }
 
 .chartBox {
- width: 100%;
- display: flex;
- justify-content: space-evenly;
- align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 
- margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .image-container {
- position: relative;
- overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 .image-container img {
- transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 }
 
 .image-container:hover img {
- transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .comment-form-wrapper {
- display: none;
+  display: none;
 }
 
 .jogging {
@@ -50,7 +50,7 @@
   overflow: hidden;
   cursor: pointer;
 }
-Jogging
+
 .jogging img {
   width: 100%;
   height: 100%;
@@ -91,7 +91,7 @@ Jogging
   text-align: justify;
 }
 .shadow-custom {
- box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 .iframe-container {
@@ -105,5 +105,5 @@ Jogging
 .iframe-container-btn {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 80px;
 }

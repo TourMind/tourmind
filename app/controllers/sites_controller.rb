@@ -7,21 +7,15 @@ class SitesController < ApplicationController
   before_action :check_permission, only: %i[new edit]
 
   def index
-    @pagy, @site = pagy(Site.all.order(:id),items: 6)
-    @city_options = %w[台北市 新北市]
-    @site_type_options = %w[建築人文 自然風光 展覽中心 宗教場所 公園/主題樂園 歷史遺跡 戶外運動 傳統文化 觀光圈 生活休閒]
-    @pet_friendly_options = %w[可攜寵物]
+    # @pagy, @site = pagy(Site.all.order(:id), items: 6)
+    declare_params
 
-    @address = params[:address] || []
-    @site_types = params[:site_types] || []
-    @pet_friendly = params[:pet_friendly] || []
-
-    @sites = if params[:keyword].present?
-               Site.search(params[:keyword]).order(updated_at: :desc).page(params[:page])
+    @pagy, @sites = if params[:keyword].present?
+               pagy(Site.search(params[:keyword]).order(updated_at: :desc), items: 6)
              elsif @address.present? || @site_types.present? || @pet_friendly.present?
-               Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc).page(params[:page])
+               pagy(Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc), items: 6)
              else
-               Site.order(updated_at: :desc).page(params[:page])
+               pagy(Site.order(updated_at: :desc), items: 6)
              end
     flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
   end
@@ -45,6 +39,7 @@ class SitesController < ApplicationController
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
     @comments = @site.comments
+    @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
   def edit; end
