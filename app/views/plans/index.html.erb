@@ -11,7 +11,7 @@
     <% if current_user.shared_plans.any? %>
       <section>
         <div class="border-b-2  border-slate-300 mb-12 pb-12">
-          <h1 class="text-xl font-bold">共同編輯</h1>
+          <h1 class="text-xl font-bold pl-3">共同編輯</h1>
           <div class="overflow-x-scroll">
             <div class="flex gap-5 py-5 w-max">
               <% current_user.shared_plans.each do |plan| %>
@@ -41,7 +41,7 @@
     <% end %>
     <section>
       <div class="border-b-2  border-slate-300 mb-12 pb-12">
-        <h1 class="text-xl font-bold">我的行程</h1>
+        <h1 class="text-xl font-bold pl-3">我的行程</h1>
         <div class="overflow-x-scroll">
           <div class="flex gap-5 py-5 w-max">
             <% if current_user.plans.any? %>
@@ -77,7 +77,7 @@
     <% next if @plans.select {|plan| plan.category == category } == [] %>
     <section>
       <div class="pb-12 mb-12 border-b-2 border-slate-300">
-        <h1 class="text-xl font-bold"><%= category %>之旅</h1>
+        <h1 class="text-xl font-bold pl-3"><%= category %>之旅</h1>
         <div class="overflow-x-scroll">
           <div class="flex gap-5 py-5 w-max">
             <% @plans.select {|plan| plan.category == category }.each do |plan| %>

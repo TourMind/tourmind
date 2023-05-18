@@ -1,9 +1,10 @@
-<div class="p-4 max-w-lg truncate ...">
+<div class="truncate ...">
+  <hr class="h-0.5 bg-gray-300">
   <p><%= comment.user.email if comment.user %> </p>
   <%= star_rating(comment.rating) %>
   <div class="flex flex-row space-x-4 ">
     <% comment.images.each do |image| %>
-    <%= image_tag image.url, class: 'w-1/5 mx-1' %>
+      <%= image_tag image.url, class: 'w-1/5 mx-1' %>
     <% end %>
   </div>
   <p><%= comment.content %></p>

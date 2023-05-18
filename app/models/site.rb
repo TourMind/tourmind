@@ -20,19 +20,19 @@ class Site < ApplicationRecord
                                                                                                     website.present?
                                                                                                   }
 
-  # 關鍵字搜尋
+# 關鍵字搜尋
   def self.search(keyword)
     where(
-      'name LIKE :keyword OR address LIKE :keyword OR hotel_types LIKE :keyword',
+      'name LIKE :keyword OR address LIKE :keyword',
       keyword: "%#{keyword}%",
     ).or(
-      where('equipment::text ILIKE ANY (ARRAY[:keywords])', keywords: ["%#{keyword}%"]),
+      where('site_types::text ILIKE ANY (ARRAY[:keywords])', keywords: ["%#{keyword}%"]),
     )
   end
 
   # 選項列表
   CITY_OPTIONS = %w[台北市 新北市]
-  SITE_TYPE_OPTIONS = %w[自然景觀 歷史文化遺產 美術館 科博館 公園休閒 購物中心 主題樂園 海邊 動物園 體育館 溫泉景點 觀光勝地]
+  SITE_TYPE_OPTIONS = %w[建築人文 自然風光 展覽中心 宗教場所 公園/主題樂園 歷史遺跡 戶外運動 傳統文化體驗 觀光圈 生活休閒]
   PET_FRIENDLY_OPTIONS = %w[可攜寵物]
 
   # 篩選
