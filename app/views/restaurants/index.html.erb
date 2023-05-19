@@ -87,7 +87,11 @@
         <div class="flex items-center justify-between">
           <div class="py-2">
             <% if @restaurants.present? %>
+              <% if params[:keyword].present?%>
+                搜尋<%= params[:keyword]%>結果： <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+              <% else %>
               <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+              <% end %>
             <% else %>
               <span>沒有找到符合條件的餐廳</span>
             <% end %>
