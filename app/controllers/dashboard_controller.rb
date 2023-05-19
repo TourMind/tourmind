@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class DashboardController < ApplicationController
+  before_action :check_permission
   def users
     if current_user.nil? || current_user.role != 0
       redirect_to hotels_path, alert: '權限不足！'
@@ -29,5 +30,11 @@ class DashboardController < ApplicationController
   def restaurants
     @pagy, @restaurants = pagy(Restaurant.all.order(:id))
     @restaurants = @restaurants.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def check_permission
+    return unless current_user.nil? || current_user.role != 0
+
+    redirect_to root_path
   end
 end
