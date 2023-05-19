@@ -38,8 +38,14 @@ Rails.application.routes.draw do
   get '/pricing/paymentok', to: 'page#paymentok'
   # 訂單資訊
   resources :orders, only: %i[index show]
+
   # 管理員後台
-  get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
+  namespace :dashboard do
+    get :users  # /dashboard/users
+    get :hotels # /dashboard/hotels
+    get :sites # /dashboard/sites
+    get :restaurants # /dashboard/restaurants
+  end
 
   # 404畫面
   get '/404', to: "application#record_not_found"
