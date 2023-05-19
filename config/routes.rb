@@ -31,11 +31,15 @@ Rails.application.routes.draw do
 
   # 升級方案
   get '/pricing', to: 'page#pricing'
-  # 金流路徑
-  post '/pricing/return', to: 'page#return'
-  post '/pricing/notify', to: 'page#notify'
-  # 付款成功
-  get '/pricing/paymentok', to: 'page#paymentok'
+
+  resources :payments, only: [] do
+    collection do
+      get :ok  # 付款成功
+      post :return  # 金流路徑
+      post :notify  # 金流路徑
+    end
+  end
+
   # 訂單資訊
   resources :orders, only: %i[index show]
 
