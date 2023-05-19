@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "plan_nav" do %>
-  <section class="my-3 mx-3">
+  <section class="my-3 mx-3 container">
     <h1 class="mt-8 text-3xl font-medium mb-5">行程</h1>
     <div>
       <% if @plan.locations %>
@@ -7,11 +7,13 @@
           <button class="py-4 px-6 block min-w-max focus:outline-none text-blue-500 border-blue-500 border-b-2 font-medium cursor-default">
             <%= link_to "概覽","/plan_overview?id=#{@plan.id}", class: "hover:text-blue-500" %>
           </button>
-          <% @plan.days.times do |i| %>
-            <button class="text-gray-600 min-w-max py-4 px-6 block focus:outline-none cursor-default">
-              <%= link_to "第 #{i + 1} 天","/day_info?id=#{@plan.id}&day=#{i + 1}", class: "hover:text-blue-500" %>
-            </button>
-          <% end %>
+          <div class="hidden sm:flex">
+            <% @plan.days.times do |i| %>
+              <button class="text-gray-600 min-w-max py-4 px-6 block focus:outline-none cursor-default">
+                <%= link_to "第 #{i + 1} 天","/day_info?id=#{@plan.id}&day=#{i + 1}", class: "hover:text-blue-500" %>
+              </button>
+            <% end %>
+          </div>
         </nav>
         <div class="bg-white min-h-[300px] rounded-lg shadow-xl p-8 gap-3 grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
           <% @plan.locations.each_key.with_index do |key, i| %>
@@ -39,6 +41,5 @@
         </div>
       <% end %>
     </div>
-  </div>
-</section>
+  </section>
 <% end %>
