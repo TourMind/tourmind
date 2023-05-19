@@ -66,10 +66,10 @@
         <div class="py-2">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
-                搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
-              <% else %>
-                <%= @sites.count %> / <%= @pagy.count %> 個景點
-              <% end %>
+              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
+            <% else %>
+              <%= @sites.count %> / <%= @pagy.count %> 個景點
+            <% end %>
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :site_types%>

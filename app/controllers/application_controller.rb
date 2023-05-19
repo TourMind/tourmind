@@ -38,12 +38,4 @@ class ApplicationController < ActionController::Base
            layout: false,
            status: :not_found and return
   end
-
-  # def authenticate_user!
-  #   unless user_signed_in?
-  #     redirect_to root_path and return
-  #   end
-  #   super
-  # end
-
 end

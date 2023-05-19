@@ -65,10 +65,10 @@
         <div class="py-2">
           <% if @hotels.present? %>
             <% if params[:keyword].present?%>
-                搜尋<%= params[:keyword]%>結果： <%= @hotels.count %> / <%= @pagy.count %> 家住宿
-              <% else %>
-                <%= @hotels.count %> / <%= @pagy.count %> 家住宿
-              <% end %>
+              搜尋<%= params[:keyword]%>結果： <%= @hotels.count %> / <%= @pagy.count %> 家住宿
+            <% else %>
+              <%= @hotels.count %> / <%= @pagy.count %> 家住宿
+            <% end %>
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :hotel_types%>
