@@ -14,7 +14,7 @@
       <span class="border-b-2">總營收 $<%= @prices %></span>
     </div>
   </div>
-  <span class="text-xl font-bold">User:<%= @users.count %> / <%= User.count %></span>
+  <span class="text-xl font-bold">會員數 : <%= @pagy.count %></span>
   <form class="m-4 my-6">
     <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢姓名、電話、信箱...">
     <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer " value="查詢">
