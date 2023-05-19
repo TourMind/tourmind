@@ -7,7 +7,13 @@
           <%= link_to 'ｘ', favorite_path(fav), method: :delete, class: "rounded-lg px-1 bg-gray-200 inline-block font-medium ms-auto absolute top-1 end-1", data: {confirm: "確定要移出喜愛清單?"}%>
           <p class="relative max-w-sm bg-white shadow-md rounded-xl">
             <span class= "absolute top-0 left-0 px-3 py-1 text-sm text-white bg-indigo-600 rounded-tl-lg shadow-xl ">
-              <%=fav.favorable.class%>
+              <% if fav.favorable.class.to_s == 'Restaurant'%>
+                餐廳
+              <% elsif fav.favorable.class.to_s == 'Hotel'%>
+                住宿
+              <% else %>
+                景點
+              <% end %>
             </span>
           </p>
         </div>
