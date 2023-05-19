@@ -15,4 +15,19 @@ class DashboardController < ApplicationController
       @prices = Order.sum(:amount)
     end
   end
+
+  def hotels
+    @pagy, @hotels = pagy(Hotel.all.order(:id))
+    @hotels = @hotels.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def sites
+    @pagy, @sites = pagy(Site.all.order(:id))
+    @sites = @sites.search(params[:keyword]) if params[:keyword].present?
+  end
+
+  def restaurants
+    @pagy, @restaurants = pagy(Restaurant.all.order(:id))
+    @restaurants = @restaurants.search(params[:keyword]) if params[:keyword].present?
+  end
 end

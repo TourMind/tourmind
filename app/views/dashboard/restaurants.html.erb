@@ -1,4 +1,65 @@
-<div>
-  <h1 class="font-bold text-4xl">Dashboard#restaurants</h1>
-  <p>Find me in app/views/dashboard/restaurants.html.erb</p>
+<div class="m-4">
+  <h1 class="mb-24 text-4xl font-bold">後台系統</h1>
+</div>
+<div class="m-4">
+  <span class="text-xl font-bold">總共 <%= @pagy.count %> 家餐廳</span>
+  <form class="m-4 my-6">
+    <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢名稱、地址...">
+    <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer" value="查詢">
+  </form>
+  <section>
+    <div class='flex justify-between bg-white border-b-2 solid'>
+      <ul class='flex cursor-pointer '>
+        <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+          <%= link_to "用戶資料", dashboard_users_path %>
+        </li>
+        <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+          <%= link_to '住宿', dashboard_hotels_path %>
+        </li>
+        <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+          <%= link_to '景點', dashboard_sites_path %>
+        </li>
+        <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+          <%= link_to '餐廳', dashboard_restaurants_path %>
+        </li>
+        <li class='px-6 py-2 text-xl font-bold bg-white bg-gray-200 rounded-t-lg hover:bg-gray-100'>
+          <i class="fa-solid fa-plus"></i>
+          <%= link_to '行程規劃', new_plan_path %>
+        </li>
+      </ul>
+      <%= link_to '新增餐廳' , new_restaurant_path(@restaurant), class:'rounded-md py-2 px-5 mr-8 bg-blue-600 text-white inline-block font-medium hover:text-blue-600 hover:bg-white border-blue-600 border-2 text-white mb-2'%>
+    </div>
+    <div>
+      <table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">No.</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">餐廳名稱</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">電話</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">地址</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">料理類型</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">編輯</th>
+            <th scope="col" class="px-6 py-4 font-medium text-center text-gray-900">刪除</th>
+          </tr>
+        </thead>
+        <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+          <% @restaurants.each do |restaurant|%>
+            <tr class="hover:bg-gray-50">
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= restaurant.id %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to restaurant.name, restaurant_path(restaurant) %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= restaurant.tel %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= restaurant.address %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= restaurant.cuisine_types.join(",") %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '編輯', edit_restaurant_path(restaurant), class: "mt-2 rounded-lg py-2 px-3 bg-blue-600 inline-block font-medium text-white hover:bg-white hover:text-blue-600 border-blue-600 border-2" %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '刪除',  restaurant_path(restaurant),method: :delete, class: "mt-2 rounded-lg py-2 px-3 bg-red-600 inline-block font-medium text-white hover:bg-white hover:text-red-600 border-red-600 border-2", data:{confirm:'您確定要刪除此筆資料嗎？'} %></th>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <br>
+    <% if @restaurants.count >= 10 || @pagy.page > 1 %>
+      <div class="flex justify-center"><%= raw pagy_nav(@pagy) %></div>
+    <% end %>
+  </section>
 </div>
