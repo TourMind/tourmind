@@ -11,12 +11,12 @@ class SitesController < ApplicationController
     declare_params
 
     @pagy, @sites = if params[:keyword].present?
-               pagy(Site.search(params[:keyword]).order(updated_at: :desc), items: 6)
-             elsif @address.present? || @site_types.present? || @pet_friendly.present?
-               pagy(Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc), items: 6)
-             else
-               pagy(Site.order(updated_at: :desc), items: 6)
-             end
+                      pagy(Site.search(params[:keyword]).order(updated_at: :desc), items: 6)
+                    elsif @address.present? || @site_types.present? || @pet_friendly.present?
+                      pagy(Site.filter(@address, @site_types, @pet_friendly).order(updated_at: :desc), items: 6)
+                    else
+                      pagy(Site.order(updated_at: :desc), items: 6)
+                    end
     flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
   end
 
@@ -29,7 +29,7 @@ class SitesController < ApplicationController
 
     @site = Site.new(params)
     if @site.save
-      redirect_to sites_path, notice: '景點新增成功'
+      redirect_to dashboard_sites_path, notice: '景點新增成功'
     else
       render :new
     end
@@ -56,7 +56,7 @@ class SitesController < ApplicationController
   def destroy
     set_site
     @site.destroy
-    redirect_to sites_path, notice: '景點刪除成功'
+    redirect_to dashboard_sites_path, notice: '景點刪除成功'
   end
 
   private

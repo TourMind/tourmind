@@ -10,12 +10,12 @@ class HotelsController < ApplicationController
     # @pagy, @hotels = pagy(Hotel.all.order(:id), items: 6)
     declare_params
     @pagy, @hotels = if params[:keyword].present?
-                pagy(Hotel.search(params[:keyword]).order(updated_at: :desc), items: 6)
-              elsif @address.present? || @hotel_types.present? || @equipment.present?
-                pagy(Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc), items: 6)
-              else
-                pagy(Hotel.order(updated_at: :desc), items: 6)
-              end
+                       pagy(Hotel.search(params[:keyword]).order(updated_at: :desc), items: 6)
+                     elsif @address.present? || @hotel_types.present? || @equipment.present?
+                       pagy(Hotel.filter(@address, @hotel_types, @equipment).order(updated_at: :desc), items: 6)
+                     else
+                       pagy(Hotel.order(updated_at: :desc), items: 6)
+                     end
     flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
   end
 
@@ -29,7 +29,7 @@ class HotelsController < ApplicationController
     @hotel = Hotel.new(params)
 
     if @hotel.save
-      redirect_to hotels_path, notice: '飯店新增成功'
+      redirect_to dashboard_hotels_path, notice: '住宿新增成功'
     else
       render :new
     end
@@ -48,7 +48,7 @@ class HotelsController < ApplicationController
     params = Image::ImageService.remove_image(hotel_params)
 
     if @hotel.update(params)
-      redirect_to hotel_path(@hotel), notice: '飯店更新成功'
+      redirect_to hotel_path(@hotel), notice: '住宿更新成功'
     else
       render :edit
     end
@@ -56,7 +56,7 @@ class HotelsController < ApplicationController
 
   def destroy
     @hotel.destroy
-    redirect_to hotels_path, notice: '飯店刪除成功'
+    redirect_to dashboard_hotels_path, notice: '住宿刪除成功'
   end
 
   private
