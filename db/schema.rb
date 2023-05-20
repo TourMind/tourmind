@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
     t.string "slug"
     t.string "scraped_photo"
     t.json "images"
+    t.string "slug"
+    t.string "scraped_photo"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
@@ -176,10 +178,10 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-
   add_foreign_key "collaborations", "plans"
   add_foreign_key "collaborations", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "users"
+  add_foreign_key "orders", "users"
   add_foreign_key "plans", "users"
 end
