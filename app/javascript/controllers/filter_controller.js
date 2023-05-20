@@ -13,6 +13,9 @@ export default class extends Controller {
   //控制小於768px時出現的篩選鍵
   toggleFilterMenu() {
     this.filterMenuTarget.classList.toggle('hidden');
+    this.filterMenuTarget.classList.toggle('h-screen');
+    this.filterMenuTarget.classList.toggle('overflow-auto');
+    document.body.classList.toggle('overflow-hidden')
   }
 
   //控制畫面左方分類區箭頭展開鍵

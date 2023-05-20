@@ -1,13 +1,13 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
-    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
+    <div class="flex-grow py-2 text-xl text-center border cursor-pointer"
       data-action="click->filter#toggleFilterMenu">
       篩選
     </div>
   </div>
-  <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)]">
+  <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)] w-11/12">
     <section data-filter-target="filterMenu"
-        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max bd" style="z-index: 1">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max" style="z-index: 1">
       <div class="flex justify-end pt-6 lg:hidden">
         <button data-action="click->filter#toggleFilterMenu">
           <i class="text-lg fa-solid fa-xmark"></i>
@@ -42,7 +42,7 @@
           </ul>
         </div>
         <div class="py-6">
-          <div class="py-2" data-action="click->filter#toggleFilterCategory">
+          <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             設備<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
           <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-full">
@@ -57,9 +57,10 @@
         <%= submit_tag "篩選", {class:'lg:hidden w-full px-4 py-2 ml-2 text-sm font-medium text-indigo-100 bg-indigo-600 border border-transparent rounded-full ', data:{filter_target:"filterSubmitBtn"}} %>
       <% end %>
     </section>
-    <section class="flex-grow w-3/5">
-      <div class='flex justify-between'>
-        <h1 class='text-4xl font-bold text-center'>住宿</h1>
+    <section class="flex-grow w-3/5 ">
+      <div class='flex flex-wrap justify-between'>
+        <h1 class='text-4xl font-bold text-center py-2'>住宿</h1>
+        <%= render "keyword" %>
       </div>
       <div class="flex items-center justify-between">
         <div class="py-2">
@@ -69,12 +70,13 @@
             <% else %>
               <%= @hotels.count %> / <%= @pagy.count %> 家住宿
             <% end %>
+          <% else %>
+            <span>沒有找到符合條件的住宿</span>
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :hotel_types%>
           <%= render "tag", tags: :equipment%>
         </div>
-        <%= render partial: "keyword" %>
       </div>
       <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
         <% @hotels.each do |hotel| %>
@@ -98,7 +100,7 @@
             <div class="flex-grow p-2 m-2">
               <div class="flex items-center justify-between">
                 <h2 class="w-3/5 py-4 text-xl font-medium">
-                  <%= hotel.name %>
+                  <%= link_to hotel.name, hotel_path(hotel)  %>
                 </h2>
                 <%= link_to hotels_path(hotel_types: [hotel.hotel_types]) do %>
                   <span class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
