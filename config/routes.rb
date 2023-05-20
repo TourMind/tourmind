@@ -31,15 +31,25 @@ Rails.application.routes.draw do
 
   # 升級方案
   get '/pricing', to: 'page#pricing'
-  # 金流路徑
-  post '/pricing/return', to: 'page#return'
-  post '/pricing/notify', to: 'page#notify'
-  # 付款成功
-  get '/pricing/paymentok', to: 'page#paymentok'
+
+  resources :payments, only: [] do
+    collection do
+      get :ok  # 付款成功
+      post :return  # 金流路徑
+      post :notify  # 金流路徑
+    end
+  end
+
   # 訂單資訊
   resources :orders, only: %i[index show]
+
   # 管理員後台
-  get '/dashboard/users', to: 'dashboard#users', as: 'dashboard_users'
+  namespace :dashboard do
+    get :users  # /dashboard/users
+    get :hotels # /dashboard/hotels
+    get :sites # /dashboard/sites
+    get :restaurants # /dashboard/restaurants
+  end
 
   # 404畫面
   get '/404', to: "application#record_not_found"
