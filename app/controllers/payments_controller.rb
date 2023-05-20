@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentsController < ApplicationController
-    skip_before_action :verify_authenticity_token, only: %i[return notify]
+  skip_before_action :verify_authenticity_token, only: %i[return notify]
   # 處理訂單的更新資訊
   def notify
     response = Newebpay::MpgResponse.new(params[:TradeInfo])
