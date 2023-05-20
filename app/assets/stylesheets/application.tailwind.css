@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navbar-menu {
-  @apply absolute right-0 bg-white shadow-md md:shadow-none top-16 md:static md:flex-row md:items-center;
+  @apply absolute right-0 bg-white shadow-md md:shadow-none top-16 md:static md:flex-row md:items-center bg-blue-200;
 }
 
 .input-field {

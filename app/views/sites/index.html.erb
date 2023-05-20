@@ -15,7 +15,7 @@
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             地區搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-96">
             <% @city_options.each do | city |%>
               <li class="py-1">
                 <%= check_box_tag "address[]", city, @address.include?(city) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -28,7 +28,7 @@
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             景點類型<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-96">
             <% @site_type_options.each do | site_type |%>
               <li class="py-1">
                 <%= check_box_tag "site_types[]", site_type, @site_types.include?(site_type) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -41,7 +41,7 @@
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
             寵物友善搜尋<i class="px-1 fa-solid fa-chevron-down"></i>
           </div>
-          <ul class="flex flex-col px-2 overflow-hidden max-h-0 max-h-96">
+          <ul class="flex flex-col px-2 overflow-hidden max-h-96">
             <% @pet_friendly_options.each do | pet_friendly |%>
               <li class="py-1">
                 <%= check_box_tag "pet_friendly[]", pet_friendly, @pet_friendly.include?(pet_friendly) , {class: "mr-2", data:{filter_target:"filterCheckbox"}} %>
@@ -69,14 +69,14 @@
         <form class="flex justify-center mb-2 max-h-10">
           <div class="flex items-center">
             <div class="relative">
-              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full pl-14 pr-10 py-2 marker:border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
+              <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full pl-14 pr-10 py-2 marker:border border-gray-500 rounded-lg leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
               <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                 <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1c3.86 0 7 3.14 7 7 0 1.94-.79 3.7-2.07 4.97l4.96 4.97-1.41 1.41-4.97-4.96A6.959 6.959 0 0 1 9 15c-3.86 0-7-3.14-7-7s3.14-7 7-7zm0 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
                 </svg>
               </div>
             </div>
-            <button type="submit" class="ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+            <button type="submit" class="ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
               搜尋
             </button>
           </div>
