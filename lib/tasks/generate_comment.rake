@@ -1,6 +1,8 @@
 desc 'generate comment for test'
 namespace :data do
     task :generate_comment => :environment do
+        Comment.destroy_all
+
         hotel_contents = [
             '這家經濟型旅館提供了價格實惠的住宿選擇。雖然房間不太大，但它們都很乾淨整潔。服務人員很友好，並且提供了基本的設施和',
             '飯店服務好房間整齊乾淨無比公設交誼廳有24小時飲料吧美式咖啡算好喝也能自助洗衣飯店外有咖啡店、自助餐、康是美、書局和中山國中捷運站超級方便',
@@ -73,6 +75,29 @@ namespace :data do
             '他们的特色菜品真是令人垂涎欲滴！我特别喜欢他们的烤肉和香料搭配，口味独特。'
         ]
 
+        plan_comments = [
+            "我旅行後的評論是，這是我人生中最難忘的經歷之一！",
+            "旅行讓我重新發現了自己，我感到煥然一新。",
+            "每次旅行都讓我變得更加開放和包容，我學會了欣賞不同文化和人群。",
+            "旅行讓我對世界的美麗和奇蹟感到驚嘆，我希望能繼續探索更多的目的地。",
+            "通過旅行，我結識了許多志同道合的人，我們一起度過了難忘的時光。",
+            "旅行讓我逃離了繁忙和壓力，享受了真正的放鬆和寧靜。",
+            "我旅行後的評價是，這個世界有太多令人驚嘆的地方等待著我去發現。",
+            "旅行是一次與自然和大自然連接的機會，我從中獲得了力量和啟示。",
+            "通過旅行，我學到了靈活適應和解決問題的能力，這對我的生活很有幫助。",
+            "旅行讓我品嚐了各種美食，我嘗試了許多新的口味和菜餚。",
+            "我旅行後的評價是，這個世界是如此豐富多彩，每個地方都有自己獨特的魅力。",
+            "旅行教會了我珍惜當下和享受每個瞬間的重要性。",
+            "通過旅行，我學會瞭如何預訂機票、安排行程和管理預算。",
+            "旅行讓我遠離日常生活的束縛，盡情享受自由和冒險。",
+            "我旅行後的評價是，這個世界上有太多令人驚嘆的自然景觀等待著我們去探索。",
+            "旅行帶給我無盡的故事和回憶，我喜歡與朋友和家人分享這些經歷。",
+            "通過旅行，我學到了尊重和理解不同文化的重要性。",
+            "旅行是一次重新連接內心和靈魂的機會，我從中找到了平衡和內在的和諧。",
+            "我旅行後的評價是，旅行是一種學習和成長的過程，我不斷發展和改變。",
+            "旅行讓我看到了世界的無限可能性，激發了我的創造力和好奇心。",
+        ]
+
         # restaurant_comments = Array.new(200) do 
         #     [
         #         Faker::Restaurant.review,
@@ -88,19 +113,32 @@ namespace :data do
         hotels = Hotel.all
         sites = Site.all
         restaurants = Restaurant.all
+        plans = Plan.all
+
         200.times do
             hotel_content = hotel_contents.sample
             site_comment = site_comments.sample
             restaurant_comment = restaurant_comments.sample
+            
             hotel = hotels.sample
             site = sites.sample
             restaurant = restaurants.sample
+
             user = users.sample
-            comment = Comment.create(content: hotel_content, rating: rand(3..5), user_id: user.id, commentable_id: hotel.id, commentable_type: 'Hotel')
-            comment = Comment.create(content: site_comment, rating: rand(3..5), user_id: user.id, commentable_id: site.id, commentable_type: 'Site')
-            comment = Comment.create(content: restaurant_comment, rating: rand(3..5), user_id: user.id, commentable_id: restaurant.id, commentable_type: 'Restaurant')
-           
+
+            comment = Comment.create(content: hotel_content, rating: rand(1..5), user_id: user.id, commentable_id: hotel.id, commentable_type: 'Hotel')
+            comment = Comment.create(content: site_comment, rating: rand(1..5), user_id: user.id, commentable_id: site.id, commentable_type: 'Site')
+            comment = Comment.create(content: restaurant_comment, rating: rand(1..5), user_id: user.id, commentable_id: restaurant.id, commentable_type: 'Restaurant')
         end
+        
+        1000.times do
+            plan_comment = plan_comments.sample
+            plan = plans.sample
+            user = users.sample
+
+            comment = Comment.create(content: plan_comment, rating: rand(1..5), user_id: user.id, commentable_id: plan.id, commentable_type: 'Plan')
+        end
+
         p 'generate comment done'
     end 
 end
