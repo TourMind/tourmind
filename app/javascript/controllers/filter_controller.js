@@ -14,7 +14,7 @@ export default class extends Controller {
   toggleFilterMenu() {
     this.filterMenuTarget.classList.toggle('hidden');
     this.filterMenuTarget.classList.toggle('overflow-auto');
-    this.filterMenuTarget.style = `height: ${window.innerHeight}px`
+    this.filterMenuTarget.style.height = `${window.innerHeight}px`
     document.body.classList.toggle('overflow-hidden');
   }
 
