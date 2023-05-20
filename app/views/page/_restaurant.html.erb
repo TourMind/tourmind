@@ -5,13 +5,12 @@
         <div class="relative">
           <%= link_to restaurant_path(restaurant) do %>
             <div class="text-gray-700 h-[15rem]">
-              <% if restaurant.images.present? %>
-                <img class="w-full h-full object-cover" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+              <% if restaurant.scraped_photos.present? %>
+                <img class="object-fit:cover w-full h-[250px]" src="<%= restaurant.scraped_photos.first %>" alt="Sites Pic">
               <% else %>
-                <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover w-full h-full' %>
+                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full' %>
               <% end %>
             </div>
-          <% end %>
         </div>
         <div class="m-2">
           <div class="flex items-start justify-between">
@@ -58,6 +57,7 @@
               </ul>
             <% end %>
           </div>
+          <% end %>
         </div>
       </div>
     <% end %>

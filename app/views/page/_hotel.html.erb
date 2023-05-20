@@ -4,13 +4,12 @@
       <div class="relative">
         <%= link_to hotel_path(hotel) do %>
           <div class="text-gray-700 h-[15rem]">
-            <% if hotel.images.present? %>
-              <img class="w-full h-full object-cover" src="<%= hotel.images.first.url %>" alt="Restaurant Pic">
+            <% if hotel.scraped_photo.present? %>
+              <img class="object-fit:cover w-full h-[250px]" src="<%= hotel.scraped_photo %>" alt="Sites Pic">
             <% else %>
-              <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover w-full h-full' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover h-[250px] ' %>
             <% end %>
           </div>
-        <% end %>
       </div>
       <div class="m-2">
         <div class="flex items-start justify-between">
@@ -19,7 +18,7 @@
           </h2>
         </div>
         <ul>
-          <li class="mt-2"><%= hotel.intro&.truncate(70) %></li>
+          <li class="mt-2"><%= hotel.intro&.truncate(50) %></li>
         </ul>
         <div class="flex mt-2">
           <ul class="flex flex-wrap mt-2">
@@ -30,7 +29,7 @@
           <ul class="flex flex-wrap mt-2">
             <% hotel.equipment.each do |equipment| %>
               <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                <%= equipment.truncate(5) %>
+                <%= equipment %>
               </li>
             <% end %>
           </ul>
@@ -38,6 +37,7 @@
             <p>沒有類型資料</p>
           <% end %>
         </div>
+        <% end %>
       </div>
     </div>
   <% end %>

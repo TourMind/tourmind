@@ -1,5 +1,5 @@
 <div class = "bg-white mb-12 ">
-  <main class="container mx-auto pt-12 max-w-screen-xl">
+  <div class="container mx-auto pt-12 max-w-screen-xl">
     <div class="flex">
       <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex justify-center mb-2 max-h-10") do |form| %>
       <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full pl-8 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
@@ -24,7 +24,7 @@
       </ul>
       <section data-favorite-target="section" data-section="all" class="justify-between items-center">
         <h2 class="font-bold text-3xl my-2">全部</h2>
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap carousel">
           <% if @hotels.present? %>
             <div class="w-full bg-gray-200 p-4 mb-4">
               <span>飯店</span>
@@ -76,5 +76,5 @@
         </div>
       </section>
     </div>
-  </main>
+  </div>
 </div>

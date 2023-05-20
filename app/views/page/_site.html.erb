@@ -1,16 +1,15 @@
-<div class="container py-6 mx-auto grid grid-cols-4 gap-4">
+<div class="container py-6 mx-auto grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
   <% @sites.each do |site| %>
     <div class="overflow-hidden bg-white rounded-md shadow-lg">
       <div class="relative">
         <%= link_to site_path(site) do %>
           <div class="text-gray-700 h-[15rem]">
-            <% if site.images.present? %>
-              <img class="w-full h-full object-cover" src="<%= site.images.first.url %>" alt="Restaurant Pic">
+            <% if site.scraped_photos.present? %>
+              <img class="object-fit:cover w-full h-[250px]" src="<%= site.scraped_photos.first %>" alt="Sites Pic">
             <% else %>
-              <%= image_tag "https://fakeimg.pl/350x200/?text=TourMind", class:'object-cover w-full h-full' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full' %>
             <% end %>
           </div>
-        <% end %>
       </div>
       <div class="m-2">
         <div class="flex items-start justify-between">
@@ -38,7 +37,8 @@
             <p>沒有類型資料</p>
           <% end %>
         </div>
+        <%end%>
       </div>
     </div>
-  <% end %>
+    <%end%>
 </div>
