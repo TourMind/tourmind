@@ -5,7 +5,9 @@ export default class extends Controller {
   static targets = ["filterMenu", "filterCheckbox", "filterSubmitBtn"]
 
   connect() {
-    this.registerCheckboxEvent(this.filterCheckboxTargets);
+    if (document.documentElement.clientWidth > 1024) {
+      this.registerCheckboxEvent(this.filterCheckboxTargets);
+    }
   }
 
   //控制小於768px時出現的篩選鍵
