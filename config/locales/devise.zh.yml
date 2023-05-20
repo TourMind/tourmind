@@ -86,6 +86,8 @@ zh:
               too_short: "密碼不得少於6個字"
             password_confirmation:
               confirmation: "密碼與確認密碼必須一致。"
+            email:
+              taken: "此信箱已被使用"
         site:
           attributes:
             name:
