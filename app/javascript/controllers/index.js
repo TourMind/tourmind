@@ -10,6 +10,9 @@ application.register("butt", ButtController)
 import ChartController from "./chart_controller"
 application.register("chart", ChartController)
 
+import ChatbaseController from "./chatbase_controller"
+application.register("chatbase", ChatbaseController)
+
 import CommentController from "./comment_controller"
 application.register("comment", CommentController)
 
@@ -31,6 +34,9 @@ application.register("form", FormController)
 import MapController from "./map_controller"
 application.register("map", MapController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import MovingController from "./moving_controller"
 application.register("moving", MovingController)
 
@@ -40,17 +46,14 @@ application.register("navbar", NavbarController)
 import PictureController from "./picture_controller"
 application.register("picture", PictureController)
 
+import SearchController from "./search_controller"
+application.register("search", SearchController)
+
 import ShareController from "./share_controller"
 application.register("share", ShareController)
 
 import SortingController from "./sorting_controller"
 application.register("sorting", SortingController)
-
-import ChatbaseController from "./chatbase_controller"
-application.register("chatbase", ChatbaseController)
-
-import ModalController from "./modal_controller"
-application.register("modal", ModalController)
 
 import TurboformController from "./turboform_controller"
 application.register("turboform", TurboformController)
