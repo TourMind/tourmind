@@ -7,7 +7,7 @@
   </div>
   <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)] w-11/12">
     <section data-filter-target="filterMenu"
-        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max" style="z-index: 1">
+        class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 z-10 h-max">
       <div class="flex justify-end pt-6 lg:hidden">
         <button data-action="click->filter#toggleFilterMenu">
           <i class="text-lg fa-solid fa-xmark"></i>
@@ -63,7 +63,7 @@
         <%= render "keyword" %>
       </div>
       <div class="flex items-center justify-between">
-        <div class="py-2">
+        <div class="py-2 font-bold">
           <% if @hotels.present? %>
             <% if params[:keyword].present?%>
               搜尋<%= params[:keyword]%>結果： <%= @hotels.count %> / <%= @pagy.count %> 家住宿
@@ -71,7 +71,7 @@
               <%= @hotels.count %> / <%= @pagy.count %> 家住宿
             <% end %>
           <% else %>
-            <span>沒有找到符合條件的住宿</span>
+            <span class="font-bold">沒有找到符合條件的住宿</span>
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :hotel_types%>
