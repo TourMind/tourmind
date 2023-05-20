@@ -78,9 +78,14 @@ zh:
       min_height_error: "圖像高度應大於 %{min_height}px"
       max_height_error: "圖像高度應小於 %{max_height}px"
   activerecord:
-
     errors:
       models:
+        user:
+          attributes:
+            password:
+              too_short: "密碼不得少於6個字"
+            password_confirmation:
+              confirmation: "密碼與確認密碼必須一致。"
         site:
           attributes:
             name:
@@ -102,16 +107,12 @@ zh:
               blank: "電話不能為空"
             address:
               blank: "地址不能為空"
-
-        
         plan:
           attributes:
             name:
               blank: "行程名稱為必填"
             description:
               blank: "行程簡介為必填"
-        
-
         restaurant:
           attributes:
             name:
