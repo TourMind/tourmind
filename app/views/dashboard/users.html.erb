@@ -1,4 +1,4 @@
-<div class="m-4">
+<div class="m-4 min-h-[calc(100vh_-_140px)]">
   <h1 class="mb-10 text-4xl font-bold">後台系統</h1>
   <div class="chartBox">
     <div class="chart" >
@@ -14,7 +14,17 @@
       <span class="border-b-2">總營收 $<%= @prices %></span>
     </div>
   </div>
-  <span class="text-xl font-bold">會員數 : <%= @pagy.count %></span>
+  <span class="text-xl font-bold">
+    <% if @users.present? %>
+      <% if params[:keyword].present?%>
+        搜尋<%= params[:keyword]%>結果： 總共 <%= @users.count %> 筆會員資料
+      <% else %>
+        總共：<%= @pagy.count %> 筆會員資料
+      <% end %>
+    <% else %>
+      <span>搜尋<%= params[:keyword]%>結果： 沒有找到符合條件的會員資料</span>
+    <% end %>
+  </span>
   <form class="m-4 my-6">
     <input type="" class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢姓名、電話、信箱...">
     <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer " value="查詢">
