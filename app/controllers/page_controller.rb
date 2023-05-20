@@ -7,19 +7,25 @@ class PageController < ApplicationController
   helper_method :star_rating
   def home; end
 
-  def pricing; end
+  def pricing
+    @option_a = Newebpay::Mpg.new(50, current_user.id).form_info
+    @option_b = Newebpay::Mpg.new(100, current_user.id).form_info
+    @option_c = Newebpay::Mpg.new(200, current_user.id).form_info
+  end
 
   private
-    def comment_all
-      @hotel = Hotel.first
-      @hotels = Hotel.all
-      @site = Site.first
-      @sites = Site.all
-      @restaurant = Restaurant.first
-      @restaurants = Restaurant.all
-      @plan = Plan.first
-      @plans = Plan.all
-    end
+
+  def comment_all
+    @hotel = Hotel.first
+    @hotels = Hotel.all
+    @site = Site.first
+    @sites = Site.all
+    @restaurant = Restaurant.first
+    @restaurants = Restaurant.all
+    @plan = Plan.first
+    @plans = Plan.all
+  end
+
   def comment_rating
     @restaurant_data = {}
     Restaurant.all.each do |restaurant|
