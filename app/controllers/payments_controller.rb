@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentsController < ApplicationController
+    skip_before_action :verify_authenticity_token, only: %i[return notify]
   # 處理訂單的更新資訊
   def notify
     response = Newebpay::MpgResponse.new(params[:TradeInfo])
@@ -18,7 +19,7 @@ class PaymentsController < ApplicationController
                             pay_time: response.mpg_result['PayTime'],
                             status: '付款成功')
     order.save
-    redirect_to ok_payment_path
+    redirect_to ok_payments_path
   end
 
   def ok

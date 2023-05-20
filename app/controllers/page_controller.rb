@@ -2,7 +2,6 @@
 
 class PageController < ApplicationController
   before_action :authenticate_user!, only: [:pricing]
-  skip_before_action :verify_authenticity_token, only: %i[return notify]
   before_action :comment_all, :total_rating, :comment_rating, only: [:home]
   helper_method :star_rating
   def home; end
