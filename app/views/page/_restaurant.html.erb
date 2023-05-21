@@ -1,64 +1,70 @@
 <div class="container py-6 mx-auto">
   <div class="grid grid-cols-4 gap-4">
-    <% @restaurants.each do |restaurant| %>
-      <div class="overflow-hidden bg-white rounded-md shadow-lg">
-        <div class="relative">
-          <%= link_to restaurant_path(restaurant) do %>
-            <div class="text-gray-700 h-[15rem]">
-              <% if restaurant.scraped_photos.present? %>
-                <img class="object-fit:cover w-full h-[250px]" src="<%= restaurant.scraped_photos.first %>" alt="Sites Pic">
-              <% else %>
-                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full' %>
+    <% if @restaurants.present? %>
+      <% @restaurants.each do |restaurant| %>
+        <div class="overflow-hidden bg-white rounded-md shadow-lg">
+          <div class="relative">
+            <%= link_to restaurant_path(restaurant) do %>
+              <div class="text-gray-700 h-[15rem]">
+                <% if restaurant.scraped_photos.present? %>
+                  <img class="object-fit:cover w-full h-[250px]" src="<%= restaurant.scraped_photos.first %>" alt="Sites Pic">
+                <% else %>
+                  <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full' %>
+                <% end %>
+              </div>
+          </div>
+          <div class="m-2">
+            <div class="flex items-start justify-between">
+              <h2 class="text-xl font-medium">
+                <%= restaurant.name %>
+              </h2>
+              <%= link_to restaurants_path(restaurant_type: [restaurant.restaurant_type]) do %>
+                <span class="inline-block text-md mt-4 px-3 py-1 font-semibold text-gray-700 bg-gray-200 rounded-full text-center">
+                  <%= restaurant.restaurant_type %>
+                </span>
               <% end %>
             </div>
-        </div>
-        <div class="m-2">
-          <div class="flex items-start justify-between">
-            <h2 class="text-xl font-medium">
-              <%= restaurant.name %>
-            </h2>
-            <%= link_to restaurants_path(restaurant_type: [restaurant.restaurant_type]) do %>
-              <span class="inline-block text-md mt-4 px-3 py-1 font-semibold text-gray-700 bg-gray-200 rounded-full text-center">
-                <%= restaurant.restaurant_type %>
-              </span>
-            <% end %>
-          </div>
-          <ul>
-            <li class="mt-2"><%= restaurant.intro&.truncate(70) %></li>
-          </ul>
-          <div class="flex mt-2">
-            <ul class="flex flex-wrap mt-2">
-              <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                均消:<%= restaurant.price.to_i %>
-              </li>
+            <ul>
+              <li class="mt-2"><%= restaurant.intro&.truncate(70) %></li>
             </ul>
-          </div>
-          <div class="mt-2">
-            <% if restaurant.cuisine_types.present? || restaurant.atmostphere.present? %>
+            <div class="flex mt-2">
               <ul class="flex flex-wrap mt-2">
-                <% if restaurant.cuisine_types.present? %>
-                  <% restaurant.cuisine_types.each do |cuisine_type| %>
-                    <%= link_to restaurants_path(cuisine_types: [cuisine_type]) do %>
-                      <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                        <%= cuisine_type %>
-                      </li>
-                    <% end %>
-                  <% end %>
-                <% end %>
-                <% if restaurant.atmostphere.present? %>
-                  <% restaurant.atmostphere.each do |atmostphere| %>
-                    <%= link_to restaurants_path(atmostphere: [atmostphere]) do %>
-                      <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
-                        <%= atmostphere %>
-                      </li>
-                    <% end %>
-                  <% end %>
-                <% end %>
+                <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                  均消:<%= restaurant.price.to_i %>
+                </li>
               </ul>
+            </div>
+            <div class="mt-2">
+              <% if restaurant.cuisine_types.present? || restaurant.atmostphere.present? %>
+                <ul class="flex flex-wrap mt-2">
+                  <% if restaurant.cuisine_types.present? %>
+                    <% restaurant.cuisine_types.each do |cuisine_type| %>
+                      <%= link_to restaurants_path(cuisine_types: [cuisine_type]) do %>
+                        <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                          <%= cuisine_type %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <% if restaurant.atmostphere.present? %>
+                    <% restaurant.atmostphere.each do |atmostphere| %>
+                      <%= link_to restaurants_path(atmostphere: [atmostphere]) do %>
+                        <li class='inline-block px-3 py-1 mb-2 mr-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full'>
+                          <%= atmostphere %>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </ul>
+              <% end %>
+            </div>
             <% end %>
           </div>
-          <% end %>
         </div>
+      <% end %>
+    <% else %>
+      <div class="text-center">
+      <span class="font-bold text-2xl">沒有相關搜尋結果</span>
       </div>
     <% end %>
   </div>
