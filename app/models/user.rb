@@ -28,6 +28,9 @@ class User < ApplicationRecord
   # 喜愛清單關聯性
   has_many :favorites, inverse_of: :user
 
+  # 驗證確認密碼
+  validates_confirmation_of :password
+
   # 第三方認證登入後，創建用戶資料庫
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

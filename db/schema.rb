@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_15_183455) do
+ActiveRecord::Schema.define(version: 2023_05_20_060429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2023_05_15_183455) do
     t.json "images"
     t.string "slug"
     t.integer "lock_version", default: 0, null: false
+    t.json "picsums"
     t.index ["slug"], name: "index_plans_on_slug", unique: true
     t.index ["user_id"], name: "index_plans_on_user_id"
   end

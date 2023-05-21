@@ -3,11 +3,11 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     def create
-      user = User.new(account_register_params)
-      user.save
-      sign_in_and_redirect user, event: :authentication
+      super do |resource|
+        flash.now[:alert] = resource.errors.full_messages.map {|el| el.split(" ").last}.join("\n") if resource.errors.any?
+      end
     end
-
+    
     # 更新使用者資訊
     # resource= User, params = 要更新的參數
     def update_resource(resource, _params)
@@ -21,8 +21,13 @@ module Users
       params.require(:user).permit(:email, :name, :city, :tel, :avatar, :avatar_url)
     end
 
+
     def account_register_params
       params.require(:user).permit(:email, :name, :city, :tel, :avatar, :avatar_url, :password)
+
+    def sign_up_params
+      params.require(:user).permit(:email, :name, :city, :tel, :avatar_url, :password, :password_confirmation)
+
     end
   end
 end
