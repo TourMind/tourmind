@@ -4,7 +4,11 @@
     <div class="flex items-center justify-center h-full shadow-lg">
       <div class="relative w-full overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
         <div>
-          <%= link_to 'ｘ', favorite_path(fav), method: :delete, class: "rounded-lg px-1 bg-gray-200 inline-block font-medium ms-auto absolute top-1 end-1", data: {confirm: "確定要移出喜愛清單?"}%>
+          <%= link_to favorite_path(fav), method: :delete, class: "rounded bg-gray-100 rounded-md p-2 flex hover:bg-gray-200 absolute top-1 end-1", data: {confirm: "確定要移出喜愛清單?"} do %>
+            <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          <% end %>
           <p class="relative max-w-sm bg-white shadow-md rounded-xl">
             <span class= "absolute top-0 left-0 px-3 py-1 text-sm text-white bg-indigo-600 rounded-tl-lg shadow-xl ">
               <% if fav.favorable.class.to_s == 'Restaurant'%>
