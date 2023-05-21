@@ -66,9 +66,9 @@
         <div class="py-2 font-bold">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
-              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
+              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> 個景點
             <% else %>
-              <%= @sites.count %> / <%= @pagy.count %> 個景點
+              總共：<%= @pagy.count %> 個景點
             <% end %>
           <% else %>
             <span class="font-bold">沒有找到符合條件的景點</span>
