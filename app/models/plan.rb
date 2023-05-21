@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Plan < ApplicationRecord
   extend FriendlyId
 
@@ -15,7 +17,7 @@ class Plan < ApplicationRecord
   friendly_id :name, use: :slugged
 
   def self.category_options
-    %w[自然 文化 美食 冒險 休閒 浪漫 音樂 藝術]
+    %w[畢業 長青族 文化 美食 冒險 休閒 浪漫 音樂]
   end
 
   def self.set_color(type)

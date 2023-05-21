@@ -1,20 +1,6 @@
 <div class="container m-auto">
-  <h1 class="flex text-4xl font-bold p-4">
-    <%= @hotel.name %>
-  </h1>
-  <div class="flex flex-wrap">
-    <div class="flex px-4 items-center">
-      <% if @comments_score.present? %>
-        <span><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
-          <%= sprintf('%.1f', @hotel_data[@hotel.id][:average_rating]) %>
-          (<%= @hotel_data[@hotel.id][:comment_count] %>則評論)
-        </span>
-      <% else %>
-        <span>尚未有評論</span>
-      <% end %>
-      <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
-    </div>
-    <span class="flex items-center text-md font-semibold"><%= @hotel.hotel_types%></span>
+  <div class="flex flex-col px-4">
+    <%= render partial: "heading"%>
   </div>
   <section class="flex justify-center p-4 shadow-md md:w-90%">
     <div class="grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative">
