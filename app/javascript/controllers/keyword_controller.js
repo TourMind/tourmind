@@ -1,7 +1,4 @@
-
-
 // Connects to data-controller="keyword"
-
 
 import { Controller } from "@hotwired/stimulus"
 
@@ -17,8 +14,6 @@ export default class extends Controller {
     if (keyword !== "") {
       keywordInput.value = keyword;
       this.element.submit();
-    } else {
-      console.log("Input field is empty. Form not submitted.");
     }
   }
   resetForm() {
