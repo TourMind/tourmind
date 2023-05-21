@@ -24,8 +24,10 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-
-    if current_user.plans.count >= current_user.plans_limit_number
+    if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.now)
+      current_user.update(diamond_grade: '一般會員')
+      return redirect_to pricing_path, alert: '會員已到期！'
+    elsif current_user.plans.count >= current_user.plans_limit_number
       return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
   end
@@ -189,7 +191,8 @@ class PlansController < ApplicationController
       :category,
       :locations,
       :lock_version,
-      images: []
+      images: [],
+      picsums: []
     )
   end
 

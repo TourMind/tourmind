@@ -13,15 +13,5 @@ module Users
       end
       request.referer || root_path
     end
-
-    private
-
-    def format_date(date)
-      date.in_time_zone('Taipei').strftime('%Y/%m/%d')
-    end
-
-    def membership_expiry_date
-      Order.where(user_id: current_user.id).last.pay_time + 1.month
-    end
   end
 end
