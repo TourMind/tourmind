@@ -66,7 +66,7 @@
         <div class="py-2 font-bold">
           <% if @hotels.present? %>
             <% if params[:keyword].present?%>
-              搜尋<%= params[:keyword]%>結果： <%= @hotels.count %> 家住宿
+              搜尋<%= params[:keyword]%>結果： <%= @pagy.count %> 家住宿
             <% else %>
               總共：<%= @pagy.count %> 家住宿
             <% end %>

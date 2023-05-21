@@ -66,7 +66,7 @@
         <div class="py-2 font-bold">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
-              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> 個景點
+              搜尋<%= params[:keyword]%>結果： <%= @pagy.count %> 個景點
             <% else %>
               總共：<%= @pagy.count %> 個景點
             <% end %>

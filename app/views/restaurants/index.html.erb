@@ -89,7 +89,7 @@
           <div class="py-2 font-bold">
             <% if @restaurants.present? %>
               <% if params[:keyword].present?%>
-                搜尋<%= params[:keyword]%>結果： <%= @restaurants.count %> 家餐廳
+                搜尋<%= params[:keyword]%>結果： <%= @pagy.count %> 家餐廳
               <% else %>
                 總共： <%= @pagy.count %> 家餐廳
               <% end %>
