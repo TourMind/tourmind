@@ -46,8 +46,8 @@ application.register("navbar", NavbarController)
 import PictureController from "./picture_controller"
 application.register("picture", PictureController)
 
-import SearchController from "./search_controller"
-application.register("search", SearchController)
+import KeywordController from "./keyword_controller"
+application.register("keyword", KeywordController)
 
 import ShareController from "./share_controller"
 application.register("share", ShareController)

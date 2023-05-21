@@ -1,12 +1,12 @@
-<form class="flex justify-center mb-2 max-h-10" data-controller="search">
+<form class="flex justify-center mb-2 max-h-10" data-controller="keyword">
   <div class="flex items-center">
     <div class="relative">
-      <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入關鍵字..." class="block w-full px-8 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" data-search-target="keywordInput"/>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+      <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入關鍵字..." class="block w-full px-8 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" data-keyword-target="keywordInput"/>
+      <button class="absolute inset-y-0 right-0 flex items-center pr-3" data-action="click->keyword#resetForm" data-keyword-target="resetButton">
         <i class="fa-solid fa-xmark fa-xl"></i>
-      </div>
+      </button>
     </div>
-    <button type="submit" class="whitespace-nowrap ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" data-action="click->search#submitForm">
+    <button type="submit" class="whitespace-nowrap ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" data-action="click->keyword#submitForm">
       <i class="fa-solid fa-magnifying-glass md:hidden"></i>
       <span class="hidden md:inline">搜尋</span>
     </button>

@@ -1,12 +1,12 @@
 
 
-// // Connects to data-controller="search"
+// Connects to data-controller="keyword"
 
 
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["keywordInput"]
+  static targets = ["keywordInput", "resetButton"]
 
   submitForm(event) {
     event.preventDefault();
@@ -20,6 +20,10 @@ export default class extends Controller {
     } else {
       console.log("Input field is empty. Form not submitted.");
     }
+  }
+  resetForm() {
+    const keywordInput = this.keywordInputTarget;
+    keywordInput.value = "";
   }
 }
 
