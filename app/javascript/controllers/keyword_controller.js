@@ -16,9 +16,13 @@ export default class extends Controller {
       this.element.submit();
     }
   }
-  resetForm() {
+  resetForm(event) {
+    event.preventDefault();
     const keywordInput = this.keywordInputTarget;
-    keywordInput.value = "";
+    if (keywordInput.value !== "") {
+      keywordInput.value = "";
+      this.element.submit();
+    }
   }
 }
 
