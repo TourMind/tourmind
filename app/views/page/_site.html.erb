@@ -1,4 +1,4 @@
-<div class="container py-6 mx-auto grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div class="container py-6 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
   <% if @sites.present? %>
     <% @sites.each do |site| %>
       <div class="overflow-hidden bg-white rounded-md shadow-lg">
@@ -6,9 +6,9 @@
           <%= link_to site_path(site) do %>
             <div class="text-gray-700 h-[15rem]">
               <% if site.scraped_photos.present? %>
-                <img class="object-fit:cover w-full h-[250px]" src="<%= site.scraped_photos.first %>" alt="Sites Pic">
+                <%= image_tag site.scraped_photos.first, class: 'object-cover w-full h-full' %>
               <% else %>
-                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full' %>
+                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full h-full' %>
               <% end %>
             </div>
         </div>

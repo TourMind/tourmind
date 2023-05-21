@@ -1,4 +1,4 @@
-<div class="container py-6 mx-auto grid grid-cols-4 gap-4">
+<div class="container py-6 mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
   <% if @hotels.present? %>
     <% @hotels.each do |hotel| %>
       <div class="overflow-hidden bg-white rounded-md shadow-lg">
@@ -6,9 +6,9 @@
           <%= link_to hotel_path(hotel) do %>
             <div class="text-gray-700 h-[15rem]">
               <% if hotel.scraped_photo.present? %>
-                <img class="object-fit:cover w-full h-[250px]" src="<%= hotel.scraped_photo %>" alt="Sites Pic">
+                <%= image_tag hotel.scraped_photo, class: 'object-cover w-full h-full' %>
               <% else %>
-                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover h-[250px] ' %>
+                <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full h-full' %>
               <% end %>
             </div>
         </div>
