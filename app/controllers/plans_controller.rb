@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlansController < ApplicationController
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
@@ -24,11 +26,11 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.now)
+    if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.zone.now)
       current_user.update(diamond_grade: '一般會員')
-      return redirect_to pricing_path, alert: '會員已到期！'
+      redirect_to pricing_path, alert: '會員已到期！'
     elsif current_user.plans.count >= current_user.plans_limit_number
-      return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
+      redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
   end
 
@@ -52,7 +54,7 @@ class PlansController < ApplicationController
 
   def edit
     if current_user.plans.count >= current_user.plans_limit_number &&
-       current_user != @plan.user && !@plan.editors.include?(current_user)
+       current_user != @plan.user && @plan.editors.exclude?(current_user)
       return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
 
@@ -85,10 +87,10 @@ class PlansController < ApplicationController
       rescue ActiveRecord::StaleObjectError, NoMethodError
 
         render json: {
-          errors: "行程已被共同編輯者更新，\n將在3秒後重新整理，\n以查看最新的內容。",
-          reload: "true"
-        },
-        status: :unprocessable_entity
+                 errors: "行程已被共同編輯者更新，\n將在3秒後重新整理，\n以查看最新的內容。",
+                 reload: 'true',
+               },
+               status: :unprocessable_entity
         return
       end
     end

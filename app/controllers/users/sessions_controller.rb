@@ -7,7 +7,7 @@ module Users
     end
 
     def after_sign_in_path_for(_resource_or_scope)
-      if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.now)
+      if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.zone.now)
         current_user.update(diamond_grade: '一般會員')
         flash[:alert] = '會員已到期！'
       end

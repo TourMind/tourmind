@@ -76,13 +76,14 @@ class User < ApplicationRecord
   end
 
   def plans_limit_number
-    if diamond_grade == '一般會員'
+    case diamond_grade
+    when '一般會員'
       1
-    elsif diamond_grade == '白鑽會員'
+    when '白鑽會員'
       3
-    elsif diamond_grade == '藍鑽會員'
+    when '藍鑽會員'
       5
-    elsif diamond_grade == '紅鑽會員'
+    when '紅鑽會員'
       Float::INFINITY # 正無窮大
     end
   end
