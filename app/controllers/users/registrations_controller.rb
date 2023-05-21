@@ -21,13 +21,8 @@ module Users
       params.require(:user).permit(:email, :name, :city, :tel, :avatar, :avatar_url)
     end
 
-
-    def account_register_params
-      params.require(:user).permit(:email, :name, :city, :tel, :avatar, :avatar_url, :password)
-
     def sign_up_params
       params.require(:user).permit(:email, :name, :city, :tel, :avatar_url, :password, :password_confirmation)
-
     end
   end
 end
