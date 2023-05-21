@@ -53,6 +53,7 @@ Things you may want to cover:
     - rails data:generate_restaurants
     - rails data:generate_hotels
     - rails data:generate_comment
+    - rails data:generate_plans
 
 - TourMind 成員：
   - 藍郁婷 https://github.com/YuTingLan
