@@ -13,7 +13,7 @@
     </nav>
     <div>
       <% if @plan.locations != nil %>
-        <div class="grid flex-wrap gap-3 p-8 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+        <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
           <% @plan.locations.each_key.with_index do |key, i| %>
             <div class="relative px-4 w-56 min-h-[150px] mx-auto">
               <h4 class="text-xl font-bold text-white py-3 w-full text-center bg-blue-400">第 <%= i + 1 %> 天</h4>
@@ -39,6 +39,5 @@
         </div>
       <% end %>
     </div>
-  </div>
-</section>
+  </section>
 <% end %>

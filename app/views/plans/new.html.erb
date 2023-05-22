@@ -1,5 +1,5 @@
 <main class="relative bg-slate-100" data-controller="edit">
-  <div class="container w-full px-10 flex mx-auto">
+  <div class="container w-full sm:px-10 flex mx-auto">
     <div class="fixed h-screen -translate-x-56 w-56 top-0 left-0 bg-white transition-all ease-in-out overflow-auto shadow-lg" data-edit-target="drawer">
       <button data-action="click->edit#toggleFav" type="button" class="bg-gray-100 rounded-md p-2 inline-flex text-gray-400 hover:text-gray-500 hover:bg-gray-200 mt-1 ml-1">
         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -31,7 +31,7 @@
     <div class="w-full mt-16" id="top" data-edit-target="id" data-id="<%= @plan.id %>">
       <%= link_to "所有行程", plans_path, class: "text-blue-600"%>
       <!-- component -->
-      <div class="flex justify-end p-12 mx-auto">
+      <div class="flex justify-end py-12 mx-auto">
         <div class="w-full transition-all ease-in-out" data-edit-target="form">
           <%= form_with model: @plan, data: { turbo: "false"}, multipart: true do |form| %>
             <div class="flex justify-between">
@@ -48,13 +48,13 @@
                 垃圾桶
               </div>
             </div>
-            <div class="bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap mt-3 grid grid-cols-4 mb-5" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
+            <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
-                  <div class="relative px-4 day min-h-[150px] bg-white">
-                    <div class="flex justify-between items-center">
-                      <h4 class="text-xl text-gray-900 font-bold day-title">第 <%= i + 1 %> 天</h4>
-                      <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
+                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
+                    <div class="relative bg-blue-400 py-3">
+                      <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
+                      <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
