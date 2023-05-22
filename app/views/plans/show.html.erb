@@ -10,17 +10,17 @@
         <% if current_user == @plan.user %>
           <%= link_to edit_plan_path(@plan.id) do %>
             <div class="inline-block px-3 py-1 text-white transition-all bg-blue-400 border-2 rounded-full focus:outline-none focus:ring-4 text-md hover:bg-white hover:text-blue-500 duration-400">
-              <span>編輯行程</span>
+              <span>編輯</span>
             </div>
           <% end %>
           <%= link_to plan_path(@plan.id), method: "delete" do %>
             <div class="inline-block px-3 py-1 text-white transition-all bg-red-500 border-2 rounded-full focus:outline-none focus:ring-4 text-md hover:bg-white hover:text-red-500 duration-400">
-              <span>刪除行程</span>
+              <span>刪除</span>
             </div>
           <% end %>
           <div class="relative inline-block px-3 py-1 text-white transition-all border-2 rounded-full cursor-pointer select-none share-btn focus:outline-none focus:ring-4 text-md duration-400" data-action="click->share#toggleSearch" data-share-target="searchBtn">
             <span class="inline-block text-red-500">&#x2665;</span>
-            <span>邀請編輯</span>
+            <span>邀請</span>
             <div class="absolute left-0 z-10 mt-1 text-gray-500 transition-all ease-in-out cursor-default search-drop-down w-80" data-share-target="menu" data-action="click->share#preventProp">
               <div class="relative">
                 <form data-action="submit->share#searchUser">
