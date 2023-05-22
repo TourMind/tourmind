@@ -4,9 +4,9 @@ class PageController < ApplicationController
   include PageHelp
   before_action :authenticate_user!, only: [:pricing]
   skip_before_action :verify_authenticity_token, only: %i[return notify]
-  before_action :set_view_data, :comment_rating, :total_rating , only: [:home, :search]
+  before_action :set_view_data,:restaurant_rating, :site_rating, :hotel_rating, :plan_rating,  only: [:home, :search]
   helper_method :star_rating
-                
+  
   def home
   end
   def search

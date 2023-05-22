@@ -1,11 +1,12 @@
 class PlansController < ApplicationController
+  include PageHelp
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
   before_action :authenticate_user!,
                 except: %i[index show day_info plan_overview]
   before_action :find_favorites, only: %i[new edit]
   helper_method :star_rating
-  before_action :comment_rating, only: %i[index show]
+  before_action :plan_rating, only: %i[index show]
   def index
     @plans = Plan.where(public: true).order(id: :desc)
   end
@@ -261,37 +262,5 @@ class PlansController < ApplicationController
           next({ name: site.name, type: '景點', id: site.id, stay_time: 0 })
         end
       end
-  end
-
-  def star_rating(rating)
-    stars = ''
-    if rating.present?
-      full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.1 ? 1 : 0
-      empty_stars = 5 - full_stars - half_stars
-      full_stars.times do
-        stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'
-      end
-      half_stars.times do
-        stars +=
-          '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'
-      end
-      empty_stars.times do
-        stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'
-      end
-    else
-      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
-    end
-    stars.html_safe
-  end
-
-  def comment_rating
-    @plan_data = {}
-    Plan.all.each do |plan|
-      @plan_data[plan.id] = {
-        average_rating: plan.comments.average(:rating).to_f,
-        comment_count: plan.comments.where.not(content: nil).count,
-      }
-    end
   end
 end
