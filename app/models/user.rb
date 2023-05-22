@@ -33,21 +33,11 @@ class User < ApplicationRecord
   # 第三方認證登入後，創建用戶資料庫
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      case auth.provider
-      when 'google_oauth2'
-        user.email = auth.info.email
+      %w[google_oauth2 facebook line].each do |_provider|
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
         user.avatar_url = auth.info.image
-      when 'line'
-        user.password = Devise.friendly_token[0, 20]
-        user.name = auth.info.name
-        user.avatar_url = auth.info.image
-      when 'facebook'
-        user.email = auth.info.email
-        user.password = Devise.friendly_token[0, 20]
-        user.name = auth.info.name
-        user.avatar_url = auth.info.image
+        user.email = auth.info.email if %w[facebook google_oauth2].include?(auth.provider)
       end
     end
   end
