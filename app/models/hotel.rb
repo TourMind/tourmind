@@ -26,7 +26,7 @@ class Hotel < ApplicationRecord
   end
 
   # 選項列表
-  CITY_OPTIONS = %w[台北市 新北市]
+  CITY_OPTIONS = %w[大同區 中正區 中山區 大安區 信義區 萬華區 士林區 瑞芳區 文山區 淡水區 萬里區 北投區]
   HOTEL_TYPES_OPTIONS = %w[飯店 民宿 青年旅館 度假村 日租套房 奢華酒店]
   EQUIPMENT_OPTIONS = %w[無線網路(WIFI) 停車場/停車位 游泳池 早餐服務 酒吧/餐廳 會議室/會議設施 健身中心 可攜帶寵物 行李存放 乾洗服務 腳踏車租賃 24小時櫃檯接待]
 
