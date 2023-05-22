@@ -13,9 +13,9 @@
     </nav>
     <div>
       <% if @plan.locations != nil %>
-        <div class="flex justify-between w-full gap-3 p-8 bg-white rounded-lg shadow-xl">
-          <div class="relative px-4 w-48 min-h-[150px]" data-map-target="day" data-key=<%= @google_api_key%>>
-            <h4 class="text-xl font-bold text-gray-900">第 <%= @day %> 天</h4>
+        <div class="flex justify-between w-full gap-3 px-8 py-16 bg-white rounded-lg shadow-xl">
+          <div class="relative px-4 w-56 min-h-[150px] mx-auto" data-map-target="day" data-key=<%= @google_api_key%>>
+            <h4 class="text-xl font-bold text-white py-3 w-full text-center bg-blue-400">第 <%= @day %> 天</h4>
             <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
             <% @plan.locations["day#{@day}"].each do |site| %>
               <!-- start::Timeline item -->
@@ -34,7 +34,7 @@
               <!-- end::Timeline item -->
             <% end %>
           </div>
-          <div class="w-2/3 h-96" data-map-target="map"></div>
+          <div class="w-full md:w-2/3 h-96" data-map-target="map"></div>
         </div>
       <% end %>
     </div>
