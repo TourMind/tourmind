@@ -45,6 +45,7 @@
 
 .jogging {
   position: relative;
+  max-height: 300px;
   overflow: hidden;
   cursor: pointer;
 }
@@ -70,24 +71,8 @@
   color: #fff;
   background-color: rgba(87, 85, 85, 0.7);
   transition: transform 0.5s ease;
-  transform: translateY(100%);
 }
 
-.jogging:hover .text {
-  transform: translateY(0);
-}
-
-.jogging .text h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.jogging .text p {
-  font-size: 16px;
-  margin-bottom: 0;
-  text-align: justify;
-}
 .shadow-custom {
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
@@ -171,7 +156,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #6C9BCF;
+  background-color: #6c9bcf;
   color: white;
   font-size: small;
   height: 30px;

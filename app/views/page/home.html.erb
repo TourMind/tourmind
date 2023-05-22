@@ -1,10 +1,10 @@
 <div class="sm:hidden">
   <label for="menu" class="sr-only">選單</label>
   <select id="menu" onchange="window.location.href=this.value" class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
-    <option value=""disabled selected>選擇</option>
-    <option value="<%= sites_path %>">住宿</option>
-    <option value="<%= restaurants_path %>">景點</option>
-    <option value="<%= hotels_path %>">餐廳</option>
+    <option value="disabled selected">選擇</option>
+    <option value="<%= sites_path %>">景點</option>
+    <option value="<%= restaurants_path %>">餐廳</option>
+    <option value="<%= hotels_path %>">飯店</option>
     <option value="<%= plans_path %>">行程規劃</option>
   </select>
   <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
@@ -43,13 +43,13 @@
       <p class="p-2 mb-4 text-base text-white md:text-lg">找尋在地體驗或到遠方探險，隨時隨地探索屬於你的玩樂世界</p>
       <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex justify-center mb-2 max-h-10") do |form| %>
       <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full pl-8 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
-      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm  rounded-full text-white bg-blue-500 hover:bg-blue-600 " %>
-      <% end %>
+      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-blue-500 hoire:bg-blue-600" %>
+      <% end %>  
     </div>
   </div>
 </section>
 <section class="container mx-auto py-6">
-  <h2 class="text-4xl py-4 font-bold">熱門行程</h2>
+  <h2 class="text-4xl">熱門行程</h2>
   <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 justify-center ">
     <% @plans.first(3).each do |plan| %>
       <div class="rounded-lg shadow-lg jogging card-dows">
@@ -72,7 +72,7 @@
 </section>
 
 <section class="container mx-auto py-6">
-  <h2 class="text-4xl py-4 font-bold">精選餐廳</h2>
+  <h2 class="text-4xl py-4 ">精選餐廳</h2>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
     <% @restaurants.first(4).each_with_index do |restaurant| %>
       <div class="relative rounded-lg card-dows">
@@ -97,7 +97,7 @@
   </div>
 </section>
 <section class="container mx-auto py-6">
-  <h2 class="text-4xl py-4 font-bold">人氣住宿</h2>
+  <h2 class="text-4xl py-4">人氣住宿</h2>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
     <% @hotels.first(4).each_with_index do |hotel| %>
       <div class="relative rounded-lg card-dows">
@@ -122,7 +122,7 @@
   </div>
 </section>
 <section class="container mx-auto py-6">
-  <h2 class="text-4xl py-4 font-bold">熱門景點</h2>
+  <h2 class="text-4xl py-4">熱門景點</h2>
   <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center">
     <% @sites.first(4).each_with_index do |site| %>
       <div class="relative rounded-lg card-dows">
@@ -212,7 +212,7 @@
     </button>
   </div>
 </section>
-<h2 class="text-4xl py-4 container mx-auto font-bold">探索更多人氣選擇</h2>
+<h2 class="text-4xl py-4 container mx-auto">探索更多人氣選擇</h2>
 <section class="container py-6 mx-auto carousel">
   <div class="carousel-item mb-2">
     <% @hotels.last(4).reverse_each do |hotel| %>
@@ -260,8 +260,4 @@
       </div>
     <% end %>
   </div>
-<<<<<<< HEAD
 </section>
-=======
-</section>
->>>>>>> 7e42c43 (fixed home image size)
