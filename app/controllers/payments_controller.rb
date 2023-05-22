@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: %i[return notify]
   # 處理訂單的更新資訊
   def notify
     Newebpay::MpgResponse.new(params[:TradeInfo])
@@ -21,7 +22,8 @@ class PaymentsController < ApplicationController
   end
 
   def ok
-    if Order.find_order(current_user).last.pay_time + 30.seconds > Time.zone.now
+    order = Order.find_order(current_user)
+    if order.present? && order.last.pay_time + 30.seconds > Time.zone.now
       @diamond_grade = Order.diamond_grade(current_user)
       current_user.update(diamond_grade: @diamond_grade)
       # 撈取user的最後一筆訂單

@@ -16,7 +16,7 @@ class HotelsController < ApplicationController
                      else
                        pagy(Hotel.order(updated_at: :desc), items: 6)
                      end
-    flash.now[:alert] = '沒有找到符合條件的飯店' and return if @hotels.empty?
+    return if @hotels.empty?
   end
 
   def new

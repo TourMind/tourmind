@@ -1,6 +1,6 @@
-<main class="container flex w-11/12 mx-auto">
+<main class="container flex mx-auto">
   <div class="flex flex-col w-full mt-10">
-    <div data-controller="share" data-id="<%= @plan.id %>" data-share-target="planId">
+    <div class="" data-controller="share" data-id="<%= @plan.id %>" data-share-target="planId">
       <%= link_to plans_path do %>
         <div class="inline-block px-3 py-1 text-white transition-all bg-blue-400 border-2 rounded-full focus:outline-none focus:ring-4 text-md hover:bg-white hover:text-blue-500 duration-400">
           <span>所有行程</span>
@@ -10,17 +10,17 @@
         <% if current_user == @plan.user %>
           <%= link_to edit_plan_path(@plan.id) do %>
             <div class="inline-block px-3 py-1 text-white transition-all bg-blue-400 border-2 rounded-full focus:outline-none focus:ring-4 text-md hover:bg-white hover:text-blue-500 duration-400">
-              <span>編輯行程</span>
+              <span>編輯</span>
             </div>
           <% end %>
           <%= link_to plan_path(@plan.id), method: "delete" do %>
             <div class="inline-block px-3 py-1 text-white transition-all bg-red-500 border-2 rounded-full focus:outline-none focus:ring-4 text-md hover:bg-white hover:text-red-500 duration-400">
-              <span>刪除行程</span>
+              <span>刪除</span>
             </div>
           <% end %>
           <div class="relative inline-block px-3 py-1 text-white transition-all border-2 rounded-full cursor-pointer select-none share-btn focus:outline-none focus:ring-4 text-md duration-400" data-action="click->share#toggleSearch" data-share-target="searchBtn">
             <span class="inline-block text-red-500">&#x2665;</span>
-            <span>邀請旅伴一起編輯</span>
+            <span>邀請</span>
             <div class="absolute left-0 z-10 mt-1 text-gray-500 transition-all ease-in-out cursor-default search-drop-down w-80" data-share-target="menu" data-action="click->share#preventProp">
               <div class="relative">
                 <form data-action="submit->share#searchUser">
@@ -149,7 +149,7 @@
       <% end %>
     </section>
     <section class="mx-3">
-      <div class="w-2/3 ">
+      <div>
         <h1 class="mt-8 text-3xl font-medium"><%= @plan.name %></h1>
         <p class="mt-2 text-sm underline text-slate-700"><a href="">提供者： <%= @plan.user.name.present? ? @plan.user.name : @plan.user.email %> </a></p>
         <div class="flex items-center my-3">
@@ -158,7 +158,7 @@
             (<%= @plan_data[@plan.id][:comment_count] %>則評論)
           </span>
         </div>
-        <p class="w-3/4 my-3 text-slate-700 text-m"><%= @plan.description %></p>
+        <p class="my-3 lg:w-3/4 text-slate-700 text-m sm:w-full"><%= @plan.description %></p>
         <div class="w-full border-y-2 border-slate-300">
           <p class="my-3 text-slate-700 text-m">適合人數： <%= @plan.people || 1 %> 人</p>
           <p class="my-3 text-slate-700 text-m">所需時間： <%= @plan.days %> 天</p>
@@ -172,21 +172,23 @@
     <%= render "plan_overview"%>
   </div>
 </main>
-<div class="container col-span-5 mx-auto bg-white">
-  <h2 class="text-2xl font-bold ">評等和評論</h2>
-  <div class="h-40 overflow-y-auto ">
-    <div id="comment-list">
-      <%= render partial: "comment", collection: @plan.comments %>
+<section class="p-6">
+  <div class="container col-span-5 mx-auto bg-white">
+    <h2 class="text-2xl font-bold ">評等和評論</h2>
+    <div class="h-40 overflow-y-auto ">
+      <div id="comment-list">
+        <%= render partial: "comment", collection: @plan.comments %>
+      </div>
     </div>
   </div>
-</div>
-<section class='container w-full mx-auto'>
-  <div data-controller="butt">
-    <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
-      發表評論
-    </a>
-    <div class="hidden" data-butt-target="form" >
-      <%= render "comments/comment", comment: Comment.new, plan:@plan %>
+  <section class='container w-full mx-auto'>
+    <div data-controller="butt">
+      <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
+        發表評論
+      </a>
+      <div class="hidden" data-butt-target="form" >
+        <%= render "comments/comment", comment: Comment.new, plan:@plan %>
+      </div>
     </div>
-  </div>
+  </section>
 </section>

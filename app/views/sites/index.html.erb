@@ -1,20 +1,19 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
-    <div class="flex-grow py-2 text-sm font-medium text-center border cursor-pointer"
+    <div class="flex-grow py-2 text-xl font-medium text-center border cursor-pointer"
       data-action="click->filter#toggleFilterMenu">
       篩選
     </div>
   </div>
-  <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)]">
+  <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)] w-11/12">
     <section data-filter-target="filterMenu"
-      class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 h-max"
-      style="z-index: 1">
+      class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 z-10 h-max">
       <div class="flex justify-end pt-6 lg:hidden">
         <button data-action="click->filter#toggleFilterMenu">
           <i class="text-lg fa-solid fa-xmark"></i>
         </button>
       </div>
-      <%= form_tag(sites_path, {method: :get,class:'border-b py-6'}) do |form| %>
+      <%= form_tag(sites_path, {method: :get,class:'py-6'}) do |form| %>
         <div class="font-bold">所有篩選類別</div>
         <div class="py-6 border-b  border-gray-400">
           <div class="py-2 cursor-pointer" data-action="click->filter#toggleFilterCategory">
@@ -55,27 +54,29 @@
             <% end %>
           </ul>
         </div>
-        <%= submit_tag "篩選", {class:'lg:hidden w-full px-4 py-2 ml-2 text-sm font-medium text-indigo-100 bg-indigo-600 border border-transparent rounded-full ', data:{filter_target:"filterSubmitBtn"}} %>
+        <%= submit_tag "篩選", {class:'lg:hidden w-full px-4 py-2 ml-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 cursor-pointer border border-transparent rounded-full ', data:{filter_target:"filterSubmitBtn"}} %>
       <% end %>
     </section>
     <section class="flex-grow w-3/5">
-      <div class='flex justify-between'>
-        <h1 class='text-4xl font-bold text-center'>景點</h1>
+      <div class='flex flex-wrap justify-between'>
+        <h1 class='text-4xl font-bold text-center py-2'>景點</h1>
+        <%= render partial: "keyword" %>
       </div>
       <div class="flex justify-between">
-        <div class="py-2">
+        <div class="py-2 font-bold">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
               搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
             <% else %>
               <%= @sites.count %> / <%= @pagy.count %> 個景點
             <% end %>
+          <% else %>
+            <span class="font-bold">沒有找到符合條件的景點</span>
           <% end %>
           <%= render "tag", tags: :address%>
           <%= render "tag", tags: :site_types%>
           <%= render "tag", tags: :pet_friendly%>
         </div>
-        <%= render partial: "keyword" %>
       </div>
       <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
         <% @sites.each do |site| %>
@@ -97,7 +98,7 @@
             <div class="flex-grow p-2 m-2">
               <div class="flex items-center justify-between">
                 <h2 class="py-4 text-xl font-medium w-3/5">
-                  <%= site.name %>
+                  <%= link_to site.name, site_path(site)  %>
                 </h2>
                 <% if site.pet_friendly.present? %>
                   <%= link_to sites_path(pet_friendly: [site.pet_friendly]) do %>
