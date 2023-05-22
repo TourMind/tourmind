@@ -15,6 +15,11 @@ export default class extends Controller {
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer({
       suppressMarkers: true,
+      polylineOptions: {
+        strokeColor: "#19A7CE",
+        strokeWeight: 7,
+        strokeOpacity: 0.8,
+      },
     });
 
     const locArr = [];

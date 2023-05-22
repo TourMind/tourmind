@@ -17,7 +17,7 @@ class SitesController < ApplicationController
                     else
                       pagy(Site.order(updated_at: :desc), items: 6)
                     end
-    flash.now[:alert] = '沒有找到符合條件的景點' and return if @sites.empty?
+    return if @sites.empty?
   end
 
   def new

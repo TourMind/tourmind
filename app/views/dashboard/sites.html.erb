@@ -13,7 +13,7 @@
   </span>
   <form class="m-4 my-6">
     <input class="px-2 py-2 text-xs border-2 w-60" name="keyword" value="<%= params[:keyword] %>" placeholder="可查詢名稱、地址...">
-    <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-600 rounded-md shadow-sm cursor-pointer " value="查詢">
+    <input type="submit" class="px-4 py-2 text-xs text-white bg-blue-500 hover:bg-blue-600 rounded-md shadow-sm cursor-pointer" value="查詢">
   </form>
   <section>
     <div class='flex justify-between bg-white border-b-2 solid'>
@@ -35,7 +35,7 @@
           <%= link_to '行程規劃', new_plan_path %>
         </li>
       </ul>
-      <%= link_to '新增景點' , new_site_path(@site), class:'rounded-md py-2 px-5 mr-8 bg-blue-600 text-white inline-block font-medium hover:text-blue-600 hover:bg-white border-blue-600 border-2 text-white mb-2'%>
+      <%= link_to '新增景點' , new_site_path(@site), class:'rounded-md py-2 px-5 mr-8 bg-blue-500 text-white inline-block font-medium text-white hover:bg-blue-600 text-white mb-2'%>
     </div>
     <div>
       <table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
@@ -58,8 +58,8 @@
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= site.tel %></th>
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= site.address %></th>
               <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= site.parking %></th>
-              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '編輯', edit_site_path(site), class: "mt-2 rounded-lg py-2 px-3 bg-blue-600 inline-block font-medium text-white hover:bg-white hover:text-blue-600 border-blue-600 border-2" %></th>
-              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '刪除',  site_path(site),method: :delete, class: "mt-2 rounded-lg py-2 px-3 bg-red-600 inline-block font-medium text-white hover:bg-white hover:text-red-600 border-red-600 border-2", data:{confirm:'您確定要刪除此筆資料嗎？'} %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '編輯', edit_site_path(site), class: "mt-2 rounded-lg py-2 px-3 bg-blue-500 inline-block font-medium text-white hover:bg-blue-600" %></th>
+              <th class="gap-3 px-6 py-4 font-normal text-center text-gray-900"><%= link_to '刪除',  site_path(site),method: :delete, class: "mt-2 rounded-lg py-2 px-3 bg-red-500 inline-block font-medium text-white hover:bg-red-600", data:{confirm:'您確定要刪除此筆資料嗎？'} %></th>
             </tr>
           <% end %>
         </tbody>

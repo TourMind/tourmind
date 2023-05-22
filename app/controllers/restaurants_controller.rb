@@ -20,7 +20,7 @@ class RestaurantsController < ApplicationController
                           else
                             pagy(Restaurant.order(updated_at: :desc), items: 6)
                           end
-    flash.now[:alert] = '沒有找到符合條件的餐廳' and return if @restaurants.empty?
+    return if @restaurants.empty?
   end
 
   # GET /restaurants/1 or /restaurants/1.json
