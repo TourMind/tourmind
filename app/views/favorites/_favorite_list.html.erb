@@ -10,7 +10,7 @@
             </svg>
           <% end %>
           <p class="relative max-w-sm bg-white shadow-md rounded-xl">
-            <span class= "absolute top-0 left-0 px-3 py-1 text-sm text-white bg-indigo-600 rounded-tl-lg shadow-xl ">
+            <span class= "absolute top-0 left-0 px-3 py-1 text-sm text-white bg-blue-500 rounded-tl-lg shadow-xl ">
               <% if fav.favorable.class.to_s == 'Restaurant'%>
                 餐廳
               <% elsif fav.favorable.class.to_s == 'Hotel'%>
@@ -43,7 +43,7 @@
             <p class="mb-5 text-gray-700 text-largue"><%= fav.favorable.name%></p>
           </div>
           <%= link_to fav.favorable do %>
-            <button class="w-full py-2 text-indigo-100 duration-75 bg-indigo-600 rounded-md hover:bg-indigo-500 hover:shadow-md">詳細資訊</button>
+            <button class="w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md">詳細資訊</button>
           <% end %>
         </div>
       </div>

@@ -1,15 +1,28 @@
 <% if show_guide? %>
+  <div class="sm:hidden">
+    <label for="menu" class="sr-only">選單</label>
+    <select id="menu" onchange="window.location.href=this.value" class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
+      <option value="disabled selected">請選擇</option>
+      <option value="<%= sites_path %>">景點</option>
+      <option value="<%= restaurants_path %>">餐廳</option>
+      <option value="<%= hotels_path %>">飯店</option>
+      <option value="<%= plans_path %>">行程規劃</option>
+    </select>
+    <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
+      <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.292 13.292a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L8 10.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-3 3z"/></svg>
+    </div>
+  </div>
   <div>
     <div class="flex justify-center my-6">
       <div class="flex hidden sm:flex container">
         <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
           <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">住宿</h2>
-          </div>
+          <h2 class="text-xl font-semibold">住宿</h2>
+        </div>
         <% end %>
         <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
           <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">景點</h2>
+          <h2 class="text-xl font-semibold">景點</h2>
           </div>
         <% end %>
         <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
@@ -18,11 +31,10 @@
           </div>
         <% end %>
         <%= link_to plans_path , class: "inline-block w-1/4" do %>
-          <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">行程規劃</h2>
-          </div>
+        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+          <h2 class="text-xl font-semibold">行程規劃</h2>
+        </div>
         <% end %>
       </div>
-    </div>
   </div>
 <% end %>
