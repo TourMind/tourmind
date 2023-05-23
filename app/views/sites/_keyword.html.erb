@@ -1,14 +1,15 @@
 <form class="flex justify-center mb-2 max-h-10">
   <div class="flex items-center">
     <div class="relative">
-      <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full pl-14 pr-10 py-2 marker:border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
+      <input type="text" name="keyword" value="<%= params[:keyword]%>" placeholder="請輸入名稱/地址/類型..." class="block w-full py-2 pr-10 leading-5 bg-white border-gray-500 rounded-full pl-14 marker:border focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"/>
       <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1c3.86 0 7 3.14 7 7 0 1.94-.79 3.7-2.07 4.97l4.96 4.97-1.41 1.41-4.97-4.96A6.959 6.959 0 0 1 9 15c-3.86 0-7-3.14-7-7s3.14-7 7-7zm0 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z" />
         </svg>
       </div>
     </div>
-    <button type="submit" class="whitespace-nowrap ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
+    <%= link_to "重置", sites_path, data: {turbo:false}, class: "whitespace-nowrap px-4 py-2 ml-2 text-sm font-medium text-white bg-gray-600 border-2 rounded-full hover:bg-gray-700"%>
+    <button type="submit" class="px-4 py-2 ml-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-full whitespace-nowrap hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
       搜尋
     </button>
   </div>

@@ -1,8 +1,6 @@
 <div class="container m-auto">
-  <div class="flex flex-wrap">
-    <div class="flex flex-col px-4">
-      <%= render partial: "heading"%>
-    </div>
+  <div class="flex flex-col px-4">
+    <%= render partial: "heading"%>
   </div>
   <section class='flex justify-center p-4 shadow-md md:w-90%'>
     <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative'>
@@ -91,7 +89,7 @@
       </div>
     </div>
   </div>
-  <div class="bg-white px-3 ">
+  <div class="bg-white px-3">
     <div class='mr-2 pb-4 border-b-2 border-gray-300'>
       <h2 id="comment-heading" class="text-2xl font-bold p-4">評等和評論</h2>
       <div class="">
@@ -102,9 +100,9 @@
       <%= render "pagy" %>
     </div>
   </div>
-  <section class='container pb-4 m-auto'>
+  <section class='container pb-4 m-auto' data-controller="butt">
     <% if user_signed_in? && current_user.role == 1 %>
-      <div data-controller="butt" class="bg-white full lg:w-2/3">
+      <div class="bg-white full lg:w-2/3 ml-3">
         <a data-action="click->butt#toggleCommentForm" class="inline-block text-white px-5 py-3 mt-2 font-medium bg-blue-500 hover:bg-blue-600 rounded-lg" href="#comment-form">
           發表評論
         </a>

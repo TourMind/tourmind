@@ -4,16 +4,25 @@ class Order < ApplicationRecord
   belongs_to :user
 
   def self.diamond_grade(current_user)
-    diamond_grade = if Order.where(user_id: current_user.id).last.amount === 50
-                      '白鑽會員'
-                    elsif Order.where(user_id: current_user.id).last.amount === 100
-                      '藍鑽會員'
-                    elsif Order.where(user_id: current_user.id).last.amount === 200
-                      '紅鑽會員'
-                    end
+    return if find_order(current_user).blank?
+
+    case find_order(current_user).last.amount
+    when 50
+      '白鑽會員'
+    when 100
+      '藍鑽會員'
+    when 200
+      '紅鑽會員'
+    else
+      '一般會員'
+    end
   end
 
   def self.expire_time(current_user)
-    Order.where(user_id: current_user.id).last.pay_time + 1.month
+    find_order(current_user)&.last&.pay_time&.+ 1.month
+  end
+
+  def self.find_order(current_user)
+    Order.where(user_id: current_user.id)
   end
 end

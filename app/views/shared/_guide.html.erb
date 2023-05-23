@@ -1,26 +1,36 @@
 <% if show_guide? %>
+  <div class="sm:hidden">
+    <label for="menu" class="sr-only">選單</label>
+    <select id="menu" onchange="window.location.href=this.value" class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
+      <option value="disabled selected">請選擇</option>
+      <option value="<%= sites_path %>">景點</option>
+      <option value="<%= restaurants_path %>">餐廳</option>
+      <option value="<%= hotels_path %>">飯店</option>
+      <option value="<%= plans_path %>">行程規劃</option>
+    </select>
+  </div>
   <div>
     <div class="flex justify-center my-6">
-      <div class="flex hidden sm:flex container">
+      <div class="container flex hidden sm:flex">
         <%= link_to hotels_path, class: "inline-block w-1/4 mr-2" do %>
-          <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">住宿</h2>
-          </div>
+          <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+          <h2 class="text-xl font-semibold">住宿</h2>
+        </div>
         <% end %>
         <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
-          <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">景點</h2>
+          <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+          <h2 class="text-xl font-semibold">景點</h2>
           </div>
         <% end %>
         <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
-          <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+          <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
             <h2 class="text-xl font-semibold">餐廳</h2>
           </div>
         <% end %>
         <%= link_to plans_path , class: "inline-block w-1/4" do %>
-          <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-            <h2 class="text-xl font-semibold">行程規劃</h2>
-          </div>
+        <div class="text-black transition-all duration-100 ease-in-out border-b-4 rounded-lg shadow-md home-title bg-with border-b-gray-400 hover:border-b-0">
+          <h2 class="text-xl font-semibold">行程規劃</h2>
+        </div>
         <% end %>
       </div>
     </div>

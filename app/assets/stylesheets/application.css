@@ -108,6 +108,7 @@
   bottom: 60px;
 }
 
+
   .avatar-container {
     position: relative;
     display: inline-block;
@@ -143,4 +144,4 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
   
-  
+ 
