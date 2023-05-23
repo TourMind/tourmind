@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlansController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
   before_action :authenticate_user!,

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RestaurantsController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :set_restaurant, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :restaurant_rating, only: %i[index show]

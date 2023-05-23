@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HotelsController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :set_hotel, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :hotel_rating, only: %i[index show]

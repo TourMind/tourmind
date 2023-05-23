@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SitesController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :set_site, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :site_rating, only: %i[index show]
