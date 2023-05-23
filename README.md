@@ -20,6 +20,15 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
   
   ------------------------------------------------
   
+  
+  - TourMind 成員：
+  - 藍郁婷 https://github.com/YuTingLan
+  - 楊士諒 https://github.com/yangliang0514
+  - 許凱晴 https://github.com/Hsubetty
+  - 翁全政 https://github.com/CCTWeng
+  - 陳柏陞 https://github.com/chencac
+  - 蕭維翔 https://github.com/weihsiang120
+  
 
 - 啟動程式需先執行
   - bundle install
@@ -29,7 +38,7 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
   - rails 6.1.7.3
   - ruby 3.2.0
   - node v16.19.0
-  - postgres (PostgreSQL) 14.7 (Homebrew)
+  - PostgreSQL 14.7
 
 - master.key
   - 編輯 vim
@@ -62,11 +71,3 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
     - rails data:generate_hotels
     - rails data:generate_comment
     - rails data:generate_plans
-
-- TourMind 成員：
-  - 藍郁婷 https://github.com/YuTingLan
-  - 楊士諒 https://github.com/yangliang0514
-  - 許凱晴 https://github.com/Hsubetty
-  - 翁全政 https://github.com/CCTWeng
-  - 陳柏陞 https://github.com/chencac
-  - 蕭維翔 https://github.com/weihsiang120
