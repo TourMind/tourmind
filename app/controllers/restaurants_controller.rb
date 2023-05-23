@@ -5,11 +5,9 @@ class RestaurantsController < ApplicationController
   helper_method :star_rating
   before_action :comment_rating, only: %i[index show]
   before_action :check_permission, only: %i[new edit]
+  before_action :declare_params, only: %i[index]
 
-  # GET /restaurants or /restaurants.json
   def index
-    # @pagy, @restaurants = pagy(Restaurant.all.order(:id), items: 6)
-    declare_params
     get_min_max_price
 
     @pagy, @restaurants = if params[:keyword].present?
@@ -23,7 +21,6 @@ class RestaurantsController < ApplicationController
     return if @restaurants.empty?
   end
 
-  # GET /restaurants/1 or /restaurants/1.json
   def show
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
@@ -31,15 +28,12 @@ class RestaurantsController < ApplicationController
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
-  # GET /restaurants/new
   def new
     @restaurant = Restaurant.new
   end
 
-  # GET /restaurants/1/edit
   def edit; end
 
-  # POST /restaurants or /restaurants.json
   def create
     params = Image::ImageService.remove_image(restaurant_params)
     @restaurant = Restaurant.new(params)
@@ -50,7 +44,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /restaurants/1 or /restaurants/1.json
   def update
     params = Image::ImageService.remove_image(restaurant_params)
     if @restaurant.update(params)
@@ -60,7 +53,6 @@ class RestaurantsController < ApplicationController
     end
   end
 
-  # DELETE /restaurants/1 or /restaurants/1.json
   def destroy
     @restaurant.destroy
     redirect_to dashboard_restaurants_url, notice: '餐廳刪除成功'
@@ -68,7 +60,6 @@ class RestaurantsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_restaurant
     @restaurant = Restaurant.friendly.find(params[:id])
   end
@@ -97,7 +88,6 @@ class RestaurantsController < ApplicationController
     @max_price = []
   end
 
-  # Only allow a list of trusted parameters through.
   def restaurant_params
     params.require(:restaurant).permit(:name, :intro, :address, :lat, :long, :image, :email, :tel,
                                        :website, :restaurant_type, { cuisine_types: [] }, :price, { atmostphere: [] }, { images: [] }, { remove_images: [] },).tap do |whitelisted|

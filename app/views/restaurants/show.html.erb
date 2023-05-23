@@ -1,11 +1,11 @@
 <div class="container mx-auto">
   <div class="mx-auto">
-    <Section class = "relative p-3">
+    <Section class = "relative px-4">
       <%= render "heading", restaurant:@restaurant%>
     </Section>
     <section class = "flex grid justify-center grid-cols-5 gap-2 px-4 py-4 overflow-hidden rounded-lg shadow-lg" >
       <% if @restaurant.images.present? %>
-        <div class = "relative col-span-5 lg:col-span-3 h-96">
+        <div class = "relative h-48 col-span-5 lg:col-span-3 sm:h-96">
           <%= image_tag @restaurant.images[0].url, {class: "w-full h-full object-fill"}%>
         </div>
         <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-96">
@@ -17,7 +17,7 @@
           </div>
         </div>
       <% elsif @restaurant.scraped_photos.present? %>
-        <div class = "relative col-span-5 lg:col-span-3 h-96">
+        <div class = "relative h-48 col-span-5 lg:col-span-3 sm:h-96">
           <%= image_tag @restaurant.scraped_photos[0], {class: "w-full h-full object-fill"}%>
         </div>
         <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-96">
@@ -29,7 +29,7 @@
           </div>
         </div>
       <% else %>
-        <div class = "relative col-span-5 h-96">
+        <div class = "relative h-48 col-span-5 sm:h-96">
           <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-fill"}%>
         </div>
       <% end %>
