@@ -23,6 +23,16 @@
       <%= form.text_area :intro, rows: 4, class: "input-field" %>
     </div>
     <div class='my-5'>
+      <%= form.label '緯度' %>
+      <%= form.text_field :lat, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2
+          w-full' %>
+    </div>
+    <div class='my-5'>
+      <%= form.label '經度' %>
+      <%= form.text_field :long, class:'block shadow rounded-md border border-gray-200 outline-none px-3 py-2
+          mt-2 w-full' %>
+    </div>
+    <div class='my-5'>
       <%= form.label :images, '照片 (預設第一張為封面圖)' %>
       <div class="flex flex-wrap" data-form-target="imageList">
         <% restaurant.images.each_with_index do |image, index| %>

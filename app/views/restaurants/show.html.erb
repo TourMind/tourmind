@@ -57,9 +57,9 @@
     </div>
   </div>
 </div>
-<section class='container py-4 m-auto'>
+<section class='container py-4 m-auto'  data-controller="butt">
   <% if user_signed_in? && current_user.role == 1 %>
-    <div data-controller="butt" class="bg-white full lg:w-2/3">
+    <div class="bg-white full lg:w-2/3 ml-3">
       <a data-action="click->butt#toggleCommentForm" class="inline-block text-white px-5 py-3 mt-2 font-medium bg-blue-500 hover:bg-blue-600 rounded-lg" href="#comment-form">
         發表評論
       </a>
