@@ -27,6 +27,7 @@ export default class extends Controller {
         name: "shared",
         pull: "clone",
         put: false,
+        dragClass: "cursor-grabbing",
       },
       animation: 150,
       sort: false,

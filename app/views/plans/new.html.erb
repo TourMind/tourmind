@@ -15,10 +15,10 @@
             <% @favorites.each_with_index do |fav, i| %>
               <!-- start::Timeline item -->
               <div class="site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="<%= fav[:type] %>-<%= fav[:id] %>">
-                <div class="w-1/12 z-10">
+                <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                   <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(fav[:type]) %> rounded-full"></div>
                 </div>
-                <div class="w-11/12 ml-2">
+                <div class="grow rounded hover:shadow-md p-2">
                   <p class="text-sm">
                     <span><%= fav[:type] %></span>
                     <span class="text-<%= Plan.set_color(fav[:type]) %> font-bold"><%= fav[:name] %></span>
