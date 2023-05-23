@@ -54,3 +54,6 @@ application.register("modal", ModalController)
 
 import TurboformController from "./turboform_controller"
 application.register("turboform", TurboformController)
+
+import KeywordController from "./keyword_controller"
+application.register("keyword", KeywordController)
