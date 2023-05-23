@@ -1,17 +1,19 @@
 <main class="relative " data-controller="edit">
   <div class="container w-full sm:px-10 flex mx-auto">
-    <div class="fixed h-screen -translate-x-56 w-56 top-0 left-0 bg-white transition-all ease-in-out overflow-auto shadow-lg" data-edit-target="drawer">
-      <button data-action="click->edit#toggleFav" type="button" class="bg-gray-100 rounded-md p-2 inline-flex text-gray-400 hover:text-gray-500 hover:bg-gray-200 mt-1 ml-1">
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <h1 class="text-blue-600 font-bold text-center text-lg my-5">喜愛清單</h1>
-      <div class="relative px-4 day w-48" data-controller="sorting" id="fav-list">
+    <div class="fixed flex md:block w-screen h-36 md:h-screen md:-translate-x-56 -translate-y-56 md:translate-y-0 md:w-56 top-0 left-0 bg-white transition-all ease-in-out overflow-y-scroll md:overflow-x-scroll shadow-lg z-50 custom-scrollbar-vertical custom-scrollbar-horizontal" data-edit-target="drawer">
+      <div class="bg-blue-400 flex md:flex-row flex-col justify-start items-center">
+        <button data-action="click->edit#toggleFav" type="button" class="rounded-md p-2 inline-flex text-white hover:text-gray-500 w-10 h-10">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <h4 class="text-white font-bold text-center text-md md:my-5 transform w-min md:w-auto">喜愛清單</h4>
+      </div>
+      <div class="relative flex gap-5 md:block px-4 day md:w-48 w-max" data-controller="sorting" id="fav-list">
         <% if current_user.favorites != nil %>
           <% @favorites.each_with_index do |fav, i| %>
             <!-- start::Timeline item -->
-            <div class="site flex items-center w-full my-6 -ml-1.5 bg-white" id="<%= fav[:type] %>-<%= fav[:id] %>">
+            <div class="site flex items-center w-36 my-6 -ml-1.5 bg-white" id="<%= fav[:type] %>-<%= fav[:id] %>">
               <div class="w-1/12 z-10">
                 <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(fav[:type]) %> rounded-full"></div>
               </div>

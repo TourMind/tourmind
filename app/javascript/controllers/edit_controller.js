@@ -174,9 +174,14 @@ export default class extends Controller {
   }
 
   toggleFav() {
-    this.drawerTarget.classList.toggle("-translate-x-56");
-    this.formTarget.classList.toggle("w-full");
-    this.formTarget.classList.toggle("w-10/12");
+    if (document.documentElement.clientWidth >= 768) {
+      this.drawerTarget.classList.toggle("md:-translate-x-56");
+      this.formTarget.classList.toggle("w-full");
+      this.formTarget.classList.toggle("w-10/12");
+      return;
+    }
+
+    this.drawerTarget.classList.toggle("-translate-y-56");
   }
 
   alertErrors(message) {

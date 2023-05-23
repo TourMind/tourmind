@@ -108,5 +108,26 @@
   bottom: 60px;
 }
 
+.custom-scrollbar-vertical::-webkit-scrollbar {
+  width: 3px;
+}
 
+.custom-scrollbar-vertical::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
+.custom-scrollbar-vertical::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar {
+  height: 3px;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
