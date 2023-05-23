@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class HotelsController < ApplicationController
+  include PageHelp
   before_action :set_hotel, only: %i[show edit update destroy]
   helper_method :star_rating
-  before_action :comment_rating, only: %i[index show]
+  before_action :hotel_rating, only: %i[index show]
   before_action :check_permission, only: %i[new edit]
 
   def index
@@ -69,32 +70,7 @@ class HotelsController < ApplicationController
     params.require(:hotel).permit(:name, :website, :star_rating, :address, :tel, :latitude, :longitude, :intro, :image,
                                   :hotel_types, :images_cache, equipment: [], images: [], remove_images: [],)
   end
-
-  def star_rating(rating)
-    stars = ''
-    if rating.present?
-      full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.1 ? 1 : 0
-      empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
-    else
-      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
-    end
-    stars.html_safe
-  end
-
-  def comment_rating
-    @hotel_data = {}
-    Hotel.all.each do |hotel|
-      @hotel_data[hotel.id] = {
-        average_rating: hotel.comments.average(:rating).to_f,
-        comment_count: hotel.comments.where.not(content: nil).count,
-      }
-    end
-  end
-
+  
   def check_permission
     if current_user.nil? || current_user.role != 0
       redirect_to sites_path, alert: '權限不足！'
