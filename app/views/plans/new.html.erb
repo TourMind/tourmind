@@ -55,8 +55,8 @@
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
                   <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
-                    <div class="relative bg-blue-400 py-3">
-                      <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title cursor-grab">第 <%= i + 1 %> 天</h4>
+                    <div class="relative bg-blue-400 py-3 cursor-grab">
+                      <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
                       <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -100,7 +100,7 @@
               <% end %>
             </div>
             <div class="mb-5">
-              <%= form.label :name, "行程名稱", class: "mb-3 block text-base font-medium text-blue-600" %>
+              <%= form.label :name, "��程名稱", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.text_field :name, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "name"}%>
             </div>
             <div class="mb-5">
