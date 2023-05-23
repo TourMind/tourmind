@@ -1,46 +1,115 @@
-<section class="flex items-center justify-center w-full h-screen">
-  <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
-    <%= link_to image_tag("close.png", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
-    <div class="form-value">
-        <div class="m-8 field ">
-            <div class="flex items-center">
-                <%= image_tag("logo.png", class: "w-10 h-10 mb-2") %>
-                <div class="w-full text-xl font-bold text-center text-red-500">
-                    <span>付款成功!</span>
+<div id="mobile-page" class="block sm:hidden">
+    <section class="flex items-center justify-center w-full h-screen">
+        <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
+            <%= link_to image_tag("close.png", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
+            <div class="form-value">
+                <div class="m-8 field">
+                    <div class="flex items-center">
+                    <%= image_tag("logo.png", class: "w-10 h-10 mb-2") %>
+                    <div class="w-full text-xl font-bold text-center text-red-500">
+                        <span>付款成功!</span>
+                    </div>
+                    </div>
+                    <span class="my-4 text-lg font-bold text-center lg:my-12 xl:text-2xl">
+                        <div class="text-center md:hidden">
+                            你已成為
+                            <span class="text-amber-500 inlink-block tracking-zero">Tour</span>
+                            <span class="inlink-block text-sky-500 tracking-zero">Mind</span> 
+                            的 VIP 會員！
+                            <br>
+                            <span class="my-4 text-lg font-bold">
+                                趕快來解鎖你的新功能吧！
+                            </span>
+                        </div>
+                    </span>
+                    <div>
+                    <table class="w-full text-sm text-center text-gray-500 bg-white border-collapse">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="hidden px-6 py-4 font-medium text-gray-900 md:table-cell">購買方案</th>
+                                <th class="hidden px-6 py-4 font-medium text-gray-900 md:table-cell">金額</th>
+                                <th class="hidden px-6 py-4 font-medium text-gray-900 lg:table-cell">付款狀態</th>
+                                <th class="hidden px-6 py-4 font-medium text-gray-900 lg:table-cell">付款時間</th>
+                                <th class="hidden px-6 py-4 font-medium text-gray-900 xl:table-cell">會員到期日</th>
+                            </tr>
+                        </thead>
+                        <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50">
+                                <th class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">購買方案</th>
+                                <td class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4"><%= @diamond_grade %></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <th class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">金額</th>
+                                <td class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">$<%= @last_order[:amount]%></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <th class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">付款狀態</th>
+                                <td class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4"><%= @last_order[:status]%></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <th class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">付款時間</th>
+                                <td class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4"><%= format_date(@last_order[:pay_time])%></td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <th class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4">會員到期日</th>
+                                <td class="gap-3 px-4 py-3 font-normal text-gray-900 md:px-6 md:py-4"><%= format_date(@expire_time) %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="field">
+                    <%= link_to "返回首頁", root_path, class: "btn-square btn-green"  %>
                 </div>
             </div>
-            <span class="my-8 text-xl font-bold text-center">
-                你已成為
-                <span class="align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
-                <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
-                的 VIP 會員！趕快來解鎖你的新功能吧！
-            </span>
-            <div>
-                <table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">購買方案</th>
-                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">金額</th>
-                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">付款狀態</th>
-                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">付款時間</th>
-                            <th scope="col" class="px-6 py-4 font-medium text-gray-900">會員到期日</th>
-                        </tr>
-                    </thead>
-                    <tbody class="border-t border-gray-100 divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50">
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @diamond_grade %></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900">$<%= @last_order[:amount]%></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @last_order[:status]%></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@last_order[:pay_time])%></th>
-                            <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@expire_time) %></th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="field">
-                <%= link_to "返回首頁", root_path, class: "btn-square btn-green"  %>
+        </div>
+    </section>
+</div>
+
+<div id="desktop-page" class="hidden sm:block">
+    <section class="flex items-center justify-center w-full h-screen">
+        <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
+            <%= link_to image_tag("close.png", class: "absolute right-0 top-0 m-2 h-5 w-5"), root_path %>
+            <div class="form-value">
+                <div class="m-8 field ">
+                    <div class="flex items-center">
+                        <%= image_tag("logo.png", class: "w-10 h-10 mb-2") %>
+                        <div class="w-full text-xl font-bold text-center text-red-500">
+                            <span>付款成功!</span>
+                        </div>
+                    </div>
+                    <span class="my-8 text-xl font-bold text-center">
+                        你已成為
+                        <span class="align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
+                        <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
+                        的 VIP 會員！趕快來解鎖你的新功能吧！
+                    </span>
+                    <div>
+                        <table class="w-full text-sm text-left text-gray-500 bg-white border-collapse">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">購買方案</th>
+                                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">金額</th>
+                                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">付款狀態</th>
+                                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">付款時間</th>
+                                    <th scope="col" class="px-6 py-4 font-medium text-gray-900">會員到期日</th>
+                                </tr>
+                            </thead>
+                            <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+                                <tr class="hover:bg-gray-50">
+                                    <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @diamond_grade %></th>
+                                    <th class="gap-3 px-6 py-4 font-normal text-gray-900">$<%= @last_order[:amount]%></th>
+                                    <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= @last_order[:status]%></th>
+                                    <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@last_order[:pay_time])%></th>
+                                    <th class="gap-3 px-6 py-4 font-normal text-gray-900"><%= format_date(@expire_time) %></th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="field">
+                        <%= link_to "返回首頁", root_path, class: "btn-square btn-green"  %>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-  </div>
-</section>
+    </section>
+</div>
