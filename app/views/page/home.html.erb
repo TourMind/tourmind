@@ -35,6 +35,19 @@
     <% end %>
   </div>
 </div>
+<section class="relative container mx-auto h-96 overflow-hidden flex justify-center items-center">
+  <img src="https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg" alt="圖片" class="absolute w-full">
+    <div class="px-2 z-10">
+      <h2 class="mb-4 text-2xl font-bold text-white md:text-3xl">探索你的玩樂世界</h2>
+      <p class="p-2 mb-4 text-base text-white md:text-lg">找尋在地體驗或到遠方探險，隨時隨地探索屬於你的玩樂世界</p>
+      <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex flex-col items-center md:flex-row md:items-center") do |form| %>
+        <div class="flex-1 mb-4 md:mr-4 md:mb-0">
+      <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "w-full px-4 py-2 bg-white border-none" %>
+        </div>
+      <%= form.submit "搜尋", class: "px-4 py-2 ml-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-full whitespace-nowrap hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+      <% end %>  
+    </div>
+</section>
 <section class="container mx-auto py-6 px-2 md:px-0">
   <div class="text-lg font-bold mb-2 px-1">行程推薦</div>
   <div class="flex flex-nowrap gap-3 carousel p-1">
@@ -43,11 +56,11 @@
         <%= link_to plan_path(plan), class: "rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out group" do %>
           <div class="w-full">
             <% if plan.picsums.present? %>
-              <%= image_tag plan.picsums.first, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag plan.picsums.first, style: "object-fit: fill; height: 400px; width: 650px;"  %>
             <% elsif plan.images.present? %>
-              <%= image_tag plan.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag plan.images.first.url, style: "object-fit: fill; height: 400px; width: 650px;"  %>
             <% else %>
-              <%= image_tag "https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/00/a0000276/img/basic/a0000276_main.jpg?20170427165412" %>
+              <%= image_tag "https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/00/a0000276/img/basic/a0000276_main.jpg?20170427165412", style: "object-fit: fill; height: 400px; width: 650px;" %>
             <% end %>
           </div>
           <div class="text translate-y-1/2 md:translate-y-[8rem] lg:translate-y-[11.5rem] xl:translate-y-[15.5rem] md:group-hover:translate-y-0">
@@ -68,11 +81,11 @@
         <%= link_to restaurant_path(restaurant), class: "w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if restaurant.scraped_photos.present? %>
-              <%= image_tag restaurant.scraped_photos.first, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag restaurant.scraped_photos.first, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif restaurant.images.present? %>
-              <%= image_tag restaurant.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag restaurant.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'w-full object-cover h-[250px]' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">
@@ -96,11 +109,11 @@
         <%= link_to hotel_path(hotel), class:"w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if hotel.scraped_photo.present? %>
-              <%= image_tag hotel.scraped_photo, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag hotel.scraped_photo, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif hotel.images.present? %>
-              <%= image_tag hotel.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag hotel.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'w-full object-cover h-[250px]' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">
@@ -123,11 +136,11 @@
         <%= link_to site_path(site), class:"w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if site.scraped_photos.present? %>
-              <%= image_tag site.scraped_photos.first, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag site.scraped_photos.first, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif site.images.present? %>
-              <%= image_tag site.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag site.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'w-full object-cover h-[250px]' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">
@@ -150,11 +163,11 @@
         <%= link_to hotel_path(hotel), class:"w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if hotel.images.present? %>
-              <%= image_tag hotel.scraped_photo, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag hotel.scraped_photo, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif hotel.images.present? %>
-              <%= image_tag hotel.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag hotel.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://i0.wp.com/banbi.tw/wp-content/uploads/20190505142306_31.jpg", class:'object-cover w-full h-[250px]'%>
+              <%= image_tag "https://i0.wp.com/banbi.tw/wp-content/uploads/20190505142306_31.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">
@@ -179,11 +192,11 @@
         <%= link_to hotel_path(hotel), class:"w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if hotel.scraped_photo.present? %>
-              <%= image_tag hotel.scraped_photo, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag hotel.scraped_photo, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif hotel.images.present? %>
-              <%= image_tag hotel.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag hotel.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">
@@ -202,11 +215,11 @@
         <%= link_to site_path(site), class: "w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
             <% if site.scraped_photos.present? %>
-              <%= image_tag site.scraped_photos.first, class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag site.scraped_photos.first, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif site.images.present? %>
-              <%= image_tag site.images.first.url, class:"w-full object-cover h-[250px]" %>
+              <%= image_tag site.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% else %>
-              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class: 'object-cover w-full h-[250px]' %>
+              <%= image_tag "https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% end %>
           </div>
           <div class="p-2">

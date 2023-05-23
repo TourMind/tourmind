@@ -39,7 +39,7 @@ class SitesController < ApplicationController
   def show
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
-    @comments = @site.comments
+    @comments = @site.comments.order(created_at: :desc)
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 

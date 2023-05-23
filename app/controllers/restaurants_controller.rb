@@ -25,7 +25,7 @@ class RestaurantsController < ApplicationController
   def show
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
-    @comments = @restaurant.comments
+    @comments = @restaurant.comments.order(created_at: :desc)
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 
