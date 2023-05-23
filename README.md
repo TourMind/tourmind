@@ -21,7 +21,7 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
   ------------------------------------------------
   
   
-  - TourMind 成員：
+- TourMind 成員：
   - 藍郁婷 https://github.com/YuTingLan
   - 楊士諒 https://github.com/yangliang0514
   - 許凱晴 https://github.com/Hsubetty
