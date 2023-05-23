@@ -54,8 +54,8 @@
             <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
-                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
-                    <div class="relative bg-blue-400 py-3 cursor-grab">
+                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center cursor-grab">
+                    <div class="relative bg-blue-400 py-3">
                       <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
                       <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -67,11 +67,11 @@
                     <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
                       <% @plan.locations[key].each.with_index do | site, j | %>
                         <!-- start::Timeline item -->
-                        <div class="site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="day<%= i + 1 %>-<%= j + 1 %>">
-                          <div class="w-1/12 z-10">
+                        <div class="group site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="day<%= i + 1 %>-<%= j + 1 %>">
+                          <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                             <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(site["type"]) %> rounded-full"></div>
                           </div>
-                          <div class="w-11/12 ml-2">
+                          <div class="grow rounded hover:shadow-md p-2">
                             <p class="text-sm">
                               <span><%= site["type"] %></span>
                               <span class="text-<%= Plan.set_color(site["type"]) %> font-bold"><%= site["name"] %></span>
