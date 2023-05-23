@@ -10,24 +10,24 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
 
 
 - 使用技術：
-  - 前端：HTML / CSS / Tailwind CSS / JavaScript / Stimulus JS
-  - 後端：Ruby on Rails 
+  - 前端：HTML / Tailwind CSS / JavaScript / Stimulus JS
+  - 後端：Ruby on Rails / Devise / Newebpay
   - 部署：Fly.io
   - 資料庫：PostgreSQL
   - 版本控制：Git / GitHub
-  - 其他：Postman
+  - 其他：Postman / AWS / 第三方登入（Line/Facebook/Google）
   
   
   ------------------------------------------------
   
   
 - TourMind 成員：
-  - 藍郁婷 https://github.com/YuTingLan
-  - 楊士諒 https://github.com/yangliang0514
-  - 許凱晴 https://github.com/Hsubetty
   - 翁全政 https://github.com/CCTWeng
   - 陳柏陞 https://github.com/chencac
+  - 許凱晴 https://github.com/Hsubetty
+  - 藍郁婷 https://github.com/YuTingLan
   - 蕭維翔 https://github.com/weihsiang120
+  - 楊士諒 https://github.com/yangliang0514
 
 
   ------------------------------------------------
@@ -63,14 +63,13 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
   - 查 Value
     - $Rails.application.credentials.dig(`:your_key`)
 
-  - 快速新增假用戶與訂單(一次 20 筆)
-    - rails data:generate_user
-    - rails data:generate_order
+  - 快速新增假資料
+    - rails data:generate_user (一次 20 筆)
+    - rails data:generate_order (一次 20 筆)
+    - rails data:generate_plans (一次 100 筆)
+    - rails data:generate_comment (一次 1600 筆)
 
-  - 爬蟲新增飯店/景點/住宿(一次 20 筆)
-    - rails data:generate_user
+  - 爬蟲新增飯店/景點/住宿(固定跑 2 頁，各 20 筆)
     - rails data:generate_sites
     - rails data:generate_restaurants
     - rails data:generate_hotels
-    - rails data:generate_comment
-    - rails data:generate_plans
