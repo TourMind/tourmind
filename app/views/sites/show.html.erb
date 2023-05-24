@@ -3,7 +3,7 @@
     <%= render partial: "heading"%>
   </div>
   <section class='flex justify-center p-4 shadow-md md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-96 shadow-md rounded-md overflow-hidden relative'>
+    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-[30rem] shadow-md rounded-md overflow-hidden relative'>
       <% if @site.images.present? %>
         <% @site.images.each_with_index do |image, index| %>
           <% if index == 0 %>
