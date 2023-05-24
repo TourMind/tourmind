@@ -2,41 +2,37 @@
   <div class="flex flex-col px-4">
     <%= render partial: "heading"%>
   </div>
-  <section class='flex justify-center p-4 shadow-md md:w-90%'>
-    <div class='grid grid-cols-3 grid-rows-2 gap-1 w-full max-h-[30rem] shadow-md rounded-md overflow-hidden relative'>
-      <% if @site.images.present? %>
-        <% @site.images.each_with_index do |image, index| %>
-          <% if index == 0 %>
-            <div class="col-span-2 row-span-2">
-              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
-            </div>
-          <% elsif index < 3 %>
-            <div>
-              <%= image_tag image.url, {class: "w-full h-full object-cover"}%>
-            </div>
-          <% end %>
-        <% end %>
-      <% elsif @site.scraped_photos.present? %>
-        <% if @site.scraped_photos.length < 3 %>
-          <div class="col-span-3 row-span-2 ">
-            <%= image_tag @site.scraped_photos[0], class: 'object-cover w-full h-full' %>
-          </div>
-        <% elsif @site.scraped_photos.length >= 3 %>
-          <div class="col-span-2 row-span-2">
-            <%= image_tag @site.scraped_photos[0], class: 'object-cover w-full h-full' %>
-          </div>
-          <div class="col-span-1 ">
-            <%= image_tag @site.scraped_photos[1], class: 'object-cover w-full h-full' %>
-          </div>
-          <div class="col-span-1 ">
-            <%= image_tag @site.scraped_photos[2], class: 'object-cover w-full h-full' %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= image_tag  src="https://tpbusker.gov.taipei/upfiles/place2020122315473.jpg", class:'object-cover col-span-full row-span-full w-full h-full' %>
-      <% end %>
-    </div>
-  </section>
+  <div class = "grid justify-center grid-cols-5 gap-2 px-4 py-4 overflow-hidden rounded-lg shadow-lg">
+    <% if @site.images.present? %>
+      <div class = "relative h-[15rem] col-span-5 lg:col-span-3 sm:h-[30rem]">
+        <%= image_tag @site.images[0].url, {class: "w-full h-full object-cover"}%>
+      </div>
+      <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-[30rem]">
+        <div class="w-full overflow-hidden h-1/2">
+          <%= image_tag @site.images[1].url, {class: "object-cover w-full h-full"} if @site.images[1].present?%>
+        </div>
+        <div class="w-full overflow-hidden h-1/2">
+          <%= image_tag @site.images[2].url, {class: "object-cover w-full h-full"} if @site.images[2].present?%>
+        </div>
+      </div>
+    <% elsif @site.scraped_photos.present? %>
+      <div class = "relative h-[15rem] col-span-5 lg:col-span-3 sm:h-[30rem]">
+        <%= image_tag @site.scraped_photos[0], {class: "w-full h-full object-cover"}%>
+      </div>
+      <div class = "flex flex-col col-span-5 gap-2 lg:col-span-2 h-[30rem]">
+        <div class="w-full overflow-hidden h-1/2">
+          <%= image_tag @site.scraped_photos[1], {class: "object-cover w-full h-full"} if @site.scraped_photos[1].present?%>
+        </div>
+        <div class="w-full overflow-hidden h-1/2">
+          <%= image_tag @site.scraped_photos[2], {class: "object-cover w-full h-full"} if @site.scraped_photos[2].present?%>
+        </div>
+      </div>
+    <% else %>
+      <div class = "relative h-[15rem] col-span-5 sm:h-[30rem]">
+        <%= image_tag "https://fakeimg.pl/300x200?text=TourMind", {class: "h-full w-full object-cover"}%>
+      </div>
+    <% end %>
+  </div>
   <div class='flex py-4 flex-col lg:flex-row'>
     <div class="w-full lg:w-2/3 mr-4 shadow-md">
       <div class='p-4'>
