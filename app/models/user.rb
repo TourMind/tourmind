@@ -9,12 +9,14 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   mount_uploader :avatar, ImageUploader
   # 驗證必填欄位
-  # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
   validates :email,
             presence: true,
             format: {
               with: /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/,
-            }, if: -> { email.present? }
+            }
+
+  validates :tel, allow_blank: true,
+                 format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
 
   # confirmable -> 確認mail認證
   devise :database_authenticatable,
