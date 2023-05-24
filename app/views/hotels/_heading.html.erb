@@ -1,6 +1,8 @@
-<div class ="flex justify-between">
+<div class ="flex justify-between item" data-controller="favorite" id="show" data-type="Hotel" data-id="<%= @hotel.id %>">
   <h1 class="font-bold text-3xl lg:text-4xl"><%=@hotel.name%></h1>
-  <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
+  <div class="button">
+    <%= render "favoritebtn", object:@hotel, size:'text-lg'%>
+  </div>
 </div>
 <div class="flex items-center">
   <span class="mr-2"><%= star_rating(@hotel_data[@hotel.id][:average_rating]) %>
