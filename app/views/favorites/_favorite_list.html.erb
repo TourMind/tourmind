@@ -1,29 +1,45 @@
-<div class="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 flex">
+<div class="flex grid min-w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
   <% favorite_objects.each do |fav| %>
     <!-- component -->
-    <div class="flex h-full items-center justify-center shadow-lg">
-      <div class="w-full rounded-xl overflow-hidden bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl relative">
+    <div class="flex items-center justify-center h-full shadow-lg">
+      <div class="relative w-full overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
         <div>
           <%= link_to 'ｘ', favorite_path(fav), method: :delete, class: "rounded-lg px-1 bg-gray-200 inline-block font-medium ms-auto absolute top-1 end-1", data: {confirm: "確定要移出喜愛清單?"}%>
           <p class="relative max-w-sm bg-white shadow-md rounded-xl">
-            <span class= "absolute text-white bg-indigo-600 rounded-tl-lg px-3 py-1 text-sm top-0 left-0 shadow-xl ">
-              <%=fav.favorable.class%>
+            <span class= "absolute top-0 left-0 px-3 py-1 text-sm text-white bg-indigo-600 rounded-tl-lg shadow-xl ">
+              <% if fav.favorable.class.to_s == 'Restaurant'%>
+                餐廳
+              <% elsif fav.favorable.class.to_s == 'Hotel'%>
+                住宿
+              <% else %>
+                景點
+              <% end %>
             </span>
           </p>
         </div>
         <div class= "aspect-[5/3]">
           <% if fav.favorable.images.present? %>
-            <img class="h-full w-full" src=<%=fav.favorable.images.first.url%> alt='<%=fav.favorable.class%> image'>
+            <img class="w-full h-full" src=<%=fav.favorable.images.first.url%> alt='<%=fav.favorable.class%> image'>
+          <% elsif fav.favorable_type != 'Hotel'%>
+            <% if fav.favorable.scraped_photos.present? %>
+              <img class="w-full h-full" src=<%=fav.favorable.scraped_photos.first%> alt='<%=fav.favorable.class%> image'>
+            <% else %>
+              <img class="w-full h-full" src="https://fakeimg.pl/350x200/?text=TourMind" alt='<%=fav.favorable.class%> image'>
+            <% end %>
           <% else %>
-            <img class="h-full w-full" src="https://fakeimg.pl/350x200/?text=TourMind" alt='<%=fav.favorable.class%> image'>
+            <% if fav.favorable.scraped_photo.present? %>
+              <img class="w-full h-full" src=<%=fav.favorable.scraped_photo%> alt='<%=fav.favorable.class%> image'>
+            <% else %>
+              <img class="w-full h-full" src="https://fakeimg.pl/350x200/?text=TourMind" alt='<%=fav.favorable.class%> image'>
+            <% end %>
           <% end %>
         </div>
         <div class="p-5">
           <div class="flex justify-between">
-            <p class="text-largue mb-5 text-gray-700"><%= fav.favorable.name%></p>
+            <p class="mb-5 text-gray-700 text-largue"><%= fav.favorable.name%></p>
           </div>
           <%= link_to fav.favorable do %>
-            <button class="w-full rounded-md bg-indigo-600 py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">詳細資訊</button>
+            <button class="w-full py-2 text-indigo-100 duration-75 bg-indigo-600 rounded-md hover:bg-indigo-500 hover:shadow-md">詳細資訊</button>
           <% end %>
         </div>
       </div>

@@ -1,10 +1,10 @@
 <div class="sm:hidden">
   <label for="menu" class="sr-only">選單</label>
   <select id="menu" onchange="window.location.href=this.value" class="block w-full px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
-    <option value="" disabled selected>請選擇</option>
+    <option value="disabled selected">請選擇</option>
     <option value="<%= sites_path %>">景點</option>
     <option value="<%= restaurants_path %>">餐廳</option>
-    <option value="<%= restaurants_path %>">飯店</option>
+    <option value="<%= hotels_path %>">飯店</option>
     <option value="<%= plans_path %>">行程規劃</option>
   </select>
   <div class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 pointer-events-none">
@@ -17,25 +17,24 @@
         <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">住宿</h2>
       </div>
-      <% end %>
-      <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
-        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+    <% end %>
+    <%= link_to sites_path , class: "inline-block w-1/4 mr-2" do %>
+      <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">景點</h2>
-        </div>
-      <% end %>
-      <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
-        <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
-          <h2 class="text-xl font-semibold">餐廳</h2>
-        </div>
-      <% end %>
-      <%= link_to plans_path , class: "inline-block w-1/4" do %>
+      </div>
+    <% end %>
+    <%= link_to restaurants_path, class: "inline-block w-1/4 mr-2" do %>
+      <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
+        <h2 class="text-xl font-semibold">餐廳</h2>
+      </div>
+    <% end %>
+    <%= link_to plans_path , class: "inline-block w-1/4" do %>
       <div class="home-title bg-with text-black rounded-lg border-b-4 border-b-gray-400 hover:border-b-0 transition-all ease-in-out duration-100 shadow-md">
         <h2 class="text-xl font-semibold">行程規劃</h2>
       </div>
-      <% end %>
-    </div>
+    <% end %>
+  </div>
 </div>
-
 <section class="relative container mx-auto">
   <img src="https://ak-d.tripcdn.com/images/0104h1200081fkqhn9FAA.jpg" alt="圖片" class="w-full h-96">
   <div class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-1/2">
@@ -51,81 +50,106 @@
     </div>
   </div>
 </section>
-
 <section class="container flex mx-auto py-6">
   <% @plans.sample(3).each_with_index do |plan, index| %>
-  <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 Jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
-  <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
-    <div class="w-full"><%= image_tag plan.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if plan.images.present?%></div>
-    <div class="text">
-      <h2 data-splitting=""><%= plan.name %></h2>
-      <p data-splitting=""><%= plan.description&.truncate(60) %></p>
-    </div>
-    </a>
-  </div>
-  <%end%>
-</section>
-
-
-<section class="container mx-auto py-6">
-  <h2 class="py-4">熱門飯店</h2>
-  <div class="flex rounded-lg ">
-    <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
-    <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-      <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
-        <div class="relative transform rounded-lg image-container">
-          <div class="w-full"><%= image_tag restaurant.images.first.url,style: "width:100%; height:300px; object-fit:cover;"if restaurant.images.present?%></div>
-          <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
-            <span>熱門景點</span>
-          </div>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-3xl text-red-500">&#x2665;</span>
-          </div>
+    <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 jogging <%= index == 2 ? '' : 'mr-2' %>" tabindex="0">
+      <a href="<%= plan_path(plan.id) %>" class=" rounded-lg  focus:bg-gray-700 transition duration-300 ease-in-out">
+        <div class="w-full">
+          <% if plan.images.present? %>
+            <img class="w-full h-full object-fit" src="<%= plan.images.first.url %>" alt="Restaurant Pic">
+          <% else %>
+            <%= image_tag "https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/00/a0000276/img/basic/a0000276_main.jpg?20170427165412" , class:'object-cover w-full h-full' %>
+          <% end %>
         </div>
-        <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
-        <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
-            <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
-            (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
-        </p>
-        <p class="mt-2 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
+        <div class="text">
+          <h2 data-splitting=""><%= plan.name %></h2>
+          <p data-splitting=""><%= plan.description&.truncate(60) %></p>
+        </div>
       </a>
     </div>
+  <%end%>
+</section>
+<section class="container mx-auto py-6">
+  <div class="flex rounded-lg ">
+    <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
+      <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
+        <a href="<%= restaurants_path(restaurant) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+          <div class="relative transform rounded-lg image-container">
+            <div class="w-full">
+              <% if restaurant.images.present? %>
+                <img class="w-full h-full object-fit" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+              <% else %>
+                <%= image_tag "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/208805414-4516731811683781-320637664336506541-n-1641539117.jpg?crop=0.604xw:0.908xh;0.209xw,0.0281xh&resize=480:*" , class:'object-cover w-full h-full' %>
+              <% end %>
+            </div>
+            <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
+              <span>熱門餐廳</span>
+            </div>
+          </div>
+          <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
+          <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+            <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+            (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
+          </p>
+          <p class="mt-2 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
+        </a>
+      </div>
     <% end %>
   </div>
 </section>
 <section class="container flex py-6 mx-auto">
-  <div class="w-64 mr-4 carousel rounded-box">
-    <% @restaurants.sample(4).each do |restaurant| %>
+  <div class="w-96 mr-4 carousel rounded-box">
+    <% @hotels.sample(4).each do |hotel| %>
       <div class="w-full carousel-item image-container">
-        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+        <% if hotel.images.present? %>
+          <img class="w-full h-full object-fit" src="<%= hotel.images.first.url %>" alt="Restaurant Pic">
+        <% else %>
+          <%= image_tag "https://www.fotobeginner.com/wp-content/uploads/2015/02/landscape-9LHVGVJ-a.jpg" , class:'object-cover w-full h-full' %>
+        <% end %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 mr-4 carousel rounded-box">
-    <% @restaurants.sample(4).each do |restaurant| %>
+  <div class="w-96 mr-4 carousel rounded-box">
+    <% @hotels.sample(4).each do |hotel| %>
       <div class="w-full carousel-item image-container">
-        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+        <% if hotel.images.present? %>
+          <img class="w-full h-full object-fit" src="<%= hotel.images.first.url %>" alt="Restaurant Pic">
+        <% else %>
+          <%= image_tag "https://lh3.googleusercontent.com/fKBZuMcuUiAwLwAElve3iOyfi-IBkUDC0gFWsylEweaZpvuXa9OhZ0M=w600-h400" , class:'object-cover w-full h-full' %>
+        <% end %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 mr-4 carousel rounded-box">
-    <% @restaurants.sample(4).each do |restaurant| %>
+  <div class="w-96 mr-4 carousel rounded-box">
+    <% @hotels.sample(4).each do |hotel| %>
       <div class="w-full carousel-item image-container">
-        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+        <% if hotel.images.present? %>
+          <img class="w-full h-full object-fit" src="<%= hotel.images.first.url %>" alt="Restaurant Pic">
+        <% else %>
+          <%= image_tag "https://kinmen.travel/attractions/15736/1024x768_attractions-image-elih34_themmjzkac11hsq.jpg" , class:'object-cover w-full h-full' %>
+        <% end %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 mr-4 carousel rounded-box">
+  <div class="w-96 mr-4 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
       <div class="w-full carousel-item image-container">
-        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+        <% if restaurant.images.present? %>
+          <img class="w-full h-full object-fit" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+        <% else %>
+          <%= image_tag "https://swcoast-nsa.travel/image/36393/1024x768" , class:'object-cover w-full h-full' %>
+        <% end %>
       </div>
     <% end %>
   </div>
-  <div class="w-64 carousel rounded-box">
+  <div class="w-96 carousel rounded-box">
     <% @restaurants.sample(4).each do |restaurant| %>
       <div class="w-full carousel-item image-container">
-        <%= image_tag restaurant.images.first.url if restaurant.images.present? %>
+        <% if restaurant.images.present? %>
+          <img class="w-full h-full object-fit" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+        <% else %>
+          <%= image_tag "https://www.fotobeginner.com/wp-content/uploads/2015/04/lake-sunset-2021-08-26-18-27-36-utc-1.jpg" , class:'object-cover w-full h-full' %>
+        <% end %>
       </div>
     <% end %>
   </div>
@@ -134,51 +158,56 @@
   <div class="relative bg-white rounded-lg " style="height:auto" data-controller="moving">
     <div data-moving-target="slides" class="flex">
       <div class="flex">
-        <% @restaurants.sample(4).each_with_index do |restaurant, index| %>
-        <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-          <a href="<%= restaurants_path(restaurant) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
-            <div class="relative image-container rounded-xl">
-              <%= image_tag restaurant.images.first.url,style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
-              <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
-                <span>飯店推薦</span>
+        <% @hotels.sample(4).each_with_index do |hotel, index| %>
+          <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
+            <a href="<%= hotels_path(hotel) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+              <div class="relative image-container rounded-xl">
+                <% if hotel.images.present? %>
+                  <img class="w-full h-full object-fit" src="<%= hotel.images.first.url %>" alt="Restaurant Pic">
+                <% else %>
+                  <%= image_tag "https://i0.wp.com/banbi.tw/wp-content/uploads/20190505142306_31.jpg" , style: "width:100%; height:300px; object-fit:cover;"%>
+                <% end %>
+                <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
+                  <span>飯店推薦</span>
+                </div>
               </div>
-              <div class="absolute top-0 right-0 m-3">
-                <span class="text-3xl text-red-500">&#x2665;</span>
-              </div>
-            </div>
-            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
-            <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
-              <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
-              (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
-            </p>
-            <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
-          </a>
-        </div>
+              <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
+              <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
+              </p>
+              <p class="mb-4 text-sm text-gray-600"><%= hotel.intro&.truncate(30) %></p>
+            </a>
+          </div>
         <% end %>
       </div>
     </div>
     <div data-moving-target="slides" class="flex">
       <div class="flex">
-        <% @hotels.sample(4).each_with_index do |hotel, index| %>
-        <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
-          <a href="<%= hotels_path(hotel) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
-            <div class="relative image-container rounded-xl">
-              <%= image_tag hotel.images.first.url,style: "width:100%; height:300px; object-fit:cover;" if hotel.images.present? %>
-              <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
-                <span>飯店推薦</span>
+        <% @sites.sample(4).each_with_index do |site, index| %>
+          <div class="rounded-lg shadow-lg flex-grow-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 <%= index == 3 ? '' : 'mr-2' %>">
+            <a href="<%= sites_path(site) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+              <div class="relative image-container rounded-xl">
+                <% if site.images.present? %>
+                  <img class="w-full h-full object-fit" src="<%= site.images.first.url %>" alt="Restaurant Pic">
+                <% else %>
+                  <%= image_tag "https://www.fotobeginner.com/wp-content/uploads/2015/02/landscape-9LHVGVJ-a.jpg" , style: "width:100%; height:300px; object-fit:cover;"%>
+                <% end %>
+                <div class="absolute top-0 left-0 px-2 py-1 m-3 text-sm font-medium text-white bg-gray-900 rounded">
+                  <span>景點推薦</span>
+                </div>
+                <div class="absolute top-0 right-0 m-3">
+                  <span class="text-3xl text-red-500">&#x2665;</span>
+                </div>
               </div>
-              <div class="absolute top-0 right-0 m-3">
-                <span class="text-3xl text-red-500">&#x2665;</span>
-              </div>
-            </div>
-            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
-            <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
-              <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
-              (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
-            </p>
-            <p class="mb-4 text-sm text-gray-600"><%= hotel.intro&.truncate(30) %></p>
-          </a>
-        </div>
+              <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= site.name %></p>
+              <p><%= star_rating(@site_data[site.id][:average_rating]) %>
+                <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+                (<%= @site_data[site.id][:comment_count] %>則評論)
+              </p>
+              <p class="mb-4 text-sm text-gray-600"><%= site.intro&.truncate(30) %></p>
+            </a>
+          </div>
         <% end %>
       </div>
     </div>
@@ -194,43 +223,45 @@
   <div class="carousel-item">
     <% @restaurants.sample(4).each do |restaurant| %>
       <div class="mr-2 bg-white rounded-lg md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
-        <div class="relative image-container rounded-xl">
-          <%= image_tag restaurant.images.first.url, style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-3xl text-red-500">&#x2665;</span>
+        <a href="<%= restaurants_path(restaurant) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+          <div class="relative image-container rounded-xl">
+            <% if restaurant.images.present? %>
+              <img class="w-full h-full object-fit" src="<%= restaurant.images.first.url %>" alt="Restaurant Pic">
+            <% else %>
+              <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-1LVqtLIEH38rH81SkJqhPVhqc9HYoTfVgA&usqp=CAU" , style: "width:100%; height:300px; object-fit:cover;"%>
+            <% end %>
           </div>
-        </div>
-        <div class="">
-          <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
-          <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
-            <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
-            (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
-          </p>
-          <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
-        </div>
+          <div class="">
+            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
+            <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+              <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+              (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
+            </p>
+            <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
+          </div>
         </a>
       </div>
     <% end %>
   </div>
   <div class="carousel-item">
-    <% @restaurants.sample(4).each do |restaurant| %>
+    <% @sites.sample(4).each do |site| %>
       <div class="mr-2 bg-white rounded-lg md:w-1/2 lg:w-1/3 xl:w-1/4">
-        <a href="<%= restaurants_path(restaurant) %>" class="px-6 transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
-        <div class="relative image-container rounded-xl">
-          <%= image_tag restaurant.images.first.url, style: "width:100%; height:300px; object-fit:cover;" if restaurant.images.present? %>
-          <div class="absolute top-0 right-0 m-3">
-            <span class="text-3xl text-red-500">&#x2665;</span>
+        <a href="<%= sites_path(site) %>" class="transition duration-300 ease-in-out rounded-lg focus:bg-gray-700">
+          <div class="relative image-container rounded-xl">
+            <% if site.images.present? %>
+              <img class="w-full h-full object-fit" src="<%= site.images.first.url %>" alt="Restaurant Pic">
+            <% else %>
+              <%= image_tag "https://www.fotobeginner.com/wp-content/uploads/2015/02/landscape-9LHVGVJ-a.jpg" , style: "width:100%; height:300px; object-fit:cover;"%>
+            <% end %>
           </div>
-        </div>
-        <div class="">
-          <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
-          <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
-            <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
-            (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
-          </p>
-          <p class="mb-4 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
-        </div>
+          <div class="">
+            <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= site.name %></p>
+            <p><%= star_rating(@site_data[site.id][:average_rating]) %>
+              <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+              (<%= @site_data[site.id][:comment_count] %>則評論)
+            </p>
+            <p class="mb-4 text-sm text-gray-600"><%= site.intro&.truncate(30) %></p>
+          </div>
         </a>
       </div>
     <% end %>
@@ -270,4 +301,3 @@
     </div>
   </div>
 </footer>
-

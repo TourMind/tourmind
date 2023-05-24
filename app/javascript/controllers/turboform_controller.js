@@ -6,7 +6,7 @@ export default class extends Controller {
         if (event.detail.success) {
             const modal = document.querySelector("#modal")
             modal.classList.add("hidden")
-            Turbo.visit(window.location.href)
+            Turbo.visit(window.location.reload())
         }
     })
   }

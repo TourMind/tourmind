@@ -15,7 +15,17 @@ export default class extends Controller {
     "id",
     "form",
     "public",
+    "submitBtn",
+    "submitText",
+    "spinner",
+    "lockVersion",
   ];
+
+  connect() {
+    if (!this.idTarget.dataset.id) {
+      this.submitTextTarget.textContent = "建立新行程";
+    }
+  }
 
   initialize() {
     this.Toast = Swal.mixin({
@@ -66,6 +76,7 @@ export default class extends Controller {
       form.append("people", +this.peopleTarget.value);
       form.append("public", this.publicTarget.checked);
       form.append("category", this.categoryTarget.value);
+      form.append("lock_version", this.lockVersionTarget.value);
       form.append("locations", JSON.stringify(locations));
 
       for (let i = 0; i < files.length; i++) {
@@ -73,6 +84,8 @@ export default class extends Controller {
       }
 
       let res;
+
+      this.addSpinner();
 
       if (!id) {
         res = await post("/plans", {
@@ -86,17 +99,20 @@ export default class extends Controller {
         });
       }
 
-      const resInfo = await res.json;
+      const data = await res.json;
 
       if (!res.ok) {
-        return this.alertErrors(
-          resInfo.errors.map((el) => el.split(" ")[1]).join("\n")
-        );
+        this.alertErrors(data.errors);
+        if (data.reload) {
+          return setTimeout(() => location.reload(true), 3500);
+        }
+        this.removeSpinner();
+        return;
       }
 
-      window.location.replace(resInfo.redirect_url);
+      window.location.replace(data.redirect_url);
     } catch (err) {
-      console.log(err);
+      window.location.replace("/404");
     }
   }
 
@@ -171,6 +187,10 @@ export default class extends Controller {
   }
 
   deleteDay(e) {
+    if (+this.containerTarget.dataset.days <= 1) {
+      return this.alertErrors("行程不得少於一天");
+    }
+
     const day = e.target.closest(".day");
     const siteInDay = day.querySelectorAll(".site").length;
 
@@ -187,5 +207,15 @@ export default class extends Controller {
       day.querySelector(".day-title").textContent = `第 ${i + 1} 天`;
       day.querySelector(".sites-list").id = `plan-day-${i + 1}`;
     });
+  }
+
+  addSpinner() {
+    const spinner = `
+    <div class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status" data-edit-target="spinner"></div>`;
+    this.submitBtnTarget.insertAdjacentHTML("afterbegin", spinner);
+  }
+
+  removeSpinner() {
+    this.spinnerTarget.remove();
   }
 }

@@ -15,7 +15,7 @@
           <button class="btn-category mr-2" data-action="click->favorite#toggle" data-section="restaurant">餐廳</button>
         </li>
         <li class=>
-          <button class="btn-category mr-2" data-action="click->favorite#toggle" data-section="hotel">飯店</button>
+          <button class="btn-category mr-2" data-action="click->favorite#toggle" data-section="hotel">住宿</button>
         </li>
         <li class=>
           <button class="btn-category mr-2" data-action="click->favorite#toggle" data-section="attraction">景點</button>
@@ -40,8 +40,8 @@
         </div>
       </section>
       <section data-favorite-target="section" data-section="hotel" class="justify-between items-center hidden">
-        <h2 class="font-bold text-3xl my-4">飯店</h2>
-        <%= render "subheader", favorites:@favorites.hotels, object:"飯店"%>
+        <h2 class="font-bold text-3xl my-4">住宿</h2>
+        <%= render "subheader", favorites:@favorites.hotels, object:"住宿"%>
         <div class="min-w-full gap-4 flex ">
           <%= render "favorite_list", favorite_objects:@favorites.hotels%>
         </div>

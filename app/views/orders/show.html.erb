@@ -1,5 +1,5 @@
 <section class="m-4">
-  <h1 class="text-4xl font-bold mb-7"><%= User.find_by(id: @order.last.user_id).name %>的收費細節</h1>
+  <h1 class="text-2xl font-bold lg:text-4xl mb-7"><%= User.find_by(id: @order.last.user_id).name %>的收費細節</h1>
   <div class="flex justify-center">
     <div>
       <h2 class="p-2 text-2xl font-bold">會員資格</h2>
@@ -24,7 +24,7 @@
     <div class="flex-1 p-8 mt-4 bg-white rounded-lg shadow-xl">
       <h4 class="font-bold">付款紀錄</h4>
       <div class="relative px-4">
-        <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+        <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
           <% @order.each do |order| %>
             <div class="flex items-center w-full my-6 -ml-1.5">
               <div class="z-10 w-1/12 ">

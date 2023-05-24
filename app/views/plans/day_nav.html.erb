@@ -14,7 +14,7 @@
     <div>
       <% if @plan.locations != nil %>
         <div class="flex bg-white rounded-lg shadow-xl p-8 gap-3 w-full justify-between">
-          <div class="relative px-4 w-48 min-h-[150px]" data-map-target="day">
+          <div class="relative px-4 w-48 min-h-[150px]" data-map-target="day" data-key=<%= @google_api_key%>>
             <h4 class="text-xl text-gray-900 font-bold">第 <%= @day %> 天</h4>
             <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
             <% @plan.locations["day#{@day}"].each do |site| %>

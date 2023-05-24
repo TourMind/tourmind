@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_08_090406) do
+ActiveRecord::Schema.define(version: 2023_05_20_060429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collaborations", force: :cascade do |t|
+    t.bigint "plan_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["plan_id"], name: "index_collaborations_on_plan_id"
+    t.index ["user_id"], name: "index_collaborations_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
@@ -68,6 +77,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.string "equipment", default: [], array: true
     t.json "images"
     t.string "slug"
+    t.string "scraped_photo"
     t.index ["slug"], name: "index_hotels_on_slug", unique: true
   end
 
@@ -94,6 +104,8 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.boolean "public", default: false
     t.json "images"
     t.string "slug"
+    t.integer "lock_version", default: 0, null: false
+    t.json "picsums"
     t.index ["slug"], name: "index_plans_on_slug", unique: true
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -116,6 +128,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.json "images"
+    t.json "scraped_photos"
     t.index ["slug"], name: "index_restaurants_on_slug", unique: true
   end
 
@@ -136,6 +149,7 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.string "parking"
     t.json "images"
     t.string "slug"
+    t.json "scraped_photos"
     t.index ["slug"], name: "index_sites_on_slug", unique: true
   end
 
@@ -162,6 +176,8 @@ ActiveRecord::Schema.define(version: 2023_05_08_090406) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "collaborations", "plans"
+  add_foreign_key "collaborations", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "users"
   add_foreign_key "orders", "users"

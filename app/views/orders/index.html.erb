@@ -1,48 +1,48 @@
 <section class="m-4">
-  <h1 class="text-4xl font-bold mb-7">收費細節</h1>
+  <h1 class="text-2xl font-bold lg:text-4xl mb-7">收費細節</h1>
   <div class="flex justify-center">
     <div>
       <h2 class="p-2 text-2xl font-bold">會員資格</h2>
-    <div class="relative p-4 duration-200 shadow-xl bg-gary-400 rounded-xl">
-      <% if Order.diamond_grade(current_user) === '白鑽會員' %>
-        <span><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
-        <span>$<%= @order.first.amount %>/月</span>
-      <% elsif Order.diamond_grade(current_user) === '藍鑽會員'%>
-        <span><%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 藍鑽會員</span>
-        <span>$<%= @order.first.amount %>/月</span>
-      <% elsif Order.diamond_grade(current_user) === '紅鑽會員'%>
-        <span><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員</span>
-        <span>$<%= @order.first.amount %>/月</span>
-      <% else %>
-        <span>一般會員</span>
-      <% end %>
-      <br>
-      <br>
-      <span>下次收費日期</span>
-      <%= format_date(@order.first.pay_time + 1.month) %>
-    </div>
-    <div class="flex-1 p-8 mt-4 bg-white rounded-lg shadow-xl">
-      <h4 class="font-bold">付款紀錄</h4>
-      <div class="relative px-4">
-        <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+      <div class="relative p-4 duration-200 shadow-xl bg-gary-400 rounded-xl">
+        <% if Order.diamond_grade(current_user) === '白鑽會員' %>
+          <span><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
+          <span>$<%= @order.first.amount %>/月</span>
+        <% elsif Order.diamond_grade(current_user) === '藍鑽會員'%>
+          <span><%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 藍鑽會員</span>
+          <span>$<%= @order.first.amount %>/月</span>
+        <% elsif Order.diamond_grade(current_user) === '紅鑽會員'%>
+          <span><%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員</span>
+          <span>$<%= @order.first.amount %>/月</span>
+        <% else %>
+          <span>一般會員</span>
+        <% end %>
+        <br>
+        <br>
+        <span>下次收費日期</span>
+        <%= format_date(@order.first.pay_time + 1.month) %>
+      </div>
+      <div class="flex-1 p-8 mt-4 bg-white rounded-lg shadow-xl">
+        <h4 class="font-bold">付款紀錄</h4>
+        <div class="relative px-4">
+          <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
           <% @order.each do |order| %>
             <div class="flex items-center w-full my-6 -ml-1.5">
               <div class="z-10 w-1/12 ">
-                  <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
               </div>
               <div class="w-11/12">
                 <div class="relative max-w-sm duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
                   <span class="absolute text-white bg-blue-600 rounded-tr-lg btn-xs -top-3 -right-1">
-                      <%= @order.first.status %>
+                    <%= @order.first.status %>
                   </span>
                   <div class="p-5">
                     <span class="font-bold">
                       <% if order.amount === 50 %>
-                          <%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員
+                        <%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員
                       <% elsif order.amount === 100 %>
-                          <%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 藍鑽會員
+                        <%= image_tag("diamond_blue.png", size: "20x20", class: "inline") %> 藍鑽會員
                       <% elsif order.amount === 200 %>
-                          <%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員
+                        <%= image_tag("diamond_red.png", size: "20x20", class: "inline") %> 紅鑽會員
                       <% end %>
                     </span>
                     <span class="font-bold">$<%= order.amount %></span>
@@ -56,9 +56,9 @@
                 </div>
               </div>
             </div>
-          <% end %>        
+          <% end %>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </section>

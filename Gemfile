@@ -49,7 +49,7 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem "faker", "~> 3.2"
+  gem 'faker', '~> 3.2'
 end
 
 group :development do
@@ -82,7 +82,7 @@ gem 'dockerfile-rails', '>= 1.2', group: :development
 gem 'fog-aws'
 gem 'foreman', '~> 0.87.2'
 gem 'friendly_id', '~> 5.4'
+gem 'pagy'
 gem 'requestjs-rails'
 gem 'turbo-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'pagy'
