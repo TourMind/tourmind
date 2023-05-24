@@ -153,9 +153,9 @@
         <h1 class="mt-8 text-3xl font-medium"><%= @plan.name %></h1>
         <p class="mt-2 text-sm underline text-slate-700"><a href="">提供者： <%= @plan.user.name.present? ? @plan.user.name : @plan.user.email %> </a></p>
         <div class="flex items-center my-3">
-          <span><%= star_rating(@plan_data[@plan.id][:average_rating]) %>
-            <%= sprintf('%.1f', @plan_data[@plan.id][:average_rating]) %>
-            (<%= @plan_data[@plan.id][:comment_count] %>則評論)
+          <span><%= star_rating(plan_rating[@plan.id][:average_rating]) %>
+            <%= sprintf('%.1f', plan_rating[@plan.id][:average_rating]) %>
+            (<%= plan_rating[@plan.id][:comment_count] %>則評論)
           </span>
         </div>
         <p class="my-3 lg:w-3/4 text-slate-700 text-m sm:w-full"><%= @plan.description %></p>

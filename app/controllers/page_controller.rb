@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class PageController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :authenticate_user!, only: [:pricing]
   skip_before_action :verify_authenticity_token, only: %i[return notify]
-  before_action :set_view_data,:restaurant_rating, :site_rating, :hotel_rating, :plan_rating,  only: [:home, :search]
+  before_action :set_view_data, :site_rating, :plan_rating,:hotel_rating,:restaurant_rating, only: [:home]
   helper_method :star_rating
   
   def home
