@@ -3,7 +3,7 @@
     <div class="flex">
       <%= form_with(url: page_search_path, method: "get", class: "flex justify-center mb-2 max-h-10") do |form| %>
       <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full pl-8 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
-      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" %>
+      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" %>
       <% end %>    
     </div>
     <h1 class="font-bold text-2xl">搜尋結果: &ldquo;<%= @query %>&rdquo;</h1>
