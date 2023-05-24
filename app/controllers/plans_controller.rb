@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlansController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
   before_action :authenticate_user!,
@@ -15,7 +15,7 @@ class PlansController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @plan.comments
+    @comments = @plan.comments.order(created_at: :desc)
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
     if (user_signed_in? && current_user == @plan.user) || @plan.public ||
        @plan.editors.include?(current_user)

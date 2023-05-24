@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SitesController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :set_site, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :site_rating, only: %i[index show]
@@ -39,7 +39,7 @@ class SitesController < ApplicationController
   def show
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
-    @comments = @site.comments
+    @comments = @site.comments.order(created_at: :desc)
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 

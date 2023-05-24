@@ -29,7 +29,7 @@ export default class extends Controller {
     this.slidesTargets.forEach((slide, index) => {
       // 遍歷所有目標元素，根據索引值更新其樣式
       if (index === this.currentIndex) {
-        slide.style.display = "flex"; // 使用 Flex 布局顯示當前索引對應的元素
+        slide.style.display = ""; // 使用 Flex 布局顯示當前索引對應的元素
         slide.style.opacity = "1"; // 將透明度設為 1，實現淡入效果
       } else {
         slide.style.display = "none"; // 隱藏其他元素

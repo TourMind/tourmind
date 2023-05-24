@@ -10,7 +10,7 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
+  <body class="content">
     <%= render 'shared/chatbase' %>
     <div data-controller="modal">
       <%= render 'shared/navbar' %>
@@ -19,6 +19,9 @@
     </div>
     <%= yield %>
     <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
+     <footer class=" footer">
+    <span>©2023 TourMind</span>
+  </footer>
   </body>
-  <footer class="bg-[#6C9BCF] w-full h-11 flex justify-center items-center"><span class="inline-block text-white text-sm">©2023 TourMind</span></footer>
+ 
 </html>
