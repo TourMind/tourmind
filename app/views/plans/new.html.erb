@@ -43,6 +43,10 @@
                 <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none" data-action="click->edit#addDay">增加天數</div>
                 <div class="bg-red-500 inline-block cursor-pointer hover:bg-red-600 text-white font-normal text-sm p-2 border-red-700 rounded select-none"  data-action="click->edit#removeDay">移除天數</div>
                 <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
+                <div class="group relative bg-yellow-500 inline-block cursor-pointer hover:bg-yellow-400 text-white font-normal text-sm p-2 border-yellow-500 rounded select-none">小提示
+                  <i class="fa-solid fa-lightbulb"></i>
+                  <span class="opacity-0 w-[300px] bg-gray-200  text-black text-left text-md rounded-lg py-3 absolute z-10 group-hover:opacity-100 top-[110%] -left-1/2 ml-[-120px] sm:ml-2 px-3 pointer-events-none">拖拉功能可編輯、刪除內容，也可將喜愛項目新增至行程規劃中</span>
+                </div>
               </div>
               <div class="inline-flex mr-3 items-center cursor-pointer p-2 bg-red-500 hover:bg-red-600 text-white text-sm font-normal rounded-md w-max" id="delete-btn" data-controller="sorting">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,7 +54,6 @@
                 </svg>
               </div>
             </div>
-            <span class="text-xs ml-3 text-gray-500 inline-block select-none">(拖拉功能可編輯、刪除內容，也可將喜愛項目新增至行程規劃中)</span>
             <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
