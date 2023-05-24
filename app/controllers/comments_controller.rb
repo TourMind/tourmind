@@ -51,7 +51,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    @comment.update(deleted_at: Time.now)
     redirect_to comments_path
   end
 

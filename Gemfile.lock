@@ -251,6 +251,8 @@ GEM
     orm_adapter (0.5.0)
     pagy (6.0.3)
     parallel (1.23.0)
+    paranoia (2.6.1)
+      activerecord (>= 5.1, < 7.1)
     parser (3.2.2.1)
       ast (~> 2.4.1)
     pg (1.5.3)
@@ -438,6 +440,7 @@ DEPENDENCIES
   omniauth-line!
   omniauth-rails_csrf_protection (~> 1.0)
   pagy
+  paranoia (~> 2.6, >= 2.6.1)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 6.1.7, >= 6.1.7.3)

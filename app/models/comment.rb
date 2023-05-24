@@ -3,6 +3,7 @@ class Comment < ApplicationRecord
   mount_uploaders :images, ImageUploader
   scope :by_content, ->(content) { where('content LIKE ?', "%#{content}%") }
   validates :content, presence: true
+  acts_as_paranoid
   def user_name
     User.find(user_id).name if user_id
   end
