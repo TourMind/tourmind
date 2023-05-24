@@ -23,10 +23,16 @@ class PaymentsController < ApplicationController
   end
 
   def ok
-    @diamond_grade = Order.diamond_grade(current_user)
-    current_user.update(diamond_grade: @diamond_grade)
-    # 撈取user的最後一筆訂單
-    @last_order = current_user.orders.last
-    @expire_time = Order.expire_time(current_user)
+    order = Order.find_order(current_user)
+    if order.present? && order.last.updated_at + 30.seconds > Time.zone.now
+      @diamond_grade = Order.diamond_grade(current_user)
+      current_user.update(diamond_grade: @diamond_grade)
+      # 撈取user的最後一筆訂單
+      @last_order = Order.where(user_id: current_user.id).last
+      @expire_time = Order.expire_time(current_user)
+    else
+      flash[:alert] = '無權限存取'
+      redirect_to root_path
+    end
   end
 end

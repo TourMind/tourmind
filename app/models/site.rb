@@ -31,7 +31,7 @@ class Site < ApplicationRecord
   end
 
   # 選項列表
-  CITY_OPTIONS = %w[台北市 新北市]
+  CITY_OPTIONS = %w[大同區 中正區 中山區 大安區 信義區 萬華區 士林區 瑞芳區 文山區 淡水區 萬里區 北投區]
   SITE_TYPE_OPTIONS = %w[建築人文 自然風光 展覽中心 宗教場所 公園/主題樂園 歷史遺跡 戶外運動 傳統文化體驗 觀光圈 生活休閒]
   PET_FRIENDLY_OPTIONS = %w[可攜寵物]
 

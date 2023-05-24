@@ -41,12 +41,10 @@
     <div class="container mx-auto">
       <h2 class="mb-4 text-2xl font-bold text-white md:text-3xl">探索你的玩樂世界</h2>
       <p class="p-2 mb-4 text-base text-white md:text-lg">找尋在地體驗或到遠方探險，隨時隨地探索屬於你的玩樂世界</p>
-      <form class="flex flex-col items-center md:flex-row md:items-center">
-        <div class="relative flex-1 mb-4 md:mr-4 md:mb-0">
-          <input type="text" name="keyword" value="<%= params[:keyword] %>" placeholder="請輸入關鍵字..." class="w-full px-4 py-2 bg-white border-none">
-        </div>
-        <input type="submit" class="w-full btn btn-primary rounded-lg md:w-auto" value="查詢">
-      </form>
+      <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex justify-center mb-2 max-h-10") do |form| %>
+      <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full pl-8 pr-10 py-2 border border-gray-500 rounded-full leading-5 bg-white focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
+      <%= form.submit "搜尋", class: "ml-2 py-2 px-4 border border-transparent text-sm font-medium rounded-full text-indigo-100 bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600" %>
+      <% end %>  
     </div>
   </div>
 </section>
@@ -267,37 +265,3 @@
     <% end %>
   </div>
 </section>
-<footer class="p-10 footer bg-base-200 text-base-content">
-  <div>
-    <span class="footer-title">Services</span>
-    <a class="link link-hover">Branding</a>
-    <a class="link link-hover">Design</a>
-    <a class="link link-hover">Marketing</a>
-    <a class="link link-hover">Advertisement</a>
-  </div>
-  <div>
-    <span class="footer-title">Company</span>
-    <a class="link link-hover">About us</a>
-    <a class="link link-hover">Contact</a>
-    <a class="link link-hover">Jobs</a>
-    <a class="link link-hover">Press kit</a>
-  </div>
-  <div>
-    <span class="footer-title">Legal</span>
-    <a class="link link-hover">Terms of use</a>
-    <a class="link link-hover">Privacy policy</a>
-    <a class="link link-hover">Cookie policy</a>
-  </div>
-  <div>
-    <span class="footer-title">Newsletter</span>
-    <div class="form-control w-80">
-      <label class="label">
-        <span class="label-text">Enter your email address</span>
-      </label>
-      <div class="relative">
-        <input type="text" placeholder="username@site.com" class="w-full pr-16 input input-bordered" />
-        <button class="absolute top-0 right-0 rounded-l-none btn btn-primary">Subscribe</button>
-      </div>
-    </div>
-  </div>
-</footer>

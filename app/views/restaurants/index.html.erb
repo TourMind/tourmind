@@ -77,7 +77,7 @@
               <% end %>
             </ul>
           </div>
-          <%= submit_tag "篩選", {class:'lg:hidden w-full px-4 py-2 ml-2 text-sm font-medium text-indigo-100 bg-indigo-600 border border-transparent rounded-full ', data:{filter_target:"filterSubmitBtn"}} %>
+          <%= submit_tag "篩選", {class:'lg:hidden w-full px-4 py-2 ml-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 cursor-pointer border border-transparent rounded-full ', data:{filter_target:"filterSubmitBtn"}} %>
         <% end %>
       </section>
       <section class="flex-grow w-3/5">
@@ -103,7 +103,7 @@
             <%= render "tag", tags: :atmostphere%>
           </div>
         </div>
-        <section class="grid grid-cols-1 gap-2 lg:grid-cols-2 xl:grid-cols-3">
+        <section class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           <% @restaurants.each do |restaurant| %>
             <div class="overflow-hidden bg-white rounded-md shadow-lg">
               <div class="relative">

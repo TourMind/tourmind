@@ -118,12 +118,12 @@ export default class extends Controller {
 
   addDay() {
     const dayElement = `
-    <div class="relative px-4 day min-h-[150px] bg-white">
-      <div class="flex justify-between items-center">
-        <h4 class="text-xl text-gray-900 font-bold day-title">第 ${
+    <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
+      <div class="relative bg-blue-400 py-3">
+        <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 ${
           +this.containerTarget.dataset.days + 1
         } 天</h4>
-        <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
+        <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>

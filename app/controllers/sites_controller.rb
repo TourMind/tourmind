@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class SitesController < ApplicationController
+  include PageHelp
   before_action :set_site, only: %i[show edit update destroy]
   helper_method :star_rating
-  before_action :comment_rating, only: %i[index show]
+  before_action :site_rating, only: %i[index show]
   before_action :check_permission, only: %i[new edit]
 
   def index
@@ -68,31 +69,6 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:name, :website, :address, :image, :parking, :tel, :latitude, :longitude,
                                  :stay_duration, :intro, :pet_friendly, :images_cache, site_types: [], images: [], remove_images: [],)
-  end
-
-  def star_rating(rating)
-    stars = ''
-    if rating.present?
-      full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.1 ? 1 : 0
-      empty_stars = 5 - full_stars - half_stars
-      full_stars.times { stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>' }
-      half_stars.times { stars += '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>' }
-      empty_stars.times { stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>' }
-    else
-      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
-    end
-    stars.html_safe
-  end
-
-  def comment_rating
-    @site_data = {}
-    Site.all.each do |site|
-      @site_data[site.id] = {
-        average_rating: site.comments.average(:rating).to_f,
-        comment_count: site.comments.where.not(content: nil).count,
-      }
-    end
   end
 
   def check_permission

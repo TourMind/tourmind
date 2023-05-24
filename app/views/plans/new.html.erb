@@ -1,5 +1,5 @@
-<main class="relative bg-slate-100" data-controller="edit">
-  <div class="container w-full px-10 flex mx-auto">
+<main class="relative " data-controller="edit">
+  <div class="container w-full sm:px-10 flex mx-auto">
     <div class="fixed h-screen -translate-x-56 w-56 top-0 left-0 bg-white transition-all ease-in-out overflow-auto shadow-lg" data-edit-target="drawer">
       <button data-action="click->edit#toggleFav" type="button" class="bg-gray-100 rounded-md p-2 inline-flex text-gray-400 hover:text-gray-500 hover:bg-gray-200 mt-1 ml-1">
         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -29,32 +29,31 @@
       </div>
     </div>
     <div class="w-full mt-16" id="top" data-edit-target="id" data-id="<%= @plan.id %>">
-      <%= link_to "所有行程", plans_path, class: "text-blue-600 rounded-lg"%>
+      <%= link_to "所有行程", plans_path, class: "text-blue-600 inline-block ml-3 border-b-2 border-blue-600"%>
       <!-- component -->
-      <div class="flex justify-end p-12 mx-auto">
+      <div class="flex justify-end py-12 mx-auto">
         <div class="w-full transition-all ease-in-out" data-edit-target="form">
           <%= form_with model: @plan, data: { turbo: "false"}, multipart: true do |form| %>
             <div class="flex justify-between">
-              <div>
-                <div class="bg-blue-600 inline-block cursor-pointer hover:bg-blue-700 text-white font-normal text-sm p-2 border-blue-700 rounded select-none" data-action="click->edit#addDay">增加天數</div>
-                <div class="bg-red-600 inline-block cursor-pointer hover:bg-red-700 text-white font-normal text-sm p-2 border-red-700 rounded select-none"  data-action="click->edit#removeDay">移除天數</div>
-                <div class="bg-blue-600 inline-block cursor-pointer hover:bg-blue-700 text-white font-normal text-sm p-2 border-blue-700 rounded select-none"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
-                <span class="text-xs text-gray-500 inline-block select-none">(使用滑鼠拖拉來編輯行程)</span>
+              <div class="ml-3">
+                <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none" data-action="click->edit#addDay">增加天數</div>
+                <div class="bg-red-500 inline-block cursor-pointer hover:bg-red-600 text-white font-normal text-sm p-2 border-red-700 rounded select-none"  data-action="click->edit#removeDay">移除天數</div>
+                <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
               </div>
-              <div class="inline-flex items-center cursor-pointer p-2 bg-red-600 hover:bg-red-700 text-white text-sm font-normal rounded-md" id="delete-btn" data-controller="sorting">
+              <div class="inline-flex mr-3 items-center cursor-pointer p-2 bg-red-500 hover:bg-red-600 text-white text-sm font-normal rounded-md w-max" id="delete-btn" data-controller="sorting">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
-                垃圾桶
               </div>
             </div>
-            <div class="bg-white rounded-lg shadow-xl p-8 gap-3 flex-wrap mt-3 grid grid-cols-4 mb-5" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
+            <span class="text-xs ml-3 text-gray-500 inline-block select-none">(拖拉功能可編輯、刪除內容，也可將喜愛項目新增至行程規劃中)</span>
+            <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
-                  <div class="relative px-4 day min-h-[150px] bg-white">
-                    <div class="flex justify-between items-center">
-                      <h4 class="text-xl text-gray-900 font-bold day-title">第 <%= i + 1 %> 天</h4>
-                      <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
+                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
+                    <div class="relative bg-blue-400 py-3">
+                      <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
+                      <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -124,7 +123,7 @@
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.file_field :images, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "images"}, multiple: true, accept: "image/png,image/gif,image/jpeg" %>
             </div>
-            <div data-action="click->edit#update" class="cursor-pointer inline-block mx-auto my-10 shadow bg-indigo-600 hover:bg-indigo-700 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-5 rounded">
+            <div data-action="click->edit#update" class="cursor-pointer inline-block mx-auto my-10 shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-5 rounded">
               <div class="flex items-center gap-2" data-edit-target="submitBtn">
                 <span class="inline-block" data-edit-target="submitText">更新行程</span>
               </div>

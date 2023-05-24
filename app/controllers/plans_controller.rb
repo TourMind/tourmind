@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 class PlansController < ApplicationController
+  include PageHelp
   before_action :find_plan,
                 only: %i[show edit update destroy day_info plan_overview]
   before_action :authenticate_user!,
                 except: %i[index show day_info plan_overview]
   before_action :find_favorites, only: %i[new edit]
   helper_method :star_rating
-  before_action :comment_rating, only: %i[index show]
+  before_action :plan_rating, only: %i[index show]
   def index
     @plans = Plan.where(public: true).order(id: :desc)
   end
@@ -24,9 +27,11 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-
-    if current_user.plans.count >= current_user.plans_limit_number
-      return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
+    if current_user.diamond_grade != '一般會員' && membership_expiry_date < format_date(Time.zone.now)
+      current_user.update(diamond_grade: '一般會員')
+      redirect_to pricing_path, alert: '會員已到期！'
+    elsif current_user.plans.count >= current_user.plans_limit_number
+      redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
   end
 
@@ -50,7 +55,7 @@ class PlansController < ApplicationController
 
   def edit
     if current_user.plans.count >= current_user.plans_limit_number &&
-       current_user != @plan.user && !@plan.editors.include?(current_user)
+       current_user != @plan.user && @plan.editors.exclude?(current_user)
       return redirect_to plans_path, alert: '已達新增上限，請升級會員！'
     end
 
@@ -83,10 +88,10 @@ class PlansController < ApplicationController
       rescue ActiveRecord::StaleObjectError, NoMethodError
 
         render json: {
-          errors: "行程已被共同編輯者更新，\n將在3秒後重新整理，\n以查看最新的內容。",
-          reload: "true"
-        },
-        status: :unprocessable_entity
+                 errors: "行程已被共同編輯者更新，\n將在3秒後重新整理，\n以查看最新的內容。",
+                 reload: 'true',
+               },
+               status: :unprocessable_entity
         return
       end
     end
@@ -189,7 +194,8 @@ class PlansController < ApplicationController
       :category,
       :locations,
       :lock_version,
-      images: []
+      images: [],
+      picsums: []
     )
   end
 
@@ -261,37 +267,5 @@ class PlansController < ApplicationController
           next({ name: site.name, type: '景點', id: site.id, stay_time: 0 })
         end
       end
-  end
-
-  def star_rating(rating)
-    stars = ''
-    if rating.present?
-      full_stars = rating.to_i
-      half_stars = rating - full_stars >= 0.1 ? 1 : 0
-      empty_stars = 5 - full_stars - half_stars
-      full_stars.times do
-        stars += '<i class="fas fa-star" style="color: #fbbf24;"></i>'
-      end
-      half_stars.times do
-        stars +=
-          '<i class="fa-solid fa-star-half-stroke" style="color: #fbbf24;"></i>'
-      end
-      empty_stars.times do
-        stars += '<i class="fa-regular fa-star" style="color: #a5a6a7;"></i>'
-      end
-    else
-      5.times { stars += '<i class="fas fa-star" style="color: #d8d8d8;"></i>' }
-    end
-    stars.html_safe
-  end
-
-  def comment_rating
-    @plan_data = {}
-    Plan.all.each do |plan|
-      @plan_data[plan.id] = {
-        average_rating: plan.comments.average(:rating).to_f,
-        comment_count: plan.comments.where.not(content: nil).count,
-      }
-    end
   end
 end

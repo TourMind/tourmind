@@ -31,6 +31,14 @@ class ApplicationController < ActionController::Base
   # 404:沒有找到紀錄
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  def membership_expiry_date
+    Order.where(user_id: current_user.id).last.pay_time + 1.month
+  end
+
+  def format_date(date)
+    date.in_time_zone('Taipei').strftime('%Y/%m/%d')
+  end
+
   private
 
   def record_not_found
