@@ -90,6 +90,10 @@
     @apply opacity-0 select-none rating-hidden checked:bg-none;
   }
 }
+.card-dows {
+  @apply rounded-lg shadow-lg flex-grow-0;
+}
+
 
 /* 以下為分頁樣式 */
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RestaurantsController < ApplicationController
-  include PageHelp
+  include PageHelper
   before_action :set_restaurant, only: %i[show edit update destroy]
   helper_method :star_rating
   before_action :restaurant_rating, only: %i[index show]
@@ -25,7 +25,7 @@ class RestaurantsController < ApplicationController
   def show
     @google_api_key = Rails.application.credentials.google_api_key
     @comment = Comment.new
-    @comments = @restaurant.comments
+    @comments = @restaurant.comments.order(created_at: :desc)
     @pagy, @paginated_comments = pagy(@comments.order(:id), items: 5)
   end
 

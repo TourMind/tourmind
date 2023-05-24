@@ -3,8 +3,8 @@
   <%= render "favoritebtn", object:@restaurant, size:'text-lg'%>
 </div>
   <div class="flex items-center">
-    <span class="mr-2"><%= star_rating(@restaurant_data[@restaurant.id][:average_rating]) %>
-                                   <%= sprintf('%.1f', @restaurant_data[@restaurant.id][:average_rating]) %></span>
-    <span class="mr-2">(<%= @restaurant_data[@restaurant.id][:comment_count] %>則評論)</span>
+    <span class="mr-2"><%= star_rating(restaurant_rating[@restaurant.id][:average_rating]) %>
+                       <%= sprintf('%.1f', restaurant_rating[@restaurant.id][:average_rating]) %></span>
+    <span class="mr-2">(<%= restaurant_rating[@restaurant.id][:comment_count] %>則評論)</span>
     <span class="inline-block rounded-full px-3 py-1 text-md font-semibold text-gray-700 "><%= restaurant.restaurant_type%></span>
   </div>
