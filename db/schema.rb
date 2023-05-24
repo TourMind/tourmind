@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2023_05_23_004845) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
+    t.string "slug"
+    t.string "scraped_photo"
     t.json "images"
     t.string "slug"
     t.string "scraped_photo"
@@ -172,6 +174,7 @@ ActiveRecord::Schema.define(version: 2023_05_23_004845) do
     t.string "diamond_grade", default: "一般會員"
     t.string "amount"
     t.integer "role", default: 1
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
