@@ -20,7 +20,7 @@
         </li>
         <li class="px-5 py-2 md:px-2">
           <% if current_user.diamond_grade == '一般會員'%>
-            <%= link_to "升級會員", pricing_path, class: "p-3 btn-sm btn-gray rounded-lg shadow-lg"  %>
+            <%= link_to "升級會員", pricing_path, class: "btn-round btn-sm btn-gray"  %>
           <% elsif current_user.diamond_grade == '白鑽會員' %>
             <%= link_to order_path(current_user.id) do %>
               <span class="mr-2 btn-round btn-sm btn-VIP"><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 訂單資訊</span>
@@ -56,10 +56,10 @@
       <span class="hidden px-2 py-2 lg:inline"><%= current_user.email %></span>
       <ul data-navbar-target="navbarMenu" class="hidden mr-2 text-right navbar-menu md:flex" style="z-index: 10">
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-black shadow-md rounded-lg p-3 btn-md" %>
+          <%= link_to "主控台", dashboard_users_path, class: "btn-round btn-sm btn-black" %>
         </li>
         <li class="px-5 py-2 md:px-2">
-          <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round shadow-md rounded-lg p-3 btn-md btn-gray" %>
+          <%= button_to "登出", destroy_user_session_path, method: "delete", class: "btn-round btn-sm btn-gray" %>
         </li>
       </ul>
       <i class="rounded-full ring ring-primary ring-offset-base-100">
@@ -71,10 +71,10 @@
     <% else %>
       <ul data-navbar-target="navbarMenu" class="hidden navbar-menu md:flex" style="z-index: 10">
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "會員登入" , new_user_session_path, data: { action: "click->modal#toggleModal", turbo_frame: :login, frame: :login }, class: "shadow-md rounded-lg p-3 btn-md btn-gray" %>
+          <%= link_to "會員登入" , new_user_session_path, data: { action: "click->modal#toggleModal", turbo_frame: :login, frame: :login }, class: "btn-round btn-sm btn-black" %>
         </li> 
         <li class="px-5 py-2 md:px-2">
-          <%= link_to "註冊", new_user_registration_path, data: { action: "click->modal#toggleModal", turbo_frame: :signup, frame: :signup }, class: "shadow-md rounded-lg p-3 btn-md btn-gray" %>
+          <%= link_to "註冊", new_user_registration_path, data: { action: "click->modal#toggleModal", turbo_frame: :signup, frame: :signup }, class: "btn-round btn-sm btn-gray" %>
         </li>
       </ul>
       <button class="px-2 md:hidden" data-action="click->navbar#toggleNavbarMenu">
