@@ -6,13 +6,10 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    @favorite = current_user.favorites.new(favorite_params)
+    favorite = current_user.favorites.new(favorite_params)
+    return render json: { message: "新增到喜愛清單", favorite_id: favorite.id } if favorite.save
 
-    if @favorite.save
-      redirect_back fallback_location: root_path, notice: '新增到喜愛清單'
-    else
-      redirect_back fallback_location: root_path, alert: '收藏失敗'
-    end
+    render json: { message: "新增到喜愛清單" }
   end
 
   def destroy
@@ -24,6 +21,6 @@ class FavoritesController < ApplicationController
   private
 
   def favorite_params
-    params.require(:favorites).permit(:favorable_type, :favorable_id)
+    params.permit(:favorable_type, :favorable_id)
   end
 end
