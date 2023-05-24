@@ -75,8 +75,6 @@ ActiveRecord::Schema.define(version: 2023_05_23_004845) do
     t.string "hotel_types"
     t.string "tel"
     t.string "equipment", default: [], array: true
-    t.string "slug"
-    t.string "scraped_photo"
     t.json "images"
     t.string "slug"
     t.string "scraped_photo"
