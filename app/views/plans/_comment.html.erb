@@ -1,12 +1,12 @@
-<div class="truncate ...">
-  <hr class="h-0.5 bg-gray-300">
+<div class="truncate ... p-3">
   <p><%= comment.user.email if comment.user %> </p>
   <%= star_rating(comment.rating) %>
-  <div class="flex flex-row space-x-4 ">
+  <div class="flex flex-row space-x-4 py-2">
     <% comment.images.each do |image| %>
-      <%= image_tag image.url, class: 'w-1/5 mx-1' %>
+      <%= image_tag image.url, style: "object-fit: fill; height: 200px; width: 200px;" %>
     <% end %>
   </div>
   <p><%= comment.content %></p>
   <%= comment.created_at.in_time_zone('Taipei').strftime("%Y-%m-%d %H:%M:%S") if comment.created_at %>
+  <hr class="h-0.5 bg-gray-300">
 </div>

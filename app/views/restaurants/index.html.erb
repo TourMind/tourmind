@@ -132,9 +132,9 @@
                   <% end %>
                 </div>
                 <ul>
-                  <li><%= star_rating(restaurant_rating[restaurant.id][:average_rating]) %>
-                    <%= sprintf('%.1f', restaurant_rating[restaurant.id][:average_rating]) %>
-                    (<%= restaurant_rating[restaurant.id][:comment_count] %>則評論)
+                  <li><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+                    <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+                    (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
                   </li>
                   <li class= "mt-2"><%= restaurant.intro&.truncate(70)%>
                   </li>
