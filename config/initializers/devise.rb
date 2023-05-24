@@ -31,9 +31,9 @@ Devise.setup do |config|
                   Rails.application.credentials[:google_oauth_client_id],
                   Rails.application.credentials[:google_oauth_client_secret]
   # Line
-  config.omniauth :line,
-                  Rails.application.credentials[:line_client_id],
-                  Rails.application.credentials[:line_client_secret]
+  # config.omniauth :line,
+  #                 Rails.application.credentials[:line_client_id],
+  #                 Rails.application.credentials[:line_client_secret]
   # Facebook
   config.omniauth :facebook,
                   Rails.application.credentials[:facebook_client_id],
