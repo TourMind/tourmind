@@ -170,25 +170,23 @@
       </div>
     </section>
     <%= render "plan_overview"%>
+    <h2 id="comment-heading" class="text-2xl font-bold px-3 py-3">評等和評論</h2>
+    <hr class="h-0.5 bg-gray-300 mx-3">
+    <div id="comment-list">
+    <%= render partial: "comment", collection: @paginated_comments %>
+    </div>
+    <%= render "pagy" %>
   </div>
 </main>
-<section class="p-6">
-  <div class="container col-span-5 mx-auto bg-white">
-    <h2 class="text-2xl font-bold ">評等和評論</h2>
-    <div class="h-40 overflow-y-auto ">
-      <div id="comment-list">
-        <%= render partial: "comment", collection: @plan.comments %>
-      </div>
-    </div>
-  </div>
-  <section class='container w-full mx-auto' data-controller="butt">
-    <div>
-      <a data-action="click->butt#toggleCommentForm" class="ml-3 inline-block px-5 py-3 mt-2 font-medium bg-gray-100 rounded-lg" href="#comment-form">
+<section class='container px-3 m-auto' data-controller="butt">
+  <% if user_signed_in? && current_user.role == 1 %>
+    <div class="bg-white full lg:w-2/3 ">
+      <a data-action="click->butt#toggleCommentForm" class="inline-block text-white px-5 py-3 mt-2 font-medium bg-blue-500 hover:bg-blue-600 rounded-lg" href="#comment-form">
         發表評論
       </a>
-      <div class="hidden" data-butt-target="form" >
-        <%= render "comments/comment", comment: Comment.new, plan:@plan %>
-      </div>
     </div>
-  </section>
+    <div class="hidden" data-butt-target="form" >
+      <%= render "comments/comment", comment: Comment.new, hotel:@hotel %>
+    </div>
+  <% end %>
 </section>

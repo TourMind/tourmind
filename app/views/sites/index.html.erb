@@ -109,9 +109,9 @@
                 <%end%>
               </div>
               <ul>
-                <li><%= star_rating(site_rating[site.id][:average_rating]) %>
-                  <%= sprintf('%.1f', site_rating[site.id][:average_rating]) %>
-                  (<%= site_rating[site.id][:comment_count] %>則評論)
+                <li><%= star_rating(@site_data[site.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+                  (<%= @site_data[site.id][:comment_count] %>則評論)
                 </li>
                 <li class= "mt-2"><%= site.intro&.truncate(70)%>
                 </li>

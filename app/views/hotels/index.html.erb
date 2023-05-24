@@ -109,9 +109,9 @@
                 <% end %>
               </div>
               <ul>
-                <li><%= star_rating(hotel_rating[hotel.id][:average_rating]) %>
-                  <%= sprintf('%.1f', hotel_rating[hotel.id][:average_rating]) %>
-                  (<%= hotel_rating[hotel.id][:comment_count] %>則評論)
+                <li><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+                  (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
                 </li>
                 <li class= "mt-2"><%= hotel.intro&.truncate(70)%>
                 </li>
