@@ -67,6 +67,31 @@ export default class extends Controller {
         this.element.id === "show" ? this.longAddBtn() : this.addBtn();
       return;
     }
+
+    this.alert("error", "刪除失敗");
+  }
+
+  async removeFavCard(e) {
+    const card = e.target.closest(".card");
+    const { id } = card.dataset;
+
+    const res = await destroy(`/favorites/${id}`);
+
+    if (res.ok) {
+      this.alert("success", "已從喜愛清單中移除");
+      document.querySelectorAll(`.card-${id}`).forEach((el) => el.remove());
+      this.updateCount();
+      return;
+    }
+
+    this.alert("error", "刪除失敗");
+  }
+
+  updateCount() {
+    document.querySelectorAll(".place").forEach((el) => {
+      el.querySelector(".count").textContent =
+        el.querySelectorAll(".card").length;
+    });
   }
 
   alert(icon, title) {
