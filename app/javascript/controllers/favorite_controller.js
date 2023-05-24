@@ -42,9 +42,11 @@ export default class extends Controller {
       responseKind: "json",
     });
 
+    const data = await res.json;
+
     if (res.ok) {
       this.alert("success", "新增到喜愛清單");
-      e.target.closest(".button").innerHTML = this.removeBtn();
+      e.target.closest(".button").innerHTML = this.removeBtn(data.favorite_id);
       return;
     }
 
@@ -52,7 +54,15 @@ export default class extends Controller {
   }
 
   async removeFav(e) {
-    const { id, type } = e.target.closest(".item").dataset;
+    const { id } = e.currentTarget.dataset;
+
+    const res = await destroy(`favorites/${id}`);
+
+    if (res.ok) {
+      this.alert("success", "已從喜愛清單中移除");
+      e.target.closest(".button").innerHTML = this.addBtn();
+      return;
+    }
   }
 
   alert(icon, title) {
@@ -62,9 +72,9 @@ export default class extends Controller {
     });
   }
 
-  removeBtn() {
+  removeBtn(id) {
     return `
-    <div class="cursor-pointer" data-action="click->favorite#removeFav">
+    <div class="cursor-pointer" data-action="click->favorite#removeFav" data-id="${id}">
       <span class="text-red-500 text-4xl">&#x2665;</span>
     </div>
     `;

@@ -7,15 +7,15 @@ class FavoritesController < ApplicationController
 
   def create
     favorite = current_user.favorites.new(favorite_params)
-    return render json: { message: "新增到喜愛清單", favorite_id: favorite.id } if favorite.save
+    return render json: { favorite_id: favorite.id } if favorite.save
 
-    render json: { message: "新增到喜愛清單" }
+    render json: { message: "新增失敗" }, status: :internal_server_error
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
-    @favorite.destroy
-    redirect_back fallback_location: root_path, notice: '已從喜愛清單中移除'
+    favorite = Favorite.find(params[:id])
+    favorite.destroy
+    head :no_content
   end
 
   private
