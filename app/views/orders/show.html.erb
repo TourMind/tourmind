@@ -2,7 +2,7 @@
   <h1 class="text-2xl font-bold lg:text-4xl mb-7"><%= User.find_by(id: @order.last.user_id).name %>的收費細節</h1>
   <div class="flex justify-center">
     <div>
-      <h2 class="p-2 text-2xl font-bold">會員資格</h2>
+      <h2 class="p-2 text-2xl font-bold">購買資訊</h2>
     <div class="relative p-4 duration-200 shadow-xl bg-gary-400 rounded-xl">
       <% if @order.last.amount === 50 %>
         <span><%= image_tag("diamond_white.png", size: "20x20", class: "inline") %> 白鑽會員</span>
@@ -58,6 +58,28 @@
             </div>
           <% end %>        
         </div>
+      </div>
+      <div class="flex-1 p-8 mt-4 mt-10 bg-white rounded-lg shadow-xl">
+        <div class="pb-1 border-b-2">
+          <span class="px-4 py-2 text-xl font-bold bg-gray-100 rounded-t-lg">會員資格</span>
+        </div>
+        <table class="w-full text-sm text-left text-gray-500 bg-white">
+          
+          <tbody class="border-t border-gray-100 divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">白鑽</th>
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">新增/編輯 3 個行程規劃</th>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">藍鑽</th>
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">新增/編輯 5 個行程規劃</th>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">紅鑽</th>
+              <th class="gap-2 px-6 py-4 font-normal text-gray-900">新增/編輯無限多個行程規劃</th>
+            </tr>
+          </tbody>
+        </table>
       </div>  
     </div>
   </div>

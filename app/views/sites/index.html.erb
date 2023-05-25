@@ -66,9 +66,9 @@
         <div class="py-2 font-bold">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
-              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
+              搜尋<%= params[:keyword]%>結果： <%= number_per_page(@pagy, @sites) %> 個景點
             <% else %>
-              <%= @sites.count %> / <%= @pagy.count %> 個景點
+              <%= number_per_page(@pagy, @sites) %> 個景點
             <% end %>
           <% else %>
             <span class="font-bold">沒有找到符合條件的景點</span>
@@ -109,9 +109,9 @@
                 <%end%>
               </div>
               <ul>
-                <li><%= star_rating(site_rating[site.id][:average_rating]) %>
-                  <%= sprintf('%.1f', site_rating[site.id][:average_rating]) %>
-                  (<%= site_rating[site.id][:comment_count] %>則評論)
+                <li><%= star_rating(@site_data[site.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+                  (<%= @site_data[site.id][:comment_count] %>則評論)
                 </li>
                 <li class= "mt-2"><%= site.intro&.truncate(70)%>
                 </li>
