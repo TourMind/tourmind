@@ -1,102 +1,102 @@
-<section class="relative flex flex-wrap w-full h-screen">
-    <div class="flex items-center justify-center w-full ">
-        <h1 class="m-6 text-2xl font-black lg:text-6xl">選擇
-            <span class="space-x-0 align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
-            <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
-            的升級方案
-        </h1>
-    </div>
-    <div class="flex items-center justify-center w-full bg-indigo-50">
-        <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-4">
-            <div class="relative w-full p-4 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
-                <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
-                    一般會員
-                </span>
-                <div class="p-5">
-                    <%= image_tag "free.png",size: '100x100', class: "m-auto" %>
-                    <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$0 <span class="text-xs">/月</span>
-                    </p>
-                    <button class="w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md">
-                        <%=  link_to "免費試用", root_path, class: "text-xl" %>
-                    </button>
-                    <hr class="mx-auto my-4 border-t-2 border-gray-300">
-                    <ul class="m-2">
-                        <li class="text-lg">
-                            <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
-                            新增/編輯 1 個行程規劃
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
-                <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
-                    白鑽會員
-                </span>
-                <div class="p-5">
-                    <%= image_tag "diamond_white.png",size: '100x100', class: "m-auto" %>
-                    <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$50 <span class="text-xs">/月</span>
-                    </p>
-                    <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
-                        <% @option_a.each do |key, value| %>
-                            <%= form.hidden_field key, value: value %>
-                        <% end %>
-                        <%= form.submit "立即購買", class: "w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl cursor-pointer" %>
-                    <% end %>
-                    <hr class="mx-auto my-4 border-t-2 border-gray-300">
-                    <ul class="m-2">
-                        <li class="text-lg">
-                            <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
-                            新增/編輯 3 個行程規劃
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
-                <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
-                    藍鑽會員
-                </span>
-                <div class="p-5">
-                    <%= image_tag "diamond_blue.png",size: '100x100', class: "m-auto" %>
-                    <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$100 <span class="text-xs">/月</span>
-                    </p>
-                    <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
-                        <% @option_b.each do |key, value| %>
-                            <%= form.hidden_field key, value: value %>
-                        <% end %>
-                        <%= form.submit "立即購買", class: "w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl cursor-pointer" %>
-                    <% end %>
-                    <hr class="mx-auto my-4 border-t-2 border-gray-300">
-                    <ul class="m-2">
-                        <li class="text-lg">
-                            <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
-                            新增/編輯 5 個行程規劃
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
-                <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
-                    紅鑽會員
-                </span>
-                <div class="p-5">
-                    <%= image_tag "diamond_red.png",size: '100x100', class: "m-auto" %>
-                    <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$200 <span class="text-xs">/月</span>
-                    </p>
-                    <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
-                        <% @option_c.each do |key, value| %>
-                            <%= form.hidden_field key, value: value %>
-                        <% end %>
-                        <%= form.submit "立即購買", class: "cursor-pointer w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl" %>
-                    <% end %>
-                    <hr class="mx-auto my-4 border-t-2 border-gray-300">
-                    <ul class="m-2">
-                        <li class="text-lg">
-                            <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
-                            無限制新增/編輯我的行程規劃
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<section class="relative flex flex-wrap w-full">
+  <div class="flex items-center justify-center w-full py-10">
+    <h1 class="m-6 text-2xl font-black lg:text-6xl">選擇
+      <span class="space-x-0 align-middle text-amber-500 cloitems-center inlink-block tracking-zero">Tour</span>
+      <span class="items-center align-middle inlink-block text-sky-500 tracking-zero">Mind</span>
+      的升級方案
+    </h1>
+  </div>
+  <div class="flex items-center justify-center w-full bg-indigo-50">
+    <div class="grid grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-4">
+      <div class="relative w-full p-4 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
+        <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
+          一般會員
+        </span>
+        <div class="p-5">
+          <%= image_tag "free.png",size: '100x100', class: "m-auto" %>
+          <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$0 <span class="text-xs">/月</span>
+          </p>
+          <button class="w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md">
+            <%=  link_to "免費試用", root_path, class: "text-xl" %>
+          </button>
+          <hr class="mx-auto my-4 border-t-2 border-gray-300">
+          <ul class="m-2">
+            <li class="text-lg">
+              <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
+              新增/編輯 1 個行程規劃
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
+        <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
+          白鑽會員
+        </span>
+        <div class="p-5">
+          <%= image_tag "diamond_white.png",size: '100x100', class: "m-auto" %>
+          <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$50 <span class="text-xs">/月</span>
+          </p>
+          <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
+            <% @option_a.each do |key, value| %>
+              <%= form.hidden_field key, value: value %>
+            <% end %>
+            <%= form.submit "立即購買", class: "w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl cursor-pointer" %>
+          <% end %>
+          <hr class="mx-auto my-4 border-t-2 border-gray-300">
+          <ul class="m-2">
+            <li class="text-lg">
+              <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
+              新增/編輯 3 個行程規劃
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
+        <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
+          藍鑽會員
+        </span>
+        <div class="p-5">
+          <%= image_tag "diamond_blue.png",size: '100x100', class: "m-auto" %>
+          <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$100 <span class="text-xs">/月</span>
+          </p>
+          <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
+            <% @option_b.each do |key, value| %>
+              <%= form.hidden_field key, value: value %>
+            <% end %>
+            <%= form.submit "立即購買", class: "w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl cursor-pointer" %>
+          <% end %>
+          <hr class="mx-auto my-4 border-t-2 border-gray-300">
+          <ul class="m-2">
+            <li class="text-lg">
+              <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
+              新增/編輯 5 個行程規劃
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="relative w-full p-4 overflow-hidden duration-200 bg-white shadow-md rounded-xl hover:scale-105 hover:shadow-xl">
+        <span class="absolute top-0 left-0 text-white bg-blue-500 rounded-tl-lg btn-xs">
+          紅鑽會員
+        </span>
+        <div class="p-5">
+          <%= image_tag "diamond_red.png",size: '100x100', class: "m-auto" %>
+          <p class="my-5 text-4xl font-medium text-center text-gray-700 text-medium">$200 <span class="text-xs">/月</span>
+          </p>
+          <%= form_with url: "https://ccore.newebpay.com/MPG/mpg_gateway", html: { method: :post } do |form| %>
+            <% @option_c.each do |key, value| %>
+              <%= form.hidden_field key, value: value %>
+            <% end %>
+            <%= form.submit "立即購買", class: "cursor-pointer w-full py-2 text-white duration-75 bg-blue-500 rounded-md hover:bg-blue-600 hover:shadow-md text-xl" %>
+          <% end %>
+          <hr class="mx-auto my-4 border-t-2 border-gray-300">
+          <ul class="m-2">
+            <li class="text-lg">
+              <i class="mr-2 fa-solid fa-check fa-xl" style="color: #56d520;"></i>
+              無限制新增/編輯我的行程規劃
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
