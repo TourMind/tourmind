@@ -18,11 +18,11 @@ module Users
 
     # 取得使用者資料允許更新的參數
     def account_update_params
-      params.require(:user).permit(:email, :name, :city, :tel, :avatar, :avatar_url)
+      params.require(:user).permit(:email, :name, :city, :tel, :avatar, :omniauth_avatar)
     end
 
     def sign_up_params
-      params.require(:user).permit(:email, :name, :city, :tel, :avatar_url, :password, :password_confirmation)
+      params.require(:user).permit(:email, :name, :city, :tel, :omniauth_avatar, :password, :password_confirmation)
     end
   end
 end
