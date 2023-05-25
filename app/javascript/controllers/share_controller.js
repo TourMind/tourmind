@@ -36,106 +36,94 @@ export default class extends Controller {
   }
 
   async searchUser(e) {
-    try {
-      e.preventDefault();
-      const email = this.keywordTarget.value;
+    e.preventDefault();
+    const email = this.keywordTarget.value;
 
-      if (!email) return this.alertErrors("請輸入email才能進行搜尋");
+    if (!email) return this.alertErrors("請輸入email才能進行搜尋");
 
-      const emailFormat =
-        /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-      if (!email.match(emailFormat)) {
-        return this.alertErrors("請輸入正確的email格式");
-      }
-
-      this.keywordTarget.value = "";
-      this.clearResult();
-      this.showResultBox();
-      this.resultTarget.innerHTML = this.loadingCard();
-
-      const res = await get(`/check_user?email=${email}`);
-      const data = await res.json;
-
-      if (!res.ok) {
-        this.resultTarget.innerHTML = this.errorCard();
-        return;
-      }
-
-      this.resultTarget.innerHTML = this.userCard(
-        data.userId,
-        data.profilePic,
-        data.userName
-      );
-    } catch (err) {
-      window.location.replace("/404");
+    const emailFormat =
+      /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if (!email.match(emailFormat)) {
+      return this.alertErrors("請輸入正確的email格式");
     }
+
+    this.keywordTarget.value = "";
+    this.clearResult();
+    this.showResultBox();
+    this.resultTarget.innerHTML = this.loadingCard();
+
+    const res = await get(`/check_user?email=${email}`);
+    const data = await res.json;
+
+    if (!res.ok) {
+      this.resultTarget.innerHTML = this.errorCard();
+      return;
+    }
+
+    this.resultTarget.innerHTML = this.userCard(
+      data.userId,
+      data.profilePic,
+      data.userName
+    );
   }
 
   async addEditor(e) {
-    try {
-      const userId = e.target.closest(".editor").dataset.id;
-      this.addBtnTarget.innerHTML = this.loadingIcon();
+    const userId = e.target.closest(".editor").dataset.id;
+    this.addBtnTarget.innerHTML = this.loadingIcon();
 
-      const res = await post(`/plans/${this.id}/add_editor`, {
-        body: { userId },
-        responseKind: "json",
-      });
+    const res = await post(`/plans/${this.id}/add_editor`, {
+      body: { userId },
+      responseKind: "json",
+    });
 
-      const data = await res.json;
+    const data = await res.json;
 
-      if (!res.ok) {
-        this.addBtnTarget.innerHTML = this.errorIcon();
-        return this.alertErrors(data.error);
-      }
-
-      this.addBtnTarget.innerHTML = this.checkedIcon();
-
-      if (this.editorsTarget.id === "empty") {
-        this.editorsTarget.innerHTML = this.userCard(
-          data.userId,
-          data.profilePic,
-          data.userName,
-          "remove"
-        );
-
-        this.editorsTarget.id = "";
-        return;
-      }
-
-      this.editorsTarget.insertAdjacentHTML(
-        "beforeend",
-        this.userCard(data.userId, data.profilePic, data.userName, "remove")
-      );
-    } catch (err) {
-      window.location.replace("/404");
+    if (!res.ok) {
+      this.addBtnTarget.innerHTML = this.errorIcon();
+      return this.alertErrors(data.error);
     }
+
+    this.addBtnTarget.innerHTML = this.checkedIcon();
+
+    if (this.editorsTarget.id === "empty") {
+      this.editorsTarget.innerHTML = this.userCard(
+        data.userId,
+        data.profilePic,
+        data.userName,
+        "remove"
+      );
+
+      this.editorsTarget.id = "";
+      return;
+    }
+
+    this.editorsTarget.insertAdjacentHTML(
+      "beforeend",
+      this.userCard(data.userId, data.profilePic, data.userName, "remove")
+    );
   }
 
   async removeEditor(e) {
-    try {
-      const card = e.target.closest(".editor");
-      const editorId = card.dataset.id;
-      const button = e.currentTarget;
-      button.innerHTML = this.loadingIcon();
+    const card = e.target.closest(".editor");
+    const editorId = card.dataset.id;
+    const button = e.currentTarget;
+    button.innerHTML = this.loadingIcon();
 
-      const res = await destroy(`/plans/${this.id}/editor/${editorId}`);
+    const res = await destroy(`/plans/${this.id}/editor/${editorId}`);
 
-      if (!res.ok) return this.alertErrors("刪除失敗");
+    if (!res.ok) return this.alertErrors("刪除失敗");
 
-      button.innerHTML = this.checkedIcon();
+    button.innerHTML = this.checkedIcon();
 
-      setTimeout(() => card.classList.add("opacity-0"), 1000);
-      setTimeout(() => {
-        card.remove();
-        if (!this.editorsTarget.querySelector(".editor")) {
-          this.toggleSharedList();
-          this.editorsTarget.id = "empty";
-          this.editorsTarget.innerHTML = this.noEditorCard();
-        }
-      }, 1500);
-    } catch (err) {
-      window.location.replace("/404");
-    }
+    setTimeout(() => card.classList.add("opacity-0"), 1000);
+    setTimeout(() => {
+      card.remove();
+      if (!this.editorsTarget.querySelector(".editor")) {
+        this.toggleSharedList();
+        this.editorsTarget.id = "empty";
+        this.editorsTarget.innerHTML = this.noEditorCard();
+      }
+    }, 1500);
   }
 
   preventProp(e) {
