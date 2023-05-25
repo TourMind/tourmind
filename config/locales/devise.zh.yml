@@ -9,7 +9,7 @@ zh:
     failure:
       already_authenticated: "您已經登入了"
       inactive: "您的帳戶尚未啟用"
-      invalid: "無效的 %{authentication_keys}或密碼"
+      invalid:  "無效的 %{authentication_keys}或密碼" #translation missing: zh.devise.failure.user.invalid
       locked: "您的帳戶被鎖定了"
       last_attempt: "您還有一次嘗試的機會，否則您的帳戶將被鎖定"
       not_found_in_database: "無效的 %{authentication_keys}或密碼"
@@ -84,10 +84,13 @@ zh:
           attributes:
             password:
               too_short: "密碼不得少於6個字"
+              blank: "密碼不能為空"
             password_confirmation:
               confirmation: "密碼與確認密碼必須一致"
             email:
               taken: "此信箱已被使用"
+              blank: "信箱不可為空"
+              invalid: "無法被識別為有效的電子郵件"
         site:
           attributes:
             name:

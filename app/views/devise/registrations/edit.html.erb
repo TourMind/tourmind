@@ -1,5 +1,6 @@
 <section class="flex items-center justify-center w-full h-screen">
   <%= turbo_frame_tag "edit_profile" do %>
+  <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
     <div class="relative flex items-center justify-center bg-white rounded-lg shadow-lg form-box w-400 h-450 shadow-gary-500/50">
       <div class="form-value">
           <div class="m-8 field ">
@@ -14,7 +15,7 @@
           </div>
           
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, data: { controller: :turboform}) do |f| %>
-            <div class="ffield flex justify-center items-center">
+            <div class="flex items-center justify-center ffield">
               <div class="avatar-container">
                 <%= f.hidden_field :avatar %>
                 <% if current_user.avatar.blank? %>
