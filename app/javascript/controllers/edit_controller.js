@@ -45,75 +45,71 @@ export default class extends Controller {
   }
 
   async update() {
-    try {
-      const valid = this.trimDays();
+    const valid = this.trimDays();
 
-      if (!valid) return this.alertErrors("行程不得為空白！");
+    if (!valid) return this.alertErrors("行程不得為空白！");
 
-      let locations = {};
-      const dayCount = this.containerTarget.querySelectorAll(".day").length;
+    let locations = {};
+    const dayCount = this.containerTarget.querySelectorAll(".day").length;
 
-      for (let i = 1; i <= dayCount; i++) {
-        locations[`day${i}`] = [];
-        const sites = document
-          .querySelector(`#plan-day-${i}`)
-          .querySelectorAll(".site");
+    for (let i = 1; i <= dayCount; i++) {
+      locations[`day${i}`] = [];
+      const sites = document
+        .querySelector(`#plan-day-${i}`)
+        .querySelectorAll(".site");
 
-        sites.forEach((site) => {
-          const updatedSite = site.id.split("-").map((el) => +el || el);
-          updatedSite.push(site.querySelector(".stay-time").textContent);
-          locations[`day${i}`].push(updatedSite);
-        });
-      }
-
-      const id = this.idTarget.dataset.id;
-      const form = new FormData();
-      const files = this.imagesTarget.files;
-
-      form.append("name", this.nameTarget.value);
-      form.append("description", this.descriptionTarget.value);
-      form.append("days", +this.containerTarget.dataset.days);
-      form.append("people", +this.peopleTarget.value);
-      form.append("public", this.publicTarget.checked);
-      form.append("category", this.categoryTarget.value);
-      form.append("lock_version", this.lockVersionTarget.value);
-      form.append("locations", JSON.stringify(locations));
-
-      for (let i = 0; i < files.length; i++) {
-        form.append("images[]", files[i]);
-      }
-
-      let res;
-
-      this.addSpinner();
-
-      if (!id) {
-        res = await post("/plans", {
-          body: form,
-          responseKind: "json",
-        });
-      } else {
-        res = await patch(`/plans/${id}`, {
-          body: form,
-          responseKind: "json",
-        });
-      }
-
-      const data = await res.json;
-
-      if (!res.ok) {
-        this.alertErrors(data.errors);
-        if (data.reload) {
-          return setTimeout(() => location.reload(true), 3500);
-        }
-        this.removeSpinner();
-        return;
-      }
-
-      window.location.replace(data.redirect_url);
-    } catch (err) {
-      window.location.replace("/404");
+      sites.forEach((site) => {
+        const updatedSite = site.id.split("-").map((el) => +el || el);
+        updatedSite.push(site.querySelector(".stay-time").textContent);
+        locations[`day${i}`].push(updatedSite);
+      });
     }
+
+    const id = this.idTarget.dataset.id;
+    const form = new FormData();
+    const files = this.imagesTarget.files;
+
+    form.append("name", this.nameTarget.value);
+    form.append("description", this.descriptionTarget.value);
+    form.append("days", +this.containerTarget.dataset.days);
+    form.append("people", +this.peopleTarget.value);
+    form.append("public", this.publicTarget.checked);
+    form.append("category", this.categoryTarget.value);
+    form.append("lock_version", this.lockVersionTarget.value);
+    form.append("locations", JSON.stringify(locations));
+
+    for (let i = 0; i < files.length; i++) {
+      form.append("images[]", files[i]);
+    }
+
+    let res;
+
+    this.addSpinner();
+
+    if (!id) {
+      res = await post("/plans", {
+        body: form,
+        responseKind: "json",
+      });
+    } else {
+      res = await patch(`/plans/${id}`, {
+        body: form,
+        responseKind: "json",
+      });
+    }
+
+    const data = await res.json;
+
+    if (!res.ok) {
+      this.alertErrors(data.errors);
+      if (data.reload) {
+        return setTimeout(() => location.reload(true), 3500);
+      }
+      this.removeSpinner();
+      return;
+    }
+
+    window.location.replace(data.redirect_url);
   }
 
   addDay() {
