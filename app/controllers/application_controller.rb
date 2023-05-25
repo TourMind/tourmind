@@ -18,10 +18,8 @@ class ApplicationController < ActionController::Base
 
     if request.env['omniauth.origin'].include?('google')
       redirect_to user_google_oauth2_omniauth_authorize_path
-    elsif request.env['omniauth.origin'].include?('facebook')
+    else request.env['omniauth.origin'].include?('facebook')
       redirect_to user_facebook_omniauth_authorize_path
-    else
-      redirect_to user_line_omniauth_authorize_path
     end
   end
   def show_guide?
