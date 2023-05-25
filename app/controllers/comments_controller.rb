@@ -52,7 +52,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.update(deleted_at: Time.now)
-    redirect_to comments_path
+    redirect_to request.referrer, notice: '刪除成功'
   end
 
   private

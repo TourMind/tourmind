@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  default_scope { where(deleted_at: nil) }
   mount_uploader :image, ImageUploader
   mount_uploaders :images, ImageUploader
   scope :by_content, ->(content) { where('content LIKE ?', "%#{content}%") }
