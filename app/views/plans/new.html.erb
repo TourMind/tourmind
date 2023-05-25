@@ -1,16 +1,16 @@
 <main class="relative " data-controller="edit">
-  <div class="container w-full sm:px-10 flex mx-auto">
-    <div class="fixed flex md:block w-screen h-36 md:h-screen md:-translate-x-56 -translate-y-56 md:translate-y-0 md:w-56 top-0 left-0 bg-white transition-all ease-in-out shadow-lg z-50" data-edit-target="drawer">
-      <div class="bg-blue-400 flex md:flex-row flex-col justify-start items-center">
-        <button data-action="click->edit#toggleFav" type="button" class="rounded-md p-2 inline-flex text-white hover:text-gray-300 w-10 h-10">
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+  <div class="container flex w-full mx-auto sm:px-10">
+    <div class="fixed top-0 left-0 z-50 flex w-screen transition-all ease-in-out -translate-y-56 bg-white shadow-lg md:block h-36 md:h-screen md:-translate-x-56 md:translate-y-0 md:w-56" data-edit-target="drawer">
+      <div class="flex flex-col items-center justify-start bg-blue-400 md:flex-row">
+        <button data-action="click->edit#toggleFav" type="button" class="inline-flex w-10 h-10 p-2 text-white rounded-md hover:text-gray-300">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
-        <h4 class="text-white font-bold text-center text-md md:my-5 transform w-min md:w-auto">喜愛清單</h4>
+        <h4 class="font-bold text-center text-white transform text-md md:my-5 w-min md:w-auto">喜愛清單</h4>
       </div>
-      <div class="overflow-scroll custom-scrollbar-vertical custom-scrollbar-horizontal h-full w-full">
-        <div class="relative flex gap-5 md:block px-4 day md:w-48 w-max mt-5" data-controller="sorting" id="fav-list">
+      <div class="w-full h-full overflow-scroll custom-scrollbar-vertical custom-scrollbar-horizontal">
+        <div class="relative flex gap-5 px-4 mt-5 md:block day md:w-48 w-max" data-controller="sorting" id="fav-list">
           <% if current_user.favorites != nil %>
             <% @favorites.each_with_index do |fav, i| %>
               <!-- start::Timeline item -->
@@ -18,12 +18,12 @@
                 <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                   <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(fav[:type]) %> rounded-full"></div>
                 </div>
-                <div class="grow rounded hover:shadow-md p-2">
+                <div class="p-2 rounded grow hover:shadow-md">
                   <p class="text-sm">
                     <span><%= fav[:type] %></span>
                     <span class="text-<%= Plan.set_color(fav[:type]) %> font-bold"><%= fav[:name] %></span>
                   </p>
-                  <p class="text-xs text-gray-500">停留時間：<span class="inline-block px-1 border-gray-300 border-2 stay-time" contenteditable="true" onKeypress="if(event.keyCode < 48 || event.keyCode > 57){return false;}"><%= fav[:stay_time] %></span> mins</p>
+                  <p class="text-xs text-gray-500">停留時間：<span class="inline-block px-1 border-2 border-gray-300 stay-time" contenteditable="true" onKeypress="if(event.keyCode < 48 || event.keyCode > 57){return false;}"><%= fav[:stay_time] %></span> mins</p>
                 </div>
               </div>
               <!-- end::Timeline item -->
@@ -40,9 +40,9 @@
           <%= form_with model: @plan, data: { turbo: "false"}, multipart: true do |form| %>
             <div class="flex justify-between">
               <div class="ml-3">
-                <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none" data-action="click->edit#addDay">增加天數</div>
-                <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
-                <div class="group relative text-blue-700 inline-block cursor-pointer hover:text-blue-600  font-normal text-md p-2 rounded select-none">
+                <div class="inline-block p-2 text-sm font-normal text-white bg-blue-500 border-blue-700 rounded cursor-pointer select-none hover:bg-blue-600" data-action="click->edit#addDay">增加天數</div>
+                <div class="inline-block p-2 text-sm font-normal text-white bg-blue-500 border-blue-700 rounded cursor-pointer select-none hover:bg-blue-600"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
+                <div class="relative inline-block p-2 font-normal text-blue-700 rounded cursor-pointer select-none group hover:text-blue-600 text-md">
                   <i class="fa-solid fa-circle-exclamation fa-2xl" style="color: #F87315"></i>
                   <span class="opacity-0 w-[300px] bg-black  text-white text-left text-md rounded-lg py-3 absolute z-10 group-hover:opacity-60 top-[-200%] -left-1/2 ml-[40px] px-3 pointer-events-none">
                     <span><i class="fa-solid fa-circle fa-2xs"></i> 住宿/景點/餐廳/天數可拖拉編輯</span><br>
@@ -51,8 +51,8 @@
                   </span>
                 </div>
               </div>
-              <div class="inline-flex items-center cursor-pointer p-2 bg-red-500 hover:bg-red-600 text-white text-sm font-normal rounded-md w-max" id="delete-btn" data-controller="sorting">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div class="inline-flex items-center p-2 text-sm font-normal text-white bg-red-500 rounded-md cursor-pointer hover:bg-red-600 w-max" id="delete-btn" data-controller="sorting">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </div>
@@ -61,28 +61,28 @@
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
                   <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center cursor-grab">
-                    <div class="relative bg-blue-400 py-3">
-                      <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
-                      <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <div class="relative py-3 bg-blue-400">
+                      <h4 class="flex justify-center mr-5 text-xl font-bold text-white day-title">第 <%= i + 1 %> 天</h4>
+                      <button data-action="click->edit#deleteDay" type="button" class="absolute right-0 flex p-2 text-white rounded-md hover:text-gray-300 top-1">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
                     </div>
                     <div class="absolute h-full border border-dashed border-slate-600 border-opacity-20 "></div>
-                    <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
+                    <div data-controller="sorting" class="w-full h-full sites-list" id="plan-day-<%= i + 1 %>" >
                       <% @plan.locations[key].each.with_index do | site, j | %>
                         <!-- start::Timeline item -->
                         <div class="group site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="day<%= i + 1 %>-<%= j + 1 %>">
                           <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                             <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(site["type"]) %> rounded-full"></div>
                           </div>
-                          <div class="grow rounded hover:shadow-md p-2">
+                          <div class="p-2 rounded grow hover:shadow-md">
                             <p class="text-sm">
                               <span><%= site["type"] %></span>
                               <span class="text-<%= Plan.set_color(site["type"]) %> font-bold"><%= site["name"] %></span>
                             </p>
-                            <p class="text-xs text-gray-500">停留時間：<span class="inline-block px-1 border-gray-300 border-2 stay-time" contenteditable="true" onKeypress="if(event.keyCode < 48 || event.keyCode > 57){return false;}"><%= site["stay_time"] %></span>  mins</p>
+                            <p class="text-xs text-gray-500">停留時間：<span class="inline-block px-1 border-2 border-gray-300 stay-time" contenteditable="true" onKeypress="if(event.keyCode < 48 || event.keyCode > 57){return false;}"><%= site["stay_time"] %></span>  mins</p>
                           </div>
                         </div>
                         <!-- end::Timeline item -->
@@ -91,17 +91,17 @@
                   </div>
                 <% end %>
               <% else %>
-                <div class="relative px-4 day min-h-[150px] bg-white">
-                  <div class="flex justify-between items-center">
-                    <h4 class="text-xl text-gray-900 font-bold day-title">第 1 天</h4>
-                    <button data-action="click->edit#deleteDay" type="button" class="bg-gray-100 rounded-md p-2 flex text-gray-400 hover:text-gray-500 hover:bg-gray-200">
-                      <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+                 <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center cursor-grab">
+                    <div class="relative py-3 bg-blue-400">
+                      <h4 class="flex justify-center mr-5 text-xl font-bold text-white day-title">第 1 天</h4>
+                      <button data-action="click->edit#deleteDay" type="button" class="absolute right-0 flex p-2 text-white rounded-md hover:text-gray-300 top-1">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
                   </div>
                   <div class="absolute h-full border border-dashed border-slate-600 border-opacity-20 "></div>
-                  <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-1" ></div>
+                  <div data-controller="sorting" class="w-full h-full sites-list" id="plan-day-1" ></div>
                 </div>
               <% end %>
             </div>
@@ -124,7 +124,7 @@
             <div class="mb-5">
               <div class='flex flex-row'>
                 <%= form.check_box :public, class: "appearance-none h-6 w-6 bg-white rounded-full checked:bg-blue-500 checked:scale-75 transition-all duration-200 peer", data: {edit_target: "public"} %>
-                <div class='h-6 w-6 absolute rounded-full pointer-events-none peer-checked:border-blue-300 peer-checked:border-2'>
+                <div class='absolute w-6 h-6 rounded-full pointer-events-none peer-checked:border-blue-300 peer-checked:border-2'>
                 </div>
                 <%= form.label :public, "與他人分享這行程", class: 'flex flex-col justify-center px-2 peer-checked:text-blue-600 text-rose-600 select-none'%>
               </div>
@@ -133,7 +133,7 @@
               <%= form.label :images, "上傳照片", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.file_field :images, class: "w-min rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "images"}, multiple: true, accept: "image/png,image/gif,image/jpeg" %>
             </div>
-            <div data-action="click->edit#update" class="cursor-pointer inline-block mx-auto my-10 shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white text-xs py-3 px-5 rounded">
+            <div data-action="click->edit#update" class="inline-block px-5 py-3 mx-auto my-10 text-xs text-white bg-blue-500 rounded shadow cursor-pointer hover:bg-blue-600 focus:shadow-outline focus:outline-none">
               <div class="flex items-center gap-2" data-edit-target="submitBtn">
                 <span class="inline-block" data-edit-target="submitText">更新行程</span>
               </div>
