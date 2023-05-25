@@ -94,7 +94,7 @@
     <section class="relative flex w-full gap-2 mt-3 h-1/3">
       <% if @plan.images.length == 0 && @plan.picsums.blank? %>
         <div class="w-full h-full overflow-hidden">
-          <img src="https://fakeimg.pl/1920x1080/?text=TourMind" class="object-cover w-full h-full">
+          <img src="https://www.10wallpaper.com/wallpaper/1366x768/2003/Green_Mountains_Road_2020_Nature_Scenery_Photo_1366x768.jpg" class="object-cover w-full h-full">
         </div>
       <% elsif @plan.images.present? %>
         <% if @plan.images.length == 1 %>
@@ -170,7 +170,7 @@
       </div>
     </section>
     <%= render "plan_overview"%>
-    <h2 id="comment-heading" class="text-2xl font-bold px-3 py-3">評等和評論</h2>
+    <h2 id="comment-heading" class="px-3 py-3 text-2xl font-bold">評等和評論</h2>
     <hr class="h-0.5 bg-gray-300 mx-3">
     <div id="comment-list">
       <%= render partial: "comment", collection: @paginated_comments %>
@@ -181,7 +181,7 @@
 <section class='container px-3 m-auto' data-controller="butt">
   <% if user_signed_in? && current_user.role == 1 %>
     <div class="bg-white full lg:w-2/3 ">
-      <a data-action="click->butt#toggleCommentForm" class="inline-block text-white px-5 py-3 mt-2 font-medium bg-blue-500 hover:bg-blue-600 rounded-lg" href="#comment-form">
+      <a data-action="click->butt#toggleCommentForm" class="inline-block px-5 py-3 mt-2 font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600" href="#comment-form">
         發表評論
       </a>
     </div>
