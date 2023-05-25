@@ -135,7 +135,7 @@ class PlansController < ApplicationController
       render json: {
         status: 'success',
         userId: user.id,
-        profilePic: user.avatar_url || user.default_avatar,
+        profilePic: user.omniauth_avatar || user.default_avatar,
         userName: user.name || '此使用者沒有設定姓名',
       }
       return
@@ -164,7 +164,7 @@ class PlansController < ApplicationController
     render json: {
       status: 'success',
       userId: user.id,
-      profilePic: user.avatar_url || user.default_avatar,
+      profilePic: user.omniauth_avatar || user.default_avatar,
       userName: user.name || '此使用者沒有設定姓名',
     }
   end

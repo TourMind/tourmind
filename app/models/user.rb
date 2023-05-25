@@ -41,7 +41,7 @@ class User < ApplicationRecord
       %w[google_oauth2 facebook].each do |_provider|
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
-        user.avatar_url = auth.info.image
+        user.omniauth_avatar = auth.info.image
         user.email = auth.info.email if %w[facebook google_oauth2].include?(auth.provider)
       end
     end
