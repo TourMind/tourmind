@@ -1,5 +1,6 @@
 <section class="flex items-center justify-center w-full h-screen">
   <%= turbo_frame_tag "signup" do %>
+  <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
     <div class="relative flex items-center justify-center bg-white rounded-lg form-box w-400 h-450 shadow-gary-500/50">
       <div class="form-value">
           <div class="m-8 field ">
@@ -51,11 +52,6 @@
                       <div class="flex items-center justify-start">
                         <%= image_tag("google.png", class: "inline-block h-8 w-8") %>
                         <span class="m-auto">使用 Google 登入</span>
-                      </div>
-                    <% elsif provider == :line%>
-                      <div class="flex items-center justify-start">
-                        <%= image_tag("line.png", class: "inline-block h-8 w-8") %>
-                        <span class="m-auto">使用 Line 登入 </span>
                       </div>
                     <% elsif provider == :facebook%>
                       <div class="flex items-center justify-start">

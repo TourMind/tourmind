@@ -1,10 +1,10 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
-    <div class="flex-grow py-2 text-xl text-center border cursor-pointer"
+    <div class="flex-grow py-2 text-xl text-center border border-gray-400 cursor-pointer"
       data-action="click->filter#toggleFilterMenu">篩選</div>
   </div>
   <div class="bg-white">
-    <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)] w-11/12">
+    <section class="container m-auto flex py-5 min-h-[calc(100vh_-_145px)] w-11/12" data-controller="favorite">
       <section data-filter-target="filterMenu"
          class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom gborder-4 border-indigo-200 lg:block lg:sticky lg:w-72 z-10 h-max">
         <div class="lg:hidden flex justify-end pt-6">
@@ -89,9 +89,9 @@
           <div class="py-2 font-bold">
             <% if @restaurants.present? %>
               <% if params[:keyword].present?%>
-                搜尋<%= params[:keyword]%>結果： <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+                搜尋<%= params[:keyword]%>結果： <%= number_per_page(@pagy, @restaurants) %> 家餐廳
               <% else %>
-                <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+                <%= number_per_page(@pagy, @restaurants) %> 家餐廳
               <% end %>
             <% else %>
               <span class="font-bold">沒有找到符合條件的餐廳</span>
@@ -105,7 +105,7 @@
         </div>
         <section class="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
           <% @restaurants.each do |restaurant| %>
-            <div class="overflow-hidden bg-white rounded-md shadow-lg">
+            <div class="overflow-hidden bg-white rounded-md shadow-lg item" data-type="Restaurant" data-id="<%= restaurant.id %>">
               <div class="relative">
                 <%= render "favorite", object:restaurant, size:"text-4xl"%>
                 <%= link_to restaurant_path(restaurant) do %>
@@ -132,9 +132,9 @@
                   <% end %>
                 </div>
                 <ul>
-                  <li><%= star_rating(restaurant_rating[restaurant.id][:average_rating]) %>
-                    <%= sprintf('%.1f', restaurant_rating[restaurant.id][:average_rating]) %>
-                    (<%= restaurant_rating[restaurant.id][:comment_count] %>則評論)
+                  <li><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+                    <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+                    (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
                   </li>
                   <li class= "mt-2"><%= restaurant.intro&.truncate(70)%>
                   </li>

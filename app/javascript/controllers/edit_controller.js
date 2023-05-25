@@ -45,84 +45,79 @@ export default class extends Controller {
   }
 
   async update() {
-    try {
-      const valid = this.trimDays();
+    const valid = this.trimDays();
 
-      if (!valid) return this.alertErrors("行程不得為空白！");
+    if (!valid) return this.alertErrors("行程不得為空白！");
 
-      let locations = {};
-      const dayCount = this.containerTarget.querySelectorAll(".day").length;
+    let locations = {};
+    const dayCount = this.containerTarget.querySelectorAll(".day").length;
 
-      for (let i = 1; i <= dayCount; i++) {
-        locations[`day${i}`] = [];
-        const sites = document
-          .querySelector(`#plan-day-${i}`)
-          .querySelectorAll(".site");
+    for (let i = 1; i <= dayCount; i++) {
+      locations[`day${i}`] = [];
+      const sites = document
+        .querySelector(`#plan-day-${i}`)
+        .querySelectorAll(".site");
 
-        sites.forEach((site) => {
-          const updatedSite = site.id.split("-").map((el) => +el || el);
-          updatedSite.push(site.querySelector(".stay-time").textContent);
-          locations[`day${i}`].push(updatedSite);
-        });
-      }
-
-      const id = this.idTarget.dataset.id;
-      const form = new FormData();
-      const files = this.imagesTarget.files;
-
-      form.append("name", this.nameTarget.value);
-      form.append("description", this.descriptionTarget.value);
-      form.append("days", +this.containerTarget.dataset.days);
-      form.append("people", +this.peopleTarget.value);
-      form.append("public", this.publicTarget.checked);
-      form.append("category", this.categoryTarget.value);
-      form.append("lock_version", this.lockVersionTarget.value);
-      form.append("locations", JSON.stringify(locations));
-
-      for (let i = 0; i < files.length; i++) {
-        form.append("images[]", files[i]);
-      }
-
-      let res;
-
-      this.addSpinner();
-
-      if (!id) {
-        res = await post("/plans", {
-          body: form,
-          responseKind: "json",
-        });
-      } else {
-        res = await patch(`/plans/${id}`, {
-          body: form,
-          responseKind: "json",
-        });
-      }
-
-      const data = await res.json;
-
-      if (!res.ok) {
-        this.alertErrors(data.errors);
-        if (data.reload) {
-          return setTimeout(() => location.reload(true), 3500);
-        }
-        this.removeSpinner();
-        return;
-      }
-
-      window.location.replace(data.redirect_url);
-    } catch (err) {
-      window.location.replace("/404");
+      sites.forEach((site) => {
+        const updatedSite = site.id.split("-").map((el) => +el || el);
+        updatedSite.push(site.querySelector(".stay-time").textContent);
+        locations[`day${i}`].push(updatedSite);
+      });
     }
+
+    const id = this.idTarget.dataset.id;
+    const form = new FormData();
+    const files = this.imagesTarget.files;
+
+    form.append("name", this.nameTarget.value);
+    form.append("description", this.descriptionTarget.value);
+    form.append("days", +this.containerTarget.dataset.days);
+    form.append("people", +this.peopleTarget.value);
+    form.append("public", this.publicTarget.checked);
+    form.append("category", this.categoryTarget.value);
+    form.append("lock_version", this.lockVersionTarget.value);
+    form.append("locations", JSON.stringify(locations));
+
+    for (let i = 0; i < files.length; i++) {
+      form.append("images[]", files[i]);
+    }
+
+    let res;
+
+    this.addSpinner();
+
+    if (!id) {
+      res = await post("/plans", {
+        body: form,
+        responseKind: "json",
+      });
+    } else {
+      res = await patch(`/plans/${id}`, {
+        body: form,
+        responseKind: "json",
+      });
+    }
+
+    const data = await res.json;
+
+    if (!res.ok) {
+      this.alertErrors(data.errors);
+      if (data.reload) {
+        return setTimeout(() => location.reload(true), 3500);
+      }
+      this.removeSpinner();
+      return;
+    }
+
+    window.location.replace(data.redirect_url);
   }
 
   addDay() {
     const dayElement = `
-    <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
+    <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center cursor-grab">
       <div class="relative bg-blue-400 py-3">
-        <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 ${
-          +this.containerTarget.dataset.days + 1
-        } 天</h4>
+        <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 ${+this.containerTarget.dataset.days + 1
+      } 天</h4>
         <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
           <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -130,8 +125,7 @@ export default class extends Controller {
       </button>
       </div>
       <div class="absolute h-full border border-dashed border-opacity-20 border-slate-600"></div>
-      <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${
-        +this.containerTarget.dataset.days + 1
+      <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-${+this.containerTarget.dataset.days + 1
       }">
       </div>
     </div>`;
@@ -174,9 +168,14 @@ export default class extends Controller {
   }
 
   toggleFav() {
-    this.drawerTarget.classList.toggle("-translate-x-56");
-    this.formTarget.classList.toggle("w-full");
-    this.formTarget.classList.toggle("w-10/12");
+    if (document.documentElement.clientWidth >= 768) {
+      this.drawerTarget.classList.toggle("md:-translate-x-56");
+      this.formTarget.classList.toggle("w-full");
+      this.formTarget.classList.toggle("w-10/12");
+      return;
+    }
+
+    this.drawerTarget.classList.toggle("-translate-y-56");
   }
 
   alertErrors(message) {

@@ -40,10 +40,8 @@ export default class extends Controller {
 
     const map = new google.maps.Map(this.mapTarget, {
       center,
-      zoom: 12,
+      zoom: 15,
     });
-
-    directionsRenderer.setMap(map);
 
     const waypoints = locArr.slice(1, -1).map((el) => {
       return { location: el, stopover: true };
@@ -56,11 +54,14 @@ export default class extends Controller {
       travelMode: "DRIVING",
     };
 
-    directionsService.route(req, function (res, status) {
-      if (status == "OK") {
-        directionsRenderer.setDirections(res);
-      }
-    });
+    if (locArr.length > 1) {
+      directionsRenderer.setMap(map);
+      directionsService.route(req, function (res, status) {
+        if (status == "OK") {
+          directionsRenderer.setDirections(res);
+        }
+      });
+    }
 
     locArr.forEach((loc, i) => {
       const contentString = nameArr[i];

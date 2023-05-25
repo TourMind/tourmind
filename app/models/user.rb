@@ -9,12 +9,16 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   mount_uploader :avatar, ImageUploader
   # 驗證必填欄位
-  # 驗證 email 欄位，只有在 email 欄位存在的情況下才進行驗證
   validates :email,
             presence: true,
             format: {
               with: /\A[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\z/,
-            }, if: -> { email.present? == false && provider != 'line' }
+            }
+  
+  validates :password, presence: true, on: :create
+
+  validates :tel, allow_blank: true,
+                 format: { with: /\A(\(\d{2}\)|\d{2})\d{8}\z/, message: '請輸入有效的電話號碼，格式(02)12345678或0912123123' }
 
   # confirmable -> 確認mail認證
   devise :database_authenticatable,
@@ -23,7 +27,7 @@ class User < ApplicationRecord
          :rememberable,
          :validatable,
          :omniauthable,
-         omniauth_providers: %i[google_oauth2 line facebook]
+         omniauth_providers: %i[google_oauth2 facebook]
 
   # 喜愛清單關聯性
   has_many :favorites, inverse_of: :user
@@ -34,18 +38,13 @@ class User < ApplicationRecord
   # 第三方認證登入後，創建用戶資料庫
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      %w[google_oauth2 facebook line].each do |_provider|
+      %w[google_oauth2 facebook].each do |_provider|
         user.password = Devise.friendly_token[0, 20]
         user.name = auth.info.name
         user.avatar_url = auth.info.image
         user.email = auth.info.email if %w[facebook google_oauth2].include?(auth.provider)
       end
     end
-  end
-
-  # 不需要用戶回傳email, line不會回傳
-  def email_required?
-    false
   end
 
   # 不需要用戶提供密碼, 第三方登入不需要輸入密碼

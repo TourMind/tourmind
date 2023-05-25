@@ -42,9 +42,9 @@
       <p class="p-2 mb-4 text-base text-white md:text-lg">找尋在地體驗或到遠方探險，隨時隨地探索屬於你的玩樂世界</p>
       <%= form_with(url: page_search_path, method: "get", id: "search-form", data: { controller: "search", action: "submit->search.clearInput" }, class: "flex flex-nowrap items-center md:flex-row md:items-center") do |form| %>
 
-      <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full py-2 mx-2 leading-5 bg-white border-gray-500 rounded-full pl-14 marker:border focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" %>
+      <%= form.text_field :query, placeholder: "請輸入名稱/地址/類型...", id: "search-input", class: "block w-full py-2 mx-2 leading-5 bg-white border-gray-500 rounded-full pl-14 marker:border focus:outline-none focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5"%>
 
-      <%= form.submit "搜尋", class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-full whitespace-nowrap hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" %>
+      <%= form.submit "搜尋", class: "px-4 py-2 text-sm font-medium text-white bg-blue-500 border border-transparent rounded-full whitespace-nowrap hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"%>
       <% end %>  
     </div>
 </section>
@@ -90,9 +90,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= restaurant.name %></p>
-            <p><%= star_rating(restaurant_rating[restaurant.id][:average_rating]) %>
-              <%= sprintf('%.1f', restaurant_rating[restaurant.id][:average_rating]) %>
-              (<%= restaurant_rating[restaurant.id][:comment_count] %>則評論)
+            <p><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+              <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+              (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
             </p>
             <p class="mt-2 text-sm text-gray-600"><%= restaurant.intro&.truncate(30) %></p>
           </div>
@@ -118,9 +118,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
-            <p><%= star_rating(hotel_rating[hotel.id][:average_rating]) %>
-              <%= sprintf('%.1f', hotel_rating[hotel.id][:average_rating]) %>
-              (<%= hotel_rating[hotel.id][:comment_count] %>則評論)
+            <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+              <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+              (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
             </p>
           </div>
         <% end %>
@@ -145,9 +145,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 mr-2 text-lg font-medium leading-tight text-gray-700"><%= site.name %></p>
-            <p><%= star_rating(site_rating[site.id][:average_rating]) %>
-              <%= sprintf('%.1f', site_rating[site.id][:average_rating]) %>
-              (<%= site_rating[site.id][:comment_count] %>則評論)
+            <p><%= star_rating(@site_data[site.id][:average_rating]) %>
+              <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+              (<%= @site_data[site.id][:comment_count] %>則評論)
             </p>
           </div>
         <% end %>
@@ -162,7 +162,7 @@
       <div class="rounded-lg overflow-hidden shadow shrink-0 md:shrink w-full md:w-1/2 lg:w-1/3 xl:w-1/4 carousel-item">
         <%= link_to hotel_path(hotel), class:"w-full transition duration-300 ease-in-out rounded-lg focus:bg-gray-700" do %>
           <div class="w-full">
-            <% if hotel.images.present? %>
+            <% if hotel.scraped_photo.present? %>
               <%= image_tag hotel.scraped_photo, style: "object-fit: fill; height: 300px; width: 650px;" %>
             <% elsif hotel.images.present? %>
               <%= image_tag hotel.images.first.url, style: "object-fit: fill; height: 300px; width: 650px;" %>
@@ -172,9 +172,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
-            <p><%= star_rating(hotel_rating[hotel.id][:average_rating]) %>
-              <%= sprintf('%.1f', hotel_rating[hotel.id][:average_rating]) %>
-              (<%= hotel_rating[hotel.id][:comment_count] %>則評論)
+            <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+              <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+              (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
             </p>
             <p class="mb-4 text-sm text-gray-600"><%= hotel.intro&.truncate(30) %></p>
           </div>
@@ -201,9 +201,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= hotel.name %></p>
-            <p><%= star_rating(hotel_rating[hotel.id][:average_rating]) %>
-              <%= sprintf('%.1f', hotel_rating[hotel.id][:average_rating]) %>
-              (<%= hotel_rating[hotel.id][:comment_count] %>則評論)
+            <p><%= star_rating(@hotel_data[hotel.id][:average_rating]) %>
+              <%= sprintf('%.1f', @hotel_data[hotel.id][:average_rating]) %>
+              (<%= @hotel_data[hotel.id][:comment_count] %>則評論)
             </p>
             <p class="mb-4 text-sm text-gray-600"><%= hotel.intro&.truncate(30) %></p>
           </div>
@@ -224,9 +224,9 @@
           </div>
           <div class="p-2">
             <p class="mb-2 text-lg font-medium leading-tight text-gray-700"><%= site.name %></p>
-            <p><%= star_rating(site_rating[site.id][:average_rating]) %>
-              <%= sprintf('%.1f', site_rating[site.id][:average_rating]) %>
-              (<%= site_rating[site.id][:comment_count] %>則評論)
+            <p><%= star_rating(@site_data[site.id][:average_rating]) %>
+              <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+              (<%= @site_data[site.id][:comment_count] %>則評論)
             </p>
             <p class="mb-4 text-sm text-gray-600"><%= site.intro&.truncate(30) %></p>
           </div>
