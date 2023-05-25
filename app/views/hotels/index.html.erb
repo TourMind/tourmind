@@ -5,7 +5,7 @@
       篩選
     </div>
   </div>
-  <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)] w-11/12">
+  <section class="container m-auto bg-white flex py-5 min-h-[calc(100vh_-_145px)] w-11/12" data-controller="favorite">
     <section data-filter-target="filterMenu"
         class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 z-10 h-max">
       <div class="flex justify-end pt-6 lg:hidden">
@@ -80,7 +80,7 @@
       </div>
       <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
         <% @hotels.each do |hotel| %>
-          <div class="overflow-hidden bg-white rounded-md shadow-lg">
+          <div class="overflow-hidden bg-white rounded-md shadow-lg item" data-type="Hotel" data-id="<%= hotel.id %>">
             <div class="relative">
               <%= render 'favorite', object: hotel, size:'text-4xl'%>
               <%= link_to hotel_path(hotel) do %>

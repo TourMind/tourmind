@@ -18,28 +18,28 @@
           <button class="btn-category mr-2" data-action="click->favorite#toggle" data-section="attraction">景點</button>
         </li>
       </ul>
-      <section data-favorite-target="section" data-section="all" class="justify-between items-center">
+      <section data-favorite-target="section" data-section="all" class="justify-between items-center place">
         <h2 class="font-bold text-3xl my-4">全部</h2>
         <%= render "subheader", favorites:@favorites, object:"行程"%>
         <div class="min-w-full gap-4 flex ">
           <%= render "favorite_list", favorite_objects:@favorites%>
         </div>
       </section>
-      <section data-favorite-target="section" data-section="restaurant" class="justify-between items-center hidden">
+      <section data-favorite-target="section" data-section="restaurant" class="justify-between items-center hidden place">
         <h2 class="font-bold text-3xl my-4">餐廳</h2>
         <%= render "subheader", favorites:@favorites.restaurants, object:"餐廳"%>
         <div class="min-w-full gap-4 flex ">
           <%= render "favorite_list", favorite_objects:@favorites.restaurants%>
         </div>
       </section>
-      <section data-favorite-target="section" data-section="hotel" class="justify-between items-center hidden">
+      <section data-favorite-target="section" data-section="hotel" class="justify-between items-center hidden place">
         <h2 class="font-bold text-3xl my-4">住宿</h2>
         <%= render "subheader", favorites:@favorites.hotels, object:"住宿"%>
         <div class="min-w-full gap-4 flex ">
           <%= render "favorite_list", favorite_objects:@favorites.hotels%>
         </div>
       </section>
-      <section data-favorite-target="section" data-section="attraction" class="justify-between items-center hidden">
+      <section data-favorite-target="section" data-section="attraction" class="justify-between items-center hidden place">
         <h2 class="font-bold text-3xl my-4">景點</h2>
         <%= render "subheader", favorites:@favorites.sites, object:"景點"%>
         <div class="min-w-full gap-4 flex ">
