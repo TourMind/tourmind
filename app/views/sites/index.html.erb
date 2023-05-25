@@ -5,7 +5,7 @@
       篩選
     </div>
   </div>
-  <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)] w-11/12">
+  <section class="container m-auto flex py-5 min-h-[calc(100vh_-_100px)] w-11/12" data-controller="favorite">
     <section data-filter-target="filterMenu"
       class="absolute top-0 left-0 hidden w-full px-6 mr-3 bg-white rounded-md shadow-custom lg:block lg:sticky lg:w-72 z-10 h-max">
       <div class="flex justify-end pt-6 lg:hidden">
@@ -66,9 +66,9 @@
         <div class="py-2 font-bold">
           <% if @sites.present? %>
             <% if params[:keyword].present?%>
-              搜尋<%= params[:keyword]%>結果： <%= @sites.count %> / <%= @pagy.count %> 個景點
+              搜尋<%= params[:keyword]%>結果： <%= number_per_page(@pagy, @sites) %> 個景點
             <% else %>
-              <%= @sites.count %> / <%= @pagy.count %> 個景點
+              <%= number_per_page(@pagy, @sites) %> 個景點
             <% end %>
           <% else %>
             <span class="font-bold">沒有找到符合條件的景點</span>
@@ -80,7 +80,7 @@
       </div>
       <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
         <% @sites.each do |site| %>
-          <div class="overflow-hidden bg-white rounded-md shadow-lg">
+          <div class="overflow-hidden bg-white rounded-md shadow-lg item" data-type="Site" data-id="<%= site.id %>">
             <div class="relative">
               <%= render 'favorite', object: site, size:'text-4xl'%>
               <%= link_to site_path(site) do %>
@@ -109,9 +109,9 @@
                 <%end%>
               </div>
               <ul>
-                <li><%= star_rating(site_rating[site.id][:average_rating]) %>
-                  <%= sprintf('%.1f', site_rating[site.id][:average_rating]) %>
-                  (<%= site_rating[site.id][:comment_count] %>則評論)
+                <li><%= star_rating(@site_data[site.id][:average_rating]) %>
+                  <%= sprintf('%.1f', @site_data[site.id][:average_rating]) %>
+                  (<%= @site_data[site.id][:comment_count] %>則評論)
                 </li>
                 <li class= "mt-2"><%= site.intro&.truncate(70)%>
                 </li>

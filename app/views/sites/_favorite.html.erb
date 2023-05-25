@@ -1,11 +1,11 @@
-<div class="absolute top-0 right-0 m-2">
+<div class="absolute top-0 right-0 m-2 button">
   <% if current_user && current_user.favorites.sites.find_by(favorable_id: object.id)%>
-    <%= button_to favorite_path(current_user.favorites.sites.find_by(favorable_id: object.id)), method: :delete, anchor: object.id, data: { turbo: false } do%>
-    <span class="text-red-500 <%=size%>">&#x2665;</span>
-    <% end %>
+    <div class="cursor-pointer" data-action="click->favorite#removeFav" data-id="<%= current_user.favorites.sites.find_by(favorable_id: object.id).id %>">
+      <span class="text-red-500 text-4xl">&#x2665;</span>
+    </div>
   <% elsif current_user %>
-    <%= button_to favorites_path(favorites: {favorable_type: object.class, favorable_id: object.id}), method: :post, anchor: object.id, data: { turbo: false } do%>
-      <span class="text-slate-300 <%=size%> ">&#x2665;</span>
-    <% end %>
-  <% end %> 
+    <div class="cursor-pointer" data-action="click->favorite#addFav">
+      <span class="text-slate-300 text-4xl">&#x2665;</span>
+    </div>
+  <% end %>
 </div>
