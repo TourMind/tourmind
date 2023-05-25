@@ -80,15 +80,40 @@
 .iframe-container {
   position: fixed;
   right: 10px;
-  bottom: 100px;
-  width: 450px;
-  height: 580px;
+  bottom: 150px;
+  width: 350px;
+  height: 480px;
+  box-shadow: 0 0 80px 0 gray;
 }
 
 .iframe-container-btn {
   position: fixed;
   right: 20px;
   bottom: 60px;
+}
+
+.custom-scrollbar-vertical::-webkit-scrollbar {
+  width: 3px;
+}
+
+.custom-scrollbar-vertical::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar-vertical::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar {
+  height: 3px;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background-color: #888;
 }
 
 @media (max-width: 767px) {
@@ -130,7 +155,6 @@
     opacity: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
-  
  
   .jogging .text h2 {
     font-size: 18px;

@@ -89,9 +89,9 @@
           <div class="py-2 font-bold">
             <% if @restaurants.present? %>
               <% if params[:keyword].present?%>
-                搜尋<%= params[:keyword]%>結果： <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+                搜尋<%= params[:keyword]%>結果： <%= number_per_page(@pagy, @restaurants) %> 家餐廳
               <% else %>
-                <%= @restaurants.count %> / <%= @pagy.count %> 家餐廳
+                <%= number_per_page(@pagy, @restaurants) %> 家餐廳
               <% end %>
             <% else %>
               <span class="font-bold">沒有找到符合條件的餐廳</span>
@@ -132,9 +132,9 @@
                   <% end %>
                 </div>
                 <ul>
-                  <li><%= star_rating(restaurant_rating[restaurant.id][:average_rating]) %>
-                    <%= sprintf('%.1f', restaurant_rating[restaurant.id][:average_rating]) %>
-                    (<%= restaurant_rating[restaurant.id][:comment_count] %>則評論)
+                  <li><%= star_rating(@restaurant_data[restaurant.id][:average_rating]) %>
+                    <%= sprintf('%.1f', @restaurant_data[restaurant.id][:average_rating]) %>
+                    (<%= @restaurant_data[restaurant.id][:comment_count] %>則評論)
                   </li>
                   <li class= "mt-2"><%= restaurant.intro&.truncate(70)%>
                   </li>
