@@ -27,6 +27,7 @@ export default class extends Controller {
         name: "shared",
         pull: "clone",
         put: false,
+        dragClass: "cursor-grabbing",
       },
       animation: 150,
       sort: false,
@@ -41,6 +42,7 @@ export default class extends Controller {
       group: "shared",
       animation: 150,
       ghostClass: "opacity-0",
+      dragClass: "cursor-grabbing"
     });
   }
 
@@ -59,6 +61,7 @@ export default class extends Controller {
     new Sortable(element, {
       animation: 150,
       ghostClass: "opacity-0",
+      dragClass: "cursor-grabbing",
       onEnd: () => {
         this.dispatch("change");
       },

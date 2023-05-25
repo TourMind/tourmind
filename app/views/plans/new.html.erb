@@ -14,11 +14,11 @@
           <% if current_user.favorites != nil %>
             <% @favorites.each_with_index do |fav, i| %>
               <!-- start::Timeline item -->
-              <div class="site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="<%= fav[:type] %>-<%= fav[:id] %>">
-                <div class="w-1/12 z-10">
+              <div class="group site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="<%= fav[:type] %>-<%= fav[:id] %>">
+                <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                   <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(fav[:type]) %> rounded-full"></div>
                 </div>
-                <div class="w-11/12 ml-2">
+                <div class="grow rounded hover:shadow-md p-2">
                   <p class="text-sm">
                     <span><%= fav[:type] %></span>
                     <span class="text-<%= Plan.set_color(fav[:type]) %> font-bold"><%= fav[:name] %></span>
@@ -41,21 +41,27 @@
             <div class="flex justify-between">
               <div class="ml-3">
                 <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none" data-action="click->edit#addDay">增加天數</div>
-                <div class="bg-red-500 inline-block cursor-pointer hover:bg-red-600 text-white font-normal text-sm p-2 border-red-700 rounded select-none"  data-action="click->edit#removeDay">移除天數</div>
                 <div class="bg-blue-500 inline-block cursor-pointer hover:bg-blue-600 text-white font-normal text-sm p-2 border-blue-700 rounded select-none"  data-action="click->edit#toggleFav">從喜愛清單加入</div>
+                <div class="group relative text-blue-700 inline-block cursor-pointer hover:text-blue-600  font-normal text-md p-2 rounded select-none">
+                  <i class="fa-solid fa-circle-exclamation fa-2xl" style="color: #F87315"></i>
+                  <span class="opacity-0 w-[300px] bg-black  text-white text-left text-md rounded-lg py-3 absolute z-10 group-hover:opacity-60 top-[-200%] -left-1/2 ml-[40px] px-3 pointer-events-none">
+                    <span><i class="fa-solid fa-circle fa-2xs"></i> 住宿/景點/餐廳/天數可拖拉編輯</span><br>
+                    <span><i class="fa-solid fa-circle fa-2xs"></i> 刪除住宿/景點/餐廳可移至垃圾桶</span><br>
+                    <span><i class="fa-solid fa-circle fa-2xs"></i> 您也可將喜愛清單項目新增至行程</span>
+                  </span>
+                </div>
               </div>
-              <div class="inline-flex mr-3 items-center cursor-pointer p-2 bg-red-500 hover:bg-red-600 text-white text-sm font-normal rounded-md w-max" id="delete-btn" data-controller="sorting">
+              <div class="inline-flex items-center cursor-pointer p-2 bg-red-500 hover:bg-red-600 text-white text-sm font-normal rounded-md w-max" id="delete-btn" data-controller="sorting">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
               </div>
             </div>
-            <span class="text-xs ml-3 text-gray-500 inline-block select-none">(拖拉功能可編輯、刪除內容，也可將喜愛項目新增至行程規劃中)</span>
             <div class="grid flex-wrap gap-3 px-8 py-16 bg-white rounded-lg shadow-xl lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2" id="plan" data-controller="sorting" data-edit-target="container" data-days="<%= @plan.days || 1 %>" data-action="sorting:change->edit#updateOrder">
               <% if @plan.locations != nil %>
                 <% @plan.locations.each_key.with_index do |key, i| %>
-                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center">
-                    <div class="relative bg-blue-400 py-3 cursor-grab">
+                  <div class="relative px-4 day min-h-[150px] bg-white flex flex-col justify-center cursor-grab">
+                    <div class="relative bg-blue-400 py-3">
                       <h4 class="mr-5 flex justify-center text-xl text-white font-bold day-title">第 <%= i + 1 %> 天</h4>
                       <button data-action="click->edit#deleteDay" type="button" class="rounded-md p-2 flex text-white hover:text-gray-300 absolute right-0 top-1">
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -67,11 +73,11 @@
                     <div data-controller="sorting" class="h-full w-full sites-list" id="plan-day-<%= i + 1 %>" >
                       <% @plan.locations[key].each.with_index do | site, j | %>
                         <!-- start::Timeline item -->
-                        <div class="site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="day<%= i + 1 %>-<%= j + 1 %>">
-                          <div class="w-1/12 z-10">
+                        <div class="group site flex items-center w-44 my-6 -ml-1.5 bg-white cursor-grab" id="day<%= i + 1 %>-<%= j + 1 %>">
+                          <div class="pr-2 z-10 group-[.sortable-chosen]:hidden">
                             <div class="w-3.5 h-3.5 bg-<%= Plan.set_color(site["type"]) %> rounded-full"></div>
                           </div>
-                          <div class="w-11/12 ml-2">
+                          <div class="grow rounded hover:shadow-md p-2">
                             <p class="text-sm">
                               <span><%= site["type"] %></span>
                               <span class="text-<%= Plan.set_color(site["type"]) %> font-bold"><%= site["name"] %></span>
@@ -99,7 +105,7 @@
                 </div>
               <% end %>
             </div>
-            <div class="mb-5">
+            <div class="my-5">
               <%= form.label :name, "行程名稱", class: "mb-3 block text-base font-medium text-blue-600" %>
               <%= form.text_field :name, class: "w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md", data: {edit_target: "name"}%>
             </div>
