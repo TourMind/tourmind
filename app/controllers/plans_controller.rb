@@ -48,7 +48,7 @@ class PlansController < ApplicationController
     end
 
     render json: {
-             errors: new_plan.errors.full_messages,
+             errors: new_plan.errors.full_messages.map { |el| el.split(" ")[1] }.join("\n"),
            },
            status: :unprocessable_entity
   end
@@ -106,7 +106,7 @@ class PlansController < ApplicationController
     end
 
     render json: {
-             errors: new_plan.errors.full_messages,
+             errors: new_plan.errors.full_messages.map { |el| el.split(" ")[1] }.join("\n"),
            },
            status: :unprocessable_entity
   end
