@@ -18,11 +18,12 @@
       <%= render 'shared/guide' %>
       <%= render 'shared/modal' %>
     </div>
-    <%= yield %>
+    <div class="px-4 sm:px-0">
+      <%= yield %>
+    </div>
     <div class='hidden'><%= render 'shared/flash' if flash.any? %></div>
-     <footer class=" footer">
-    <span>©2023 TourMind</span>
-  </footer>
+    <footer class=" footer">
+      <span>©2023 TourMind</span>
+    </footer>
   </body>
- 
 </html>

@@ -1,6 +1,6 @@
 <div data-controller="filter">
   <div class="flex justify-around w-full lg:hidden">
-    <div class="flex-grow py-2 text-xl text-center border cursor-pointer"
+    <div class="flex-grow py-2 text-xl text-center border border-gray-400 cursor-pointer"
       data-action="click->filter#toggleFilterMenu">
       篩選
     </div>
@@ -78,7 +78,7 @@
           <%= render "tag", tags: :equipment%>
         </div>
       </div>
-      <section class="grid grid-cols-1 gap-2 md:grid-cols-3">
+      <section class="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
         <% @hotels.each do |hotel| %>
           <div class="overflow-hidden bg-white rounded-md shadow-lg item" data-type="Hotel" data-id="<%= hotel.id %>">
             <div class="relative">
