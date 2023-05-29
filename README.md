@@ -73,3 +73,7 @@ Tourmind 是一個用於協助旅行者計畫和組織旅行行程的平台，�
     - rails data:generate_sites
     - rails data:generate_restaurants
     - rails data:generate_hotels
+
+------------------------------------------------
+- DEMO Video 
+  https://www.youtube.com/watch?v=_ZIqcAggcHs
